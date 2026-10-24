@@ -1,4 +1,4 @@
-# TVDb builders
+# TVDb Builders
 
 You can find items using the features of [TheTVDb.com](https://www.thetvdb.com/) (TVDb).
 
@@ -8,7 +8,7 @@ You can find items using the features of [TheTVDb.com](https://www.thetvdb.com/)
 | [`tvdb_show`](#tvdb-show)   | Finds the series specified                                                                                                |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  | 
 | [`tvdb_movie`](#tvdb-movie) | Finds the movie specified                                                                                                 | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-## TVDb List — `tvdb_list`, `tvdb_list_details` {#tvdb-list}
+## TVDb list — `tvdb_list`, `tvdb_list_details` {#tvdb-list}
 
 Finds every item in a [TVDb List](https://www.thetvdb.com/lists) or [TVDb UserList](https://www.thetvdb.com/lists/custom)
 
@@ -22,7 +22,7 @@ and in a specific order.
 
     You can replace `tvdb_list` with `tvdb_list_details` if you would like to fetch and use the description from the list
 
-### Example TVDb List Builder(s) {#example-tvdb-list-builders}
+### Example TVDb list builder(s) {#example-tvdb-list-builders}
 
 ```yaml
 collections:
@@ -50,7 +50,7 @@ collections:
     sync_mode: sync
 ```
 
-## TVDb Movie — `tvdb_movie`, `tvdb_movie_details` {#tvdb-movie}
+## TVDb movie — `tvdb_movie`, `tvdb_movie_details` {#tvdb-movie}
 
 Finds the movie specified
 
@@ -61,7 +61,7 @@ comma-separated string.
 
     You can replace `tvdb_movie` with `tvdb_movie_details` if you would like to fetch and use the description from the list
 
-### Example TVDb Movie Builder(s) {#example-tvdb-movie-builders}
+### Example TVDb movie builder(s) {#example-tvdb-movie-builders}
 
 ```yaml
 collections:
@@ -90,7 +90,7 @@ collections:
       - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-return-of-the-king
 ```
 
-## TVDb Show — `tvdb_show`, `tvdb_show_details` {#tvdb-show}
+## TVDb show — `tvdb_show`, `tvdb_show_details` {#tvdb-show}
 
 Finds the show specified
 
@@ -101,7 +101,7 @@ comma-separated string.
 
     You can replace `tvdb_show` with `tvdb_show_details` if you would like to fetch and use the description from the list
 
-### Example TVDb Show Builder(s) {#example-tvdb-show-builders}
+### Example TVDb show builder(s) {#example-tvdb-show-builders}
 
 ```yaml
 collections:

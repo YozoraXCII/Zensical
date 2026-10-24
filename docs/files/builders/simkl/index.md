@@ -1,4 +1,4 @@
-# Simkl builders
+# Simkl Builders
 
 You can find items using the trending and DVD release lists provided by [Simkl](https://simkl.com/) via the [Kometa Simkl Service](https://utilities.kometa.wiki/simkl-service).
 
@@ -35,7 +35,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     selects the appropriate list size based on your `limit` value: `small` is used when `limit` is 100 or fewer,
     `large` when `limit` is greater than 100.
 
-### Example Simkl DVD Builder(s) {#example-simkl-dvd-builders}
+### Example Simkl DVD builder(s) {#example-simkl-dvd-builders}
 
 Simple usage with just a limit:
 
@@ -58,7 +58,7 @@ collections:
     sync_mode: sync
 ```
 
-## Simkl Trending — `simkl_trending` {#simkl-trending}
+## Simkl trending — `simkl_trending` {#simkl-trending}
 
 Finds movies, TV shows and anime from Simkl's trending lists.
 
@@ -90,7 +90,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     selects the appropriate list size based on your `limit` value: `small` is used when `limit` is 100 or fewer,
     `large` when `limit` is greater than 100.
 
-### Example Simkl Trending Builder(s) {#example-simkl-trending-builders}
+### Example Simkl trending builder(s) {#example-simkl-trending-builders}
 
 Simple usage with just a limit:
 

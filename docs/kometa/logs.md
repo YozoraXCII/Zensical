@@ -2,7 +2,7 @@
 search:
   boost: 4
 ---
-# Help & troubleshooting
+# Help & Troubleshooting
 
 Find answers to frequently asked questions (FAQ), diagnose errors, update Kometa, undo changes, or migrate from Plex Meta Manager (PMM).
 
@@ -124,7 +124,7 @@ File is not where Kometa expects it:
 
 ### Connection and authentication problems
 
-Confirm the connection details for the service named in the error. See [Service connections](../config/connections/index.md). For MyAnimeList, use [Kometa Utilities Authentication](../config/authentication.md).
+Confirm the connection details for the service named in the error. See [Service connections](../config/plex.md). For MyAnimeList, use [Kometa Utilities Authentication](../config/authentication.md).
 
 ### Common log messages {#common-log-file-messages}
 
@@ -404,7 +404,7 @@ Both of these backups are only useful if you have created them before you need t
 
 The remarks that follow apply in the absence of a metadata backup.
 
-#### Posters and Backgrounds
+#### Posters and backgrounds
 
 If you have used Kometa to set artwork based on URLs or local files, there is no way to restore what was there before Kometa changed it. No history of what was there before is kept.
 
@@ -416,7 +416,7 @@ You can generally use Kometa to reset those values and let Plex fill them back i
 This is not always the case, however. If you had assigned user ratings to everything prior to using Kometa and then you told 
 Kometa to update the user rating with some other rating [say TMDB or the like], all your user ratings are lost with no backup.
 
-#### Other Metadata
+#### Other metadata
 
 If you have used Kometa to change titles, summaries, years, artwork, etc. with a Metadata File[all things you would have explicitly told it to do] 
 there is no way to restore what was there before Kometa changed it.
@@ -425,7 +425,7 @@ there is no way to restore what was there before Kometa changed it.
 
 These notes describe historical changes. Follow them only when migrating an older working configuration, then check the current reference for supported settings.
 
-### Plex Meta Manager → Kometa
+### Plex meta manager → Kometa
 
 ??? info "Historical PMM migration instructions"
 
@@ -631,7 +631,7 @@ With the release of Kometa 1.20, several changes have been made. Please read the
 
     The Kometa Default file `other_award` is now deprecated and will no longer function.
 
-    Individual Kometa Default files have been introduced for several Awards, see the [Awards List](../defaults/browse/collections/awards/index.md)
+    Individual Kometa Default files have been introduced for several Awards, see the [Awards List](../defaults/award/separator.md)
     for more information on the new options.
 
 <span id="providing-log-files-on-discord"></span>

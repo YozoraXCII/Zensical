@@ -31,7 +31,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     
     No date attribute can take multiple values.
     
-    ### "Date Attributes"
+    ### "Date attributes"
     
     | Date Attributes | Description                                  |
     |:----------------|:---------------------------------------------|
@@ -51,7 +51,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     
     No number attribute can take multiple values.
     
-    ### "Number Attributes"
+    ### "Number attributes"
     
     | Number Attribute | Description                                                                                           |
     |:-----------------|:------------------------------------------------------------------------------------------------------|
@@ -76,7 +76,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     
     String attributes can take multiple values as a **list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string**.
     
-    ### "Tag Attributes"
+    ### "Tag attributes"
     
     | Tag Attribute  | Description & Values                                                                                                                                                                            |
     |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -95,7 +95,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
         
         
 
-### Example AniList Search Builder(s)
+### Example AniList search builder(s)
 
 ```yaml
 collections:

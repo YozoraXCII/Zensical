@@ -1,4 +1,4 @@
-# MyAnimeList Charts and rankings
+# MyAnimeList Charts and Rankings
 
 Choose a builder below. Each section includes its supported inputs and a configuration example.
 
@@ -14,7 +14,7 @@ Choose a builder below. Each section includes its supported inputs and a configu
 | [MyAnimeList Top TV Series](#myanimelist-top-tv-series) |
 | [MyAnimeList Top Upcoming](#myanimelist-top-upcoming) |
 
-## MyAnimeList Top Airing — `mal_airing` {#myanimelist-top-airing}
+## MyAnimeList top airing — `mal_airing` {#myanimelist-top-airing}
 
 Gets every anime in MyAnimeList's [Top Airing Anime](https://myanimelist.net/topanime.php?type=airing) list. (Maximum: 500)
 
@@ -26,7 +26,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 
     [Configuring MyAnimeList](../../../config/myanimelist.md) in the config is required for any of these builders to function.
 
-### Example MyAnimeList Top Airing Builder(s) {#example-myanimelist-top-airing-builders}
+### Example MyAnimeList top airing builder(s) {#example-myanimelist-top-airing-builders}
 
 ```yaml
 collections:
@@ -36,7 +36,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top All — `mal_all` {#myanimelist-top-all}
+## MyAnimeList top all — `mal_all` {#myanimelist-top-all}
 
 Gets every anime in MyAnimeList's [Top Airing Anime](https://myanimelist.net/topanime.php?type=airing) list. (Maximum: 500)
 
@@ -44,7 +44,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top All Builder(s) {#example-myanimelist-top-all-builders}
+### Example MyAnimeList top all builder(s) {#example-myanimelist-top-all-builders}
 
 ```yaml
 collections:
@@ -54,7 +54,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Most Favorited — `mal_favorite` {#myanimelist-most-favorited}
+## MyAnimeList most favorited — `mal_favorite` {#myanimelist-most-favorited}
 
 Gets every anime in MyAnimeList's [Most Favorited Anime](https://myanimelist.net/topanime.php?type=favorite) list. (Maximum: 500)
 
@@ -62,7 +62,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Most Favorited Builder(s) {#example-myanimelist-most-favorited-builders}
+### Example MyAnimeList most favorited builder(s) {#example-myanimelist-most-favorited-builders}
 
 ```yaml
 collections:
@@ -72,7 +72,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top Movies — `mal_movie` {#myanimelist-top-movies}
+## MyAnimeList top movies — `mal_movie` {#myanimelist-top-movies}
 
 Gets every anime in MyAnimeList's [Top Anime Movies](https://myanimelist.net/topanime.php?type=movie) list. (Maximum: 500)
 
@@ -80,7 +80,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top Movies Builder(s) {#example-myanimelist-top-movies-builders}
+### Example MyAnimeList top movies builder(s) {#example-myanimelist-top-movies-builders}
 
 ```yaml
 collections:
@@ -90,7 +90,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top OVA Series — `mal_ova` {#myanimelist-top-ova-series}
+## MyAnimeList top OVA series — `mal_ova` {#myanimelist-top-ova-series}
 
 Gets every anime in MyAnimeList's [Top Anime OVA Series](https://myanimelist.net/topanime.php?type=ova) list. (Maximum: 500)
 
@@ -98,7 +98,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top OVA Series Builder(s) {#example-myanimelist-top-ova-series-builders}
+### Example MyAnimeList top OVA series builder(s) {#example-myanimelist-top-ova-series-builders}
 
 ```yaml
 collections:
@@ -108,7 +108,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Most Popular — `mal_popular` {#myanimelist-most-popular}
+## MyAnimeList most popular — `mal_popular` {#myanimelist-most-popular}
 
 Gets every anime in MyAnimeList's [Most Popular Anime](https://myanimelist.net/topanime.php?type=bypopularity) list. (Maximum: 500)
 
@@ -116,7 +116,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Most Popular Builder(s) {#example-myanimelist-most-popular-builders}
+### Example MyAnimeList most popular builder(s) {#example-myanimelist-most-popular-builders}
 
 ```yaml
 collections:
@@ -126,7 +126,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top Specials — `mal_special` {#myanimelist-top-specials}
+## MyAnimeList top specials — `mal_special` {#myanimelist-top-specials}
 
 Gets every anime in MyAnimeList's [Top Anime Specials](https://myanimelist.net/topanime.php?type=special) list. (Maximum: 500)
 
@@ -134,7 +134,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top Specials Builder(s) {#example-myanimelist-top-specials-builders}
+### Example MyAnimeList top specials builder(s) {#example-myanimelist-top-specials-builders}
 
 ```yaml
 collections:
@@ -144,7 +144,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top TV Series — `mal_tv` {#myanimelist-top-tv-series}
+## MyAnimeList top TV series — `mal_tv` {#myanimelist-top-tv-series}
 
 Gets every anime in MyAnimeList's [Top Anime TV Series](https://myanimelist.net/topanime.php?type=tv) list. (Maximum: 500)
 
@@ -152,7 +152,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top TV Series Builder(s) {#example-myanimelist-top-tv-series-builders}
+### Example MyAnimeList top TV series builder(s) {#example-myanimelist-top-tv-series-builders}
 
 ```yaml
 collections:
@@ -162,7 +162,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Top Upcoming — `mal_upcoming` {#myanimelist-top-upcoming}
+## MyAnimeList top upcoming — `mal_upcoming` {#myanimelist-top-upcoming}
 
 Gets every anime in MyAnimeList's [Top Upcoming Anime](https://myanimelist.net/topanime.php?type=upcoming) list. (Maximum: 500)
 
@@ -170,7 +170,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Top Upcoming Builder(s) {#example-myanimelist-top-upcoming-builders}
+### Example MyAnimeList top upcoming builder(s) {#example-myanimelist-top-upcoming-builders}
 
 ```yaml
 collections:

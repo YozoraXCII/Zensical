@@ -75,7 +75,7 @@ If Chris doesn't specify a type of coffee, and you have no note about Chris, Chr
 
 If you don't specify a runtime flag or environment variable, you get the standard/default behavior.
 
-## Runtime Flags vs Environment Variables; who wins?
+## Runtime flags vs environment variables; who wins?
 
 The ridiculous example above notwithstanding, in Kometa, environment variables take precedence over runtime flags.
 
@@ -127,7 +127,7 @@ Kometa will load those environment variables when it starts up, and you don't ha
             docker run -it -v "X:\Media\Kometa\config:/config:rw" kometateam/kometa --collections-only --run
             ```
 
-## All Available Runtime Flags/Environment Variables
+## All available runtime flags/environment variables
 
 ??? blank "Config Location&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`-c`/`--config`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`KOMETA_CONFIG`<a class="headerlink" href="#config" title="Permanent link">¶</a>"
 

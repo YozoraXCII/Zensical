@@ -48,12 +48,12 @@ Kometa can dynamically create collections based on different criteria, such as
 The main purpose of dynamic collections is to automate the creation of collections which would otherwise require 
 considerable user input and repetition (such as creating a collection for every genre).
 
-## Using Dynamic Collections
+## Using dynamic collections
 
 Each dynamic collection definition creates a set of collection definitions based on some given criteria and uses either 
 the built-in default template or a user defined custom template to dynamically create collection definitions.
 
-#### Collection Naming
+#### Collection naming
 
 By default, the collections generated will be named for the thing being used to create them; things like genres, 
 countries or actors.
@@ -61,7 +61,7 @@ countries or actors.
 To change the name of the collection, you can use dynamic collection attributes including `title_format`, 
 `remove_suffix`, `remove_prefix`, `key_name_override`, and `title_override` all detailed below.
 
-#### Dynamic Keys & Key Names
+#### Dynamic keys & key names
 
 A `dynamic key` or `key` for short is used to refer to a specific value/result from the dynamic collection criteria that
 will be used to create the collection.
@@ -76,7 +76,7 @@ An example of some keys and their names that would be generated from a `tmdb_col
 | 1241  | Harry Potter Collection |
 
 
-### Example Key Usage
+### Example key usage
 
 Keys can be used for a number of purposes, examples can be found throughout this page. A few examples are shown below:
 
@@ -122,7 +122,7 @@ dynamic_collections:
         - MTV (UK)
 ```
 
-## Dynamic Collection Definition
+## Dynamic collection definition
 
 Each dynamic collection definition must have a mapping name (just like standard collections) under the 
 `dynamic_collections` attribute, which is also attached to the collection as a label to mark it as having been created 
@@ -599,7 +599,7 @@ by this dynamic collection.
               - War
         ```
 
-## Dynamic Collection Template Variables
+## Dynamic collection template variables
 
 When calling a Collection File with dynamic collection all the following are automatically accepted as template 
 variables which will just replace the same attribute when running the file.

@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Basic Chart", 
-        "CODE_NAME": "basic",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "010", 
-        "DESCRIPTION": "create collections based on recently released media in your library"
-    }'
+    "COLLECTION": "Basic Chart",
+    "CODE_NAME": "basic",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "010",
+    "DESCRIPTION": "create collections based on recently released media in your library"
+}'
 %}
 | `New Episodes`   | `episodes` | Collection of Episodes released in the last 7 days.            |
 | `Newly Released` | `released` | Collection of Movies or TV Shows released in the last 90 days. |

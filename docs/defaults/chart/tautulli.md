@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Tautulli Chart", 
-        "CODE_NAME": "tautulli",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "DESCRIPTION": "create collections based on Tautulli/Plex charts",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "Tautulli Chart",
+    "CODE_NAME": "tautulli",
+    "LIBRARY_TYPE": "Movie, Show",
+    "DESCRIPTION": "create collections based on Tautulli/Plex charts",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": "Requirements: [Tautulli Authentication](../../../../config/tautulli.md)."}'
 %}
 | `Plex Popular` | `popular` | Collection of the most Popular Movies/Shows on Plex. |

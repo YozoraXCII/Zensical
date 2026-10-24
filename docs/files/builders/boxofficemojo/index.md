@@ -1,4 +1,4 @@
-# BoxOfficeMojo builders
+# BoxOfficeMojo Builders
 
 You can find items using the lists on [boxofficemojo.com](https://www.boxofficemojo.com/) (BoxOfficeMojo). 
 
@@ -12,7 +12,7 @@ You can find items using the lists on [boxofficemojo.com](https://www.boxofficem
 | [`mojo_never`](#boxofficemojo-never-hit)                 | Uses the Never Hit lists.          | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 | [`mojo_record`](#boxofficemojo-other-records)               | Uses other Record lists.           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 
-## BoxOfficeMojo All Time — `mojo_all_time` {#boxofficemojo-all-time}
+## BoxOfficeMojo all time — `mojo_all_time` {#boxofficemojo-all-time}
 
 Uses the [All Time Lists](https://www.boxofficemojo.com/charts/overall/) to collect items.
 
@@ -20,7 +20,7 @@ Uses the [All Time Lists](https://www.boxofficemojo.com/charts/overall/) to coll
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#builder-attributes}
+### Builder attributes {#builder-attributes}
     
 | Attribute               | Description                                                                                                                     |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------|
@@ -28,7 +28,7 @@ Uses the [All Time Lists](https://www.boxofficemojo.com/charts/overall/) to coll
 | `content_rating_filter` | Determines the content rating chart to use.<br>**Allowed Values:** `g`, `g/pg`, `pg`, `pg-13`, `r`, or `nc-17`                  |
 | `limit`                 | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0 |
 
-### Example Mojo All Time Builder(s) {#example-mojo-all-time-builders}
+### Example Mojo all time builder(s) {#example-mojo-all-time-builders}
     
 ```yaml
 collections:
@@ -50,7 +50,7 @@ collections:
       limit: 10
 ```
 
-## BoxOfficeMojo Domestic — `mojo_domestic` {#boxofficemojo-domestic}
+## BoxOfficeMojo domestic — `mojo_domestic` {#boxofficemojo-domestic}
 
 Uses the Domestic Box Office to collect items.
 
@@ -58,7 +58,7 @@ Uses the Domestic Box Office to collect items.
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#boxofficemojo-domestic-builder-attributes}
+### Builder attributes {#boxofficemojo-domestic-builder-attributes}
     
 | Attribute    | Description                                                                                                                                                                                                                           |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -67,7 +67,7 @@ Uses the Domestic Box Office to collect items.
 | `range_data` | Determines the actual time range of the Box Office. The input changes depending on the value of `range`.<br>**Required:** Yes, except for `yearly` range                                                                              |
 | `limit`      | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0                                                                                                       |
 
-### Allowed Values for `range_data` {#allowed-values-for-range_data}
+### Allowed values for `range_data` {#allowed-values-for-range_data}
 
 | Range       | Allowed Values                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -79,7 +79,7 @@ Uses the Domestic Box Office to collect items.
 | `season`    | `winter`, `spring`, `summer`, `fall`, `holiday`, or `current`                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `holiday`   | `new_years_day`, `new_year_weekend`, `mlk_day`, `mlk_day_weekend`, `presidents_day`, `presidents_day_weekend`, `easter`, `easter_weekend`, `memorial_day`, `memorial_day_weekend`, `independence_day`, `independence_day_weekend`, `labor_day`, `labor_day_weekend`, `indigenous_day`, `indigenous_day_weekend`, `halloween`, `thanksgiving`, `thanksgiving_3`, `thanksgiving_4`, `thanksgiving_5`, `post_thanksgiving_weekend`, `christmas_day`, `christmas_weekend`, `new_years_eve` |
     
-### Example Mojo Domestic Builder(s) {#example-mojo-domestic-builders}
+### Example Mojo domestic builder(s) {#example-mojo-domestic-builders}
     
 ```yaml
 collections:
@@ -101,7 +101,7 @@ collections:
       limit: 10
 ```
 
-## BoxOfficeMojo International — `mojo_international` {#boxofficemojo-international}
+## BoxOfficeMojo international — `mojo_international` {#boxofficemojo-international}
     
 Uses the International Box Office to collect items.
 
@@ -109,7 +109,7 @@ Uses the International Box Office to collect items.
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#boxofficemojo-international-builder-attributes}
+### Builder attributes {#boxofficemojo-international-builder-attributes}
     
 | Attribute    | Description                                                                                                                                                                          |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -119,7 +119,7 @@ Uses the International Box Office to collect items.
 | `range_data` | Determines the actual time range of the Box Office. Required for all ranges except `yearly`. Input depends on the `range` selected.                                                  |
 | `limit`      | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0                                                      |
 
-### Allowed Values for `range_data` {#boxofficemojo-international-allowed-values-for-range_data}
+### Allowed values for `range_data` {#boxofficemojo-international-allowed-values-for-range_data}
     
 | Range       | Allowed Values                                                                                                |
 |-------------|---------------------------------------------------------------------------------------------------------------|
@@ -127,7 +127,7 @@ Uses the International Box Office to collect items.
 | `monthly`   | `january`, `february`, ..., `december`, `current`, or relative (`current-#`) where `#` is days before current |
 | `quarterly` | `q1`, `q2`, `q3`, `q4`, `current`, or relative (`current-#`) where `#` is days before current                 |
     
-### Example Mojo International Builder(s) {#example-mojo-international-builders}
+### Example Mojo international builder(s) {#example-mojo-international-builders}
     
 ```yaml
 collections:
@@ -151,7 +151,7 @@ collections:
       limit: 10
 ```
 
-## BoxOfficeMojo Never Hit" — `mojo_never` {#boxofficemojo-never-hit}
+## BoxOfficeMojo never hit" — `mojo_never` {#boxofficemojo-never-hit}
 
 Uses the [Never Hit Lists](https://www.boxofficemojo.com/charts/overall/) (Bottom Section) to collect items.
 
@@ -159,7 +159,7 @@ Uses the [Never Hit Lists](https://www.boxofficemojo.com/charts/overall/) (Botto
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#boxofficemojo-never-hit-builder-attributes}
+### Builder attributes {#boxofficemojo-never-hit-builder-attributes}
 
 | Attribute | Description                                                                                                                                   |
 |-----------|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -167,7 +167,7 @@ Uses the [Never Hit Lists](https://www.boxofficemojo.com/charts/overall/) (Botto
 | `never`   | Determines the never filter to use.<br>**Default Value:** `1`<br>**Allowed Values:** `1`, `5`, or `10`                                        |
 | `limit`   | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0               |
     
-### Example Mojo Never Hit Builder(s) {#example-mojo-never-hit-builders}
+### Example Mojo never hit builder(s) {#example-mojo-never-hit-builders}
 
 ```yaml
 collections:
@@ -189,7 +189,7 @@ collections:
       limit: 100
 ```
 
-## BoxOfficeMojo Other Records — `mojo_record` {#boxofficemojo-other-records}
+## BoxOfficeMojo other records — `mojo_record` {#boxofficemojo-other-records}
 
 Uses the [Weekend Records](https://www.boxofficemojo.com/charts/weekend/), [Daily Records](https://www.boxofficemojo.com/charts/daily/),
 and [Miscellaneous Records](https://www.boxofficemojo.com/charts/misc/) to collect items.
@@ -198,14 +198,14 @@ and [Miscellaneous Records](https://www.boxofficemojo.com/charts/misc/) to colle
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#boxofficemojo-other-records-builder-attributes}
+### Builder attributes {#boxofficemojo-other-records-builder-attributes}
 
 | Attribute | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 |-----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `chart`   | Determines the record you want to use.<br>**Allowed Values:**<br>`second_weekend_drop`, `post_thanksgiving_weekend_drop`, `top_opening_weekend`, `worst_opening_weekend_theater_avg`, `mlk_opening`, `easter_opening`, `memorial_opening`, `labor_opening`, `president_opening`, `thanksgiving_3_opening`, `thanksgiving_5_opening`, `mlk`, `easter`, `4th`, `memorial`, `labor`, `president`, `thanksgiving_3`, `thanksgiving_5`, `january`, `february`, `march`, `april`, `may`, `june`, `july`, `august`, `september`, `october`, `november`, `december`, `spring`, `summer`, `fall`, `holiday_season`, `winter`, `g`, `g/pg`, `pg`, `pg-13`, `r`, `nc-17`, `top_opening_weekend_theater_avg_all`, `top_opening_weekend_theater_avg_wide`, `opening_day`, `single_day_grosses`, `christmas_day_gross`, `new_years_day_gross`, `friday`, `saturday`, `sunday`, `monday`, `tuesday`, `wednesday`, `thursday`, `friday_non_opening`, `saturday_non_opening`, `sunday_non_opening`, `monday_non_opening`, `tuesday_non_opening`, `wednesday_non_opening`, `thursday_non_opening`, `biggest_theater_drop`, `opening_week` |
 | `limit`   | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
-### Example Mojo Other Records Builder(s) {#example-mojo-other-records-builders}
+### Example Mojo other records builder(s) {#example-mojo-other-records-builders}
 
 ```yaml
 collections:
@@ -226,7 +226,7 @@ collections:
       limit: 10
 ```
 
-## BoxOfficeMojo Worldwide — `mojo_world` {#boxofficemojo-worldwide}
+## BoxOfficeMojo worldwide — `mojo_world` {#boxofficemojo-worldwide}
     
 Uses the [Worldwide Box Office](https://www.boxofficemojo.com/year/world/) to collect items.
 
@@ -234,14 +234,14 @@ Uses the [Worldwide Box Office](https://www.boxofficemojo.com/year/world/) to co
 
 **Builder Value:** Dictionary :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-dictionaries" } of Attributes
 
-### Builder Attributes {#boxofficemojo-worldwide-builder-attributes}
+### Builder attributes {#boxofficemojo-worldwide-builder-attributes}
 
 | Attribute | Description                                                                                                                                                                                              |
 |-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `year`    | The year of the [Worldwide Box Office](https://www.boxofficemojo.com/year/world/) to pull.<br>**Allowed Values:** Number between 1977 and the current year, `current`, or relative current (`current-#`) |
 | `limit`   | The maximum number of results to return.<br>**Default Value:** Returns all results<br>**Allowed Values:** Number greater than 0                                                                          |
 
-### Example Mojo Worldwide Builder(s) {#example-mojo-worldwide-builders}
+### Example Mojo worldwide builder(s) {#example-mojo-worldwide-builders}
     
 ```yaml
 collections:

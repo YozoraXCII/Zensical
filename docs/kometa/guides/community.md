@@ -1,22 +1,16 @@
-# Guides
-
-Follow practical guides for the task you want to complete. For exact YAML options, use the Configuration and Reference sections.
-
-- [Collections and playlists](collections/index.md)
-- [Overlays and artwork](artwork/index.md)
-- [Library management](libraries/index.md)
-- [Running and scheduling](running/index.md)
-- [Companion tools](../scripts/index.md)
-
-## Community guides and recipes
+# Community Guides and Recipes
 
 Special credit to [Chazlarson](https://github.com/chazlarson) for developing many of these guides. Community recipes offer additional examples beyond the reference documentation.
 
 {% include-markdown "https://raw.githubusercontent.com/Kometa-Team/Cookbook/main/guides/README.md" %}
 
-{% include-markdown "https://raw.githubusercontent.com/Kometa-Team/Cookbook/main/cookbook/README.md" %}
+{% include-markdown "https://raw.githubusercontent.com/Kometa-Team/Cookbook/main/cookbook/README.md"
+  replace='{
+    "## Kometa Cookbook": "## Kometa cookbook"
+}'
+%}
 
-## Demo Video
+## Demo video
 
 This YouTube video has been created by one of our community members to showcase some of the things that Kometa can do for you. 
 
@@ -28,6 +22,6 @@ Caveat: it is very long, and the author has their own ideas as to what is "requi
 
 For platform walkthroughs, see [Installation](../install/index.md).
 
-## Associated Git Repos
+## Associated Git repos
 
 Project repositories and credits are listed under [Community & credits](../acknowledgements.md#associated-git-repos).

@@ -1,4 +1,4 @@
-# Lidarr builders
+# Lidarr Builders
 
 Lidarr builders create artist collections from artists already tracked in Lidarr. They require a configured Lidarr connection and a Plex music library.
 
@@ -7,7 +7,7 @@ Kometa first matches each Lidarr artist's MusicBrainz artist ID to a Plex `mbid:
 - [All](#lidarr-all) includes every Lidarr artist.
 - [Taglist](#lidarr-taglist) includes artists with specified Lidarr tags.
 
-## Lidarr All — `lidarr_all` {#lidarr-all}
+## Lidarr all — `lidarr_all` {#lidarr-all}
 
 `lidarr_all` includes every artist currently tracked in Lidarr.
 
@@ -20,7 +20,7 @@ collections:
     sync_mode: sync
 ```
 
-## Lidarr Taglist — `lidarr_taglist` {#lidarr-taglist}
+## Lidarr taglist — `lidarr_taglist` {#lidarr-taglist}
 
 `lidarr_taglist` includes Lidarr artists that have every supplied tag. Leave the value blank to include untagged artists.
 

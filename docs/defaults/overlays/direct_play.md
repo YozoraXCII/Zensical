@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Direct Play", 
-        "CODE_NAME": "direct_play",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay to indicate items that cannot be transcoded and instead only support Direct Play (i.e. if you use Tautulli to kill 4K transcoding)"
-    }'
+    "OVERLAY_NAME": "Direct Play",
+    "CODE_NAME": "direct_play",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay to indicate items that cannot be transcoded and instead only support Direct Play (i.e. if you use Tautulli to kill 4K transcoding)",
+    "OVERLAY_LABEL": "direct play"
+}'
     end='<!--rec-sub-->'
 %}
 {% 

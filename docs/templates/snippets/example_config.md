@@ -1,4 +1,4 @@
-## Example Configuration File
+## Example configuration file
 
 ??? example "Sample `config.yml` file (Click to Expand)"
 

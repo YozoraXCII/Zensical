@@ -5,12 +5,13 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAMEs": "Status",
-        "OVERLAY_NAME": "Status",
-        "CODE_NAME": "status",
-        "OVERLAY_LEVEL": "Show",
-        "DESCRIPTION": "an overlay on a show detailing its Current Airing Status for all shows in your library"
-    }'
+    "OVERLAY_NAMEs": "Status",
+    "OVERLAY_NAME": "Status",
+    "CODE_NAME": "status",
+    "OVERLAY_LEVEL": "Show",
+    "DESCRIPTION": "an overlay on a show detailing its Current Airing Status for all shows in your library",
+    "OVERLAY_LABEL": "status"
+}'
 %}
 | AIRING    | `airing`    | `40` |
 | RETURNING | `returning` | `30` |
@@ -60,4 +61,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The Status overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) with [filters](../../../files/filters) on `tmdb_status`.
+    The Status overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) with [filters](../../../files/filters) on `tmdb_status`.

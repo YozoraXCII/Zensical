@@ -1,4 +1,4 @@
-# Tautulli builders
+# Tautulli Builders
 
 You can find items in your Plex using the features of [Tautulli](https://tautulli.com/).
 
@@ -13,7 +13,7 @@ Tautulli builders use its popular and most-played lists. `tautulli_popular` gets
 | [`tautulli_popular`](#tautulli-popular)                | Gets the Tautulli Most Popular List               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`tautulli_top`](#tautulli-top)                        | Gets the Tautulli Top List                       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## Tautulli Popular — `tautulli_popular`, `tautulli_top` {#tautulli-popular}
+## Tautulli popular — `tautulli_popular`, `tautulli_top` {#tautulli-popular}
 
 | Attribute      | Description                                                |                 Required                 | Default |
 |:---------------|:-----------------------------------------------------------|:----------------------------------------:|:-------:|
@@ -25,7 +25,7 @@ Tautulli builders use its popular and most-played lists. `tautulli_popular` gets
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
 and in a specific order. 
 
-### Example Tautulli Popular Builder(s) {#example-tautulli-popular-builders}
+### Example Tautulli popular builder(s) {#example-tautulli-popular-builders}
 
 ```yaml
 collections:
@@ -76,7 +76,7 @@ collections:
     collection_order: custom
 ```
 
-## Tautulli Top — `tautulli_top`, `tautulli_popular` {#tautulli-top}
+## Tautulli top — `tautulli_top`, `tautulli_popular` {#tautulli-top}
 
 ???+ tip "Tautulli Watched"
 
@@ -96,7 +96,7 @@ and in a specific order.
 
 On music libraries, set `builder_level` to `artist`, `album`, or `track` to choose results from Tautulli's Top Music list. The default is `album`. Artist and album results aggregate Tautulli's music stats; track results count plays from Tautulli history within `list_days`. `list_minimum` is the minimum play count for the selected item.
 
-### Example Tautulli Top Builder(s) {#example-tautulli-top-builders}
+### Example Tautulli top builder(s) {#example-tautulli-top-builders}
 
 ```yaml
 collections:

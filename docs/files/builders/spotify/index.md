@@ -1,4 +1,4 @@
-# Spotify builders
+# Spotify Builders
 
 The `spotify_chart` builder adds chart tracks to a Plex Music collection or playlist by matching the chart's artist and song titles.
 
@@ -10,7 +10,7 @@ Set `chart` to `daily` or `weekly`. When Plex returns multiple exact artist and 
 
 See [Spotify Chart Builder](#spotify-chart-builder) for configuration examples and supported country codes.
 
-## Spotify Chart Builder — `spotify_chart` {#spotify-chart-builder}
+## Spotify chart builder — `spotify_chart` {#spotify-chart-builder}
 
 `spotify_chart` builds a track-level collection from a Spotify country chart. It matches exact artist and track titles in your Plex Music library. When Plex has multiple exact matches, Kometa chooses the track on the album with the earliest known release date. Unmatched chart tracks are skipped.
 

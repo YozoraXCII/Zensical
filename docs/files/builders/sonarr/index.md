@@ -1,4 +1,4 @@
-# Sonarr builders
+# Sonarr Builders
 
 You can find items in your Plex using the features of [Sonarr](https://sonarr.tv/).
 
@@ -11,11 +11,11 @@ You can find items in your Plex using the features of [Sonarr](https://sonarr.tv
 | [`sonarr_all`](#sonarr-all)         | Gets all Series in Sonarr.                   | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
 | [`sonarr_taglist`](#sonarr-taglist) | Gets Series from Sonarr based on their tags. | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
 
-## Sonarr All — `sonarr_all` {#sonarr-all}
+## Sonarr all — `sonarr_all` {#sonarr-all}
     
 Gets all Series in Sonarr.
 
-### Example Sonarr All Builder(s) {#example-sonarr-all-builders}
+### Example Sonarr all builder(s) {#example-sonarr-all-builders}
 
 ```yaml
 collections:
@@ -23,14 +23,14 @@ collections:
     sonarr_all: true
 ```
 
-## Sonarr Taglist — `sonarr_taglist` {#sonarr-taglist}
+## Sonarr taglist — `sonarr_taglist` {#sonarr-taglist}
 
 Gets Series from Sonarr based on their tags. 
 
 Set the attribute to the tag you want to search for. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated 
 string. 
 
-### Example Sonarr Taglist Builder(s) {#example-sonarr-taglist-builders}
+### Example Sonarr taglist builder(s) {#example-sonarr-taglist-builders}
 
 ```yaml
 collections:

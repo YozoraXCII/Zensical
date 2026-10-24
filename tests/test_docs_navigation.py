@@ -39,19 +39,17 @@ class DocumentationNavigationTests(unittest.TestCase):
             with self.subTest(page=page):
                 self.assertTrue((SOURCE / page).is_file())
 
-    def test_categories_have_clickable_landing_pages(self):
+    def test_folders_only_group_explicit_individual_pages(self):
         def check(items):
             for item in items:
-                if not isinstance(item, dict):
-                    continue
+                self.assertIsInstance(item, dict, "Every page must have an explicit navigation label")
                 for label, value in item.items():
                     if isinstance(value, list):
                         with self.subTest(section=label):
-                            self.assertIsInstance(value[0], str)
-                            self.assertTrue(value[0].endswith("/index.md"))
+                            self.assertTrue(value, "Navigation folders must not be empty")
                         check(value)
 
-        self.assertIn("navigation.indexes", self.project["theme"]["features"])
+        self.assertNotIn("navigation.indexes", self.project["theme"]["features"])
         check(self.project["nav"])
 
     def test_redirects_have_final_destinations_without_output_collisions(self):

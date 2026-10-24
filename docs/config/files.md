@@ -45,7 +45,7 @@ Every file block under the parent attribute begins with a `-`.
           - default: imdb       # Block 2
     ```
 
-### Location Types and Paths
+### Location types and paths
 
 There are multiple location types that can be used to call a file. They can either be on the local system, online at an url, part of the [Kometa Defaults](../defaults/guide.md), 
 directly from the [Kometa Community Configs](https://github.com/Kometa-Team/Community-Configs) repository, or from another [`Custom Repository`](settings.md#custom-repo).
@@ -143,7 +143,7 @@ The location types are outlined as follows:
               - repo: People
         ```
 
-## Other Block Attributes
+## Other block attributes
 
 You can have some control of the files from inside your Configuration file by using these block attributes.
 

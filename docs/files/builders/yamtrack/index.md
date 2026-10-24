@@ -1,4 +1,4 @@
-# YamTrack builders
+# YamTrack Builders
 
 You can find items using lists from your [YamTrack](https://github.com/FuzzyGrim/YamTrack) instance.
 
@@ -11,7 +11,7 @@ You can find items using lists from your [YamTrack](https://github.com/FuzzyGrim
 | [`yamtrack_list`](#yamtrack-list)      | Finds every movie/show in the YamTrack List. Extracts both TMDb and TVDB IDs. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`yamtrack_tracked`](#yamtrack-tracked)| Finds tracked movies/shows/anime by YamTrack status. Extracts both TMDb and TVDB IDs. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## YamTrack List — `yamtrack_list`, `yamtrack_list_details` {#yamtrack-list}
+## YamTrack list — `yamtrack_list`, `yamtrack_list_details` {#yamtrack-list}
 
 Finds every item in the YamTrack List.
 
@@ -23,7 +23,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 
     You can replace `yamtrack_list` with `yamtrack_list_details` if you would like to fetch and use the YamTrack list description as the collection summary.
 
-### Example YamTrack List Builder(s) {#example-yamtrack-list-builders}
+### Example YamTrack list builder(s) {#example-yamtrack-list-builders}
 
 ```yaml
 collections:
@@ -45,7 +45,7 @@ collections:
 * You can update the collection summary with the YamTrack list description by using `yamtrack_list_details`.
 * You can specify multiple lists in `yamtrack_list_details`, but only the first one is used to update the collection summary.
 
-## YamTrack Tracked — `yamtrack_tracked` {#yamtrack-tracked}
+## YamTrack tracked — `yamtrack_tracked` {#yamtrack-tracked}
 
 Finds every tracked item from the configured YamTrack user's movie and TV pages with the selected statuses.
 
@@ -53,7 +53,7 @@ Finds every tracked item from the configured YamTrack user's movie and TV pages 
 
     [Configuring YamTrack](../../../config/yamtrack.md) in the config is required for this builder.
 
-### Example YamTrack Tracked Builder {#example-yamtrack-tracked-builder}
+### Example YamTrack tracked builder {#example-yamtrack-tracked-builder}
 
 ```yaml
 collections:

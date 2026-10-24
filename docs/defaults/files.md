@@ -1,8 +1,8 @@
 <span id="list-of-defaults-files"></span>
 
-# All defaults A–Z
+# All Defaults A–Z
 
-Find a default by name, or browse the [topic categories](index.md).
+Find a default by name. For setup and customization, see [Using defaults](guide.md).
 
 <span id="awards"></span>
 <span id="charts"></span>

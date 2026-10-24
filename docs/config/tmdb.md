@@ -24,10 +24,10 @@ tmdb:
 |:-------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|:------------------------------------------:|
 | `apikey`           | User TMDb V3 API key.                                                                                                                                                                  | Any valid API key                    | :fontawesome-solid-circle-check:{ .green } |
 | `language`         | [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for user language.                                                                                             | Two-letter ISO code, e.g. **`en`**   |  :fontawesome-solid-circle-xmark:{ .red }  |
-| `region`           | [ISO 3166-1 code](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) for user region.<br>Used with [TMDb Chart Builders](../files/builders/tmdb/index.md#tmdb-chart-builders). | Two-letter code or leave **blank**   |  :fontawesome-solid-circle-xmark:{ .red }  |
+| `region`           | [ISO 3166-1 code](https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) for user region.<br>Used with [TMDb Chart Builders](../files/builders/tmdb/builders.md#tmdb-chart-builders). | Two-letter code or leave **blank**   |  :fontawesome-solid-circle-xmark:{ .red }  |
 | `cache_expiration` | Number of days before each cache mapping expires and is re-cached.                                                                                                                     | Integer, e.g. **`60`**               |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-## Important Notes
+## Important notes
 
 It is important that you use a TMDb **V3** API key. If you do not already have one, follow the [TMDb Getting Started guide](https://developers.themoviedb.org/3/getting-started/introduction).
 

@@ -10,7 +10,7 @@ Choose a builder below. Each section includes its supported inputs and a configu
 | [TMDb Producer](#tmdb-producer) |
 | [TMDb Writer](#tmdb-writer) |
 
-## TMDb Actor — `tmdb_actor`, `tmdb_actor_details` {#tmdb-actor}
+## TMDb actor — `tmdb_actor`, `tmdb_actor_details` {#tmdb-actor}
 
 ???+ tip "People Collections"
 
@@ -20,7 +20,7 @@ Choose a builder below. Each section includes its supported inputs and a configu
 
 Finds every item in the TMDb Person's Actor Credits.
 
-### Example TMDb Actor Builder(s) {#example-tmdb-actor-builders}
+### Example TMDb actor builder(s) {#example-tmdb-actor-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -37,11 +37,11 @@ collections:
 2.  You can replace `tmdb_actor` with `tmdb_actor_details` if you would like to fetch and use the TMDb Person's biography and profile from the list
 3.  You can specify multiple people in `tmdb_actor_details` but it will only use the first one to update the collection details
 
-## TMDb Crew — `tmdb_crew`, `tmdb_crew_details` {#tmdb-crew}
+## TMDb crew — `tmdb_crew`, `tmdb_crew_details` {#tmdb-crew}
 
 Finds every item in the TMDb Person's Crew Credits.
 
-### Example TMDb Crew Builder(s) {#example-tmdb-crew-builders}
+### Example TMDb crew builder(s) {#example-tmdb-crew-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -61,11 +61,11 @@ collections:
 2.  You can replace `tmdb_crew` with `tmdb_crew_details` if you would like to fetch and use the TMDb Person's biography and profile from the list
 3.  You can specify multiple people in `tmdb_crew_details` but it will only use the first one to update the collection details
 
-## TMDb Director — `tmdb_director`, `tmdb_director_details` {#tmdb-director}
+## TMDb director — `tmdb_director`, `tmdb_director_details` {#tmdb-director}
 
 Finds every item in the TMDb Person's Director Credits.
 
-### Example TMDb Director Builder(s) {#example-tmdb-director-builders}
+### Example TMDb director builder(s) {#example-tmdb-director-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -81,11 +81,11 @@ collections:
 1.  You can replace `tmdb_director` with `tmdb_director_details` if you would like to fetch and use the TMDb Person's biography and profile from the list
 3.  You can specify multiple people in `tmdb_director_details` but it will only use the first one to update the collection details
 
-## TMDb Producer — `tmdb_producer`, `tmdb_producer_details` {#tmdb-producer}
+## TMDb producer — `tmdb_producer`, `tmdb_producer_details` {#tmdb-producer}
 
 Finds every item in the TMDb Person's Producer Credits.
 
-### Example TMDb Producer Builder(s) {#example-tmdb-producer-builders}
+### Example TMDb producer builder(s) {#example-tmdb-producer-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -101,11 +101,11 @@ collections:
 2.  You can specify multiple producers in `tmdb_producer_details` but it will only use the first one to update the collection details
 3.  https://www.themoviedb.org/person/19292-adam-sandler also accepted
 
-## TMDb Writer — `tmdb_writer`, `tmdb_writer_details` {#tmdb-writer}
+## TMDb writer — `tmdb_writer`, `tmdb_writer_details` {#tmdb-writer}
 
 Finds every item in the TMDb Person's Writer Credits.
 
-### Example TMDb Writer Builder(s) {#example-tmdb-writer-builders}
+### Example TMDb writer builder(s) {#example-tmdb-writer-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:

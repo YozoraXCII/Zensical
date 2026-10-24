@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Anilist Chart", 
-        "CODE_NAME": "anilist",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "020", 
-        "DESCRIPTION": "create collections based on Anilist charts"
-    }'
+    "COLLECTION": "AniList Chart",
+    "CODE_NAME": "anilist",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "020",
+    "DESCRIPTION": "create collections based on Anilist charts"
+}'
 %}
 | `AniList Popular`   | `popular`  | Collection of the most Popular Anime on AniList.     |
 | `AniList Season`    | `season`   | Collection of the Current Season's Anime on AniList. |

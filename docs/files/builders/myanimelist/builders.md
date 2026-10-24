@@ -1,4 +1,4 @@
-# MyAnimeList builders
+# MyAnimeList Builders
 
 You can find anime using the features of [MyAnimeList.net](https://myanimelist.net/) (MyAnimeList).
 
@@ -29,7 +29,7 @@ Gets the anime specified by the MyAnimeList ID.
 
 The expected input is a MyAnimeList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example MyAnimeList ID Builder(s) {#example-myanimelist-id-builders}
+### Example MyAnimeList ID builder(s) {#example-myanimelist-id-builders}
 
 ```yaml
 collections:
@@ -37,7 +37,7 @@ collections:
     mal_id: 23, 219
 ```
 
-## MyAnimeList Search — `mal_search` {#myanimelist-search}
+## MyAnimeList search — `mal_search` {#myanimelist-search}
 
 Gets every anime in a MyAnimeList search. The different sub-attributes are detailed below. At least one attribute is required.
 
@@ -64,7 +64,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 * To find the ID click on a Studio or Genre in the link above and there should be a number in the URL that's the `id`.
 * For example if the url is `https://myanimelist.net/anime/producer/4/Bones` the `id` would be `4` or if the url is `https://myanimelist.net/anime/genre/1/Action` the `id` would be `1`.
 
-### Example MyAnimeList Search Builder(s) {#example-myanimelist-search-builders}
+### Example MyAnimeList search builder(s) {#example-myanimelist-search-builders}
 
 ```yaml
 collections:
@@ -77,7 +77,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Seasonal — `mal_season` {#myanimelist-seasonal}
+## MyAnimeList seasonal — `mal_season` {#myanimelist-seasonal}
 
 Gets anime in MyAnimeList's [Seasonal Anime](https://myanimelist.net/anime/season) list the options are detailed below. 
 
@@ -91,7 +91,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 | `limit`         | **Description:** Don't return more than this number<br>**Default:** `100`<br>**Values:** Number of Anime to query from MyAnimeList (max: 500)                                                                                                                                                                                                                                                                                                                                    |
 | `starting_only` | **Description:** Return only anime that began airing in the selected season<br>**Default:** `False`<br>**Values:** `True` or `False`                                                                                                                                                                                                                                                                                                                                             |
 
-### Example MyAnimeList Seasonal Builder(s) {#example-myanimelist-seasonal-builders}
+### Example MyAnimeList seasonal builder(s) {#example-myanimelist-seasonal-builders}
 
 ```yaml
 collections:
@@ -113,7 +113,7 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList Suggested — `mal_suggested` {#myanimelist-suggested}
+## MyAnimeList suggested — `mal_suggested` {#myanimelist-suggested}
     
 Gets the suggested anime in by MyAnimeList for the authorized user. (Maximum: 100)
 
@@ -121,7 +121,7 @@ The expected input value is a single integer value of how many movies/shows to q
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example MyAnimeList Suggested Builder(s) {#example-myanimelist-suggested-builders}
+### Example MyAnimeList suggested builder(s) {#example-myanimelist-suggested-builders}
 
 ```yaml
 collections:
@@ -144,7 +144,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 | `sort_by`  | **Description:** Sort Order to return<br>**Default:** `score`<br>**Values:**<table class="clearTable"><tr><td>`score`</td><td>Sort by Score</td></tr><tr><td>`last_updated`</td><td>Sort by Last Updated</td></tr><tr><td>`title`</td><td>Sort by Anime Title</td></tr><tr><td>`start_date`</td><td>Sort by Start Date</td></tr></table>                                                                                          |
 | `limit`    | **Description:** Don't return more than this number<br>**Default:** `100`<br>**Values:** Number of Anime to query from MyAnimeList (max: 1000)                                                                                                                                                                                                                                                                                    |
 
-### Example MyAnimeList UserList Builder(s) {#example-myanimelist-userlist-builders}
+### Example MyAnimeList UserList builder(s) {#example-myanimelist-userlist-builders}
 
 ```yaml
 collections:

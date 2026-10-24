@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Letterboxd Chart", 
-        "CODE_NAME": "letterboxd",
-        "LIBRARY_TYPE": "Movie", 
-        "DESCRIPTION": "create collections based on lists from Letterboxd",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "Letterboxd Chart",
+    "CODE_NAME": "letterboxd",
+    "LIBRARY_TYPE": "Movie",
+    "DESCRIPTION": "create collections based on lists from Letterboxd",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": "
 Recommendations: Users might consider increasing the value set for the Template Variable 
 `cache_builders:` as several lists are in excess of 1,000 items and are not updated daily.

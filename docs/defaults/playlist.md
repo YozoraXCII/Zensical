@@ -75,7 +75,7 @@ playlist_files:
 {% include-markdown "./../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
     === "Playlists"
-        The default Playlists use the [IMDb List Builder](../files/builders/imdb/index.md#imdb-list) and [MDBList List Builder](../files/builders/mdblist/index.md#mdblist-list) to create the playlists.
+        The default Playlists use the [IMDb List Builder](../files/builders/imdb/builders.md#imdb-list) and [MDBList List Builder](../files/builders/mdblist/index.md#mdblist-list) to create the playlists.
 
     === "Default `imdb_list`"
     

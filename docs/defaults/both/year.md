@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Year", 
-        "CODE_NAME": "year",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "105", 
-        "DESCRIPTION": "dynamically create collections based on the years available in your library, sorted by critic rating to create \"best of YEAR\" collections"
-    }'
+    "COLLECTION": "Year",
+    "CODE_NAME": "year",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "105",
+    "DESCRIPTION": "dynamically create collections based on the years available in your library, sorted by critic rating to create \"best of YEAR\" collections"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Year"}' %}
 | `Best of <<Year>>`<br>**Example:** `Best of 2022` | `<<Year>>`<br>**Example:** `2022` | Collection of Movies/Shows that have this Year. |

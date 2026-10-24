@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Franchise", 
-        "CODE_NAME": "franchise",
-        "DESCRIPTION": "dynamically create collections based on popular Movie franchises, and can be used as a replacement to the TMDb Collections that Plex creates out-of-the-box",
-        "LIBRARY_TYPE": "Movie", 
-        "Section SECTION_NUMBER": ""
-    }'
+    "COLLECTION": "Franchise",
+    "CODE_NAME": "franchise",
+    "DESCRIPTION": "dynamically create collections based on popular Movie franchises, and can be used as a replacement to the TMDb Collections that Plex creates out-of-the-box",
+    "LIBRARY_TYPE": "Movie",
+    "Section SECTION_NUMBER": ""
+}'
     replace-tags='{
         "title-sub": "Unlike most Default Collection Files, Franchise works by placing collections inline with the main library items if your library allows it. 
 For example, the \"Iron Man\" franchise collection will appear next to the \"Iron Man\" movies within your library.

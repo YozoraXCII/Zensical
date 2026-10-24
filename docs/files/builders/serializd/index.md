@@ -3,7 +3,7 @@ search:
   boost: 2
 ---
 
-# Serializd builders
+# Serializd Builders
 
 Serializd builders use Serializd's JSON API to find shows. They are available only for show libraries and require [Serializd authentication](../../../config/serializd.md) in the Kometa configuration file.
 
@@ -17,7 +17,7 @@ Serializd builders use Serializd's JSON API to find shows. They are available on
 
 These builders do not scrape Serializd web pages. Private or otherwise API-inaccessible content produces a builder error.
 
-## Serializd Charts — `serializd_trending`, `serializd_popular`, `serializd_featured` {#serializd-charts}
+## Serializd charts — `serializd_trending`, `serializd_popular`, `serializd_featured` {#serializd-charts}
 
 The Serializd chart builders retrieve the homepage's ordered show charts through its JSON API. Each builder value is the maximum number of shows to return.
 
@@ -47,7 +47,7 @@ collections:
 
 The value must be an integer greater than `0`.
 
-## Serializd List — `serializd_list` {#serializd-list}
+## Serializd list — `serializd_list` {#serializd-list}
 
 The `serializd_list` builder finds every show in a public Serializd list.
 
@@ -61,7 +61,7 @@ collections:
 
 Multiple list URLs can be supplied as a YAML list. Items retain the order returned by Serializd.
 
-## Serializd Watchlist — `serializd_watchlist` {#serializd-watchlist}
+## Serializd watchlist — `serializd_watchlist` {#serializd-watchlist}
 
 The `serializd_watchlist` builder finds every show in a Serializd watchlist using its JSON API.
 

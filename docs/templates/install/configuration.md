@@ -31,7 +31,7 @@ Kometa runs from the command line and reads YAML files. It can run on a differen
 
 Gather your Plex server URL, Plex token, and TMDb API key. Keep tokens in your own configuration file; this page does not collect them.
 
-#### Getting a TMDb API Key
+#### Getting a TMDb API key
 
 Note that if you already have an API key, you can use that one. You don’t need another.
 
@@ -54,7 +54,7 @@ Once you’ve done that there should be an API Key available on this screen. If 
 
 Copy that value, you’ll need it for the config file.
 
-#### Getting a Plex URL and Token
+#### Getting a Plex URL and token
 
 The Plex URL is whatever URL you’d use **from this machine** to connect directly to your Plex server [i.e. NOT app.plex.tv].
 
@@ -197,7 +197,7 @@ libraries:
       - default: imdb
 ```
 
-Save and rerun using the same command as your first run. Browse [collection defaults](../../defaults/collections/index.md) for additional choices.
+Save and rerun using the same command as your first run. Browse [collection defaults](../../defaults/collections/usage.md) for additional choices.
 
 </details>
 
@@ -319,4 +319,4 @@ To update Kubernetes, update the image in the CronJob manifest and apply it; new
 
 Use the image or code branch matching the wiki version you are reading. See [Docker images](images.md) for supported tags and variants.
 
-Your configuration is portable between environments. Copy its directory, adjust paths and service URLs, and select your new environment above. Continue with [understanding your config and files](files.md), [YAML basics](../yaml.md), and [defaults](../../defaults/index.md).
+Your configuration is portable between environments. Copy its directory, adjust paths and service URLs, and select your new environment above. Continue with [understanding your config and files](files.md), [YAML basics](../yaml.md), and [defaults](../../defaults/guide.md).

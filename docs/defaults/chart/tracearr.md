@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Tracearr Chart",
-        "CODE_NAME": "tracearr",
-        "LIBRARY_TYPE": "Movie, Show",
-        "DESCRIPTION": "create collections based on Tracearr watch history",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "Tracearr Chart",
+    "CODE_NAME": "tracearr",
+    "LIBRARY_TYPE": "Movie, Show",
+    "DESCRIPTION": "create collections based on Tracearr watch history",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": "Requirements: [Tracearr Authentication](../../../../config/tracearr.md)."}'
 %}
 | `Tracearr Popular`   | `popular`   | Collection of items watched by the most unique Tracearr users. |

@@ -1,4 +1,4 @@
-# YouTube Music builders
+# YouTube Music Builders
 
 Configure the [service connection](../../../config/ytmusic.md) before using these builders.
 
@@ -10,7 +10,7 @@ Choose a builder below. Each section includes its supported inputs and a configu
 | [YouTube Music List Builder](#youtube-music-list-builder) |
 | [YouTube Music Top Artists Builder](#youtube-music-top-artists-builder) |
 
-## YouTube Music Dynamic Charts — `ytmusic_video_charts`, `ytmusic_genre_charts`, `ytmusic_list` {#youtube-music-dynamic-charts}
+## YouTube Music dynamic charts — `ytmusic_video_charts`, `ytmusic_genre_charts`, `ytmusic_list` {#youtube-music-dynamic-charts}
 
 Use `dynamic_collections` to create track collections from YouTube Music charts. Kometa creates a collection for each chart available in the selected section and country. No sign-in or YouTube Music setup is needed.
 
@@ -53,7 +53,7 @@ GT, HK, HN, HU, ID, IE, IL, IN, IS, IT, JP, KE, KR, LU, MX, MY, NG, NI, NL, NO, 
 PH, PL, PT, PY, RO, RS, RU, SA, SE, SG, SV, TH, TR, TW, TZ, UA, UG, US, UY, VN, ZA, ZW, ZZ
 ```
 
-## YouTube Music List Builder — `ytmusic_list` {#youtube-music-list-builder}
+## YouTube Music list builder — `ytmusic_list` {#youtube-music-list-builder}
 
 `ytmusic_list` creates a collection from a public YouTube Music playlist. Paste the playlist link, or use its playlist ID. No sign-in or YouTube Music setup is needed for public playlists.
 
@@ -73,7 +73,7 @@ To include at most 50 tracks, use `ytmusic_list: {playlist: PLC7LNuBoMA-o, limit
 
 Kometa matches playlist tracks to your Plex library using the artist and track name, and checks the duration and album when available. Tracks it cannot match appear in the missing-tracks log and report. Versions with similar names and lengths may occasionally be confused, so review the collection if the exact recording matters.
 
-## YouTube Music Top Artists Builder — `ytmusic_top_artists` {#youtube-music-top-artists-builder}
+## YouTube Music top artists builder — `ytmusic_top_artists` {#youtube-music-top-artists-builder}
 
 `ytmusic_top_artists` creates an artist collection from YouTube Music's top artists chart. You can use worldwide or country-specific charts. No sign-in is needed; see [YouTube Music settings](../../../config/ytmusic.md).
 

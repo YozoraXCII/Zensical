@@ -11,4 +11,11 @@ hide:
 {%    
   include-markdown "https://raw.githubusercontent.com/Kometa-Team/Overlay-Reset/develop/README.md"
   comments=false
+  replace='{
+    "### Install Walkthroughs": "### Install walkthroughs",
+    "### Local Install Overview": "### Local install overview",
+    "### Docker Install Overview": "### Docker install overview",
+    "#### Docker Run:": "#### Docker run:",
+    "### Example .env File": "### Example .env file"
+}'
 %}

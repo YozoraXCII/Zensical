@@ -24,7 +24,7 @@ libraries:
       split_duplicates: true
 ```
 
-## Operation Blocks
+## Operation blocks
 
 You can create individual blocks of operations by using a list under `operations` with each item in the list being a "block" that can be individually scheduled.
 
@@ -42,7 +42,7 @@ libraries:
         split_duplicates: true
 ```
 
-## A Note on Data Sources
+## A note on data sources
 
 Several of these operations use data from external sources such as MDBList. You will need to authenticate against each service you wish to use in these operations.
 
@@ -50,13 +50,13 @@ Some of these sources have free and paid tiers of access. Your entire library ma
 
 For example, MDBList's free tier is limited [at time of writing] to 1000 API requests daily. Changes in external site paid/free status and limits are not under Kometa's control.
 
-## A Note on Mass Operations
+## A note on mass operations
 
 Several of these operations perform **mass** updates; these are just that, **mass** updates.  Except as shown below, they cannot be filtered to operate on only a subset of the items in your library.
 
-## Operation Attributes
+## Operation attributes
 
-###### Mass Metadata Update
+###### Mass metadata update
 
 ??? info "`mass_metadata_update` - Updates metadata fields, artwork, ratings, mappings, and metadata backup data."
     `mass_metadata_update` groups the legacy `mass_*_update` operations into one operation block.
@@ -663,7 +663,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
         | Any string | Set an explicit studio. |
 
 
-###### Assets For All
+###### Assets for all
 
 ??? info "`assets_for_all` - Used to search the asset directories for images for all items in the library."
     Ordinarily, Kometa searches the asset directories for collection artwork. Enabling this Operation tells Kometa
@@ -682,7 +682,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               assets_for_all: false
         ```
 
-###### Assets For All Collections
+###### Assets for all collections
 
 ??? info "`assets_for_all_collections` - Used to search the asset directories for images for all unmanaged and/or unconfigured in the library."
     Enabling this Operation tells Kometa
@@ -703,7 +703,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               assets_for_all_collections: false
         ```
 
-###### Delete Collections
+###### Delete collections
 
 ??? info "`delete_collections` - Deletes collections based on a set of given attribute."
     Deletes collections based on a set of given attributes. The Collection must match all set attributes to be deleted.
@@ -739,7 +739,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
                 managed: true
         ```
 
-###### Update Blank Track Titles
+###### Update blank track titles
 
 ??? info "`update_blank_track_titles` - Updates blank track titles of every item in the library."
     Search though every track in a music library and replace any blank track titles with the tracks sort title.
@@ -757,7 +757,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               update_blank_track_titles: true
         ```
 
-###### Remove Title Parentheses
+###### Remove title parentheses
 
 ??? info "`remove_title_parentheses` - Removes title parentheses of every item in the library."
     Search through every title and remove all ending parentheses in an items title if the title is not locked.
@@ -775,7 +775,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               remove_title_parentheses: true
         ```
 
-###### Sync Watchlist to Serializd
+###### Sync watchlist to Serializd
 
 ??? info "`sync_watchlist_to_serializd` - Adds the Plex server owner's watched episodes to Serializd."
     This show-library operation reads episode watched state for the owner authenticated by the configured Plex token and marks those episodes as watched for the authenticated [Serializd](serializd.md) account. Episodes are sent in season-level batches. The operation is additive: it does not mark any Serializd episodes unwatched.
@@ -797,7 +797,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               sync_watchlist_to_serializd: true
         ```
 
-###### Ignore Labels
+###### Ignore labels
 
 ??? info "`ignore_labels` - Skips items from Library Operations when they have any of the given labels."
     Enabling this Operation tells Kometa to skip items from item-based Library Operations when the item has any label listed in `ignore_labels`.
@@ -826,7 +826,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
                   critic: tmdb
         ```
 
-###### Respect Ignore IDs
+###### Respect ignore IDs
 
 ??? info "`respect_ignore_ids` - Skips items from Library Operations when their IDs are ignored."
     Enabling this Operation tells Kometa to skip items from Library Operations when their TMDb/TVDb ID is listed in `ignore_ids` or their IMDb ID is listed in `ignore_imdb_ids`.
@@ -862,7 +862,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
 
         ```
 
-###### Split Duplicates
+###### Split duplicates
 
 ??? info "`split_duplicates` - Splits all duplicate items found in this library."
     Splits all duplicate items found in this library.
@@ -880,7 +880,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               split_duplicates: true
         ```
 
-###### Radarr Add All
+###### Radarr add all
 
 ??? info "`radarr_add_all` - Adds every item in the library to Radarr."
     Adds every item in the library to Radarr.
@@ -903,7 +903,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               radarr_add_all: true
         ```
 
-###### Radarr Remove By Tag
+###### Radarr remove by tag
 
 ??? info "`radarr_remove_by_tag` - Removes every item from Radarr with the Tags given."
     Removes every item from Radarr with the Tags given.
@@ -921,7 +921,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               radarr_remove_by_tag: mytag1, mytag2
         ```
 
-###### Sonarr Add All
+###### Sonarr add all
 
 ??? info "`sonarr_add_all` - Adds every item in the library to Sonarr."
     Adds every item in the library to Sonarr.
@@ -944,7 +944,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               sonarr_add_all: true
         ```
 
-###### Sonarr Remove By Tag
+###### Sonarr remove by tag
 
 ??? info "`sonarr_remove_by_tag` - Removes every item from Sonarr with the Tags given."
     Removes every item from Sonarr with the Tags given.
@@ -962,7 +962,7 @@ Several of these operations perform **mass** updates; these are just that, **mas
               sonarr_remove_by_tag: mytag1, mytag2
         ```
 
-###### Plex Bulk Edits Batch Size
+###### Plex bulk edits batch size
 
 ??? info "`plex_bulk_edit_batch_size` - Breaks up processing of operations into chunks of this many items."
     Setting this file tells Kometa to break up operations that require inspecting/modifying the entire library into chunks. Setting this can be particularly helpful for large libraries.

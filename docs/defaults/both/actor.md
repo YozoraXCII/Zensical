@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Actor",
-        "CODE_NAME": "actor",
-        "DESCRIPTION": "dynamically create collections based on the most popular actors/actresses in your library",
-        "LIBRARY_TYPE": "Movie, Show",
-        "SECTION_NUMBER": "140"
-    }'
+    "COLLECTION": "Actor",
+    "CODE_NAME": "actor",
+    "DESCRIPTION": "dynamically create collections based on the most popular actors/actresses in your library",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "140"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Actors"}' %}
 | `<<actor_name>>`<br>**Example:** `Frank Welker` | `<<actor_name>>`<br>**Example:** `Frank Welker` | Collection of Movies/Shows the actor is top billing in. |

@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Streaming Service", 
-        "CODE_NAME": "streaming",
-        "OVERLAY_LEVEL": "Movie, Show",
-        "DESCRIPTION": "an overlay based on the streaming service the file is found on for each item within your library"
-    }'
+    "OVERLAY_NAME": "Streaming Service",
+    "CODE_NAME": "streaming",
+    "OVERLAY_LEVEL": "Movie, Show",
+    "DESCRIPTION": "an overlay based on the streaming service the file is found on for each item within your library",
+    "OVERLAY_LABEL": "streaming service"
+}'
 %}
 | Netflix         | `netflix`     | `160` |
 | Prime Video     | `amazon`      | `150` |
@@ -34,7 +35,7 @@ hide:
 | tubi            | `tubi`        | `5`   |
 | filmin          | `filmin`      | `5`   |
 
-## Regional Variants
+## Regional variants
 
 Some logic is applied to allow for regional streaming service lists to be available to users depending on where they are, as detailed below:
 

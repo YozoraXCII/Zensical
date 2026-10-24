@@ -56,7 +56,7 @@ If you skip this step you're going to hit a hard stop in a moment.
 
 ---
 
-### Installing git {#local-installing-git}
+### Installing Git {#local-installing-git}
 
 To copy the Kometa code to your machine, we'll be using git. This may be installed on Mac or Linux, and probably isn't in Windows.
 
@@ -145,7 +145,7 @@ git checkout develop
 
     **In the future, when you want to run Kometa at the command line, you have to be in this directory.**
 
-#### Navigating to the Kometa Code {#local-navigating-to-the-kometa-code}
+#### Navigating to the Kometa code {#local-navigating-to-the-kometa-code}
 
 When you open a command window to run Kometa, the first step will always be:
 

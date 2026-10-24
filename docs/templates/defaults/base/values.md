@@ -1,4 +1,4 @@
-## Default Value Source
+## Default value source
 
 This is a reference showing the source of the data used in this Defaults File.
 

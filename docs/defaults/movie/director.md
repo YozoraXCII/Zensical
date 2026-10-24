@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Director",
-        "CODE_NAME": "director",
-        "DESCRIPTION": "dynamically create collections based on the most popular directors in your library",
-        "LIBRARY_TYPE": "Movie",
-        "SECTION_NUMBER": "150"
-    }'
+    "COLLECTION": "Director",
+    "CODE_NAME": "director",
+    "DESCRIPTION": "dynamically create collections based on the most popular directors in your library",
+    "LIBRARY_TYPE": "Movie",
+    "SECTION_NUMBER": "150"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Directors"}' %}
 | `<<director_name>> (Director)`<br>**Example:** `Frank Welker (Director)` | `<<director_name>>`<br>**Example:** `Frank Welker` | Collection of Movies by the Director. |

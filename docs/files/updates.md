@@ -61,7 +61,7 @@ All the following attributes update various details of the definition's Metadata
 
 * Here's an example of how the collections can look on the Home Page.
 
-## Summary Collection/Playlist Metadata Updates
+## Summary collection/playlist metadata updates
 
 All the following attributes update the summary of the collection/playlist from various sources. 
 
@@ -77,7 +77,7 @@ All the following attributes update the summary of the collection/playlist from 
 | `tvdb_description`       | **Description:** Changes summary to the TVDb List Description<br>**Values:** TVDb List URL                                                                                         |
 | `tvdb_summary`           | **Description:** Changes summary to the TVDb Movie summary for a movie library or the TVDb Show summary for a show library<br>**Values:** TVDb Movie/Show ID or URL                |
 
-## Poster Collection/Playlist Metadata Updates
+## Poster collection/playlist metadata updates
 
 All the following attributes update the poster of the collection/playlist from various sources. 
 
@@ -119,7 +119,7 @@ Standard priority is as follows [lower numbers take precedence]:
 
 You can use the `prioritize_assets` setting to push the asset_directory to the top of this priority list.
 
-## Background Collection/Playlist Metadata Updates
+## Background collection/playlist metadata updates
 
 All the following attributes update the background of the collection/playlist from various sources.
 
@@ -150,7 +150,7 @@ Standard priority is as follows [lower numbers take precedence]:
 
 You can use the `prioritize_assets` setting to push the asset_directory to the top of this priority list.
 
-## Logo Collection/Playlist Metadata Updates
+## Logo collection/playlist metadata updates
 
 All the following attributes update the logo of the collection/playlist from various sources.
 
@@ -175,7 +175,7 @@ Standard priority is as follows [lower numbers take precedence]:
 
 You can use the `prioritize_assets` setting to push the asset_directory to the top of this priority list.
 
-## Square Art Collection/Playlist Metadata Updates
+## Square art collection/playlist metadata updates
 
 All the following attributes update the square art (used by some Plex clients) of the collection/playlist from various sources.
 

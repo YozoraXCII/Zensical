@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Universe", 
-        "CODE_NAME": "universe",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "040", 
-        "DESCRIPTION": "create collections based on popular Movie universes (such as the Marvel Cinematic Universe or Wizarding World)"
-    }'
+    "COLLECTION": "Universe",
+    "CODE_NAME": "universe",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "040",
+    "DESCRIPTION": "create collections based on popular Movie universes (such as the Marvel Cinematic Universe or Wizarding World)"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Universe"}' %}
 | `Alien / Predator`           | `avp`       | Collection of Movies in the Alien / Predator Universe             |

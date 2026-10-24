@@ -37,7 +37,6 @@ features = [
     "navigation.top",
     "navigation.tracking",
     "search.highlight",
-    "navigation.indexes",
 ]
 language = "en"
 variant = "modern"
@@ -133,7 +132,6 @@ Home = "index.md"
 
 [[project.nav]]
 "Get Started" = [
-    "start/index.md",
     { "Installation" =  "kometa/install/index.md" },
     { "Understanding your config and files" = "kometa/install/files.md" },
     { "YAML basics" = "kometa/yaml.md" },
@@ -142,31 +140,26 @@ Home = "index.md"
 
 [[project.nav]]
 Guides = [
-    "kometa/guides/index.md",
+    { "Community guides and recipes" = "kometa/guides/community.md" },
     { "Collections and Playlists" = [
-    "kometa/guides/collections/index.md",
     { "Sorting collections and playlists" = "kometa/guides/order.md" },
     { "Managing recommendations" = "kometa/guides/hub.md" },
 ] },
     { "Overlays and Artwork" = [
-    "kometa/guides/artwork/index.md",
     { "How overlays work" = "kometa/guides/overlays.md" },
     { "Understanding Plex ratings" = "kometa/guides/ratings.md" },
     { "Setting up image assets" = "kometa/guides/assets.md" },
     { "Using MediUX assets" = "kometa/guides/mediux.md" },
 ] },
     { "Library Management" = [
-    "kometa/guides/libraries/index.md",
     { "Library operations" = "config/operations.md" },
     { "Formula 1 metadata" = "kometa/guides/formula.md" },
 ] },
     { "Running and Scheduling" = [
-    "kometa/guides/running/index.md",
     { "Scheduling runs" = "kometa/guides/scheduling.md" },
     { "Schedule syntax" = "config/schedule.md" },
 ] },
     { "Companion Tools" = [
-    "kometa/scripts/index.md",
     { Quickstart = "kometa/scripts/quickstart.md" },
     { ImageMaid = "kometa/scripts/imagemaid.md" },
     { "Overlay Reset" = "kometa/scripts/overlay-reset.md" },
@@ -175,12 +168,10 @@ Guides = [
 
 [[project.nav]]
 Defaults = [
-    "defaults/index.md",
     { "Using defaults" = "defaults/guide.md" },
     { "Collection Defaults" = [
-    "defaults/collections/index.md",
+    { "Configuring collection defaults" = "defaults/collections/usage.md" },
     { Awards = [
-    "defaults/browse/collections/awards/index.md",
     { Separator = "defaults/award/separator.md" },
     { "Academy Awards (Oscars)" = "defaults/award/oscars.md" },
     { "Berlin Film Festival Awards" = "defaults/award/berlinale.md" },
@@ -200,7 +191,6 @@ Defaults = [
     { "Venice Film Festival Awards" = "defaults/award/venice.md" },
 ] },
     { Charts = [
-    "defaults/browse/collections/charts/index.md",
     { Separator = "defaults/chart/separator.md" },
     { "Basic Charts" = "defaults/chart/basic.md" },
     { "AniList Charts" = "defaults/chart/anilist.md" },
@@ -214,7 +204,6 @@ Defaults = [
     { "Other Charts" = "defaults/chart/other.md" },
 ] },
     { "Content and Franchises" = [
-    "defaults/browse/collections/content/index.md",
     { Genres = "defaults/both/genre.md" },
     { "Franchises (Movie)" = "defaults/movie/franchise.md" },
     { "Franchises (Show)" = "defaults/show/franchise.md" },
@@ -223,7 +212,6 @@ Defaults = [
     { Collectionless = "defaults/both/collectionless.md" },
 ] },
     { "Content Ratings" = [
-    "defaults/browse/collections/content-ratings/index.md",
     { "US Content Ratings (Movie)" = "defaults/movie/content_rating_us.md" },
     { "US Content Ratings (Show)" = "defaults/show/content_rating_us.md" },
     { "UK Content Ratings" = "defaults/both/content_rating_uk.md" },
@@ -234,7 +222,6 @@ Defaults = [
     { "Common Sense Media Content Ratings" = "defaults/both/content_rating_cs.md" },
 ] },
     { Locations = [
-    "defaults/browse/collections/locations/index.md",
     { "Countries (Movie)" = "defaults/movie/country.md" },
     { "Countries (Show)" = "defaults/show/country.md" },
     { "Regions (Movie)" = "defaults/movie/region.md" },
@@ -243,27 +230,23 @@ Defaults = [
     { "Continents (Show)" = "defaults/show/continent.md" },
 ] },
     { "Media Properties" = [
-    "defaults/browse/collections/media/index.md",
     { "Aspect Ratio" = "defaults/both/aspect.md" },
     { Resolutions = "defaults/both/resolution.md" },
     { "Audio Languages" = "defaults/both/audio_language.md" },
     { "Subtitle Languages" = "defaults/both/subtitle_language.md" },
 ] },
     { People = [
-    "defaults/browse/collections/people/index.md",
     { Actors = "defaults/both/actor.md" },
     { Directors = "defaults/movie/director.md" },
     { Producers = "defaults/movie/producer.md" },
     { Writers = "defaults/movie/writer.md" },
 ] },
     { "Networks, Studios and Streaming" = [
-    "defaults/browse/collections/production/index.md",
     { Networks = "defaults/show/network.md" },
     { Streaming = "defaults/both/streaming.md" },
     { Studios = "defaults/both/studio.md" },
 ] },
     { "Years and Seasons" = [
-    "defaults/browse/collections/time/index.md",
     { Seasonal = "defaults/movie/seasonal.md" },
     { Years = "defaults/both/year.md" },
     { "Decades (Movie)" = "defaults/movie/decade.md" },
@@ -272,16 +255,14 @@ Defaults = [
     { Separators = "defaults/separators.md" },
 ] },
     { "Overlay Defaults" = [
-    "defaults/overlays/index.md",
+    { "Configuring overlay defaults" = "defaults/overlays/usage.md" },
     { "Ratings and Content" = [
-    "defaults/browse/overlays/content/index.md",
     { Ratings = "defaults/overlays/ratings.md" },
     { Ribbon = "defaults/overlays/ribbon.md" },
     { "Episode info" = "defaults/overlays/episode_info.md" },
     { MediaStinger = "defaults/overlays/mediastinger.md" },
     { Status = "defaults/overlays/status.md" },
     { "Content Ratings" = [
-    "defaults/browse/overlays/content-ratings/index.md",
     { "US Content Ratings (Movie)" = "defaults/overlays/content_rating_us_movie.md" },
     { "US Content Ratings (Show)" = "defaults/overlays/content_rating_us_show.md" },
     { "UK Content Ratings" = "defaults/overlays/content_rating_uk.md" },
@@ -292,7 +273,6 @@ Defaults = [
 ] },
 ] },
     { "Media Properties" = [
-    "defaults/browse/overlays/media/index.md",
     { "Aspect Ratio" = "defaults/overlays/aspect.md" },
     { "Audio Codec" = "defaults/overlays/audio_codec.md" },
     { "Audio/Subtitle Language Count" = "defaults/overlays/language_count.md" },
@@ -303,13 +283,11 @@ Defaults = [
     { "Video Format" = "defaults/overlays/video_format.md" },
 ] },
     { "Networks, Studios and Streaming" = [
-    "defaults/browse/overlays/production/index.md",
     { Networks = "defaults/overlays/network.md" },
     { Streaming = "defaults/overlays/streaming.md" },
     { Studios = "defaults/overlays/studio.md" },
 ] },
     { Utility = [
-    "defaults/browse/overlays/utility/index.md",
     { "Direct Play Only" = "defaults/overlays/direct_play.md" },
 ] },
 ] },
@@ -319,24 +297,19 @@ Defaults = [
 
 [[project.nav]]
 Configuration = [
-    "config/index.md",
     { "Config file overview" = "config/overview.md" },
     { "Libraries and File Loading" = [
-    "config/library-files/index.md",
     { "Library attributes" = "config/libraries.md" },
     { "Loading files" = "config/files.md" },
     { "Loading playlist files" = "config/playlists.md" },
 ] },
     { "Global settings" = "config/settings.md" },
     { "Service Connections" = [
-    "config/connections/index.md",
     { "Required Services" = [
-    "config/connections/required-services/index.md",
     { Plex = "config/plex.md" },
     { TMDb = "config/tmdb.md" },
 ] },
     { "Metadata and Tracking" = [
-    "config/connections/metadata-and-tracking/index.md",
     { FlickList = "config/flicklist.md" },
     { Floppy = "config/floppy.md" },
     { MDBList = "config/mdblist.md" },
@@ -347,35 +320,29 @@ Configuration = [
     { YamTrack = "config/yamtrack.md" },
 ] },
     { Anime = [
-    "config/connections/anime/index.md",
     { AniDB = "config/anidb.md" },
     { MyAnimeList = "config/myanimelist.md" },
 ] },
     { "Media Management" = [
-    "config/connections/media-management/index.md",
     { Lidarr = "config/lidarr.md" },
     { Radarr = "config/radarr.md" },
     { Seerr = "config/seerr.md" },
     { Sonarr = "config/sonarr.md" },
 ] },
     { "Activity Monitoring" = [
-    "config/connections/activity-monitoring/index.md",
     { Tautulli = "config/tautulli.md" },
     { Tracearr = "config/tracearr.md" },
 ] },
     { Music = [
-    "config/connections/music/index.md",
     { "Last.fm" = "config/lastfm.md" },
     { "YouTube Music" = "config/ytmusic.md" },
 ] },
     { "Other Connections" = [
-    "config/connections/other-connections/index.md",
     { GitHub = "config/github.md" },
     { "Kometa Utilities Authentication" = "config/authentication.md" },
 ] },
 ] },
     { Notifications = [
-    "config/notifications/index.md",
     { Webhooks = "config/webhooks.md" },
     { Apprise = "config/apprise.md" },
     { Gotify = "config/gotify.md" },
@@ -386,33 +353,29 @@ Configuration = [
 
 [[project.nav]]
 Reference = [
-    "files/index.md",
+    { "Definition components" = "files/definition-components.md" },
     { "File Formats" = [
-    "files/formats/index.md",
     { "Collection files" = "files/collections.md" },
     { "Overlay files" = "files/overlays.md" },
     { "Playlist files" = "files/playlists.md" },
     { "Metadata files" = "files/metadata.md" },
 ] },
     { "Templates and Dynamic Collections" = [
-    "files/reuse/index.md",
     { "Definition templates" = "files/templates.md" },
     { "Dynamic collections" = "files/dynamic.md" },
     { "Dynamic collection types and data" = "files/dynamic_types.md" },
 ] },
     { Builders = [
-    "files/builders/index.md",
     { "Movie and TV Databases" = [
-    "files/builders/categories/movie-and-tv-databases/index.md",
     { TMDb = [
-    "files/builders/tmdb/index.md",
+    { "TMDb builders" = "files/builders/tmdb/builders.md" },
     { Charts = "files/builders/tmdb/charts.md" },
     { People = "files/builders/tmdb/people.md" },
     { "Discover movies" = "files/builders/tmdb/discover/movie.md" },
     { "Discover shows" = "files/builders/tmdb/discover/show.md" },
 ] },
     { IMDb = [
-    "files/builders/imdb/index.md",
+    { "IMDb builders" = "files/builders/imdb/builders.md" },
     { "Advanced search" = "files/builders/imdb/search.md" },
 ] },
     { TVDb = "files/builders/tvdb/index.md" },
@@ -420,12 +383,11 @@ Reference = [
     { StevenLu = "files/builders/stevenlu/index.md" },
 ] },
     { "Lists and Tracking" = [
-    "files/builders/categories/lists-and-tracking/index.md",
     { FlickList = "files/builders/flicklist/index.md" },
     { Floppy = "files/builders/floppy/index.md" },
     { ICheckMovies = "files/builders/icheckmovies/index.md" },
     { Letterboxd = [
-    "files/builders/letterboxd/index.md",
+    { "Letterboxd builders" = "files/builders/letterboxd/builders.md" },
     { "Discovery and filmographies" = "files/builders/letterboxd/discovery.md" },
 ] },
     { MDBList = "files/builders/mdblist/index.md" },
@@ -435,28 +397,25 @@ Reference = [
     { YamTrack = "files/builders/yamtrack/index.md" },
 ] },
     { Anime = [
-    "files/builders/categories/anime/index.md",
     { AniDB = "files/builders/anidb/index.md" },
     { AniList = [
-    "files/builders/anilist/index.md",
+    { "AniList builders" = "files/builders/anilist/builders.md" },
     { "Advanced search" = "files/builders/anilist/search.md" },
 ] },
     { MyAnimeList = [
-    "files/builders/myanimelist/index.md",
+    { "MyAnimeList builders" = "files/builders/myanimelist/builders.md" },
     { "Charts and rankings" = "files/builders/myanimelist/charts.md" },
 ] },
 ] },
     { Music = [
-    "files/builders/categories/music/index.md",
     { "Apple Music and iTunes" = "files/builders/apple/index.md" },
     { "Last.fm" = "files/builders/lastfm/index.md" },
     { Spotify = "files/builders/spotify/index.md" },
     { "YouTube Music" = "files/builders/ytmusic/index.md" },
 ] },
     { "Your Library and Activity" = [
-    "files/builders/categories/your-library-and-activity/index.md",
     { Plex = [
-    "files/builders/plex/index.md",
+    { "Plex builders" = "files/builders/plex/builders.md" },
     { Search = "files/builders/plex/search.md" },
     { "Smart filters" = "files/builders/plex/smart-filter.md" },
 ] },
@@ -472,7 +431,6 @@ Reference = [
     { "Definition settings" = "files/settings.md" },
     { "Radarr/Sonarr definition settings" = "files/arr.md" },
     { "Metadata Updates" = [
-    "files/metadata-updates/index.md",
     { "Collection and playlist updates" = "files/updates.md" },
     { "Item updates" = "files/item_updates.md" },
 ] },
@@ -481,7 +439,6 @@ Reference = [
 
 [[project.nav]]
 "Help and Community" = [
-    "help/index.md",
     { "Help & troubleshooting" = "kometa/logs.md" },
     { "Release notes" = "kometa/release-notes.md" },
     { "Community & credits" = "kometa/acknowledgements.md" },

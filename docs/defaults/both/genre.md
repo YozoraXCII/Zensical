@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Genre", 
-        "CODE_NAME": "genre",
-        "DESCRIPTION": "dynamically create collections based on the genres available in your library",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "060"
-    }'
+    "COLLECTION": "Genre",
+    "CODE_NAME": "genre",
+    "DESCRIPTION": "dynamically create collections based on the genres available in your library",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "060"
+}'
     replace-tags='{"title-sub": "This file also merges similarly named genres (such as \"Sci-Fi\", \"SciFi\" and \"Sci-Fi & Fantasy\") into one (\"Science Fiction\")."}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Genre"}' %}

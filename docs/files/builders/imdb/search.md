@@ -414,7 +414,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     | Zombie Horror                    | `zombie_horror`                    | `in0000122` |
 
 
-### Example IMDb Search Builder(s)
+### Example IMDb search builder(s)
 
 ```yaml
 collections:

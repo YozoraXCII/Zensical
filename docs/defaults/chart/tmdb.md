@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "TMDb Chart", 
-        "CODE_NAME": "tmdb",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "DESCRIPTION": "create collections based on TMDb charts",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "TMDb Chart",
+    "CODE_NAME": "tmdb",
+    "LIBRARY_TYPE": "Movie, Show",
+    "DESCRIPTION": "create collections based on TMDb charts",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": "Recommendations: The `TMDb Airing Today` and `TMDb On The Air` Collections only work with Show Libraries."}'
 %}
 | `TMDb Airing Today` | `airing`   | Collection of Shows Airing Today on TMDb.            |

@@ -4,7 +4,7 @@ hide:
 ---
 # Docker Images
 
-## Official Image
+## Official image
 
 Generally, you should use the official docker image:
 
@@ -15,7 +15,7 @@ kometateam/kometa
 All the examples in the wiki are assuming the use of this image, and many do not work with non-official 
 Docker images due to differences in how the authors have chosen to construct their images.
 
-## Alternate Images
+## Alternate images
 
 Generally speaking, we suggest you use the official image instead of these alternates, unless you have a specific reason to use one of these over the official. 
 We do not provide support for issues which specifically relate to using third-party images [LSIO or other].

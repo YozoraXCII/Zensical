@@ -35,8 +35,8 @@ hide:
 
 ## What would you like to do?
 
-- **[Get started](start/index.md)** — install Kometa and make your first run.
-- **[Browse defaults](defaults/index.md)** — add ready-made collections, overlays, and playlists.
+- **[Get started](kometa/install/index.md)** — install Kometa and make your first run.
+- **[Browse defaults](defaults/files.md)** — add ready-made collections, overlays, and playlists.
 - **[Write custom collections](files/collections.md)** — choose builders and define your own collections.
 - **[Help & troubleshooting](kometa/logs.md)** — diagnose errors, update, and recover changes.
 

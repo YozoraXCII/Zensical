@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Franchise", 
-        "CODE_NAME": "franchise",
-        "DESCRIPTION": "dynamically create collections based on popular TV Show franchises",
-        "LIBRARY_TYPE": "Show", 
-        "Section SECTION_NUMBER": ""
-    }'
+    "COLLECTION": "Franchise",
+    "CODE_NAME": "franchise",
+    "DESCRIPTION": "dynamically create collections based on popular TV Show franchises",
+    "LIBRARY_TYPE": "Show",
+    "Section SECTION_NUMBER": ""
+}'
     replace-tags='{
         "title-sub": "Unlike most Default Collection Files, Franchise works by placing collections inline with the main library items if your library allows it. 
 For example, the \"Pretty Little Liars\" franchise collection will appear next to the \"Pretty Little Liars\" show in your library.

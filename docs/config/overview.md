@@ -15,7 +15,7 @@ If Kometa cannot find the `config.yml` at the default location, it will attempt 
 Kometa will attempt to download a copy from the GitHub repository in line with the user's current branch. 
 If this also fails, the user will have to download the Configuration Template File from  the above link and manually rename it to `config.yml`.
 
-## Quickstart Web UI
+## Quickstart web UI
 
 The team at Kometa have developed a tool called [Quickstart](../kometa/scripts/quickstart.md) which is a guided Web UI that helps you create a Configuration File for use with Kometa.
 
@@ -57,7 +57,7 @@ requirements for setup that can be found by clicking the links within the table 
 | [`wetrakr`](wetrakr.md)                                                                                                                                                                                               |  :fontawesome-solid-circle-xmark:{ .red }  |
 | [`mal`](myanimelist.md)                                                                                                                                                                                               |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-## Configuration Template File Example
+## Configuration template file example
 
 The below in an extract of the `config.yml.template` and is the initial values that are set if you follow any of the installation guides.
 

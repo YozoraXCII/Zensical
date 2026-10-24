@@ -1,4 +1,4 @@
-# Tracearr builders
+# Tracearr Builders
 
 You can find items in your Plex using the watch history from your configured [Tracearr](https://docs.tracearr.com/) instance.
 
@@ -20,7 +20,7 @@ You can find items in your Plex using the watch history from your configured [Tr
 | [`tracearr_in_progress`](#tracearr-history) | Gets a user's unfinished movies and exact episodes.                   | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 | [`tracearr_history`](#tracearr-history)   | Gets every movie/show in the Tracearr watch history feed.           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## Tracearr History — `tracearr_watched_media`, `tracearr_history`, `tracearr_watch_time`, `tracearr_in_progress`, `tracearr_popular` {#tracearr-history}
+## Tracearr history — `tracearr_watched_media`, `tracearr_history`, `tracearr_watch_time`, `tracearr_in_progress`, `tracearr_popular` {#tracearr-history}
 
 Most Tracearr builders below use the Public API history endpoints and their pagination and filtering support. Kometa prefers `/api/v2/public/history` and automatically falls back to `/api/v1/public/history` when v2 is unavailable. `tracearr_watched_media` instead uses its purpose-built v2 endpoint when Tracearr advertises that capability.
 
@@ -67,7 +67,7 @@ Kometa probes Tracearr's v2 Public API when connecting. When v2 is available, Ko
 
 Identical history requests are reused during the same Kometa run, reducing repeated pagination and pressure on Tracearr's shared v2 API rate limit.
 
-### Tracearr Watched Media {#tracearr-watched-media}
+### Tracearr watched media {#tracearr-watched-media}
 
 `tracearr_watched_media` uses `/api/v2/public/watched-media`, when provided by the installed Tracearr version. The endpoint returns compact, distinct media records rather than every playback session, permits up to 1,000 records per page, and supplies provider IDs for direct matching. Kometa checks Tracearr's v2 API specification for this individual capability because early Public API v2 releases do not include it.
 
@@ -105,7 +105,7 @@ collections:
       list_size: 50
 ```
 
-### Tracearr History Builders {#tracearr-history-builders}
+### Tracearr history builders {#tracearr-history-builders}
 
 `tracearr_binged` requires at least two distinct completed episodes and works with Show libraries. In playlists, it returns shows only.
 
@@ -115,7 +115,7 @@ collections:
 
     [Configuring Tracearr](../../../config/tracearr.md) in the config is required for this builder.
 
-### Example Tracearr History Builder(s) {#example-tracearr-history-builders}
+### Example Tracearr history builder(s) {#example-tracearr-history-builders}
 
 ```yaml
 collections:

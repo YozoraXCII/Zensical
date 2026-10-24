@@ -8,7 +8,9 @@ Install the build dependencies and run the checks listed in the root README.
 Author pages in `docs/` and maintain navigation in `zensical.toml`.
 Navigation folders use Title Case; individual page labels use sentence case,
 preserving product names and acronyms. Each page has one sidebar location, and
-folder entries begin with their clickable `index.md`.
+folders only group individual pages and do not have landing pages.
+Use title case for H1 headings and sentence case for H2–H6 headings, preserving
+product names, proper names, acronyms, and code identifiers.
 
 Reusable content belongs in `docs/templates/`. Use the existing `include` and
 `include-markdown` directives; the local Markdown extension expands them directly

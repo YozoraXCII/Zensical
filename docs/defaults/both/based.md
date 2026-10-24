@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Based On...", 
-        "CODE_NAME": "based",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "085", 
-        "DESCRIPTION": "create collections with items that are based on or inspired by various media outlets (such as Books or Video Games)"
-    }'
+    "COLLECTION": "Based On...",
+    "CODE_NAME": "based",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "085",
+    "DESCRIPTION": "create collections with items that are based on or inspired by various media outlets (such as Books or Video Games)"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Based on..."}' %}
 | `Based on a Book`       | `books`       | Collection of Movies/Shows based on or inspired by books        |

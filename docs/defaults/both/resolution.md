@@ -5,17 +5,17 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Resolution", 
-        "CODE_NAME": "resolution",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "120", 
-        "DESCRIPTION": "dynamically create collections based on the resolutions available in your library"
-    }'
+    "COLLECTION": "Resolution",
+    "CODE_NAME": "resolution",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "120",
+    "DESCRIPTION": "dynamically create collections based on the resolutions available in your library"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Resolution"}' %}
 | `<<Resolution>> Movies/Shows`<br>**Example:** `1080p Movies` | `<<Number>>`<br>**Example:** `1080` | Collection of Movies/Shows that have this Resolution. |
 
-## Standards Style
+## Standards style
 
 Below is a screenshot of the alternative Standards (`standards`) style which can be set via the `style` template variable.
 

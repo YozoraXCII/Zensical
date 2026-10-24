@@ -1,4 +1,4 @@
-# AniList builders
+# AniList Builders
 
 You can find anime using the features of [AniList.co](https://anilist.co/) (AniList).
 
@@ -19,7 +19,7 @@ Finds the anime specified by the AniList ID.
 
 The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example AniList ID Builder(s) {#example-anilist-id-builders}
+### Example AniList ID builder(s) {#example-anilist-id-builders}
 
 ```yaml
 collections:
@@ -27,7 +27,7 @@ collections:
     anilist_id: 23, 219
 ```
 
-## AniList Popular — `anilist_popular` {#anilist-popular}
+## AniList popular — `anilist_popular` {#anilist-popular}
 
 Finds every anime in AniList's [Popular Anime](https://anilist.co/search/anime/popular) list.
 
@@ -35,7 +35,7 @@ The expected input is a single integer value of how many movies/shows to query.
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example AniList Popular Builder(s) {#example-anilist-popular-builders}
+### Example AniList popular builder(s) {#example-anilist-popular-builders}
 
 ```yaml
 collections:
@@ -45,13 +45,13 @@ collections:
     sync_mode: sync
 ```
 
-## AniList Relations — `anilist_relations` {#anilist-relations}
+## AniList relations — `anilist_relations` {#anilist-relations}
 
 Finds the anime specified by the AniList ID and every relation in its relation tree except Character and Other relations.
 
 The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example AniList Relations Builder(s) {#example-anilist-relations-builders}
+### Example AniList relations builder(s) {#example-anilist-relations-builders}
 
 ```yaml
 collections:
@@ -59,13 +59,13 @@ collections:
     anilist_relations: 21
 ```
 
-## AniList Studio — `anilist_studio` {#anilist-studio}
+## AniList studio — `anilist_studio` {#anilist-studio}
 
 Finds all anime specified by the AniList Studio ID.
 
 The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example AniList Studio Builder(s) {#example-anilist-studio-builders}
+### Example AniList studio builder(s) {#example-anilist-studio-builders}
 
 ```yaml
 collections:
@@ -73,7 +73,7 @@ collections:
     anilist_studio: 21
 ```
 
-## AniList Top Rated — `anilist_top_rated` {#anilist-top-rated}
+## AniList top rated — `anilist_top_rated` {#anilist-top-rated}
 
 Finds every anime in AniList's [Top Rated Anime](https://anilist.co/search/anime?sort=SCORE_DESC) list.
 
@@ -81,7 +81,7 @@ The expected input is a single integer value of how many movies/shows to query.
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example AniList Top Rated Builder(s) {#example-anilist-top-rated-builders}
+### Example AniList top rated builder(s) {#example-anilist-top-rated-builders}
 
 ```yaml
 collections:
@@ -91,7 +91,7 @@ collections:
     sync_mode: sync
 ```
 
-## AniList Trending — `anilist_trending` {#anilist-trending}
+## AniList trending — `anilist_trending` {#anilist-trending}
 
 Finds every anime in AniList's [Trending Anime](https://anilist.co/search/anime/trending) list.
 
@@ -99,7 +99,7 @@ The expected input is a single integer value of how many movies/shows to query.
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
 
-### Example AniList Trending Builder(s) {#example-anilist-trending-builders}
+### Example AniList trending builder(s) {#example-anilist-trending-builders}
 
 ```yaml
 collections:
@@ -127,7 +127,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 | `score.lte` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-score-filters" } | **Description:** Only return items that have a score less than or equal to the given number.<br>**Values:** `0.0`-`10.0`                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
 | `sort_by`                                                                                     | **Description:** Sort Order to return<br>**Default:** `score`<br>**Values:**<table class="clearTable"><tr><td>`score`</td><td>Sort by User Score</td></tr><tr><td>`popularity`</td><td>Sort by Popularity</td></tr><tr><td>`status`</td><td>Sort by Status</td></tr><tr><td>`progress`</td><td>Sort by Progress</td></tr><tr><td>`last_updated`</td><td>Sort by Last Updated</td></tr><tr><td>`last_added`</td><td>Sort by Last Added</td></tr><tr><td>`start_date`</td><td>Sort by Start Date</td></tr><tr><td>`completed_date`</td><td>Sort by Completed Date</td></tr></table> |
 
-### Example AniList UserList Builder(s) {#example-anilist-userlist-builders}
+### Example AniList UserList builder(s) {#example-anilist-userlist-builders}
 
 ```yaml
 collections:

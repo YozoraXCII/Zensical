@@ -9,7 +9,7 @@ The Recommendations Hub allows you granular control over which collections appea
 You can use this to disable Plex's default recommendations (such as "Recently Added in Movies") and replace them with any of your favorite Kometa Collections.
 
 
-## Getting Started
+## Getting started
 
 The Recommendations tab is accessed by going to `Settings > Server > Manage > Libraries` within Plex. 
 You can then press the "Manage Recommendations" button against any of your libraries to view the current configuration.

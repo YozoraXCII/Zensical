@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "MyAnimeList Chart", 
-        "CODE_NAME": "myanimelist",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "020", 
-        "DESCRIPTION": "create collections based on MyAnimeList charts"
-    }'
+    "COLLECTION": "MyAnimeList Chart",
+    "CODE_NAME": "myanimelist",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "020",
+    "DESCRIPTION": "create collections based on MyAnimeList charts"
+}'
 %}
 | `MyAnimeList Favorited`  | `favorited` | Collection of most Favorited Anime on MyAnimeList.      |
 | `MyAnimeList Popular`    | `popular`   | Collection of the most Popular Anime on MyAnimeList.    |

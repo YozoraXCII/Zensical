@@ -5,18 +5,19 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Resolution/Edition",
-        "CODE_NAME": "resolution",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the resolutions and editions available on each item within your library"
-    }'
+    "OVERLAY_NAME": "Resolution/Edition",
+    "CODE_NAME": "resolution",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the resolutions and editions available on each item within your library",
+    "OVERLAY_LABEL": "resolution/edition"
+}'
     end='<!--rec-sub-->'
 %}
 
 Recommendations: Editions overlay is designed to use the Editions field within Plex [which requires Plex Pass to use] or the
 [TRaSH Guides](https://trash-guides.info/) filename naming scheme.
 
-## Supported Resolutions
+## Supported resolutions
 
 | Resolution      | Key               | Weight |
 |:----------------|:------------------|:-------|
@@ -60,7 +61,7 @@ Recommendations: Editions overlay is designed to use the Editions field within P
 | HLG             | `hlg`             | `2`    |
 | HDR             | `hdr`             | `1`    |
 
-## Supported Editions
+## Supported editions
 
 | Edition             | Key             | Weight |
 |:--------------------|:----------------|:-------|

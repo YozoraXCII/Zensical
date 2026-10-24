@@ -104,7 +104,7 @@ collections:
 | `tmdb_region`                | **Description:** Sets the region for `tmdb_popular`, `tmdb_now_playing`, `tmdb_top_rated`, and `tmdb_upcoming`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | `validate_builders`          | **Description:** When set to false the definition will not fail if one Builder fails.<br>**Default:** `true`<br>**Values:** `true` or `false`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
-### MDBList Sync Example
+### MDBList sync example
 
 `sync_to_mdb_list` synchronizes a collection with an MDBList static list. The
 list is found by exact name and created automatically when it does not exist.
@@ -131,7 +131,7 @@ The default `mode` is `sync`, which adds missing items and removes items no
 longer present in the collection. Use `append` to add items without removing
 existing list entries. Movies and shows are supported.
 
-### FlickList Sync Example
+### FlickList sync example
 
 `sync_to_flicklist_list` synchronizes a collection with a list in your FlickList account. The list is
 found by numeric id or exact name among your own lists, and created automatically when no match exists.
@@ -164,7 +164,7 @@ contents (for example, an item added to the list some other way that only carrie
 cannot resolve), that item is left in the list rather than removed. A stale, over-cautious leftover is
 preferred over the alternative of the sync deleting something it shouldn't have.
 
-### WeTrakr Sync Example
+### WeTrakr sync example
 
 `sync_to_wetrakr_list` synchronizes a collection with a list in your WeTrakr account. The list is
 found by numeric id or exact name among your own lists, and created automatically when no match exists.
@@ -199,9 +199,9 @@ contents (for example, an item added to the list some other way that only carrie
 cannot resolve), that item is left in the list rather than removed. A stale, over-cautious leftover is
 preferred over the alternative of the sync deleting something it shouldn't have.
 
-## Smart Label Definitions
+## Smart label definitions
 
-Smart Labels are a process that Kometa uses to build [Smart Collections](builders/plex/index.md#understanding-smart-vs-manual-collections) using non-Plex builders.
+Smart Labels are a process that Kometa uses to build [Smart Collections](builders/plex/builders.md#understanding-smart-vs-manual-collections) using non-Plex builders.
 
 Instead of building a Manual (also known as Dumb or non-Smart) Collection with items from third-party builders, 
 Kometa applies a label to every item that is discovered by the builder.
@@ -255,10 +255,10 @@ collections:
 The above workflow would still happen as described (note that the label applied to the items would now be "Unplayed Marvel Cinematic Universe with Robert Downey Jr."), 
 but the Smart Filter now includes two new criteria; that the item must be unplayed and must feature Robert Downey Jr.
 
-### Smart Labels & Plex Collectionless 
+### Smart labels & Plex collectionless
 
 Smart Label definitions are especially powerful because Smart Collections are not subject to the usual show/hide rules that affect Manual collections. 
-As such, it can help resolve issues like those described in [Plex Collectionless](builders/plex/index.md#plex-collectionless). 
+As such, it can help resolve issues like those described in [Plex Collectionless](builders/plex/builders.md#plex-collectionless).
 
 For example, if Marvel Cinematic Universe is set up using the smart label method, and all other Marvel-related collections are Manual collections, 
 Plex will handle the visibility correctly across grouped collections.
@@ -268,9 +268,9 @@ A good rule of thumb is: each item in your library should belong to no more than
 
 The only downside of using smart collections is that they are unable to be sorted by `custom` (which uses the order of the original builder). 
 In order to have a custom ordered Marvel Cinematic Universe Collection  with the show/hide of the collection to work correctly you will have to use
-[Plex Collectionless](builders/plex/index.md#plex-collectionless).
+[Plex Collectionless](builders/plex/builders.md#plex-collectionless).
 
-## Default Percent Example
+## Default percent example
 
 An example of using `default_percent` which is used in an external yml file and not within config.yml:
 
@@ -288,7 +288,7 @@ An example of using `default_percent` which is used in an external yml file and 
       filepath.regex: 'HDR10\+|HDR10P'
 ```
 
-### Server Preroll Example
+### Server preroll example
 
 An example of using `server_preroll` with a schedule which is also used in an external yml file and not within config.yml:
 

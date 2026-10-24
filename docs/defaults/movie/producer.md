@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Producer",
-        "CODE_NAME": "producer",
-        "DESCRIPTION": "dynamically create collections based on the most popular producers in your library",
-        "LIBRARY_TYPE": "Movie",
-        "SECTION_NUMBER": "160"
-    }'
+    "COLLECTION": "Producer",
+    "CODE_NAME": "producer",
+    "DESCRIPTION": "dynamically create collections based on the most popular producers in your library",
+    "LIBRARY_TYPE": "Movie",
+    "SECTION_NUMBER": "160"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Producers"}' %}
 | `<<producer_name>> (Producer)`<br>**Example:** `Frank Welker (Producer)` | `<<producer_name>>`<br>**Example:** `Frank Welker` | Collection of Movies by the Producer. |

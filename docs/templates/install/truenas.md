@@ -1,4 +1,4 @@
-### Kometa Installation Walkthrough for TrueNAS Scale {#truenas-kometa-installation-walkthrough-for-truenas-scale}
+### Kometa installation walkthrough for TrueNAS Scale {#truenas-kometa-installation-walkthrough-for-truenas-scale}
 
 Thanks to i.am.stonecutter on Discord.
 
@@ -14,13 +14,13 @@ This guide provides step-by-step instructions to install Kometa on TrueNAS Scale
 
 ### Setup {#truenas-setup}
 
-#### Step 1: Sign into TrueNAS Web Interface {#truenas-step-1-sign-into-truenas-web-interface}
+#### Step 1: sign into TrueNAS web interface {#truenas-step-1-sign-into-truenas-web-interface}
 
 1. Log in to the TrueNAS Scale web interface.
 
     ![Prerequisite 1](../../assets/images/kometa/install/truenas/truenas-step-1.png)
 
-#### Step 2: Create Kometa Dataset {#truenas-step-2-create-kometa-dataset}
+#### Step 2: create Kometa dataset {#truenas-step-2-create-kometa-dataset}
 
 1. Navigate to Datasets.
 
@@ -34,7 +34,7 @@ This guide provides step-by-step instructions to install Kometa on TrueNAS Scale
 
 3. Edit the ACL for the kometa dataset to ensure proper permissions for your user setup. Default settings are usually sufficient, but adjust if issues arise.
 
-#### Step 3: Set Up Config Directory {#truenas-step-3-set-up-config-directory}
+#### Step 3: set up config directory {#truenas-step-3-set-up-config-directory}
 
 1. Connect to TrueNAS Scale via SSH.
 2. Run `sudo mc` to launch Midnight Commander.
@@ -44,7 +44,7 @@ This guide provides step-by-step instructions to install Kometa on TrueNAS Scale
 
     ![Prerequisite 1](../../assets/images/kometa/install/truenas/truenas-step-3.png)
 
-#### Step 4: Deploy Kometa Docker Container {#truenas-step-4-deploy-kometa-docker-container}
+#### Step 4: deploy Kometa Docker container {#truenas-step-4-deploy-kometa-docker-container}
 
 1. In the TrueNAS web interface, go to Apps > Discover Apps.
 2. Click the three-dot menu and select **Install via YAML**.
@@ -71,7 +71,7 @@ This guide provides step-by-step instructions to install Kometa on TrueNAS Scale
 
     ![Prerequisite 1](../../assets/images/kometa/install/truenas/truenas-step-4b.png)
 
-#### Step 5: Run Kometa after completing the configuration below {#truenas-step-5-run-kometa-after-completing-the-configuration-below}
+#### Step 5: run Kometa after completing the configuration below {#truenas-step-5-run-kometa-after-completing-the-configuration-below}
 
 This is an optional step you can perform if you want to fire off a run right this second to verify that things are working.  Whether or not you do this, Kometa will wake up tomorrow at 5AM to process the config [assuming you used the docker-compose YAML just above].
 
@@ -84,7 +84,7 @@ This is an optional step you can perform if you want to fire off a run right thi
 
     Of course, replace `YOUR-STORAGE-POOL/YOUR-DATASET` to suit your specific setup.
    
-#### Step 6: Verify and Expand {#truenas-step-6-verify-and-expand}
+#### Step 6: verify and expand {#truenas-step-6-verify-and-expand}
 
 1. Check your Plex library for updated collections.
 2. Explore Kometa’s Defaults for pre-made collections.

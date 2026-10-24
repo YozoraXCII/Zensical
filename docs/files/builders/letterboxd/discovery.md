@@ -31,7 +31,7 @@ collections:
       person: francis-ford-coppola
 ```
 
-## Other Discovery Builders
+## Other discovery builders
 
 Pass the slug directly in the string form, such as `letterboxd_studio: a24`. In the object form, use the named slug attribute shown below and add `limit`, `year`, or `sort_by` as needed.
 

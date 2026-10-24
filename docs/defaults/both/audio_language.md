@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Audio Language", 
-        "CODE_NAME": "audio_language",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "090", 
-        "DESCRIPTION": "dynamically create collections based on the audio languages available in your library"
-    }'
+    "COLLECTION": "Audio Language",
+    "CODE_NAME": "audio_language",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "090",
+    "DESCRIPTION": "dynamically create collections based on the audio languages available in your library"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Audio Language"}' %}
 | `<<Audio Language>> Audio`<br>**Example:** `Japanese` | `<<ISO 639-1 Code>>`<br>**Example:** `ja` <br>`<<ISO 639-2 Code>>`<br>**Example:** `myn` | Collection of Movies/Shows that have this Audio Language.  |

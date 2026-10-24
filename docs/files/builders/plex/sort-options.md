@@ -1,4 +1,4 @@
-## Plex Sort Options
+## Plex sort options
 
 The majority of Smart and Manual Builders utilize the same Sort Options. Any deviation from this will be highlighted against the specific Builder.
 
@@ -31,7 +31,7 @@ The majority of Smart and Manual Builders utilize the same Sort Options. Any dev
 | `bitrate.asc`<br>`bitrate.desc`                 | Sort by Bitrate                                     | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |
 | `random`                                        | Sort by Random                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-### Sort Option Examples
+### Sort option examples
 
 ```yaml
 collections:

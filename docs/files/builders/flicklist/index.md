@@ -1,4 +1,4 @@
-# FlickList builders
+# FlickList Builders
 
 You can find items using lists and personal data from [FlickList](https://flicklist.tv/).
 
@@ -17,7 +17,7 @@ You can find items using lists and personal data from [FlickList](https://flickl
 | [`flicklist_tracked`](#flicklist-personal-data)   | Finds shows the configured FlickList user is tracking.              | :fontawesome-solid-circle-xmark:{ .red }   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`flicklist_ratings`](#flicklist-ratings)    | Finds every item the configured FlickList user has rated.           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## FlickList List — `flicklist_list`, `flicklist_list_details`, `flicklist_user_lists` {#flicklist-list}
+## FlickList list — `flicklist_list`, `flicklist_list_details`, `flicklist_user_lists` {#flicklist-list}
 
 Finds every item in a FlickList list, or across a FlickList user's public lists.
 
@@ -39,7 +39,7 @@ updated externally and are returned in list order.
     FlickList list description as the collection summary. Only the first list's description is used when
     multiple lists are given.
 
-### Example FlickList List Builder(s) {#example-flicklist-list-builders}
+### Example FlickList list builder(s) {#example-flicklist-list-builders}
 
 ```yaml
 collections:
@@ -69,7 +69,7 @@ lists are readable without authentication — but Kometa still requires the `fli
 A user with many public lists means more requests; Kometa logs how many lists it found for that user before
 processing them.
 
-### Example FlickList User Lists Builder {#example-flicklist-user-lists-builder}
+### Example FlickList user lists builder {#example-flicklist-user-lists-builder}
 
 ```yaml
 collections:
@@ -79,7 +79,7 @@ collections:
     sync_mode: sync
 ```
 
-## FlickList Personal Data — `flicklist_watchlist`, `flicklist_favorites`, `flicklist_watched`, `flicklist_tracked`, `flicklist_up_next` {#flicklist-personal-data}
+## FlickList personal data — `flicklist_watchlist`, `flicklist_favorites`, `flicklist_watched`, `flicklist_tracked`, `flicklist_up_next` {#flicklist-personal-data}
 
 Finds items from the configured FlickList API key's own watchlist, favorites, watched history, up-next queue,
 or tracked shows.
@@ -144,7 +144,7 @@ collections:
     is a different concept from `flicklist_watched`, which reflects actual play history (has the
     episode/movie been played), not a manually-set watchlist status.
 
-## FlickList Ratings — `flicklist_ratings` {#flicklist-ratings}
+## FlickList ratings — `flicklist_ratings` {#flicklist-ratings}
 
 Finds every item the configured FlickList API key's account has rated.
 
@@ -156,7 +156,7 @@ Finds every item the configured FlickList API key's account has rated.
 object with `minimum`/`maximum` bounds. FlickList ratings are documented as half-point increments (0.5–10) but
 the API does not currently enforce that, so a fractional rating like `5.3` can come back from FlickList itself.
 
-### Example FlickList Ratings Builder(s) {#example-flicklist-ratings-builders}
+### Example FlickList ratings builder(s) {#example-flicklist-ratings-builders}
 
 ```yaml
 collections:

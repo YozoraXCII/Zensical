@@ -28,7 +28,7 @@ the type of items the collection holds.**
     include-markdown "./sort-options.md"
 %}
 
-## Plex Builder Attributes
+## Plex builder attributes
 
 The majority of Smart and Manual Builders utilize the same Builder Attributes. Any deviation from this will be highlighted against the specific Builder.
 
@@ -38,7 +38,7 @@ The majority of Smart and Manual Builders utilize the same Builder Attributes. A
 | `sort_by`  | **Description:** This will control how the filter is sorted in your library. You can do a multi-level sort using a list.<br>**Default:** `random`<br>**Values:** Any sort options for your filter type in the [Sorts Options Table](#plex-sort-options) |
 | `validate` | **Description:** Determines if a collection will fail on a validation error<br>**Default:** `true`<br>**Values**: `true` or `false`                                                                                                                |
 
-### Example Plex Search Builder(s)
+### Example Plex search builder(s)
 
 ```yaml
 collections:

@@ -63,9 +63,9 @@ tags:
 
 Filters allow for you to filter every item added to the collection/overlay/playlist from every Builder using the `filters` attribute.
 
-## Using Filters
+## Using filters
 
-Filters cannot do anything alone they require the use of at least one [Builder](builders/index.md) to function.
+Filters cannot do anything alone they require the use of at least one [Builder](definition-components.md#builders) to function.
 
 You can have multiple filters in each set but an item must match at least one value from **each** filter to not be ignored. The values for each must match what Plex has including special characters in order to match.
 
@@ -97,15 +97,15 @@ You can use the `plex_all: true` Builder to filter from your entire library.
 
 ???+ warning
 
-    Filters can be very slow, particularly on larger libraries. Try to build or narrow your items using a [Smart Label Collection](settings.md#smart-label-definitions), [Plex Search](builders/plex/search.md) or another [Builder](index.md) if possible.
+    Filters can be very slow, particularly on larger libraries. Try to build or narrow your items using a [Smart Label Collection](settings.md#smart-label-definitions), [Plex Search](builders/plex/search.md) or another [Builder](definition-components.md) if possible.
 
-## Filter Options
+## Filter options
 
 === "Boolean Filters"
 
     **Modifiers:** No Modifier
 
-    ### Boolean Filter Attributes
+    ### Boolean filter attributes
 
     | Boolean Filters                                                                                          | Description                                                                                              | Allowed Media                                                                                                                                                                                                              |
     |:---------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -139,7 +139,7 @@ You can use the `plex_all: true` Builder to filter from your entire library.
 
     Date filters can **NOT** take multiple values.
 
-    ### Date Filter Attributes
+    ### Date filter attributes
 
     | Date Filters                                                                                                     | Description                                                                    | Allowed Media                                                                        |
     |:-----------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|
@@ -184,7 +184,7 @@ You can use the `plex_all: true` Builder to filter from your entire library.
 
     Number filters can **NOT** take multiple values.
 
-    ### Number Filter Attributes
+    ### Number filter attributes
 
     | Number Filters                                                                                                                                                                      | Description                                                                                                                                                                 | Allowed Media                                                                                                                                                                                                                                                                                                                                                                                                              |
     |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -246,7 +246,7 @@ You can use the `plex_all: true` Builder to filter from your entire library.
 
     String filters can take multiple values **only as a list**.
 
-    ### String Filter Attributes
+    ### String filter attributes
 
     | String Filter                                                                                          | Description                              | Allowed Media                                                                                                                                                                                                                                                                                                                                                                                                             |
     |:-------------------------------------------------------------------------------------------------------|:-----------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -303,7 +303,7 @@ You can use the `plex_all: true` Builder to filter from your entire library.
 
     Tag filters can take multiple values as a **list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string**.
 
-    ### Tag Filter Attributes
+    ### Tag filter attributes
 
     | Tag Filters                                                                                            | Description                                                                                                                                     | Allowed Media                                                                                                                                                                                                          |
     |:-------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

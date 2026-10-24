@@ -1,4 +1,4 @@
-# Apple Music and iTunes builders
+# Apple Music and iTunes Builders
 
 The Apple Music and iTunes chart builders match ranked chart entries to exact artist and title values in a Plex Music library.
 
@@ -11,7 +11,7 @@ Both builders accept US, UK, JP, DE, FR, IT, and RU. France, Italy, and Russia u
 
 See [Apple Music and iTunes Charts](#apple-music-and-itunes-charts) for configuration examples and source page details.
 
-## Apple Music and iTunes Charts — `apple_chart` {#apple-music-and-itunes-charts}
+## Apple Music and iTunes charts — `apple_chart` {#apple-music-and-itunes-charts}
 
 `apple_chart` and `itunes_chart` build track-level collections from country charts. Use `type: album` to build an album-level collection; the level defaults to tracks for songs and albums for the album chart. Kometa keeps only rows with a positive integer in the selected country's column, sorts those rows by that rank, then matches exact artist and title values in Plex. When multiple track matches exist, the earliest known album release is selected. Unmatched chart items are skipped.
 

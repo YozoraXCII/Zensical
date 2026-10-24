@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Audio Codec", 
-        "CODE_NAME": "audio_codec",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the audio codec available on each item within your library"
-    }'
+    "OVERLAY_NAME": "Audio Codec",
+    "CODE_NAME": "audio_codec",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the audio codec available on each item within your library",
+    "OVERLAY_LABEL": "audio codec"
+}'
     replace-tags='{"rec-sub": "Recommendations: Designed for [TRaSH Guides](https://trash-guides.info/) filename naming scheme."}'
 %}
 | Dolby TrueHD Atmos     | `truehd_atmos` | `160`  |
@@ -84,4 +85,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The Audio Codec overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) with [filters](../../../files/filters) on both audio channel name and filepath.
+    The Audio Codec overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) with [filters](../../../files/filters) on both audio channel name and filepath.

@@ -1,4 +1,4 @@
-# WeTrakr builders
+# WeTrakr Builders
 
 You can find items using lists and personal data from [WeTrakr](https://wetrakr.com/).
 
@@ -14,7 +14,7 @@ You can find items using lists and personal data from [WeTrakr](https://wetrakr.
 | [`wetrakr_favorites`](#wetrakr-personal-data) | Finds every item in the configured WeTrakr account's favorites. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`wetrakr_ratings`](#wetrakr-ratings)    | Finds every item the configured WeTrakr account has rated.      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## WeTrakr List — `wetrakr_list`, `wetrakr_list_details`, `wetrakr_user_lists` {#wetrakr-list}
+## WeTrakr list — `wetrakr_list`, `wetrakr_list_details`, `wetrakr_user_lists` {#wetrakr-list}
 
 Finds every item in a WeTrakr list, or across a WeTrakr user's public lists.
 
@@ -39,7 +39,7 @@ private list belonging to someone else returns an error naming the list.
     WeTrakr list description as the collection summary. Only the first list's description is used when
     multiple lists are given.
 
-### Example WeTrakr List Builder(s) {#example-wetrakr-list-builders}
+### Example WeTrakr list builder(s) {#example-wetrakr-list-builders}
 
 ```yaml
 collections:
@@ -70,7 +70,7 @@ matched on an exact (case-insensitive) username.
 A user with many public lists means more requests; Kometa logs how many lists it found for that user before
 processing them. Locked or non-public lists in that user's list collection are skipped automatically.
 
-### Example WeTrakr User Lists Builder {#example-wetrakr-user-lists-builder}
+### Example WeTrakr user lists builder {#example-wetrakr-user-lists-builder}
 
 ```yaml
 collections:
@@ -80,7 +80,7 @@ collections:
     sync_mode: sync
 ```
 
-## WeTrakr Personal Data — `wetrakr_tracking`, `wetrakr_favorites` {#wetrakr-personal-data}
+## WeTrakr personal data — `wetrakr_tracking`, `wetrakr_favorites` {#wetrakr-personal-data}
 
 Finds items from the configured WeTrakr account's own tracking list or favorites.
 
@@ -129,7 +129,7 @@ collections:
 | `wetrakr_tracking`   | Every status valid for the library type          | Object of specific statuses, or `false` | Movies and Shows    |
 | `wetrakr_favorites`  | Entire favorites list                            | —                          | Movies and Shows    |
 
-## WeTrakr Ratings — `wetrakr_ratings` {#wetrakr-ratings}
+## WeTrakr ratings — `wetrakr_ratings` {#wetrakr-ratings}
 
 Finds every item the configured WeTrakr account has rated.
 
@@ -140,7 +140,7 @@ Finds every item the configured WeTrakr account has rated.
 `wetrakr_ratings` accepts a blank value or `true` for every rated item, a number as a minimum rating, or an
 object with `minimum`/`maximum` bounds. WeTrakr ratings are on a 0–10 scale with one decimal place.
 
-### Example WeTrakr Ratings Builder(s) {#example-wetrakr-ratings-builders}
+### Example WeTrakr ratings builder(s) {#example-wetrakr-ratings-builders}
 
 ```yaml
 collections:

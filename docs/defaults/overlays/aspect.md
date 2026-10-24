@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Aspect", 
-        "CODE_NAME": "aspect",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay on a show/movie detailing its aspect ratio"
-    }'
+    "OVERLAY_NAME": "Aspect",
+    "CODE_NAME": "aspect",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay on a show/movie detailing its aspect ratio",
+    "OVERLAY_LABEL": "aspect"
+}'
 %}
 | 1.33 | `1.33` | `80` |
 | 1.65 | `1.65` | `70` |

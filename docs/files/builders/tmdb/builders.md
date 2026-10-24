@@ -1,8 +1,8 @@
-# TMDb builders
+# TMDb Builders
 
 You can find items using the features of [TheMovieDb.org](https://www.themoviedb.org/) (TMDb).
 
-## TMDb Standard Builders
+## TMDb standard builders
 
 | Builder                                                              | Description                                                                                                                                                                                                                                                                                                                   |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
 |:---------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -15,7 +15,7 @@ You can find items using the features of [TheMovieDb.org](https://www.themoviedb
 | [`tmdb_network`](#tmdb-network)                                | Finds every item from the TMDb network's show list                                                                                                                                                                                                                                                                            |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
 | [`tmdb_keyword`](#tmdb-keyword)                                | Finds every item from the TMDb keyword's movie/show list                                                                                                                                                                                                                                                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-## TMDb Chart Builders
+## TMDb chart builders
 
 | Builder                                            | Description                                                                                                                                                     |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
 |:---------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -29,7 +29,7 @@ You can find items using the features of [TheMovieDb.org](https://www.themoviedb
 | [`tmdb_trending_weekly`](charts.md#tmdb-trending-weekly) | Finds the movies/shows in TMDb's Trending Weekly list                                                                                                           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
 
-## TMDb People Builders
+## TMDb people builders
 
     ???+ tip "People Collections"
     
@@ -45,13 +45,13 @@ You can find items using the features of [TheMovieDb.org](https://www.themoviedb
 | [`tmdb_producer`](people.md#tmdb-producer) | Finds every item in the TMDb Person's Producer Credits | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
 | [`tmdb_writer`](people.md#tmdb-writer)     | Finds every item in the TMDb Person's Writer Credits   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
 
-## TMDb Collection — `tmdb_collection`, `tmdb_collection_details` {#tmdb-collection}
+## TMDb collection — `tmdb_collection`, `tmdb_collection_details` {#tmdb-collection}
 
 Finds every item in the TMDb collection.
 
 This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example TMDb Collection Builder(s) {#example-tmdb-collection-builders}
+### Example TMDb collection builder(s) {#example-tmdb-collection-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -72,13 +72,13 @@ collections:
 
 * Posters and background in the library's asset directory will be used over the collection details unless `tmdb_poster`/`tmdb_background` is also specified.
 
-## TMDb Company — `tmdb_company` {#tmdb-company}
+## TMDb company — `tmdb_company` {#tmdb-company}
 
 Finds every movie from the TMDb company's movie list.
 
 This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example TMDb Company Builder(s) {#example-tmdb-company-builders}
+### Example TMDb company builder(s) {#example-tmdb-company-builders}
 
 ```yaml
 collections:
@@ -88,11 +88,11 @@ collections:
 
 1. https://www.themoviedb.org/company/10342 also accepted
 
-## TMDb Keyword — `tmdb_keyword` {#tmdb-keyword}
+## TMDb keyword — `tmdb_keyword` {#tmdb-keyword}
 
 Finds every item from the TMDb keyword's movie/show list.
 
-### Example TMDb Keyword Builder(s) {#example-tmdb-keyword-builders}
+### Example TMDb keyword builder(s) {#example-tmdb-keyword-builders}
 
 ```yaml
 collections:
@@ -102,7 +102,7 @@ collections:
 
 1.   https://www.themoviedb.org/keyword/180547 also accepted
 
-## TMDb List — `tmdb_list`, `tmdb_list_details` {#tmdb-list}
+## TMDb list — `tmdb_list`, `tmdb_list_details` {#tmdb-list}
 
 Finds every item in the TMDb List.
 
@@ -111,7 +111,7 @@ This Builder is expected to have the full URL to the item or the TMDb ID of the 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
 and in a specific order. 
 
-### Example TMDb List Builder(s) {#example-tmdb-list-builders}
+### Example TMDb list builder(s) {#example-tmdb-list-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -131,13 +131,13 @@ collections:
 2. You can replace `tmdb_list` with `tmdb_list_details` if you would like to fetch and use the TMDb collection's summary, poster, and background from the list
 3. You can specify multiple lists in `tmdb_list_details` but it will only use the first one to update the collection details
 
-## TMDb Movie — `tmdb_movie`, `tmdb_movie_details` {#tmdb-movie}
+## TMDb movie — `tmdb_movie`, `tmdb_movie_details` {#tmdb-movie}
 
 Finds the movie specified.
 
 This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example TMDb Movie Builder(s) {#example-tmdb-movie-builders}
+### Example TMDb movie builder(s) {#example-tmdb-movie-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:
@@ -156,13 +156,13 @@ collections:
 
 * Posters and background in the library's asset directory will be used over the collection details unless `tmdb_poster`/`tmdb_background` is also specified.
 
-## TMDb Network — `tmdb_network` {#tmdb-network}
+## TMDb network — `tmdb_network` {#tmdb-network}
 
 Finds every item from the TMDb network's movie/show list.
 
 This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example TMDb Network Builder(s) {#example-tmdb-network-builders}
+### Example TMDb network builder(s) {#example-tmdb-network-builders}
 
 ```yaml
 collections:
@@ -172,13 +172,13 @@ collections:
 
 1.  https://www.themoviedb.org/network/16 also accepted
 
-## TMDb Show — `tmdb_show` {#tmdb-show}
+## TMDb show — `tmdb_show` {#tmdb-show}
 
 Finds the show specified.
 
 This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example TMDb Show Builder(s) {#example-tmdb-show-builders}
+### Example TMDb show builder(s) {#example-tmdb-show-builders}
 
 ```yaml title="Press the + icon to learn more"
 collections:

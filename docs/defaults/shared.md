@@ -7,7 +7,7 @@ These variables are shared by the default collection files. File-specific variab
     rewrite-relative-urls=false
     replace='{
         "../../../../defaults/": "",
-        "../../config/": "../config/",
+        "../../config/": "../config/operations.md",
         "../../defaults/": ""
     }'
 %}

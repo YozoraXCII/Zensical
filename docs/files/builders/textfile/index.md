@@ -1,4 +1,4 @@
-# Text and file lists
+# Text and File Lists
 
 You can find items using IDs written directly in YAML or maintained in a local or remote text file.
 
@@ -9,7 +9,7 @@ No external service configuration is required for this Builder.
 | [`text`](#text)           | Reads supported IDs and URLs directly from a YAML scalar, multiline string, or list.        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`text_file`](#text-file) | Reads supported IDs and URLs from a local or remote text file while preserving source order. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## Text File — `text_file` {#text-file}
+## Text file — `text_file` {#text-file}
 
 Finds items using a manually created local or remote text file.
 
@@ -46,7 +46,7 @@ A URL used directly as the `text_file` value can return either plain text conten
 
 On show libraries, `text_file` can also be used with `builder_level: season` or `builder_level: episode` collections. In those cases, `tvdb_season` and `tvdb_episode` entries can target specific show parts directly.
 
-### Episode and Season Part Syntax {#episode-and-season-part-syntax}
+### Episode and season part syntax {#episode-and-season-part-syntax}
 
 For show-part collections, the following explicit values are supported:
 
@@ -64,7 +64,7 @@ Behavior depends on the collection level:
 
 If multiple lines point at the same episode, Kometa will only keep the episode once in the final collection.
 
-### JSON List Example {#json-list-example}
+### JSON list example {#json-list-example}
 
 ```json
 [
@@ -92,7 +92,7 @@ If multiple lines point at the same episode, Kometa will only keep the episode o
 ]
 ```
 
-### Example Text File Builder(s) {#example-text-file-builders}
+### Example text file builder(s) {#example-text-file-builders}
 
 ```yaml
 collections:
@@ -131,7 +131,7 @@ collections:
 
 When multiple files or URLs are listed, Kometa reads them as one `text_file` builder input in the order shown above. The source boundaries are not kept as separate builder groups; only the combined item order is preserved.
 
-### Example Text File Contents {#example-text-file-contents}
+### Example text file contents {#example-text-file-contents}
 
 ```text
 # Movie library example
@@ -175,7 +175,7 @@ The builder accepts a scalar string or integer, a literal multiline string, or a
 
 The `sync_mode: sync` and `collection_order: custom` settings are recommended when you want the collection and its order to exactly match the inline source.
 
-### Supported Values {#supported-values}
+### Supported values {#supported-values}
 
 Each entry can contain one of the following:
 
@@ -199,7 +199,7 @@ Numeric entries are interpreted by library type:
 
 On show libraries, `text` can be used with `builder_level: season` or `builder_level: episode`. The `tvdb_season` and `tvdb_episode` forms described in the [`text_file` documentation](#episode-and-season-part-syntax) target the corresponding show parts.
 
-### Single Value {#single-value}
+### Single value {#single-value}
 
 ```yaml
 collections:
@@ -219,7 +219,7 @@ collections:
     text: 174
 ```
 
-### Multiline String {#multiline-string}
+### Multiline string {#multiline-string}
 
 Use YAML's literal `|` or `|-` block style so each identifier remains on its own line:
 
@@ -238,7 +238,7 @@ collections:
 
 Do not use YAML's folded `>` block style. Folded blocks replace line breaks with spaces, which destroys the one-entry-per-line structure. `>|` is not valid YAML syntax.
 
-### YAML List {#yaml-list}
+### YAML list {#yaml-list}
 
 ```yaml
 collections:
@@ -255,7 +255,7 @@ collections:
 
 List entries may be strings or integers. Quote Plex metadata IDs if YAML could interpret the value as a number or discard leading zeroes.
 
-### Playlist Example {#playlist-example}
+### Playlist example {#playlist-example}
 
 ```yaml
 playlists:
@@ -270,7 +270,7 @@ playlists:
 
 In a playlist, `tmdb:` entries are considered as both movie and show IDs so mixed item types retain their declared order. Only the type that resolves on the configured Plex libraries is added.
 
-### URL Entries {#url-entries}
+### URL entries {#url-entries}
 
 A URL within `text` must return a JSON list in the format supported by [`text_file`](#json-list-example):
 

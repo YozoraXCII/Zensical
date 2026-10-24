@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Ribbon", 
-        "CODE_NAME": "ribbon",
-        "OVERLAY_LEVEL": "Movie, Show",
-        "DESCRIPTION": "a ribbon overlay based on the Top Lists of various sites on each item within your library"
-    }'
+    "OVERLAY_NAME": "Ribbon",
+    "CODE_NAME": "ribbon",
+    "OVERLAY_LEVEL": "Movie, Show",
+    "DESCRIPTION": "a ribbon overlay based on the Top Lists of various sites on each item within your library",
+    "OVERLAY_LABEL": "ribbon"
+}'
 %}
 | Oscars Best Picture             | `oscars`          | `190` |
 | Oscars Best Director            | `oscars_director` | `180` |

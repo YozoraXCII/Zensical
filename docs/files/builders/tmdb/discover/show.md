@@ -13,7 +13,7 @@ and in a specific order.
     Note that a number of filters support being comma (,) or pipe (|) separated. Commas are treated like an AND query 
     while pipes are treated like an OR. This allows for quite complex filtering depending on your desired results.
 
-## Value Types
+## Value types
 
 These are the types of values you can use in your TMDb Discover queries. The type and formatting of attributes such as date and year is important to know when building your queries.
 
@@ -26,7 +26,7 @@ These are the types of values you can use in your TMDb Discover queries. The typ
 | Date: `MM/DD/YYYY` | Date that fits the specified format               |
 | Year: `YYYY`       | Year must be a 4 digit integer i.e. 1990          |
 
-## Discover Attributes
+## Discover attributes
 
 | Attributes                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 |:--------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -64,7 +64,7 @@ These are the types of values you can use in your TMDb Discover queries. The typ
 | `with_type`                     | Filter TV shows by their type.<br>Can be a comma (`,`) for an AND, or a pipe (<code>&#124;</code>) for an OR separated query<br>**Type:** String<br>**Values:** `0`: Documentary, `1`: News, `2`: Miniseries, `3`: Reality, `4`: Scripted, `5`: Show, `6`: Video                                                                                                                                                                                                                                                                                                                                           |
 
 
-## Sort Options
+## Sort options
 
 | Sort Option                 |                 Movie Sort                 |                 Show Sort                  |
 |:----------------------------|:------------------------------------------:|:------------------------------------------:|
@@ -91,7 +91,7 @@ These are the types of values you can use in your TMDb Discover queries. The typ
 | `vote_count.asc`            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | `vote_count.desc`           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-### Example TMDb Discover Builder(s)
+### Example TMDb discover builder(s)
 
 ```yaml
 collections:

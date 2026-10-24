@@ -5,15 +5,16 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Studio", 
-        "CODE_NAME": "studio",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the show studio on each item within your library"
-    }'
+    "OVERLAY_NAME": "Studio",
+    "CODE_NAME": "studio",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the show studio on each item within your library",
+    "OVERLAY_LABEL": "studio"
+}'
     end='<!--rec-sub-->'
 %}
 
-### Bigger Style
+### Bigger style
 
 Below is a screenshot of the alternative Bigger (`bigger`) style which can be set via the `style` Template Variable.
 

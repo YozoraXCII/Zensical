@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "US Movie Content Rating", 
-        "CODE_NAME": "content_rating_us_movie",
-        "OVERLAY_LEVEL": "Movie",
-        "DESCRIPTION": "an overlay based on the MPAA Age Rating on each item within your library"
-    }'
+    "OVERLAY_NAME": "US Movie Content Rating",
+    "CODE_NAME": "content_rating_us_movie",
+    "OVERLAY_LEVEL": "Movie",
+    "DESCRIPTION": "an overlay based on the MPAA Age Rating on each item within your library",
+    "OVERLAY_LABEL": "US movie content rating"
+}'
     replace-tags='{"rec-sub": "Requirements: Use the [Mass Content Rating Update Library Operation](../../../../config/operations.md#mass-metadata-update) with either `mdb` or `omdb` to update Plex to the MPAA Age Rating."}'
     end='<!--table-before-->'
 %}

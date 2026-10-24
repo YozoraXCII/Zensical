@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Seasonal", 
-        "CODE_NAME": "seasonal",
-        "LIBRARY_TYPE": "Movie", 
-        "SECTION_NUMBER": "090", 
-        "DESCRIPTION": "dynamically create seasonal collections based on holidays"
-    }'
+    "COLLECTION": "Seasonal",
+    "CODE_NAME": "seasonal",
+    "LIBRARY_TYPE": "Movie",
+    "SECTION_NUMBER": "090",
+    "DESCRIPTION": "dynamically create seasonal collections based on holidays"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Seasonal"}' %}
 | `Asian American Pacific Islander Movies` | `aapi`          | Collection of Movies related to Asian American Pacific Islander Month. |

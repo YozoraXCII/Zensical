@@ -1,15 +1,4 @@
-# Reference
-
-Look up file syntax, item selection, definition settings, and command-line options. Global configuration belongs in [Configuration](../config/index.md).
-
-- [File formats](formats/index.md)
-- [Templates and dynamic collections](reuse/index.md)
-- [Builders](builders/index.md)
-- [Filters](filters.md)
-- [Definition settings](settings.md)
-- [Radarr/Sonarr definition settings](arr.md)
-- [Metadata updates](metadata-updates/index.md)
-- [Commands and environment variables](../kometa/environmental.md)
+# Definition Components
 
 {%    
   include-markdown "../config/file_types.md"
@@ -17,13 +6,13 @@ Look up file syntax, item selection, definition settings, and command-line optio
 
 * **See [File Blocks](../config/files.md) for more information on how to define files in the config.**
 
-## Definition Component Overview
+## Definition component overview
 
 There are a few different types of attributes that can be used in any given Collection/Overlay/Playlist File.
 
 ### Builders
 
-[Builders](builders/index.md) are attributes placed at the top level of the definition that tell Kometa what items 
+Builders are attributes placed at the top level of the definition that tell Kometa what items 
 belong in a collection/overlay/playlist. Multiple builders can be used in one definition. These could come from a 
 variety of sources including but not limited to:
 
@@ -95,7 +84,7 @@ definition. Each setting will affect how the definition is run or shown in the l
             genre: Action
     ```
 
-### Radarr/Sonarr Settings
+### Radarr/Sonarr settings
 
 [Radarr/Sonarr Settings](arr.md) are attributes placed at the top level of the definition that tells Kometa how 
 Radarr/Sonarr is handled in this specific definition.
@@ -115,7 +104,7 @@ Radarr/Sonarr is handled in this specific definition.
           votes.gte: 1000
     ```
 
-### Collection/Playlist Metadata Updates
+### Collection/playlist metadata updates
 
 [Updates](updates.md) are attributes placed at the top level of the definition that tells Kometa Metadata Changes for the 
 Collection/Playlist. 
@@ -131,7 +120,7 @@ Collection/Playlist.
             genre: Action
     ```
 
-### Item Metadata Updates
+### Item metadata updates
 
 [Item Updates](item_updates.md) are attributes placed at the top level of the definition that tells Kometa Metadata Changes 
 for every item found in the Collection/Playlist. 

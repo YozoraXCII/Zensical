@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Episode Info", 
-        "CODE_NAME": "episode_info",
-        "OVERLAY_LEVEL": "Episode",
-        "DESCRIPTION": "an overlay on the episode title card on the episode numbering within a given series in your library"
-    }'
+    "OVERLAY_NAME": "Episode Info",
+    "CODE_NAME": "episode_info",
+    "OVERLAY_LEVEL": "Episode",
+    "DESCRIPTION": "an overlay on the episode title card on the episode numbering within a given series in your library",
+    "OVERLAY_LABEL": "episode info"
+}'
     end='<!--rec-sub-->'
 %}
 {% 
@@ -49,4 +50,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The Episode Info overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) to apply to every episode in the library.
+    The Episode Info overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) to apply to every episode in the library.

@@ -1,4 +1,4 @@
-# MDBList builders
+# MDBList Builders
 
 You can find items using the features of [MDBList.com](https://mdblist.com/) (MDBList).
 
@@ -7,7 +7,7 @@ You can find items using the features of [MDBList.com](https://mdblist.com/) (MD
 | [`mdblist_list`](#mdblist-list) | Gets every movie/show in a [MDBList List](https://mdblist.com/toplists/). | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`mdblist_streaming`](#mdblist-streaming) | Gets the JustWatch streaming chart from MDBList. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
 
-## MDBList List — `mdblist_list` {#mdblist-list}
+## MDBList list — `mdblist_list` {#mdblist-list}
 
 
 ???+ tip "Note on `mdb` sources"
@@ -28,7 +28,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
     returns items in the API's response order, preserving any interleaving of movies and shows.
     No grouping by type occurs.
 
-### Sort Options {#sort-options}
+### Sort options {#sort-options}
 
 For these sorts to be reflected in your collection you **must** use `collection_order: custom`.
 
@@ -60,7 +60,7 @@ For these sorts to be reflected in your collection you **must** use `collection_
 | `usort.asc`<br>`usort.desc`                   | Sort by User Sort [not available for external lists]  |
 | `added.asc`<br>`added.desc`                   | Sort by Date Added [not available for external lists] |
 
-### Example MDBList List Builder(s) {#example-mdblist-list-builders}
+### Example MDBList list builder(s) {#example-mdblist-list-builders}
 
 ```yaml
 collections:
@@ -117,7 +117,7 @@ collections:
     sync_mode: sync
 ```
 
-## MDBList Streaming — `mdblist_streaming` {#mdblist-streaming}
+## MDBList streaming — `mdblist_streaming` {#mdblist-streaming}
 
 `mdblist_streaming` builds a collection from MDBList's [JustWatch streaming chart](https://api.mdblist.com/docs/#/Official%20Lists/justwatch_streaming_charts_retrieve). It uses the Plex library type automatically: movie libraries request movie charts and show libraries request show charts.
 

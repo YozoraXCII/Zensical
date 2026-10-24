@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Video Format", 
-        "CODE_NAME": "video_format",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the video format available on each item within your library"
-    }'
+    "OVERLAY_NAME": "Video Format",
+    "CODE_NAME": "video_format",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the video format available on each item within your library",
+    "OVERLAY_LABEL": "video format"
+}'
     replace-tags='{"rec-sub": "Recommendations: Designed for [TRaSH Guides](https://trash-guides.info/) filename naming scheme."}'
 %}
 | REMUX    | `remux`    | `60` |
@@ -67,4 +68,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The Video Format overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) with [filters](../../../files/filters) on filepath.
+    The Video Format overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) with [filters](../../../files/filters) on filepath.

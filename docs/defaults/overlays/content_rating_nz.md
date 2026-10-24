@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "NZ Content Rating", 
-        "CODE_NAME": "content_rating_nz",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the New Zealand Rating on each item within your library"
-    }'
+    "OVERLAY_NAME": "NZ Content Rating",
+    "CODE_NAME": "content_rating_nz",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the New Zealand Rating on each item within your library",
+    "OVERLAY_LABEL": "NZ content rating"
+}'
     replace-tags='{"rec-sub": "Requirements: Use the [Mass Content Rating Update Library Operation](../../../../config/operations.md#mass-metadata-update) with either `mdb` or `omdb` to update Plex to the New Zealand Rating."}'
     end='<!--table-before-->'
 %}

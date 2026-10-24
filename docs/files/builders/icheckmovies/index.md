@@ -1,4 +1,4 @@
-# ICheckMovies builders
+# ICheckMovies Builders
 
 You can find items using the lists on [ICheckMovies.com](https://www.icheckmovies.com/) (ICheckMovies). 
 
@@ -6,7 +6,7 @@ You can find items using the lists on [ICheckMovies.com](https://www.icheckmovie
 |:-------------------------------|:-------------------------------------------|:------------------------------------------:|:----------------------------------------:|:------------------------------------------:|
 | [`icheckmovies_list`](#icheckmovies-list) | Finds every movie in the ICheckMovies List | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 
-## ICheckMovies List — `icheckmovies_list`, `icheckmovies_list_details` {#icheckmovies-list}
+## ICheckMovies list — `icheckmovies_list`, `icheckmovies_list_details` {#icheckmovies-list}
 
 Finds every movie in the ICheckMovies List.
 
@@ -18,7 +18,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 
     You can replace `icheckmovies_list` with `icheckmovies_list_details` if you would like to fetch and use the description from the list
 
-### Example ICheckMovies List Builder(s) {#example-icheckmovies-list-builders}
+### Example ICheckMovies list builder(s) {#example-icheckmovies-list-builders}
 
 ```yaml
 collections:

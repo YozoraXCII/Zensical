@@ -1,4 +1,4 @@
-# Letterboxd builders
+# Letterboxd Builders
 
 You can find items using the lists on [Letterboxd.com](https://letterboxd.com/) (Letterboxd). 
 
@@ -18,7 +18,7 @@ Letterboxd support is powered by `letterboxdpy`. Builder inputs stay the same, b
 | [`letterboxd_user_films`](#letterboxd-user-films) | Finds every movie in a user's watched films | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 | [`letterboxd_user_reviews`](#letterboxd-user-reviews) | Finds every movie in a user's reviewed films | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
 
-## Letterboxd List — `letterboxd_list`, `letterboxd_list_details` {#letterboxd-list}
+## Letterboxd list — `letterboxd_list`, `letterboxd_list_details` {#letterboxd-list}
 
 Finds every movie in a Letterboxd list or [Letterboxd Films Search](https://letterboxd.com/films/).
 
@@ -54,7 +54,7 @@ Using the `limit` filter attribute is recommended when using a Letterboxd Film S
     You can replace `letterboxd_list` with `letterboxd_list_details` if you would like to fetch and use the description from the list
 
 
-### Example Letterboxd List Builder(s) {#example-letterboxd-list-builders}
+### Example Letterboxd list builder(s) {#example-letterboxd-list-builders}
 
 ```yaml
 collections:
@@ -85,7 +85,7 @@ collections:
     sync_mode: sync
 ```
 
-## Letterboxd User Films — `letterboxd_user_films` {#letterboxd-user-films}
+## Letterboxd user films — `letterboxd_user_films` {#letterboxd-user-films}
 
 Finds every movie in a Letterboxd user's watched films page.
 
@@ -122,7 +122,7 @@ Using the `limit` filter attribute is recommended when using a user with many wa
     You can replace `letterboxd_user_films` with `letterboxd_user_films_details` if you would like to use the details variant (currently no description is available for user pages, but this maintains consistency with other builders).
 
 
-### Example Letterboxd User Films Builder(s) {#example-letterboxd-user-films-builders}
+### Example Letterboxd user films builder(s) {#example-letterboxd-user-films-builders}
 
 ```yaml
 collections:
@@ -179,7 +179,7 @@ collections:
     sync_mode: sync
 ```
 
-## Letterboxd User Reviews — `letterboxd_user_reviews` {#letterboxd-user-reviews}
+## Letterboxd user reviews — `letterboxd_user_reviews` {#letterboxd-user-reviews}
 
 Finds every movie in a Letterboxd user's reviewed films page.
 
@@ -214,7 +214,7 @@ Using the `limit` filter attribute is recommended when using a user with many re
     You can replace `letterboxd_user_reviews` with `letterboxd_user_reviews_details` if you would like to use the details variant (currently no description is available for user pages, but this maintains consistency with other builders).
 
 
-### Example Letterboxd User Reviews Builder(s) {#example-letterboxd-user-reviews-builders}
+### Example Letterboxd user reviews builder(s) {#example-letterboxd-user-reviews-builders}
 
 ```yaml
 collections:

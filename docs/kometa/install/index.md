@@ -54,7 +54,7 @@ JavaScript enables the questionnaire. You can also browse all paths below:
 
 <section class="install-path" data-method="docker" data-launch="run" markdown="1">
 
-## Docker Run {#path-docker}
+## Docker run {#path-docker}
 
 {% include-markdown "../../templates/install/docker.md" rewrite-relative-urls=false %}
 
@@ -62,7 +62,7 @@ JavaScript enables the questionnaire. You can also browse all paths below:
 
 <section class="install-path" data-env="unraid" markdown="1">
 
-## unRAID {#path-unraid}
+## Unraid {#path-unraid}
 
 {% include-markdown "../../templates/install/unraid.md" rewrite-relative-urls=false %}
 

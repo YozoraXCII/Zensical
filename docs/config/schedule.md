@@ -10,7 +10,7 @@ Kometa allows you to schedule libraries, files, overlays, operations, and more s
 
 This is particularly handy for users who have a lot of libraries or run a lot of Metadata/Operations on their libraries.
 
-### IMPORTANT:
+### Important:
 
 These schedules do not trigger Kometa to run; they control what Kometa will do if it happens to be running at the scheduled time. `weekly(sunday)`, 
 for example, does not mean "run Kometa on Sunday to do this thing"; it means "If Kometa is running, and it's Sunday, do this thing".
@@ -38,7 +38,7 @@ The scheduling options are:
 * Use `all[...]` to require every enclosed scheduling option to match.
 * You can use the `delete_not_scheduled` setting to delete Collections that are skipped due to not being scheduled.
 
-## Library Schedule Modes
+## Library schedule modes
 
 Library schedule modes limit the media items Kometa processes. Use an ordered list of `schedule` and `mode` mappings under a library's `schedule` attribute. Kometa uses the first matching entry; if none match, it skips the library.
 
@@ -101,7 +101,7 @@ When a mode is not `full`, Kometa limits metadata, overlays, item operations, an
     Use monthly(last) if you want to schedule for the last day of every month.
     ```
 
-### Multiple Schedule Values
+### Multiple schedule values
 
 Multiple schedule values in a YAML list use OR logic. This definition runs when the collection does not exist **or** when the date is within the range:
 

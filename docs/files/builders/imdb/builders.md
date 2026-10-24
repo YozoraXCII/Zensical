@@ -1,4 +1,4 @@
-# IMDb builders
+# IMDb Builders
 
 You can find items using the features of [IMDb.com](https://www.imdb.com/) (IMDb).
 
@@ -11,7 +11,7 @@ You can find items using the features of [IMDb.com](https://www.imdb.com/) (IMDb
 | [`imdb_watchlist`](#imdb-watchlist) | Gets every movie/show in an IMDb User's Watchlist.                                                                    | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`imdb_award`](#imdb-award)         | Gets every movie/show in an [IMDb Event](https://www.imdb.com/event/).                                                | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-## IMDb Award — `imdb_award` {#imdb-award}
+## IMDb award — `imdb_award` {#imdb-award}
 
 Finds every item in an [IMDb Event](https://www.imdb.com/event/).
 
@@ -37,7 +37,7 @@ Finds every item in an [IMDb Event](https://www.imdb.com/event/).
   comments=false
 %}
 ```
-### Example IMDb Award Builder(s) {#example-imdb-award-builders}
+### Example IMDb award builder(s) {#example-imdb-award-builders}
 
 ```yaml
 collections:
@@ -56,7 +56,7 @@ collections:
       category_filter: Best Motion Picture of the Year
 ```
 
-## IMDb Chart — `imdb_chart` {#imdb-chart}
+## IMDb chart — `imdb_chart` {#imdb-chart}
 
 Finds every item in an IMDb Chart.
 
@@ -81,7 +81,7 @@ The `sync_mode: sync` and `collection_order: custom` Setting are recommended sin
 | [Trending Tamil Movies](https://www.imdb.com/india/tamil/)                           | `trending_tamil`  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
 | [Trending Telugu Movies](https://www.imdb.com/india/telugu/)                         | `trending_telugu` | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
 
-### Example IMDb Chart Builder(s) {#example-imdb-chart-builders}
+### Example IMDb chart builder(s) {#example-imdb-chart-builders}
 
 ```yaml
 collections:
@@ -97,7 +97,7 @@ Gets the movie/show specified.
 
 The expected input is an IMDb ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example IMDb ID Builder(s) {#example-imdb-id-builders}
+### Example IMDb ID builder(s) {#example-imdb-id-builders}
 
 ```yaml
 collections:
@@ -105,7 +105,7 @@ collections:
     imdb_id: tt0458290, tt2930604
 ```
 
-## IMDb List — `imdb_list` {#imdb-list}
+## IMDb list — `imdb_list` {#imdb-list}
 
 ???+ danger "Important Notice"
 
@@ -127,7 +127,7 @@ Multiple values are supported as a list only a comma-separated string will not w
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
 
-### Example IMDb List Builder(s) {#example-imdb-list-builders}
+### Example IMDb list builder(s) {#example-imdb-list-builders}
 
 ```yaml
 collections:
@@ -165,7 +165,7 @@ collections:
     collection_order: alpha
 ```
 
-## IMDb Watchlist — `imdb_watchlist` {#imdb-watchlist}
+## IMDb watchlist — `imdb_watchlist` {#imdb-watchlist}
 
 Finds every item in an IMDb User's Watchlist.
 
@@ -179,7 +179,7 @@ Multiple values are supported as a list only a comma-separated string will not w
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
 
-### Example IMDb Watchlist Builder(s) {#example-imdb-watchlist-builders}
+### Example IMDb watchlist builder(s) {#example-imdb-watchlist-builders}
 
 ```yaml
 collections:

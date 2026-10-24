@@ -42,7 +42,7 @@ plex:
 
 If you set `optimize: true`, you may find that Plex becomes temporarily unresponsive after Kometa has finished running,  this is normal and expected behaviour which is reproducible if you run Optimize Database within the Plex UI.
 
-# Important token notes:
+# Important Token Notes:
 
 The token you use with Kometa should ideally be a token you have generated expressly for Kometa's use.
 

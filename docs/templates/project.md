@@ -22,7 +22,7 @@ with granular control over metadata, collections, overlays, and much more.
 Transform your media library with Kometa and discover its full potential! Connect to third-party services like TMDb and IMDb, among others,
 to create one-of-a-kind collections, overlays and more. Your media library will stand out and be tailored to your specific needs.
 
-## What Can Kometa Do?
+## What can Kometa do?
 <!--intro-end-->
 <!--whatcanitdo-start-->
 Elevate your library with beautifully crafted metadata - customize artwork, titles, summaries, and more to create a stunning library.
@@ -32,20 +32,20 @@ Harness the power of TMDb, IMDb and more to create collections and overlays. Tak
 Integrate with Sonarr and Radarr to automate your library growth.
 <!--whatcanitdo-end-->
 
-## Example Kometa Libraries 
+## Example Kometa libraries
 
 Here are some examples of the things you can achieve using Kometa!
 
-**Example Movie Collections using the [Kometa Defaults](https://wiki.kometa.team/defaults/collections/)** (click to enlarge):
+**Example Movie Collections using the [Kometa Defaults](https://wiki.kometa.team/defaults/collections/usage/)** (click to enlarge):
 
 <img src="https://wiki.kometa.team/assets/images/movie-collections.png" width="600" alt="Movie Collection Preview">
 
-**Example Show Overlays using the [Kometa Defaults](https://wiki.kometa.team/defaults/overlays/)** (click to enlarge):
+**Example Show Overlays using the [Kometa Defaults](https://wiki.kometa.team/defaults/overlays/usage/)** (click to enlarge):
 
 <img src="https://wiki.kometa.team/assets/images/show-overlays.png" width="600" alt="Show Collection Preview">
 
 <!--collecionsoverlays-start-->
-## Collections & Overlays
+## Collections & overlays
 
 The [Kometa Defaults](https://wiki.kometa.team/defaults/guide/) are modular files designed by the Kometa team to make it simple to create a personalized, one-of-a-kind media collection without the hassle of manually defining each one.
 
@@ -57,7 +57,7 @@ It is also easy to move your customizations between servers if you need to.
 <!--collecionsoverlays-end-->
 
 <!--started-start-->
-## Getting Started
+## Getting started
 
 To get started with Kometa, follow these simple steps:
 
@@ -72,7 +72,7 @@ To get started with Kometa, follow these simple steps:
 
 4. Finally, check out the [Wiki](https://wiki.kometa.team), you'll find new and exciting ways to truly unlock the potential of your libraries.
 
-## Step-by-Step Guides
+## Step-by-step guides
 
 If you're a beginner to the concepts of Python, Git and/or Kometa and find the above steps challenging, don't worry. We've got some step-by-step guides that can help you get 
 started. These guides will take you through the process of installing Kometa, creating your Configuration File and getting some basic Collections up and running.
@@ -92,7 +92,7 @@ If you are using unRAID, Kubernetes, QNAP, or Synology refer to the following ba
 * [QNAP Walkthrough](https://wiki.kometa.team/kometa/install/#path-qnap)
 * [Synology Walkthrough](https://wiki.kometa.team/kometa/install/#path-synology)
 
-## Example Usage
+## Example usage
 
 Kometa puts you in control of your media library by letting you create custom Collections that make discovering and organizing your content a breeze. 
 With powerful search and filtering options, you can build Collections based on popular builders like TMDb, IMDb, and many more.
@@ -113,7 +113,7 @@ Collections and Overlays that fit your unique preferences and make discovering y
 But if you don't want to spend time manually creating Collections and Overlays, we've got you covered. Check out the 
 [Kometa Defaults](https://wiki.kometa.team/defaults/guide/) - a handcrafted selection of tried-and-tested Collections and Overlays made by the Kometa team.
 <!--started-end-->
-## Alternate Branches
+## Alternate branches
 
 The Develop branch is a "beta" version of Kometa that is updated more frequently than the stable version (Master branch). 
 It's where bug fixes, new features, and other changes are added before being released to the Master branch.
@@ -122,7 +122,7 @@ Develop is recommended for more technical users who don't mind updating frequent
 Keep in mind that this beta branch may have bugs or other issues that could cause problems with Kometa or your media server. 
 So, if you're not comfortable with technical issues, it's best to stick with the Master branch.
 
-### Develop Branch
+### Develop branch
 
 <!--develop-start-->
 [![Develop GitHub commits since latest stable release (by SemVer)](https://img.shields.io/github/commits-since/Kometa-Team/Kometa/latest/develop?label=Commits%20in%20Develop&style=plastic)](https://github.com/Kometa-Team/Kometa/tree/develop)
@@ -170,19 +170,19 @@ If switching to the develop branch, it is recommended to also use the [develop b
 which documents any changes made from the Master branch.
 <!--develop2-end-->
 <!--discord-start-->
-## Discord Support Server
+## Discord support server
 
 If you're looking for support for any questions or issues you might have, or if you just want to be a part of our 
 growing community, Join the [Kometa Discord Server](https://wiki.kometa.team/discord/).
 <!--discord-end-->
-## Feature Requests
+## Feature requests
 
 At Kometa, we value our community's input and actively seek feedback to drive the evolution of our product. We want to hear your ideas on how to enhance Kometa, 
 and we encourage you to visit our [Feature Request](https://features.kometa.wiki/features) page to share your thoughts or vote on what features you would like to see added next. 
 Your voice matters and helps shape the future of Kometa, so please don't hesitate to join in the conversation and be a part of our community-driven development process.
 
 <!--outro-start-->
-## Errors and Configuration Questions
+## Errors and configuration questions
 
 If you're having trouble, we recommend first joining the [Kometa Discord Server](https://wiki.kometa.team/discord/) 
 and seeking support there. If that isn't possible for you, here's what you can do:
@@ -207,23 +207,23 @@ See [documentation development](docs-extension/README.md) and the [migration rem
 Pull Requests are greatly encouraged. Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md) before opening a PR — it covers branching, versioning, code style, and the changelog process.
 
 <!--sponsor-start-->
-## GitHub Sponsors
+## GitHub sponsors
 
 Maintenance of this project is made possible by all the <a href="https://github.com/Kometa-Team/Kometa/graphs/contributors">contributors</a> and <a href="https://github.com/sponsors/meisnate12">sponsors</a>. If you'd like to sponsor this project and have your avatar or company logo appear below <a href="https://github.com/sponsors/meisnate12">click here</a>. 💖
 
-<h2 align="center">Gold Sponsors</h2>
+<h2 align="center">Gold sponsors</h2>
 
 <p align="center">
 <!--gold-sponsors--><a href="https://github.com/merci45k"><img src="https://github.com/merci45k.png" width="120px" alt="User avatar: merci45k" /></a>&nbsp;&nbsp;<a href="https://github.com/strcrzy"><img src="https://github.com/strcrzy.png" width="120px" alt="User avatar: strcrzy" /></a>&nbsp;&nbsp;<a href="https://github.com/Joed1986"><img src="https://github.com/Joed1986.png" width="120px" alt="User avatar: Joed1986" /></a>&nbsp;&nbsp;<a href="https://github.com/genomez"><img src="https://github.com/genomez.png" width="120px" alt="User avatar: genomez" /></a>&nbsp;&nbsp;<a href="https://github.com/Injuku"><img src="https://github.com/Injuku.png" width="120px" alt="User avatar: Injuku" /></a>&nbsp;&nbsp;<a href="https://github.com/Anarchy27"><img src="https://github.com/Anarchy27.png" width="120px" alt="User avatar: Anarchy27" /></a>&nbsp;&nbsp;<a href="https://github.com/axsuul"><img src="https://github.com/axsuul.png" width="120px" alt="User avatar: axsuul" /></a>&nbsp;&nbsp;<a href="https://github.com/RayBishopTN"><img src="https://github.com/RayBishopTN.png" width="120px" alt="User avatar: RayBishopTN" /></a>
 </p>
 
-<h2 align="center">Silver Sponsors</h2>
+<h2 align="center">Silver sponsors</h2>
 
 <p align="center">
 <!--silver-sponsors--><a href="https://github.com/Ackthbpt"><img src="https://github.com/Ackthbpt.png" width="80px" alt="User avatar: Ackthbpt" /></a>&nbsp;&nbsp;<a href="https://github.com/aschillingchi"><img src="https://github.com/aschillingchi.png" width="80px" alt="User avatar: aschillingchi" /></a>&nbsp;&nbsp;<a href="https://github.com/chazlarson"><img src="https://github.com/chazlarson.png" width="80px" alt="User avatar: chazlarson" /></a>&nbsp;&nbsp;<a href="https://github.com/Ramshackles"><img src="https://github.com/Ramshackles.png" width="80px" alt="User avatar: Ramshackles" /></a>&nbsp;&nbsp;<a href="https://github.com/TheWatcherOfPlex"><img src="https://github.com/TheWatcherOfPlex.png" width="80px" alt="User avatar: TheWatcherOfPlex" /></a>&nbsp;&nbsp;<a href="https://github.com/tecnobrat"><img src="https://github.com/tecnobrat.png" width="80px" alt="User avatar: tecnobrat" /></a>&nbsp;&nbsp;<a href="https://github.com/jarodaustin"><img src="https://github.com/jarodaustin.png" width="80px" alt="User avatar: jarodaustin" /></a>&nbsp;&nbsp;<a href="https://github.com/wellingssimon"><img src="https://github.com/wellingssimon.png" width="80px" alt="User avatar: wellingssimon" /></a>&nbsp;&nbsp;<a href="https://github.com/Quick104"><img src="https://github.com/Quick104.png" width="80px" alt="User avatar: Quick104" /></a>&nbsp;&nbsp;<a href="https://github.com/kevbentz"><img src="https://github.com/kevbentz.png" width="80px" alt="User avatar: kevbentz" /></a>&nbsp;&nbsp;<a href="https://github.com/Eagle1337"><img src="https://github.com/Eagle1337.png" width="80px" alt="User avatar: Eagle1337" /></a>&nbsp;&nbsp;<a href="https://github.com/darthShadow"><img src="https://github.com/darthShadow.png" width="80px" alt="User avatar: darthShadow" /></a>&nbsp;&nbsp;<a href="https://github.com/mrbuckwheet"><img src="https://github.com/mrbuckwheet.png" width="80px" alt="User avatar: mrbuckwheet" /></a>&nbsp;&nbsp;<a href="https://github.com/VulgarBoatman"><img src="https://github.com/VulgarBoatman.png" width="80px" alt="User avatar: VulgarBoatman" /></a>&nbsp;&nbsp;<a href="https://github.com/sw4rl3y79"><img src="https://github.com/sw4rl3y79.png" width="80px" alt="User avatar: sw4rl3y79" /></a>&nbsp;&nbsp;<a href="https://github.com/DaddyDarkan"><img src="https://github.com/DaddyDarkan.png" width="80px" alt="User avatar: DaddyDarkan" /></a>&nbsp;&nbsp;<a href="https://github.com/htlcalbbs"><img src="https://github.com/htlcalbbs.png" width="80px" alt="User avatar: htlcalbbs" /></a>&nbsp;&nbsp;<a href="https://github.com/industrial64"><img src="https://github.com/industrial64.png" width="80px" alt="User avatar: industrial64" /></a>&nbsp;&nbsp;<a href="https://github.com/nichols89ben"><img src="https://github.com/nichols89ben.png" width="80px" alt="User avatar: nichols89ben" /></a>
 </p>
 
-<h2 align="center">Bronze Sponsors</h2>
+<h2 align="center">Bronze sponsors</h2>
 
 <p align="center">
 <!--bronze-sponsors--><a href="https://github.com/TheSpoon98"><img src="https://github.com/TheSpoon98.png" width="50px" alt="User avatar: TheSpoon98" /></a>&nbsp;&nbsp;<a href="https://github.com/Kha-kis"><img src="https://github.com/Kha-kis.png" width="50px" alt="User avatar: Kha-kis" /></a>&nbsp;&nbsp;<a href="https://github.com/paterson37"><img src="https://github.com/paterson37.png" width="50px" alt="User avatar: paterson37" /></a>&nbsp;&nbsp;<a href="https://github.com/RobertDoc"><img src="https://github.com/RobertDoc.png" width="50px" alt="User avatar: RobertDoc" /></a>&nbsp;&nbsp;<a href="https://github.com/alexandercraen"><img src="https://github.com/alexandercraen.png" width="50px" alt="User avatar: alexandercraen" /></a>&nbsp;&nbsp;<a href="https://github.com/erwintwr2"><img src="https://github.com/erwintwr2.png" width="50px" alt="User avatar: erwintwr2" /></a>&nbsp;&nbsp;<a href="https://github.com/jaredhocutt"><img src="https://github.com/jaredhocutt.png" width="50px" alt="User avatar: jaredhocutt" /></a>&nbsp;&nbsp;<a href="https://github.com/Iyagovos"><img src="https://github.com/Iyagovos.png" width="50px" alt="User avatar: Iyagovos" /></a>&nbsp;&nbsp;<a href="https://github.com/Arial-Z"><img src="https://github.com/Arial-Z.png" width="50px" alt="User avatar: Arial-Z" /></a>&nbsp;&nbsp;<a href="https://github.com/kokuragari"><img src="https://github.com/kokuragari.png" width="50px" alt="User avatar: kokuragari" /></a>&nbsp;&nbsp;<a href="https://github.com/msorelle"><img src="https://github.com/msorelle.png" width="50px" alt="User avatar: msorelle" /></a>&nbsp;&nbsp;<a href="https://github.com/TR3JACK"><img src="https://github.com/TR3JACK.png" width="50px" alt="User avatar: TR3JACK" /></a>&nbsp;&nbsp;<a href="https://github.com/owine"><img src="https://github.com/owine.png" width="50px" alt="User avatar: owine" /></a>&nbsp;&nbsp;<a href="https://github.com/Drazzilb08"><img src="https://github.com/Drazzilb08.png" width="50px" alt="User avatar: Drazzilb08" /></a>&nbsp;&nbsp;<a href="https://github.com/LunarVigilante"><img src="https://github.com/LunarVigilante.png" width="50px" alt="User avatar: LunarVigilante" /></a>&nbsp;&nbsp;<a href="https://github.com/theimmortal68"><img src="https://github.com/theimmortal68.png" width="50px" alt="User avatar: theimmortal68" /></a>&nbsp;&nbsp;<a href="https://github.com/pterisaur"><img src="https://github.com/pterisaur.png" width="50px" alt="User avatar: pterisaur" /></a>&nbsp;&nbsp;<a href="https://github.com/qazero"><img src="https://github.com/qazero.png" width="50px" alt="User avatar: qazero" /></a>&nbsp;&nbsp;<a href="https://github.com/Alaksin"><img src="https://github.com/Alaksin.png" width="50px" alt="User avatar: Alaksin" /></a>&nbsp;&nbsp;<a href="https://github.com/bullmoose20"><img src="https://github.com/bullmoose20.png" width="50px" alt="User avatar: bullmoose20" /></a>&nbsp;&nbsp;<a href="https://github.com/michaelkahn"><img src="https://github.com/michaelkahn.png" width="50px" alt="User avatar: michaelkahn" /></a>&nbsp;&nbsp;<a href="https://github.com/andrewmcd7"><img src="https://github.com/andrewmcd7.png" width="50px" alt="User avatar: andrewmcd7" /></a>&nbsp;&nbsp;<a href="https://github.com/rg9400"><img src="https://github.com/rg9400.png" width="50px" alt="User avatar: rg9400" /></a>&nbsp;&nbsp;<a href="https://github.com/TownyMontana"><img src="https://github.com/TownyMontana.png" width="50px" alt="User avatar: TownyMontana" /></a>&nbsp;&nbsp;<a href="https://github.com/wcbutler"><img src="https://github.com/wcbutler.png" width="50px" alt="User avatar: wcbutler" /></a>&nbsp;&nbsp;<a href="https://github.com/smh51"><img src="https://github.com/smh51.png" width="50px" alt="User avatar: smh51" /></a>&nbsp;&nbsp;<a href="https://github.com/AwesomeAustn"><img src="https://github.com/AwesomeAustn.png" width="50px" alt="User avatar: AwesomeAustn" /></a>&nbsp;&nbsp;<a href="https://github.com/CountofNotreDame"><img src="https://github.com/CountofNotreDame.png" width="50px" alt="User avatar: CountofNotreDame" /></a>&nbsp;&nbsp;<a href="https://github.com/Steezy33"><img src="https://github.com/Steezy33.png" width="50px" alt="User avatar: Steezy33" /></a>

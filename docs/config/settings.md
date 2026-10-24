@@ -1198,7 +1198,7 @@ The available setting attributes which can be set at each level are outlined bel
           tvdb_language: eng
         ```
 
-## Default Values
+## Default values
 
 The below in an extract of the `config.yml.template` and is the initial values that are set if you follow any of the installation guides.
 
@@ -1217,7 +1217,7 @@ settings: {%
 %}
 ~~~
 
-## Example Library-Level Settings
+## Example library-level settings
 
 The below showcases how to set a library-level setting, assuming that the attribute is listed as a library-level compatible attribute in the above table.
 

@@ -1,17 +1,4 @@
-# Collection defaults
-
-Choose ready-made collections by topic.
-
-- [Awards](../browse/collections/awards/index.md)
-- [Charts](../browse/collections/charts/index.md)
-- [Content and franchises](../browse/collections/content/index.md)
-- [Content ratings](../browse/collections/content-ratings/index.md)
-- [Locations](../browse/collections/locations/index.md)
-- [Media properties](../browse/collections/media/index.md)
-- [People](../browse/collections/people/index.md)
-- [Networks, studios and streaming](../browse/collections/production/index.md)
-- [Years and seasons](../browse/collections/time/index.md)
-- [Separators](../separators.md)
+# Configuring Collection Defaults
 
 There are many Default Collection Files built into Kometa itself which offer an easy-to-use and customizable set of Collections 
 that the user can achieve without having to worry about creating the files that makes the collections possible.
@@ -42,7 +29,7 @@ Most Metadata Files use separators to denote different sections of collection li
 
     ![](../../assets/images/defaults/separators.jpg)
 
-### Library On/Off
+### Library on/off
 
 Chart Separators are turned On by default (except `seasonal`), to turn the Separators On/Off on a per Library basis.
 
@@ -56,7 +43,7 @@ libraries:
       - default: genre
 ```
 
-## Collection Section Order
+## Collection section order
 
 All Default Collection Files have a `collection_section` attribute. These attributes determine the order of the various sections and can be set by [customizing your config](#customizing-configs).
 
@@ -106,7 +93,7 @@ This is the default Kometa collection ordering:
 
 </div>
 
-## Customizing Configs
+## Customizing configs
 
 Configs can be customized using the `template_variables` attribute when calling the file. These `template_variables` 
 will be given to every template call in the file which allows them to affect how that file runs.

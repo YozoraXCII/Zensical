@@ -1,4 +1,4 @@
-## Plex Search Options
+## Plex search options
 
 When using a Plex Builder, there are three elements that correlate to Plex's Advanced Filters in the Web UI.
 
@@ -16,7 +16,7 @@ The majority of Smart and Manual Builders utilize the same Search Options, meani
     
     Boolean Filters take no modifier and can only be either `true` or `false`.
  
-    #### Boolean Filter Attributes
+    #### Boolean filter attributes
     
     | Boolean Search      | Description            |             Movie<br>Libraries             |             Show<br>Libraries              |             Music<br>Libraries             |
     |:--------------------|:-----------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -46,7 +46,7 @@ The majority of Smart and Manual Builders utilize the same Search Options, meani
     No date filter can take multiple values.
     
 
-    #### Date Filter Attributes
+    #### Date filter attributes
     
     | Date Search           | Description                                                                        |             Movie<br>Libraries             |             Show<br>Libraries              |             Music<br>Libraries             |
     |:----------------------|:-----------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -83,7 +83,7 @@ The majority of Smart and Manual Builders utilize the same Search Options, meani
     
     No number filter can take multiple values.
     
-    #### Number Filter Attributes
+    #### Number filter attributes
     
     | Number Search                                                                                    | Description                                                                                 |             Movie<br>Libraries             |             Show<br>Libraries              |             Music<br>Libraries             |
     |:-------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -129,7 +129,7 @@ The majority of Smart and Manual Builders utilize the same Search Options, meani
     
     String filter can take multiple values **only as a list**.
     
-    #### String Filter Attributes
+    #### String filter attributes
     
     | String Search        | Description                                              |             Movie<br>Libraries             |             Show<br>Libraries              |             Music<br>Libraries             |
     |:---------------------|:---------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -161,7 +161,7 @@ The majority of Smart and Manual Builders utilize the same Search Options, meani
     
     Tag filter can take multiple values as a **list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string**.
      
-    #### Tag Filter Attributes
+    #### Tag filter attributes
     
     | Tag Search                                                                                       | Description                                                                 |             Movie<br>Libraries             |             Show<br>Libraries              |             Music<br>Libraries             |
     |:-------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|

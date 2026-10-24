@@ -1,6 +1,6 @@
 <span id="acknowledgements"></span>
 
-# Community & credits
+# Community & Credits
 
 Find support, share configurations, and help improve Kometa.
 
@@ -18,12 +18,13 @@ Find support, share configurations, and help improve Kometa.
 
 | GitHub                                        | Discord    | Role                                                                                                                                                                    |
 |:----------------------------------------------|:-----------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [meisnate12](https://github.com/meisnate12/)  | Sohjiro    | Main Kometa Developer                                                                                                                                                   |
+| [meisnate12](https://github.com/meisnate12/)  | Sohjiro    | Kometa Founder & Developer                                                                                                                                                   |
+| [chazlarson](https://github.com/chazlarson/)  | Mr. Carrot | Kometa Developer, Discord Moderator and Wiki Contributor            |
+| [Badja](https://github.com/orgs/Kometa-Team/people/badja-dev)  | Badja | Kometa Developer           |
 | [YozoraXCII](https://github.com/YozoraXCII)   | Yozora     | Kometa Discord Moderator, Default Configs Creator & Maintainer, Wiki Contributor, [Community Configs Repo](https://github.com/Kometa-Team/Community-Configs) Maintainer |
 | [bullmoose20](https://github.com/bullmoose20) | bullmoose  | Kometa Discord Moderator, Default Configs Creator & Maintainer, Wiki Contributor, [Community Configs Repo](https://github.com/Kometa-Team/Community-Configs) Maintainer |
-| [chazlarson](https://github.com/chazlarson/)  | Mr. Carrot | Kometa Master Discord Support and Wiki Contributor who created the [Local](install/index.md#path-local) and [Docker](install/index.md#path-docker) guides           |
-| [JohnFawkes](https://github.com/JohnFawkes)   | anonfawkes | Kometa Master Discord Support                                                                                                                                           |
-| [antwanchild](https://github.com/antwanchild) | Antwan     | Kometa Master Discord Support                                                                                                                                           |
+| [JohnFawkes](https://github.com/JohnFawkes)   | anonfawkes | Kometa Master, Discord Moderator                                                                                                                                           |
+| [antwanchild](https://github.com/antwanchild) | Antwan     | Kometa Master, Discord Moderator                                                                                                                                           |
 
 The team at Kometa would like to recognize and thank those who have helped the project become what it is today. 
 
@@ -41,7 +42,7 @@ Special Thanks to [RedHeadJedi](https://theposterdb.com/user/RedHeadJedi) over a
     end="<!--sponsor-end-->"
 %}
 
-## Community Developer Acknowledgements
+## Community developer acknowledgements
 
 These are the developers and creators who are an active part of the Kometa community and help us achieve new goals.
 
@@ -57,7 +58,7 @@ These are the developers and creators who are an active part of the Kometa commu
 
 <br>
 
-## Project Inspiration Acknowledgements
+## Project inspiration acknowledgements
 
 These are the developers and creators who served as inspiration for Kometa.
 
@@ -72,28 +73,18 @@ These are the developers and creators who served as inspiration for Kometa.
 
 <br>
 
-## Kometa Dependency Acknowledgements
-These are the developers and creators of the technologies that are required to make Kometa work.
-
-| Acknowledgement                             | Reason                                                                                                             |                Sponsor the Developer                 |
-|:--------------------------------------------|:-------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------:|
-| [pkkid](https://github.com/pkkid)           | Creator of [python-plexapi](https://github.com/pkkid/python-plexapi)                                               |       :fontawesome-solid-circle-xmark:{ .red }       |
-| [meisnate12](https://github.com/meisnate12) | Creator of [ArrAPI](https://github.com/Kometa-Team/ArrAPI) and [TMDbAPIs](https://github.com/Kometa-Team/TMDbAPIs) | [Click Here](https://github.com/sponsors/meisnate12) |
-| [dbader](https://github.com/dbader)         | Creator of [schedule](https://github.com/dbader/schedule)                                                          |       :fontawesome-solid-circle-xmark:{ .red }       |
-| [rholder](https://github.com/rholder)       | Creator of [retrying](https://github.com/rholder/retrying)                                                         |       :fontawesome-solid-circle-xmark:{ .red }       |
-| [jd](https://github.com/jd)                 | Creator of [tenacity](https://github.com/jd/tenacity)                                                              |       :fontawesome-solid-circle-xmark:{ .red }       |
-
-
-## Other Acknowledgements
+## Other acknowledgements
 
 <a href="https://www.vecteezy.com/free-vector/meteor-logo">Meteor Logo Vectors by Vecteezy</a>
 
-## Associated Git Repos
+## Associated Git repos
+
+### Community configurations
 
 - [Kometa Community Configs](https://github.com/Kometa-Team/Community-Configs)
     - Kometa's Community submitted Config Repo
 
-<br>
+### Tools and metadata resources
 
 - [ImageMaid](https://github.com/Kometa-Team/ImageMaid)
     - Removes Image bloat from your Plex Server
@@ -106,7 +97,7 @@ These are the developers and creators of the technologies that are required to m
 - [Kometa Mediastingers](https://github.com/Kometa-Team/Mediastingers)
     - How Kometa stores the Mediastingers List
 
-<br>
+### Python libraries
 
 - [ArrAPI](https://github.com/Kometa-Team/ArrAPI)
     - Module to interface with Radarr/Sonarr
@@ -115,7 +106,7 @@ These are the developers and creators of the technologies that are required to m
 - [kometautils](https://github.com/Kometa-Team/Kometa-Utils)
     - Module for various common files among Kometa Repos
 
-<br>
+### Images and artwork
 
 - [Default Images](https://github.com/Kometa-Team/Default-Images)
     - Repo to store Kometa's various Images for the Defaults
@@ -136,11 +127,9 @@ These are the developers and creators of the technologies that are required to m
 - [People Images Transparent (transparent)](https://github.com/Kometa-Team/People-Images-transparent)
     - Stores the Transparent actor posters
 
-<br>
+### Deployment and translations
 
 - [Unraid Templates](https://github.com/Kometa-Team/Unraid-Templates)
     - Stores the Kometa Unraid Templates
 - [Translations](https://github.com/Kometa-Team/Translations)
     - Stores the data for Kometa Translations
-
-Community configurations are contributed by users and may target older Kometa versions. Review their settings and compatibility before applying them; they are not supported by the Kometa team.

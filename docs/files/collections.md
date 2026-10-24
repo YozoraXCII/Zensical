@@ -4,6 +4,8 @@ hide:
 ---
 # Collection Files
 
+Builders select the items used by collections, overlays, and playlists. Combine them with [filters](filters.md) to narrow the results. Start with [Plex builders](builders/plex/builders.md), [TMDb builders](builders/tmdb/builders.md), or [IMDb builders](builders/imdb/builders.md).
+
 Collection Files holds information on how Kometa should create collections. There are a large number of 
 builders available to build collections, 
 
@@ -55,7 +57,7 @@ I then call "MyCollections.yml" in my [Configuration File](../config/overview.md
 Whenever I execute Kometa and the Movies library is run, MyCollections.yml will run and my "Top 50 Grossing Films of 
 All Time (Worldwide)" will be created/updated.
 
-## File Attributes
+## File attributes
 
 Collection Files can utilize the following top-level attributes
 
@@ -72,7 +74,7 @@ an error when trying to run the file against your library.
 * Example Files can be found in the 
 [Kometa Community Configs Repository](https://github.com/Kometa-Team/Community-Configs)
 
-## Collection Operations & Attributes
+## Collection operations & attributes
 
 Whilst [Library Operations](../config/operations.md) are used to control library-wide operations, Collection Files can 
 be used as a method to perform more limited operations, such as:
@@ -154,14 +156,14 @@ Examples of these can be seen here
 
 There are multiple types of attributes that can be utilized within a collection:
 
-* [Builders](builders/index.md)
+* [Builders](definition-components.md#builders)
 * [Filters](filters.md)
 * [Settings](settings.md)
 * [Radarr/Sonarr Settings](settings.md)
 * [Collection/Playlist Metadata Updates](updates.md)
 * [Item Metadata Updates](item_updates.md)
 
-## Example File
+## Example file
 
 Below is a common Collection File which will create two collections in a Plex library.
 
@@ -187,7 +189,7 @@ collections:
     summary: Popular Movies across the internet
 ```
 
-## Dynamic Collections
+## Dynamic collections
 
 In addition to manually defining each Collection that you want in your library, Kometa can also dynamically 
 create collections based on a variety of different criteria, such as

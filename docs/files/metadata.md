@@ -240,7 +240,7 @@ You can have the script edit the metadata of Items by adding them to the `metada
                 originally_available: "2007-05-14"
         ```
 
-## Matching Items
+## Matching items
 
 The `match` attribute is used to match movies within Plex to that definition within the Metadata File. One definition 
 can match and edit multiple items. The available matching options are outlined below.
@@ -454,11 +454,11 @@ can match and edit multiple items. The available matching options are outlined b
             edits...
         ```
 
-## Metadata Edits
+## Metadata edits
 
 The available attributes for editing movies are as follows
 
-### Special Attributes
+### Special attributes
 
 | Attribute         | Description                                                                                                                                                                                                                                                                                                                       | Item Types                   |
 |:------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------|
@@ -475,7 +475,7 @@ The available attributes for editing movies are as follows
 | `update_seasons`  | Used to specify if this definition's seasons metadata will update.<br>Multiple can be used for one definition as a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma separated string. One `false` will cause it to fail.<br>**Values:** `true`, `false`                            | `Shows`                      |
 
 
-### General Attributes
+### General attributes
 
 | Attribute                                                                                | <div style="width:295px">Allowed Values</div>                               | Item Types                                                              |
 |:-----------------------------------------------------------------------------------------|:----------------------------------------------------------------------------|:------------------------------------------------------------------------|
@@ -496,7 +496,7 @@ The available attributes for editing movies are as follows
 | `track`                                                                                  | Text to change Track.                                                       | `Tracks`                                                                |
 | `user_rating`                                                                            | Number to change User Rating.                                               | `Movies`, `Shows`, `Seasons`, `Episodes`, `Artists`, `Albums`, `Tracks` |
 
-### Tag Attributes
+### Tag attributes
 
 You can add `.remove` to any tag attribute to only remove those tags i.e. `genre.remove`.
 
@@ -516,7 +516,7 @@ You can add `.sync` to any tag attribute to sync all tags vs just appending the 
 | `style`          | List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated text of each Style Tag.          | `Artists`, `Albums`                                                     |
 | `writer`         | List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated text of each Writer Tag.         | `Movies`, `Episodes`                                                    |
 
-### Image and Theme Attributes
+### Image and theme attributes
 
 | Attribute         | <div style="width:365px">Allowed Values</div>    | Item Types                                                    |
 |:------------------|:-------------------------------------------------|:--------------------------------------------------------------|
@@ -541,7 +541,7 @@ metadata:
     file_theme: /config/themes/dune.mp3
 ```
 
-### Advanced Attributes
+### Advanced attributes
 
 | <div style="width:200px">Attribute</div>                                                            | Allowed Values                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <div style="width:110px">Item Types</div> |
 |:----------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------|

@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Network", 
-        "CODE_NAME": "network",
-        "OVERLAY_LEVEL": "Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the show network on each item within your library"
-    }'
+    "OVERLAY_NAME": "Network",
+    "CODE_NAME": "network",
+    "OVERLAY_LEVEL": "Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the show network on each item within your library",
+    "OVERLAY_LABEL": "network"
+}'
     end='<!--rec-sub-->'
 %}
 {% include-markdown "./../../templates/snippets/white_style.md" replace='{"styles/CODE_NAME": "overlays/network"}' exclude-tags='logo' %}

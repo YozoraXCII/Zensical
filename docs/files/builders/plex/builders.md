@@ -1,4 +1,4 @@
-# Plex builders
+# Plex Builders
 
 Plex Builders utilize media that already exists within your Plex library to place them into a Collection.
 
@@ -12,7 +12,7 @@ Manual (also known as Dumb or non-Smart) Builders are static in nature and will 
 
 Smart Builders are usually the recommended approach as they are lightweight and faster to process than Dumb Builders
 
-## Understanding Smart vs Manual Collections
+## Understanding smart vs manual collections
 
 There are some key differences that you should understand before choosing if you want to use a Smart or Manual Builder, this table shows you the key differences between the Collections that are built from each type of Builder.
 
@@ -29,7 +29,7 @@ There are some key differences that you should understand before choosing if you
 
 There are some exceptions to the above when using a Smart Builder (namely when using a [Smart Label Definition](../../settings.md#smart-label-definitions)), but the above should offer a basic understanding of the key differences.
 
-## Builder Attributes
+## Builder attributes
 
 The majority of Smart and Manual Builders utilize the same Builder Attributes. Any deviation from this will be highlighted against the specific Builder.
 
@@ -39,7 +39,7 @@ The majority of Smart and Manual Builders utilize the same Builder Attributes. A
 | `sort_by`  | **Description:** This will control how the filter is sorted in your library. You can do a multi-level sort using a list.<br>**Default:** `random`<br>**Values:** Any sort options for your filter type in the [Sorts Options Table](#plex-sort-options) |
 | `validate` | **Description:** Determines if a collection will fail on a validation error<br>**Default:** `true`<br>**Values**: `true` or `false`                                                                                                                |
 
-## Plex Builder Types
+## Plex builder types
 
 | Builder                                    | Description                                                                                                                                                  |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
 |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
@@ -61,7 +61,7 @@ The majority of Smart and Manual Builders utilize the same Builder Attributes. A
     include-markdown "./sort-options.md"
 %}
 
-## Plex All — `plex_all` {#plex-all}
+## Plex all — `plex_all` {#plex-all}
 
 Finds every item in your library. Useful with [Filters](../../filters.md).
 
@@ -69,7 +69,7 @@ The expected input is either true or false.
 
 See the shared [sort options](#plex-sort-options) above.
 
-### Example Plex All Builder(s) {#example-plex-all-builders}
+### Example Plex all builder(s) {#example-plex-all-builders}
 
 ```yaml
 collections:
@@ -79,7 +79,7 @@ collections:
       user_rating.gte: 9
 ```
 
-## Plex Collectionless — `plex_collectionless` {#plex-collectionless}
+## Plex collectionless — `plex_collectionless` {#plex-collectionless}
 
 **This is not needed if you're using [Smart Label Collections](../../settings.md#smart-label-definitions).**
 
@@ -109,7 +109,7 @@ collectionless.
  
 **At least one exclusion is required.**
 
-### Example Plex Collectionless Builder(s) {#example-plex-collectionless-builders}
+### Example Plex collectionless builder(s) {#example-plex-collectionless-builders}
 
 ```yaml
 collections:
@@ -146,13 +146,13 @@ For show-part collections, episode GUIDs such as `plex://episode/63e3eedd1668198
 
 This builder does not guarantee that the resulting collection follows the order of the configured IDs.
 
-## Plex Pilots — `plex_pilots` {#plex-pilots}
+## Plex pilots — `plex_pilots` {#plex-pilots}
 
 Gets the first episode of every show in your library. This only works with `builder_level: episode`
 
 See the shared [sort options](#plex-sort-options) above.
 
-### Example Plex Pilots Builder(s) {#example-plex-pilots-builders}
+### Example Plex pilots builder(s) {#example-plex-pilots-builders}
 
 ```yaml
 collections:
@@ -161,7 +161,7 @@ collections:
     plex_pilots: true
 ```
 
-## Plex Rating Key — `plex_rating_key` {#plex-rating-key}
+## Plex rating key — `plex_rating_key` {#plex-rating-key}
 
 The `plex_rating_key` builder finds items already in Plex using their numeric Plex rating key. It accepts a single rating key or a list.
 
@@ -177,13 +177,13 @@ Rating keys are local to a Plex server and can change if a library is rebuilt. U
 
 This builder does not guarantee that the resulting collection follows the order of the configured rating keys.
 
-## Plex Watchlist — `plex_watchlist` {#plex-watchlist}
+## Plex watchlist — `plex_watchlist` {#plex-watchlist}
 
 Finds every item in your Watchlist.
 
 The expected input is the sort you want returned. It defaults to `added.asc`.
 
-### Watchlist Sort Options {#watchlist-sort-options}
+### Watchlist sort options {#watchlist-sort-options}
 
 | Sort Option                                 | Description                                 |
 |:--------------------------------------------|:--------------------------------------------|
@@ -194,7 +194,7 @@ The expected input is the sort you want returned. It defaults to `added.asc`.
 
 The `sync_mode: sync` and `collection_order: custom` Setting are recommended.
 
-### Example Plex Watchlist Builder(s) {#example-plex-watchlist-builders}
+### Example Plex watchlist builder(s) {#example-plex-watchlist-builders}
 
 ```yaml
 collections:

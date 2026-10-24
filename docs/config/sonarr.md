@@ -150,7 +150,7 @@ sonarr:
   plex_path: #
 ```
 
-# Other examples:
+# Other Examples:
 
 Specifying a second Sonarr instance for a specific library:
 

@@ -9,7 +9,7 @@ tags:
 
 There are various sort options available depending on what you want to sort.
 
-## Plex Sort Order
+## Plex sort order
 
 The first thing to note is that Plex utilizes an ASCII based sort order, which defines which priority a character gets.
 
@@ -114,7 +114,7 @@ The first thing to note is that Plex utilizes an ASCII based sort order, which d
     Z - uppercase Z
     ```
 
-## Collection Sorting
+## Collection sorting
 
 Collections can be sorted so that they appear in a specific order in the `Collections` and `Library` tab of your library. This is done using the `sort_title` attribute.
 
@@ -174,7 +174,7 @@ Now let's use the `sort_title` attribute to reorder these collections slightly
 You will often see users using sort titles such as `+++++++_My Collection` or `!010_My Collection` in order to force a specific order of collections. 
 Whilst it may not seem logical at a glance, the ASCII sort order allows a lot of flexibility for power users to be able to tailor the ordering of collections.
 
-### Kometa Default Collection Sorting
+### Kometa default collection sorting
 
 When utilizing the [Kometa Defaults](../../defaults/files.md), they are all built on the same format for their sort titles:
 
@@ -220,10 +220,10 @@ Users aren't expected to understand what this does, but users can use the `sort_
 
     ![example3](../../assets/images/kometa/guides/order/example3.jpg)
 
-#### Sorting the **groups** of Default collections
+#### Sorting the **groups** of default collections
 
 Each group of collections created by the Kometa defaults has a default "collection section", so they are displayed in a standard order, which is shown 
-[here](../../defaults/collections/index.md#collection-section-order). If you want to change the order in which the sections appear within the set of 
+[here](../../defaults/collections/usage.md#collection-section-order). If you want to change the order in which the sections appear within the set of
 default-generated collections, you would use the `collection_section` Template Variable.
 
 For example, these collection groups display in this order, by default:
@@ -262,7 +262,7 @@ If you wanted to reverse the order in which those groups of collections appear [
 
 That will result in those four groups of collections appearing in the opposite order to the default.
 
-#### Sorting the **collections** within the **groups** of Default collections
+#### Sorting the **collections** within the **groups** of default collections
 
 You can re-order collections within each Defaults File using the `order_<<key>>` Template Variable. 
 <<key>> refers to the identifier that Kometa uses for each collection, which you can find on the relevant default's wiki page.
@@ -291,7 +291,7 @@ You can re-order collections within each Defaults File using the `order_<<key>>`
 
     ![example](../../assets/images/kometa/guides/order/example4.jpg)
 
-#### Sorting the **contents** of the **collections** within the **groups** of Default collections
+#### Sorting the **contents** of the **collections** within the **groups** of default collections
 
 You can also re-order the contents of each collection within a Defaults File using **either** the `sort_by` or `collection_order` Template Variables. The specific option you use will depend 
 on the specific default file [it is ultimately controlled by which type of collection is created by the file, manual or smart], and will be listed on the relevant wiki page.
@@ -318,9 +318,9 @@ overriding the default of `release.desc` AND the override value set by the previ
 3. This sets the `collection_order` for the IMDB collections to `release`, overriding the default of `custom`. `imdb` creates manual collections, so it uses `collection_order`.
 4. This sets the `collection_order` for the `IMDb Lowest Rated` collection to `alpha.`,  overriding the default of `custom` AND the override value set by the previous Template Variable.
 
-## Builder Sorting
+## Builder sorting
 
-When using a collection [Builder](../../files/builders/index.md), it is possible to sort the items within the collection in a number of ways.
+When using a collection [Builder](../../files/definition-components.md#builders), it is possible to sort the items within the collection in a number of ways.
 
 This can be useful to control the particular items that end up in the collection, or to control the order that they appear in.
 
@@ -340,7 +340,7 @@ collections:
     collection_order: critic_rating.desc
 ```
 
-### Collection Order
+### Collection order
 
 Within Plex, the attribute that controls the top-level sorting is called the `collection_order` and there are three options presented within the Plex UI for this:
 
@@ -362,7 +362,7 @@ When using Kometa builders, the majority of builders will require `collection_or
         collection_order: custom
     ```
 
-## Manual and Smart Collection Sorting
+## Manual and smart collection sorting
 
 Plex has two types of collections, "Manual" and "Smart".
 
@@ -463,7 +463,7 @@ The Sort Orders available for "Smart" collections are outlined on the **[Plex So
         collection_order: added.desc
     ```
 
-### Secondary Sorting
+### Secondary sorting
 
 You can also leverage "Secondary Sorting" This goes beyond the single sort settings you can apply to a collection in Plex.
 

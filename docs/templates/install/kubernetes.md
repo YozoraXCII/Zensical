@@ -1,4 +1,4 @@
-### Kubernetes Walkthrough {#kubernetes-kubernetes-walkthrough}
+### Kubernetes walkthrough {#kubernetes-kubernetes-walkthrough}
 
 This article will walk you through getting Kometa set up and running in Kubernetes. It will cover:
 
@@ -105,12 +105,12 @@ spec:
 
 ```
 
-### Creating the Config Maps {#kubernetes-creating-the-config-maps}
+### Creating the config maps {#kubernetes-creating-the-config-maps}
 
 In Kubernetes, configurations are managed via Config Maps. So we deploy the configurations for Kometa as config maps. The
 minimum requirement is the Kometa config, but the example here assumes you have a separate config for movies and tv shows.
 
-### Kometa Config {#kubernetes-kometa-config}
+### Kometa config {#kubernetes-kometa-config}
 
 Here's a config map for the `config.yml` file for Kometa. Note there are many placeholders that will need update based on your environment and needs.
 
@@ -205,7 +205,7 @@ metadata:
   namespace: media
 ```
 
-### Movie Config Map {#kubernetes-movie-config-map}
+### Movie config map {#kubernetes-movie-config-map}
 
 Config maps for collections (movies in this example) are more simple!
 
@@ -227,7 +227,7 @@ metadata:
   namespace: media
 ```
 
-### TV Config Map {#kubernetes-tv-config-map}
+### TV config map {#kubernetes-tv-config-map}
 
 ```yaml
 apiVersion: v1
@@ -260,13 +260,13 @@ metadata:
 <details markdown="1">
 <summary>Advanced: generate configuration with an Init Container</summary>
 
-### Creating dynamic configuration files with an Init Container {#kubernetes-creating-dynamic-configuration-files-with-an-init-container}
+### Creating dynamic configuration files with an init container {#kubernetes-creating-dynamic-configuration-files-with-an-init-container}
 
 IMDb search results may include results for media which has not yet been released, resulting in a collection that is incomplete. 
 In order to solve for this you can replace a static config map with a config file that is (re)generated when the cronjob starts each time. 
 This can be done by including an init container which renders a [Jinja](https://jinja.palletsprojects.com/en/3.0.x/templates/) template to a file in the PVC.
 
-### Including the Init Container in the Cron Job {#kubernetes-including-the-init-container-in-the-cron-job}
+### Including the init container in the cron job {#kubernetes-including-the-init-container-in-the-cron-job}
 
 NOTE the environment value named `JINJA_DEST_FILE` is the resulting name of the generated config file.
 

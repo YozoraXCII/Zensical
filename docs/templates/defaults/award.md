@@ -2,10 +2,10 @@
 {%
     include-markdown "./base/collection/header.md"
     replace='{
-        "SECTION_NUMBER": "130",
-        "COLLECTION": "FULL_NAME Awards",
-        "DESCRIPTION": "create collections based on the FULL_NAME Awards"
-    }'
+    "SECTION_NUMBER": "130",
+    "COLLECTION": "FULL_NAME Awards",
+    "DESCRIPTION": "create collections based on the FULL_NAME Awards"
+}'
 %}
 <!--all-->
 <!--bafta-->

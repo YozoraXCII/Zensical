@@ -51,7 +51,7 @@ tags:
 ---
 # Radarr/Sonarr Definition Settings
 
-## Radarr Definition Settings
+## Radarr definition settings
 
 All the following attributes can override the global/library [Radarr](../config/radarr.md) attributes which are the default unless otherwise specified.
 
@@ -72,7 +72,7 @@ All the following attributes can override the global/library [Radarr](../config/
 | `item_radarr_tag.remove`  | **Description:** Used to remove existing tags in Radarr for every movie found by the builders that's in Radarr<br>**Values:** List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated string of tags            |
 | `item_radarr_tag.sync`    | **Description:** Matches the tags in Radarr for every movie found by the builders that's in Radarr with the provided tags<br>**Values:** List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated string of tags |
 
-## Sonarr Definition Settings
+## Sonarr definition settings
 
 All the following attributes can override the global/library [Sonarr](../config/sonarr.md) attributes which are the default unless otherwise specified.
 
@@ -96,7 +96,7 @@ All the following attributes can override the global/library [Sonarr](../config/
 | `item_sonarr_tag.remove`  | **Description:** Used to remove existing tags in Sonarr for every series found by the builders that's in Sonarr<br>**Values:** List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated string of tags            |
 | `item_sonarr_tag.sync`    | **Description:** Matches the tags in Sonarr for every series found by the builders that's in Sonarr with the provided tags<br>**Values:** List :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or comma-separated string of tags |
 
-## Seerr Definition Settings
+## Seerr definition settings
 
 These attributes override Seerr request behavior for the collection or playlist. Seerr must be configured globally or for the library; see the [Seerr configuration](../config/seerr.md).
 
@@ -107,35 +107,35 @@ These attributes override Seerr request behavior for the collection or playlist.
 | `seerr_instance`      | **Description:** Seerr request tier(s) to use<br>**Values:** `standard`, `4k`, or `both` (default: `standard`)                                                                          |
 | `seerr_overrides`     | **Description:** Override Seerr's server, quality profile, or root folder separately for each tier<br>**Values:** Dictionary with `standard` and/or `4k` entries; see [Seerr configuration](../config/seerr.md) |
 
-## Adding to Arr
+## Adding to arr
 You can add items to Radarr/Sonarr in two different ways.
   1. Items found by Kometa that are missing from your collections/playlists.
   2. Items found by Kometa that already exist in Plex but are not in Radarr/Sonarr.
 
-### Arr Add Missing
+### Arr add missing
 
 When `radarr_add_missing`/`sonarr_add_missing` are true the items missing from the collection/playlist will be added to Radarr/Sonarr.
 
-### Arr Add Existing
+### Arr add existing
 
 When `radarr_add_existing`/`sonarr_add_existing` are true the items that exist in the collection/playlist will be added to Radarr/Sonarr. 
 
 If your Radarr/Sonarr has different file system mappings from your Plex use `radarr_path`/`sonarr_path` along with `plex_path` from your 
 [Radarr](../config/radarr.md)/[Sonarr](../config/sonarr.md) global config settings.
 
-### Radarr Add Settings
+### Radarr add settings
 
 When adding a movie in Radarr you get the screen below to set these options use `radarr_root_folder_path`, `radarr_monitor`, `radarr_minimum_availability`, `radarr_quality_profile`, `radarr_tags`, and `radarr_search`.
 
 ![Radarr Details](../assets/images/files/radarr-settings.png)
 
-### Sonarr Add Settings
+### Sonarr add settings
 
 When adding a show in Sonarr you get the screen below to set these options use `sonarr_root_folder_path`, `sonarr_monitor`, `sonarr_quality_profile`, `sonarr_language_profile`, `sonarr_series_type`,
 `sonarr_season_folder`, `sonarr_tags`, `sonarr_search`, and `sonarr_cutoff_search`.
 
 ![Sonarr Details](../assets/images/files/sonarr-settings.png)
 
-## Arr Edit Settings
+## Arr edit settings
 
 When editing the details of items that exist in the collection/playlist and in Radarr/Sonarr use `item_radarr_tag` and `item_sonarr_tag`

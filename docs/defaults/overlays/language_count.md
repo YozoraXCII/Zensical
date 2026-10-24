@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Audio/Subtitle Language Count", 
-        "CODE_NAME": "language_count",
-        "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
-        "DESCRIPTION": "an overlay based on the number of audio/subtitle languages available on each item within your library"
-    }'
+    "OVERLAY_NAME": "Audio/Subtitle Language Count",
+    "CODE_NAME": "language_count",
+    "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
+    "DESCRIPTION": "an overlay based on the number of audio/subtitle languages available on each item within your library",
+    "OVERLAY_LABEL": "audio/subtitle language count"
+}'
 %}
 | Dual  | `dual`  | `20` |
 | Multi | `multi` | `10` |

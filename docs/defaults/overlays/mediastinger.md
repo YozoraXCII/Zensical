@@ -49,4 +49,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The MediaStinger overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) with [filters](../../../files/filters) on `tmdb_keyword: aftercreditsstinger, duringcreditsstinger`.
+    The MediaStinger overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) with [filters](../../../files/filters) on `tmdb_keyword: aftercreditsstinger, duringcreditsstinger`.

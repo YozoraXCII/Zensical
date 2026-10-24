@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Writer",
-        "CODE_NAME": "writer",
-        "DESCRIPTION": "dynamically create collections based on the most popular writers in your library",
-        "LIBRARY_TYPE": "Movie",
-        "SECTION_NUMBER": "170"
-    }'
+    "COLLECTION": "Writer",
+    "CODE_NAME": "writer",
+    "DESCRIPTION": "dynamically create collections based on the most popular writers in your library",
+    "LIBRARY_TYPE": "Movie",
+    "SECTION_NUMBER": "170"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Writers"}' %}
 | `<<writer_name>> (Writer)`<br>**Example:** `Frank Welker (Writer)` | `<<writer_name>>`<br>**Example:** `Frank Welker` | Collection of Movies by the Writer. |

@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Runtimes", 
-        "CODE_NAME": "runtimes",
-        "OVERLAY_LEVEL": "Movie, Show, Episode",
-        "DESCRIPTION": "an overlay of the movie runtime, episode runtime, or average episode runtime for all items in your library"
-    }'
+    "OVERLAY_NAME": "Runtimes",
+    "CODE_NAME": "runtimes",
+    "OVERLAY_LEVEL": "Movie, Show, Episode",
+    "DESCRIPTION": "an overlay of the movie runtime, episode runtime, or average episode runtime for all items in your library",
+    "OVERLAY_LABEL": "runtimes"
+}'
     end='<!--rec-sub-->'
 %}
 
@@ -57,4 +58,4 @@ hide:
 {% include-markdown "./../../templates/defaults/base/values.md" rewrite-relative-urls=false %}
 
 
-    The Runtimes overlays use the [`plex_all` Builder](../../files/builders/plex/index.md#plex-all) to apply to all items in the library.
+    The Runtimes overlays use the [`plex_all` Builder](../../files/builders/plex/builders.md#plex-all) to apply to all items in the library.

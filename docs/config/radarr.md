@@ -137,7 +137,7 @@ radarr:
   plex_path: #
 ```
 
-# Other examples:
+# Other Examples:
 
 Specifying different options for specific libraries:
 

@@ -1,4 +1,4 @@
-# AniDB builders
+# AniDB Builders
 
 You can find anime using the features of [AniDB.net](https://anidb.net/) (AniDB).
 
@@ -15,7 +15,7 @@ Finds the anime specified by the AniDB ID.
 
 The expected input is an AniDB ID or AniDB Anime URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example AniDB ID Builder(s) {#example-anidb-id-builders}
+### Example AniDB ID builder(s) {#example-anidb-id-builders}
 
 ```yaml
 collections:
@@ -36,7 +36,7 @@ collections:
     anidb_id: https://anidb.net/anime/8692, https://anidb.net/anime/8691, https://anidb.net/anime/13494
 ```
 
-## AniDB Relation — `anidb_relation` {#anidb-relation}
+## AniDB relation — `anidb_relation` {#anidb-relation}
 
 Finds all anime in the relation graph of the specified AniDB ID.
 
@@ -44,7 +44,7 @@ To see the relation graph of an anime use: `https://anidb.net/anime/<ANIDB_ID>/r
 
 **Value:** The expected input is an AniDB ID, AniDB Anime URL, or AniDB Anime Relation URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
 
-### Example AniDB Relation Builder(s) {#example-anidb-relation-builders}
+### Example AniDB relation builder(s) {#example-anidb-relation-builders}
 
 ```yaml
 collections:
@@ -62,7 +62,7 @@ collections:
     anidb_relation: https://anidb.net/anime/8692/relation/graph
 ```
 
-## AniDB Tag — `anidb_tag` {#anidb-tag}
+## AniDB tag — `anidb_tag` {#anidb-tag}
 
 Finds anime with a specific AniDB tag ID.
 
@@ -70,7 +70,7 @@ The expected input is an AniDB tag ID with an optional `limit` parameter.
 
 You can find tag IDs by browsing tags at [https://utilities.kometa.wiki/anidb-service/tags](https://utilities.kometa.wiki/anidb-service/tags).
 
-### Example AniDB Tag Builder(s) {#example-anidb-tag-builders}
+### Example AniDB tag builder(s) {#example-anidb-tag-builders}
 
 ```yaml
 collections:
@@ -98,7 +98,7 @@ collections:
     sync_mode: sync
 ```
 
-### Tag ID Examples {#tag-id-examples}
+### Tag ID examples {#tag-id-examples}
 
 | Tag Name | Tag ID |
 |:---------|-------:|
@@ -118,7 +118,7 @@ collections:
 
 **Note:** The `mature` setting from your AniDB configuration controls whether mature/adult anime are included in the results.
 
-## AniDB Tag Name — `anidb_tag_name` {#anidb-tag-name}
+## AniDB tag name — `anidb_tag_name` {#anidb-tag-name}
 
 Finds anime with specific AniDB tag names. This builder supports multiple tags and searches by tag name (e.g., "action", "comedy") rather than tag ID.
 
@@ -126,7 +126,7 @@ The expected input is either a single tag name, a list of tag names, or a dictio
 
 Multiple tags can be specified to find anime that match all of the given tags. Tag names are case-insensitive.
 
-### Example AniDB Tag Name Builder(s) {#example-anidb-tag-name-builders}
+### Example AniDB tag name builder(s) {#example-anidb-tag-name-builders}
 
 ```yaml
 collections:
@@ -165,7 +165,7 @@ collections:
     sync_mode: sync
 ```
 
-### Tag Weight {#tag-weight}
+### Tag weight {#tag-weight}
 
 Tag weights in AniDB indicate how strongly a tag applies to an anime:
 
@@ -176,7 +176,7 @@ Tag weights in AniDB indicate how strongly a tag applies to an anime:
 
 Using `min_weight` filters results to only include anime where the tag(s) meet the minimum weight threshold.
 
-### Common Tag Names {#common-tag-names}
+### Common tag names {#common-tag-names}
 
 | Tag Name      | Description                      |
 |:--------------|:---------------------------------|

@@ -25,7 +25,7 @@ tautulli:
     
     The apikey can be found by going to Tautulli > Settings > Web Interface > API > API Key.
 
-# Other examples
+# Other Examples
 
 Specifying a second Tautulli instance for a specific library:
 

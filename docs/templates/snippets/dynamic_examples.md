@@ -1,4 +1,4 @@
-## Dynamic Collection Examples
+## Dynamic collection examples
 
 ???+ example
 

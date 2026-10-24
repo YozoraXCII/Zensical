@@ -10,7 +10,7 @@ The Image Asset Directories can be used to update the posters and backgrounds of
 
 Please read thorough this entire guide.  Everything in it assumes understanding of what came before.
 
-## What is an Asset?
+## What is an asset?
 
 Kometa can apply a variety of images to a variety of items in Plex from a variety of sources.
 
@@ -46,7 +46,7 @@ Relevant operations:
 
 Image **assets** are stored in and retrieved by Kometa from "asset directories".
 
-## What is an Asset Directory?
+## What is an asset directory?
 
 It is a folder containing artwork (posters and/or backgrounds) that is *typically* entirely separate to your media directories.
 
@@ -174,7 +174,7 @@ If a media item has an asset associated with it, that asset image is taken as th
 and the overlay pipeline will no longer download and back up the base artwork from Plex. Using the Asset Directory to assign custom art is
 the simplest and safest way to ensure that the overlay pipeline doesn't unexpectedly overwrite your custom artwork in Plex.
 
-## Asset Naming
+## Asset naming
 
 The table below shows the asset folder path structures that will be searched for. There are two options for how Kometa looks at the files inside your Asset Directories. Choose an option with
 
@@ -276,7 +276,7 @@ For example, if the asset name is `Toy Story (1995)`, Kometa accepts the followi
     config/assets/Toy Story (1995)-backgroundSquare.png
     ```
 
-## Determining the "Asset Name"
+## Determining the "asset name"
 
 === "Collections"
 
@@ -357,7 +357,7 @@ For example, if the asset name is `Toy Story (1995)`, Kometa accepts the followi
         config/assets/The Expanse (2015) {tvdb-280619}_background.ext
         ```
 
-## Season and Episode numbers
+## Season and episode numbers
 
 === "Seasons"
 
@@ -417,7 +417,7 @@ For example, if the asset name is `Toy Story (1995)`, Kometa accepts the followi
 
 Here's an example config folder structure with an assets directory with `asset_folders` set to true and false.
 
-### Asset Folders vs Flat Assets
+### Asset folders vs flat assets
 
 === "ASSET_FOLDERS=True"
 
@@ -520,6 +520,6 @@ Here's an example config folder structure with an assets directory with `asset_f
 
 There are other asset-related settings described starting [here](../../config/settings.md#asset-depth)
 
-### Step-by-Step
+### Step-by-step
 
 The Cookbook has a step-by-step [walkthrough](https://github.com/Kometa-Team/Cookbook/blob/main/cookbook/asset_pipeline_walkthrough.md).

@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Simkl Chart", 
-        "CODE_NAME": "simkl",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "DESCRIPTION": "create collections based on Simkl charts",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "Simkl Chart",
+    "CODE_NAME": "simkl",
+    "LIBRARY_TYPE": "Movie, Show",
+    "DESCRIPTION": "create collections based on Simkl charts",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": ""}'
 %}
 | `Simkl Trending Today`      | `trending_today`  | Collection of Movies/Shows Trending Today on Simkl.      |

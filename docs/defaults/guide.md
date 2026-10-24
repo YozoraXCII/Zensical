@@ -133,13 +133,13 @@ For example, the Defaults Overlay File `default: resolution` has a page [here](o
 The shared Template Variables can be reviewed here for [Collections](shared.md) and [Overlays](overlay_variables.md). These are also linked from each Defaults File's wiki page. 
 Keep in mind that *most*, but not all Defaults Files have access to the shared variables. This will be noted on the individual files' page.
 
-## Collection Defaults
+## Collection defaults
 
-See the [Collection Defaults](collections/index.md) Page for more information on the specifics of the Collection Defaults.
+See the [Collection Defaults](collections/usage.md) Page for more information on the specifics of the Collection Defaults.
 
-## Overlay Defaults
+## Overlay defaults
 
-See the [Overlay Defaults](overlays/index.md) Page for more information on the specifics of the Overlay Defaults.
+See the [Overlay Defaults](overlays/usage.md) Page for more information on the specifics of the Overlay Defaults.
 
 {% include-markdown "./../templates/snippets/example_config.md" %}
 

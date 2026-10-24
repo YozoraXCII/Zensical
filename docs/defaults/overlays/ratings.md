@@ -5,11 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/overlays/header.md"
     replace='{
-        "OVERLAY_NAME": "Ratings", 
-        "CODE_NAME": "ratings",
-        "OVERLAY_LEVEL": "Movie, Show, Episode",
-        "DESCRIPTION": "an overlay based on ratings from various sources including IMDb, TMDb, Floppy, MDBList, OMDb, AniDB, MAL, Serializd, and Rotten Tomatoes on each item within your library"
-    }'
+    "OVERLAY_NAME": "Ratings",
+    "CODE_NAME": "ratings",
+    "OVERLAY_LEVEL": "Movie, Show, Episode",
+    "DESCRIPTION": "an overlay based on ratings from various sources including IMDb, TMDb, Floppy, MDBList, OMDb, AniDB, MAL, Serializd, and Rotten Tomatoes on each item within your library",
+    "OVERLAY_LABEL": "ratings"
+}'
     replace-tags='{"title-sub": "**Please read [Kometa Ratings Explained](../../../../kometa/guides/ratings.md) for more understanding on how Kometa interacts with ratings.**"}'
     end='<!--rec-sub-->'
 %}

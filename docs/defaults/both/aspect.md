@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Aspect Ratio", 
-        "CODE_NAME": "aspect",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "125", 
-        "DESCRIPTION": "create collections with items that are based on their aspect ratio"
-    }'
+    "COLLECTION": "Aspect Ratio",
+    "CODE_NAME": "aspect",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "125",
+    "DESCRIPTION": "create collections with items that are based on their aspect ratio"
+}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Aspect Ratio"}' %}
 | `1.33 - Academy Aperture`      | `1.33` | Collection of Movies/Shows with a 1.33 aspect ratio. |

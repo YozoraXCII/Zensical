@@ -1,4 +1,4 @@
-# Floppy builders
+# Floppy Builders
 
 You can find movies and shows using lists from your [Floppy](https://github.com/dannyvfilms/Floppy) instance.
 
@@ -12,7 +12,7 @@ You can find movies and shows using lists from your [Floppy](https://github.com/
 | [`floppy_list_details`](#floppy-list) | Finds list items and uses the Floppy description as the Plex collection summary. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 | [`floppy_tracked`](#floppy-tracked) | Finds Floppy items tracked with selected statuses and media types. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
 
-## Floppy List — `floppy_list_details`, `floppy_list` {#floppy-list}
+## Floppy list — `floppy_list_details`, `floppy_list` {#floppy-list}
 
 Finds every supported movie, show, or episode in a Floppy list. The expected input is a list URL from the configured Floppy instance. Multiple URLs are supported. Episode entries require `builder_level: episode` and are added as the exact listed episodes.
 
@@ -44,7 +44,7 @@ collections:
     sync_mode: sync
 ```
 
-## Floppy Tracked — `floppy_tracked` {#floppy-tracked}
+## Floppy tracked — `floppy_tracked` {#floppy-tracked}
 
 Finds items in the configured Floppy instance by tracking status. A private Floppy API token is required.
 

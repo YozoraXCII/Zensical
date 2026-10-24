@@ -132,7 +132,7 @@ At this point, Kometa is waiting until 5AM to wake up and process the config fil
 **Some unidentified older version**
 
 
-### Prerequisite: Installing Docker {#synology-prerequisite-installing-docker}
+### Prerequisite: installing Docker {#synology-prerequisite-installing-docker}
 
 1. Open the Package Center app from the Synology Web GUI.
 

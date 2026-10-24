@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Other Chart", 
-        "CODE_NAME": "other_chart",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "DESCRIPTION": "create collections based on other charts",
-        "SECTION_NUMBER": "020"
-    }'
+    "COLLECTION": "Other Chart",
+    "CODE_NAME": "other_chart",
+    "LIBRARY_TYPE": "Movie, Show",
+    "DESCRIPTION": "create collections based on other charts",
+    "SECTION_NUMBER": "020"
+}'
     replace-tags='{"rec-sub": "Recommendations: The `StevenLu\'s Popular Movies` and `Top 10 Pirated Movies of the Week` Collections only work with Movie Libraries."}'
 %}
 | `Common Sense Selection`            | `commonsense` | Collection of Common Sense Selection Movies/Shows.   |

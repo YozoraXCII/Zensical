@@ -56,7 +56,7 @@ This guide covers both parts. First choose how to start Kometa on a regular basi
     [virtual environment](../install/index.md#local-setting-up-a-virtual-environment). Please also ensure to edit any commands to be reflective of the live
     environment (such as usernames, installation directories).
 
-    ### Background Run Scheduled Task
+    ### Background run scheduled task
 
     This method will start Kometa at system startup and will keep Kometa running in the background indefinitely.
     The user can then define set days and times for the Configuration File to be processed, and Kometa will handle processing as and when required.
@@ -114,7 +114,7 @@ This guide covers both parts. First choose how to start Kometa on a regular basi
 
         Kometa will now launch at system startup, but will wait until the user-specified scheduled time before executing, and will then wait in the background for the next scheduled run.
 
-    ### Single Run Scheduled Task
+    ### Single run scheduled task
 
     This method will start Kometa at the desired time, immediately begin running the Configuration File and will then kill the process once it has completed.
 

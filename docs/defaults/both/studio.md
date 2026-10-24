@@ -5,12 +5,12 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-        "COLLECTION": "Studio", 
-        "CODE_NAME": "studio",
-        "DESCRIPTION": "dynamically create collections based on the studios available in your library",
-        "LIBRARY_TYPE": "Movie, Show", 
-        "SECTION_NUMBER": "070"
-    }'
+    "COLLECTION": "Studio",
+    "CODE_NAME": "studio",
+    "DESCRIPTION": "dynamically create collections based on the studios available in your library",
+    "LIBRARY_TYPE": "Movie, Show",
+    "SECTION_NUMBER": "070"
+}'
     replace-tags='{"title-sub": "This file also merges similarly named studios (such as \"20th Century Fox\" and \"20th Century Animation\") into one (\"20th Century Studios\")."}'
 %}
 {% include-markdown "./../../templates/snippets/separator_line.md" replace='{"SEPARATOR": "Studio"}' %}

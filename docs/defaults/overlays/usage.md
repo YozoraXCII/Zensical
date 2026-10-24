@@ -1,11 +1,4 @@
-# Overlay defaults
-
-Choose badges and information to display on your posters.
-
-- [Ratings and content](../browse/overlays/content/index.md)
-- [Media properties](../browse/overlays/media/index.md)
-- [Networks, studios and streaming](../browse/overlays/production/index.md)
-- [Utility](../browse/overlays/utility/index.md)
+# Configuring Overlay Defaults
 
 There are many Default Overlay Files built into Kometa itself which offer an easy-to-use and customizable set of 
 Overlays that the user can achieve without having to worry about creating the files that makes the overlays possible.
@@ -26,7 +19,7 @@ libraries:
       - default: ratings
 ```
 
-### Example Poster Overlays
+### Example poster overlays
 
 **Note: These examples use fonts not packaged with Kometa. See [bullmoose20's Configs](https://github.com/Kometa-Team/Community-Configs/tree/master/bullmoose20)**
 
@@ -72,7 +65,7 @@ libraries:
     ```
 
 
-### Example TV Shows - Show Overlays
+### Example TV shows - show overlays
 
 ![](../../assets/images/defaults/show-overlays.png)
 
@@ -113,7 +106,7 @@ libraries:
     ```
 
 
-### Example TV Shows - Season Overlays
+### Example TV shows - season overlays
 
 ![](../../assets/images/defaults/season-overlays.png)
 ??? example "Click to expand sample config.yml TV Shows overlays section for the Season Poster"
@@ -135,7 +128,7 @@ libraries:
     ```
 
 
-### Example TV Shows - Episode Overlays
+### Example TV shows - episode overlays
 
 ![](../../assets/images/defaults/episode-overlays.png)
 
@@ -183,7 +176,7 @@ libraries:
     ```
 
 
-## Rating Overlays
+## Rating overlays
 
 By default, for Movies in Plex, the `Ratings Source` dropdown (`#3`) below, can come from Rotten Tomatoes (and includes Critic Ratings and Audience Ratings) or IMDb (Audience Ratings). 
 This only changes the tiny icons displayed and where Plex will retrieve the ratings from upon initial scan and import of the media metadata.
@@ -211,7 +204,7 @@ file to post Rotten Tomatoes Critics Ratings in (`#1`), IMDb ratings in (`#2`), 
 
 ![](../../assets/images/defaults/ratings_overlay_path.png)
 
-## Customizing Configs
+## Customizing configs
 
 Configs can be customized using the `template_variables` attribute when calling the file. These `template_variables` 
 will be given to every template call in the file which allows them to affect how that file runs.
