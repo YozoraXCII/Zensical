@@ -1,3 +1,6 @@
+# Search Options
+
+<!--shared-content-start-->
 ## Plex search options
 
 When using a Plex Builder, there are three elements that correlate to Plex's Advanced Filters in the Web UI.

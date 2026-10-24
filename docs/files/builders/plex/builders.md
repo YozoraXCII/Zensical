@@ -55,10 +55,12 @@ The majority of Smart and Manual Builders utilize the same Builder Attributes. A
 
 {%
     include-markdown "./search-options.md"
+  start="<!--shared-content-start-->"
 %}
 
 {%
     include-markdown "./sort-options.md"
+  start="<!--shared-content-start-->"
 %}
 
 ## Plex all — `plex_all` {#plex-all}

@@ -22,10 +22,12 @@ the type of items the collection holds.**
 
 {%
     include-markdown "./search-options.md"
+  start="<!--shared-content-start-->"
 %}
 
 {%
     include-markdown "./sort-options.md"
+  start="<!--shared-content-start-->"
 %}
 
 ## Plex builder attributes

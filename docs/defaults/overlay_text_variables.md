@@ -1,3 +1,6 @@
+# Overlay Text Variables
+
+<!--shared-content-start-->
 When something in this table is noted as expecting a number, typically that number is expressed in pixels, assuming an image 1000x1500 in size.
 
 Color values should be wrapped in quotes in the YAML, as the `#` denotes a comment in YAML and if left unquoted will prevent the value from being seen by Kometa.

@@ -24,6 +24,7 @@ When using Kometa, the structure of each library is made using File Blocks.
 
 {%    
   include-markdown "./file_types.md"
+  start="<!--shared-content-start-->"
 %}
 
 ## Blocks

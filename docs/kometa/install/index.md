@@ -62,7 +62,7 @@ JavaScript enables the questionnaire. You can also browse all paths below:
 
 <section class="install-path" data-env="unraid" markdown="1">
 
-## Unraid {#path-unraid}
+## unRAID {#path-unraid}
 
 {% include-markdown "../../templates/install/unraid.md" rewrite-relative-urls=false %}
 

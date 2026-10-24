@@ -2,6 +2,7 @@
 
 {%    
   include-markdown "../config/file_types.md"
+  start="<!--shared-content-start-->"
 %}
 
 * **See [File Blocks](../config/files.md) for more information on how to define files in the config.**

@@ -5,7 +5,7 @@ hide:
 {%
     include-markdown "./../../templates/defaults/base/collection/header.md"
     replace='{
-    "COLLECTION": "Based On...",
+    "COLLECTION": "Based on...",
     "CODE_NAME": "based",
     "LIBRARY_TYPE": "Movie, Show",
     "SECTION_NUMBER": "085",

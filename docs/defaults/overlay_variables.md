@@ -1,3 +1,6 @@
+# Overlay Variables
+
+<!--shared-content-start-->
 When something in this table is noted as expecting a number, that number is expressed in pixels, assuming an image 1000x1500 in size.
 If the number is an `offset`, the value is relative to the corresponding `alignment`. Percentages are also relative to the `alignment`.
 

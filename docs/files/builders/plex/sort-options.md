@@ -1,3 +1,6 @@
+# Sort Options
+
+<!--shared-content-start-->
 ## Plex sort options
 
 The majority of Smart and Manual Builders utilize the same Sort Options. Any deviation from this will be highlighted against the specific Builder.
