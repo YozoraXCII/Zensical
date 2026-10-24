@@ -9,7 +9,7 @@ hide:
     "CODE_NAME": "commonsense",
     "OVERLAY_LEVEL": "Movie, Show, Season, Episode",
     "DESCRIPTION": "an overlay based on the Common Sense Age Rating on each item within your library",
-    "OVERLAY_LABEL": "common sense age rating"
+    "OVERLAY_LABEL": "Common Sense age rating"
 }'
     replace-tags='{"rec-sub": "Requirements: Use the [Mass Content Rating Update Library Operation](../../../../config/operations.md#mass-metadata-update) with either `mdb_commonsense` or `mdb_commonsense0` to update Plex to the Common Sense Rating."}'
     end='<!--table-before-->'
