@@ -1,0 +1,29 @@
+# Local environments, editor settings, and agent tooling
+.venv/
+.venv-*/
+.env
+.idea/
+.vscode/
+.agents/
+.claude/
+.gemini/
+.worktrees/
+
+# Python build artifacts and caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated Zensical output
+/site/
+/.cache/
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db

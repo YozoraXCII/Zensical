@@ -1,0 +1,287 @@
+---
+search:
+  boost: 2
+hide:
+  - toc
+---
+# Scheduling Parts of Kometa
+
+Kometa allows you to schedule libraries, files, overlays, operations, and more so that runs can be tailored to suit your needs.
+
+This is particularly handy for users who have a lot of libraries or run a lot of Metadata/Operations on their libraries.
+
+### IMPORTANT:
+
+These schedules do not trigger Kometa to run; they control what Kometa will do if it happens to be running at the scheduled time. `weekly(sunday)`, 
+for example, does not mean "run Kometa on Sunday to do this thing"; it means "If Kometa is running, and it's Sunday, do this thing".
+
+If you want to control when Kometa itself runs, like if you want Kometa to only run on Tuesdays and Thursdays, see [this page](../kometa/guides/scheduling.md).
+
+The scheduling options are:
+
+| Name         | Description                                                                                                          | Format                                             | Example                                                              |
+|:-------------|:---------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------|:---------------------------------------------------------------------|
+| Hourly       | Update only when the script is run in that hour or hour range. Separate multiple hours or ranges with a bar (<code>&#124;</code>). | hourly(Hour of Day)<br>hourly(Start Hour-End Hour) | `hourly(17)`<br>`hourly(17-04)`<br><code>hourly(2&#124;5-7&#124;22)</code> |
+| Daily        | Update once a day.                                                                                                   | daily                                              | `daily`                                                              |
+| Weekly       | Update once a week on the specified days. (For multiple days, use a bar-separated (<code>&#124;</code>) list)        | weekly(Days of Week)                               | `weekly(sunday)`<br><code>weekly(sunday&#124;tuesday)</code>         |
+| Monthly      | Update once a month on the specified day or inclusive day range. Use `last` as the range end to include the final day of every month regardless of its length. Separate multiple days or ranges with a bar (<code>&#124;</code>). | monthly(Day of Month)<br>monthly(Start Day-End Day)<br>monthly(Start Day-last)<br>monthly(last) | `monthly(1)`<br>`monthly(1-7)`<br>`monthly(21-last)`<br><code>monthly(1&#124;3&#124;5&#124;7&#124;9-last)</code><br>`monthly(last)` |
+| Yearly       | Update once a year on the specified day. Separate multiple dates with a bar (<code>&#124;</code>).                    | yearly(MM/DD)                                      | `yearly(01/30)`<br><code>yearly(01/01&#124;12/25)</code>            |
+| Date         | Update on a specific date.                                                                                           | date(MM/DD/YYYY)                                   |                                                                      |
+| Range        | Updates whenever the date is within the range. A range can be a single day (`range(06/01-06/01)`) (For multiple ranges, use a bar-separated (<code>&#124;</code>) list) | range(MM/DD-MM/DD)                                 | `range(12/01-12/31)`<br><code>range(8/01-8/15&#124;9/01-9/15)</code> |
+| Never        | Never updates.                                                                                                       | never                                              | `never`                                                              |
+| Non Existing | Updates if it doesn't exist.                                                                                         | non_existing                                       | `non_existing`                                                       |
+| All          | Requires that all comma-separated scheduling options inside its brackets be met in order to run.                     | all[Options]                                       | `all[weekly(sunday), hourly(17)]`                                    |
+
+* `daily` is the default when `schedule` is not specified.
+* You can run Kometa multiple times per day but using the `--time` command line argument detailed on the [Run Commands & Environmental Variables Page](../kometa/environmental.md).
+* You can have multiple scheduling options as a list. List entries use OR logic: the definition runs when any entry matches.
+* Use `all[...]` to require every enclosed scheduling option to match.
+* You can use the `delete_not_scheduled` setting to delete Collections that are skipped due to not being scheduled.
+
+## Library Schedule Modes
+
+Library schedule modes limit the media items Kometa processes. Use an ordered list of `schedule` and `mode` mappings under a library's `schedule` attribute. Kometa uses the first matching entry; if none match, it skips the library.
+
+```yaml title="Run a limited Monday update and a full update on other days"
+libraries:
+  Movies:
+    schedule:
+      - schedule: weekly(monday)
+        mode: added(7)
+      - schedule: weekly.not(monday)
+        mode: full
+```
+
+The `.not` modifier inverts one schedule expression. For example, `weekly.not(monday)` matches every day except Monday.
+
+| Mode | Scope |
+|:--|:--|
+| `full` | Every top-level library item. |
+| `items(ids)` | Individual movies or shows identified by pipe-separated TMDb, TVDb, IMDb, or Plex rating-key IDs. |
+| `added(duration)` | Items added to Plex within the previous duration. Use a positive integer with `m` for minutes, `h` for hours, or `d` for 24-hour days, such as `added(30m)`, `added(1h)`, or `added(12d)`. A bare integer such as `added(7)` means days. In a TV Show library, this also includes existing shows with recently added episodes. |
+| `diff` | Items absent from Kometa's previous library snapshot. Show libraries compare each season's Plex `updatedAt` value. Requires a persistent Kometa cache. |
+| `index(A-F)` | Titles beginning with letters in the inclusive A through F range. |
+| `index(A-F#)` | The A through F range plus titles beginning with a number, symbol, or other non-alphabetical character. |
+
+`index` matches the first non-whitespace character in a Plex item's Sort Title, case-insensitively, and falls back to its title when no Sort Title is set. Ranges must be alphabetical and ascending.
+
+Use `items(...)` to select specific items already present in the library. Accepted identifiers are `tmdb:<id>`, `tvdb:<id>`, `imdb:tt<id>`, and `plex:<ratingKey>`. Numeric IDs must be positive. Identifiers can be mixed and are matched with OR logic; duplicates select an item only once. IDs that do not match a library item select nothing and never expand the scope to the full library. TMDb IDs in a TV Show library are converted to TVDb IDs. Selecting a show also includes its seasons and episodes. Plex rating keys must identify top-level library items, such as movies, shows, or music artists; provider IDs apply to movies and shows.
+
+```yaml title="Update two selected movies on Mondays"
+libraries:
+  Movies:
+    schedule:
+      - schedule: weekly(monday)
+        mode: items(tmdb:550|tmdb:603)
+      - schedule: weekly.not(monday)
+        mode: full
+```
+
+The second entry is optional; without it, this library is skipped on other days. As with other library schedule modes, `--ignore-schedules` or explicitly selecting the library with `--run-libraries` bypasses its schedule and uses the full scope.
+
+Use `--run --mode full` or `KOMETA_MODE=full` to choose one mode for every library in a run. This overrides configured library schedule modes, including unmatched entries. Other schedules, such as individual collection schedules and `schedule_overlays`, still apply unless you also use `--ignore-schedules`.
+
+When a mode is not `full`, Kometa limits metadata, overlays, item operations, and collection additions to items in scope. It does not remove existing collection members or change custom collection ordering; run with `full` to reconcile the whole library.
+
+???+ warning "Scoped runs can leave outdated results"
+
+    Scoped runs only update items in their selected scope. If a collection or overlay depends on a changing list, such as "Top 10 Today", items outside that scope may remain after they no longer qualify.
+
+    Schedule regular `full` runs to reconcile the whole library. For example, run `diff` daily for quick updates and `full` weekly to remove stale collection members and refresh overlays.
+
+???+ warning "monthly(N) behaviour change"
+    In previous versions, `monthly(N)` would fall back to the last day of the month if day N didn't exist in that month — for example, `monthly(31)` would fire on 30 November. This created a conflict where `monthly(30)` and `monthly(31)` would both trigger on the same day in 30-day months.
+
+    This fallback has been removed. `monthly(N)` now only fires when today is exactly day N. If you want to schedule something for the last day of every month, use **`monthly(last)`** instead.
+
+    If your config uses `monthly(29)`, `monthly(30)`, or `monthly(31)` and relies on the fallback behaviour, Kometa will log a warning on months where that day doesn't exist:
+
+    ```
+    Schedule Warning: monthly(31) will not run this month; November does not have a 31st day.
+    Use monthly(last) if you want to schedule for the last day of every month.
+    ```
+
+### Multiple Schedule Values
+
+Multiple schedule values in a YAML list use OR logic. This definition runs when the collection does not exist **or** when the date is within the range:
+
+```yaml
+schedule:
+  - non_existing
+  - range(10/05-10/31)
+```
+
+???+ warning "`delete_not_scheduled` with `non_existing`"
+    When this OR schedule is combined with `delete_not_scheduled: true`, an existing collection is deleted outside the range because neither condition matches. On the next run, `non_existing` matches again and recreates it. Use only the range if the collection should remain absent outside that range, or leave `delete_not_scheduled` disabled if the existing collection should remain in Plex without being updated.
+
+Use `all[...]` for AND logic. This definition runs only when the collection does not exist **and** the date is within the range:
+
+```yaml
+schedule: all[non_existing, range(10/05-10/31)]
+```
+
+Use a bar (`|`) inside `hourly`, `monthly`, or `yearly` schedules to accept any of several values. Monthly values can mix individual days and inclusive ranges:
+
+```yaml
+# Runs on the 1st, 3rd, 5th, 7th, and every day from the 9th through the end of the month.
+schedule: monthly(1|3|5|7|9-last)
+```
+
+Hourly schedules can likewise mix individual hours and hour ranges:
+
+```yaml
+# Runs at 02:00, every hour from 05:00 through 07:00, and at 22:00.
+schedule: hourly(2|5-7|22)
+```
+
+## Examples
+
+??? blank "Scheduling a Library<a class="headerlink" href="#schedule-library" title="Permanent link">¶</a>"
+    
+    <div id="schedule-library" />Uses the `schedule` [Library Attribute](libraries.md#attributes) to set when a library will be run.
+
+    Other schedule rules for files, overlays, collections, and any other attribute that can be scheduled must also be met.
+
+    Press the :fontawesome-solid-circle-plus: icon to learn more
+
+    ```yaml title="Library Scheduled to Run on Sunday"
+    libraries:
+      Movies:
+        schedule: weekly(sunday) #(1)!
+        collection_files:
+          - file: config/Movies.yml
+          - default: imdb
+          - default: studio
+          - default: genre
+          - default: actor
+        operations:
+          mass_critic_rating_update: tmdb
+    ```
+    
+    1. If you run Kometa on any day apart from Sunday, this library will not be processed at all
+
+??? blank "Scheduling Collection, Playlist, and Metadata Files<a class="headerlink" href="#schedule-files" title="Permanent link">¶</a>"
+    
+    <div id="schedule-files" />Uses the `schedule` [Block Attribute](files.md#other-block-attributes) to set when a file will be run.
+
+    Other schedule rules for collections and any other attribute that can be scheduled must also be met.
+
+    Collection Files, Playlist Files, and Metadata Files can all be individually scheduled.
+    
+    ```yaml title="Files Scheduled for Different Days"
+    libraries:
+      Movies:
+        collection_files:
+          - file: config/Movies.yml
+            schedule: weekly(monday)
+          - default: imdb
+            schedule: weekly(tuesday)
+          - folder: config/Movies/
+            schedule: weekly(wednesday)
+          - default: genre
+            schedule: weekly(thursday)
+          - default: actor
+            schedule: weekly(friday)
+        metadata_files:
+          - file: config/metadata.yml
+            schedule: weekly(saturday)
+    playlist_files:
+      - file: config/Playlists.yml
+        schedule: weekly(sunday)
+    ```
+
+??? blank "Scheduling Overlays<a class="headerlink" href="#schedule-overlays" title="Permanent link">¶</a>"
+    
+    <div id="schedule-overlays" />Uses the `schedule_overlays` [Library Attribute](libraries.md#attributes) to set when overlays will run for a library.
+
+    ???+ danger "Scheduling Overlay Warning"
+
+        Overlay Files cannot be individually Scheduled, all Overlay Files **MUST** be scheduled for the same period.
+
+    Press the :fontawesome-solid-circle-plus: icon to learn more
+
+    ```yaml title="Overlays Scheduled for Saturday"
+    libraries:
+      Movies:
+        schedule_overlays: weekly(saturday) #(1)!
+        overlay_files:
+          - default: audio_codec
+          - default: resolution
+          - default: video_format
+    ```
+
+    1. You **MUST** use the `schedule_overlays` attribute. You cannot schedule individual Overlay Files.
+
+??? blank "Scheduling Individual Collections<a class="headerlink" href="#schedule-collection" title="Permanent link">¶</a>"
+    
+    <div id="schedule-collection" />Uses the `schedule` [Definition Setting](../files/settings.md) to set when each collection will run.
+
+    Press the :fontawesome-solid-circle-plus: icon to learn more
+ 
+    ```yaml title="Collections Scheduled for Different Days"
+    collections:
+      TMDb Trending Weekly:
+        tmdb_trending_weekly: 30
+        sync_mode: sync
+        schedule: weekly(sunday)
+      TMDb Top Rated:
+        tmdb_top_rated: 30
+        sync_mode: sync
+        schedule: #(1)!
+         - monthly(1)
+         - monthly(15)
+    ```
+
+    1. This Collection will run on the 1st and the 15th of each month only
+
+??? blank "Scheduling Operation Blocks<a class="headerlink" href="#schedule-operations" title="Permanent link">¶</a>"
+    
+    <div id="schedule-operations" />Each [Operation Block](operations.md#operation-blocks) can use the `schedule` [Definition Setting](../files/settings.md) to set when that block will run.
+
+    Press the :fontawesome-solid-circle-plus: icon to learn more
+
+    ```yaml title="All Operations Scheduled for Friday"
+    libraries:
+      Movies:
+        collection_files:
+          - default: imdb
+        operations:
+          schedule: weekly(friday) #(1)!
+          mass_critic_rating_update: tmdb
+          split_duplicates: true
+    ```
+    
+    1. All Operations will be processed on a Friday only
+
+    ```yaml title="Operations Scheduled for Different Days"
+    libraries:
+      Movies:
+        collection_files:
+          - default: imdb
+        operations:
+          - schedule: weekly(friday) #(1)!
+            mass_critic_rating_update: tmdb
+          - schedule: weekly(saturday) #(2)!
+            split_duplicates: true
+    ```
+
+    1. This Operation will be processed on a Friday only
+    2. This Operation will be processed on a Saturday only
+
+??? blank "Scheduling Pinning Collections<a class="headerlink" href="#schedule-pinning" title="Permanent link">¶</a>" 
+    
+    <div id="schedule-pinning" />Uses the `visible_library`, `visible_home`, or `visible_shared` [Collection Metadata Update](../files/updates.md) 
+    to have collections be "pinned" toyour home screen while scheduled.
+
+    Press the :fontawesome-solid-circle-plus: icon to learn more
+
+    ```yaml title="Pin Christmas Collection to Home in December"
+    collections:
+      Christmas:
+        imdb_list: https://www.imdb.com/list/ls000096828/
+        sync_mode: sync
+        visible_home: range(12/01-12/31) #(1)!
+    ```
+
+    1. This Collection will appear on the server owner's home screen for the month of December, and once Kometa runs on January 1st the Collection will
+        be unpinned and no longer visible on the home screen.

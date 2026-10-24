@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block footer %}
+  {{ super() }}
+  {% include "partials/tooltips.html" %}
+{% endblock %}
+
+{% block announce %}
+<div class="announce-bar">
+  For any questions and support, please reach out to us on
+  <a href="https://discord.com/invite/kometa-822460010649878528">Discord</a>.
+</div>
+{% endblock %}

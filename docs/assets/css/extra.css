@@ -1,0 +1,877 @@
+/* Kometa branding and targeted layout adjustments over Zensical's defaults. */
+:root,
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #00bc8c;
+  --md-primary-fg-color--light: #00bc8c;
+  --md-primary-fg-color--dark: #00bc8c;
+  --md-typeset-a-color: #00bc8c;
+  --md-accent-fg-color: #03a37a;
+  --md-accent-fg-color--transparent: #03a37a1a;
+}
+
+/* Reclaim desktop side margins without changing sidebar or mobile behavior. */
+@media screen and (min-width: 76.25em) {
+  :root {
+    --kometa-sidebar-width: 17rem;
+    --kometa-main-gutter: .5rem;
+  }
+
+  .md-main__inner.md-grid {
+    max-width: none;
+    margin-top: 0;
+    margin-inline: var(--kometa-main-gutter);
+  }
+
+  .md-content {
+    --kometa-article-width: 95%;
+  }
+}
+
+/* Keep the footer on the same dark surface and page grid as the article. */
+.md-footer {
+  color: var(--md-default-fg-color--light);
+  background: var(--md-default-bg-color);
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.md-footer-meta {
+  color: inherit;
+  background: transparent;
+}
+
+.md-footer .md-copyright {
+  color: var(--md-default-fg-color--light);
+}
+
+.md-footer :is(.md-copyright a, .md-social__link):hover {
+  color: var(--md-accent-fg-color);
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-footer-meta__inner.md-grid {
+    max-width: none;
+    margin-inline: var(--kometa-main-gutter);
+  }
+}
+
+/* Outline-inspired navigation, using Kometa's existing theme colors. */
+.kometa-sidebar-brand { display: none; }
+
+.kometa-sidebar-actions { padding: .15rem .5rem .5rem; }
+.kometa-sidebar-action {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  width: 100%;
+  padding: .35rem .4rem;
+  border-radius: .35rem;
+  border: 0;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.kometa-sidebar-action .md-icon { width: 1rem; height: 1rem; flex-shrink: 0; }
+.kometa-sidebar-action:hover,
+.kometa-navigation .md-nav__link:hover { background: var(--md-default-fg-color--lightest); }
+.kometa-sidebar-action:focus-visible,
+.kometa-navigation .md-nav__link:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: -2px;
+}
+.kometa-sidebar-heading {
+  padding: .5rem .9rem .25rem;
+  color: var(--md-default-fg-color--light);
+  font-size: .6rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.kometa-navigation {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.kometa-navigation > .md-nav__list { padding-inline: .5rem; }
+.kometa-navigation .md-nav__list .md-nav__list {
+  width: auto;
+  padding-inline: 0;
+  margin-inline: .7rem 0;
+}
+.kometa-navigation .md-nav__item {
+  min-width: 0;
+  max-width: 100%;
+  padding-inline: 0;
+}
+.kometa-navigation .md-nav__link {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: .45rem;
+  padding: .35rem .4rem;
+  margin: .1rem 0;
+  border-radius: .35rem;
+  font-size: .7rem;
+  line-height: 1.4;
+}
+.kometa-navigation .md-nav__link .md-ellipsis {
+  flex: 1;
+  min-width: 0;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.kometa-navigation .md-nav__link > .md-nav__icon {
+  flex-shrink: 0;
+  margin-inline-start: auto;
+}
+.kometa-navigation a.md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color--transparent);
+  font-weight: 600;
+}
+.kometa-navigation .md-nav__item > .md-nav__link::before,
+.kometa-navigation .md-nav__container > a.md-nav__link::before {
+  content: "";
+  width: .85rem;
+  height: .85rem;
+  margin-top: .05rem;
+  flex-shrink: 0;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.kometa-navigation .md-nav__item--nested > .md-nav__link::before,
+.kometa-navigation .md-nav__item--nested > .md-nav__container > a.md-nav__link::before {
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7V5a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z'/%3E%3C/svg%3E");
+}
+
+/* Indexed sections are one compact row, with separate link and toggle targets. */
+.kometa-navigation .md-nav__container {
+  gap: 0;
+  padding: 0;
+  align-items: stretch;
+}
+.kometa-navigation .md-nav__item > .md-nav__container::before { content: none; }
+.kometa-navigation .md-nav__item > .md-nav__container > .md-nav__link {
+  width: auto;
+  margin: 0;
+  background: transparent;
+}
+.kometa-navigation .md-nav__container > a.md-nav__link {
+  flex: 1 1 0;
+}
+.kometa-navigation .md-nav__container > label.md-nav__link {
+  flex: 0 0 auto;
+  align-items: center;
+  padding: .35rem .4rem;
+  border: 0;
+  box-shadow: none;
+}
+.kometa-navigation .md-nav__container:has(> a.md-nav__link--active) {
+  color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color--transparent);
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-sidebar--primary {
+    box-sizing: border-box;
+    order: 0;
+    flex: 0 0 var(--kometa-sidebar-width);
+    width: var(--kometa-sidebar-width);
+    min-width: 0;
+    padding: 0;
+  }
+  .md-sidebar--primary .md-sidebar__scrollwrap {
+    box-sizing: border-box;
+    width: 100%;
+    border-inline-end: 1px solid var(--md-default-fg-color--lightest);
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--md-default-bg-color);
+  }
+  .md-sidebar--primary .md-sidebar__inner {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    padding-inline: 0;
+  }
+  .kometa-sidebar-brand { display: block; padding: .75rem .9rem .5rem; }
+  .kometa-sidebar-brand > a {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    color: var(--md-default-fg-color);
+    font-size: .85rem;
+    font-weight: 600;
+  }
+  .kometa-sidebar-brand img { width: 1.6rem; height: 1.6rem; }
+  .kometa-navigation > .md-nav__title { display: none; }
+  .md-sidebar--secondary {
+    box-sizing: border-box;
+    order: 1;
+    flex: 0 0 11rem;
+    width: 11rem;
+    margin-inline: .5rem;
+    padding: 0;
+  }
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    border-inline-end: 1px solid var(--md-default-fg-color--lightest);
+  }
+  .md-sidebar--secondary .md-sidebar__inner { width: auto; }
+  .md-sidebar--secondary:not(:has(.md-nav--secondary > .md-nav__list > li)) { display: none; }
+  .md-content { order: 2; }
+  /* Continue the rail divider through the header, including before scrolling. */
+  .md-header::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--kometa-main-gutter) + var(--kometa-sidebar-width) - 1px);
+    width: 1px;
+    background: var(--md-default-fg-color--lightest);
+    pointer-events: none;
+  }
+  /* Composite the translucent divider onto an opaque base to mask the crossing. */
+  .md-header--shadow::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    inset-inline: 0;
+    inset-block-end: -.05rem;
+    height: .05rem;
+    background-color: var(--md-default-bg-color);
+    background-image: linear-gradient(var(--md-default-fg-color--lightest), var(--md-default-fg-color--lightest));
+    pointer-events: none;
+  }
+  .md-header__inner {
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: 1rem;
+    gap: .6rem;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .md-header__inner > :is(.md-header__option, .md-search, .md-header__source) {
+    align-self: center;
+    margin-inline: 0;
+  }
+  .md-header .md-search { padding-block: 0; }
+  .md-header__button.md-logo,
+  .md-header__title,
+  .md-header label[for="__search"] { display: none; }
+  .md-header .md-search__button {
+    display: block;
+    width: 1.8rem;
+    height: 1.8rem;
+    padding: 0;
+    color: var(--md-default-fg-color--light);
+    background: transparent;
+    font-size: 0;
+  }
+  .md-header .md-search__button::before {
+    inset: .4rem;
+    background-color: currentColor;
+  }
+  .md-header .md-search__button::after { display: none; }
+  .md-header .md-search__button:hover {
+    color: var(--md-accent-fg-color);
+    background: var(--md-default-fg-color--lightest);
+  }
+  .md-header .md-search__button:focus-visible {
+    outline: 2px solid var(--md-accent-fg-color);
+    outline-offset: 2px;
+  }
+  .md-header__source { margin-inline-start: 0; }
+  .md-sidebar--secondary .md-nav__title {
+    margin-top: 0;
+    padding-top: .9rem;
+  }
+}
+
+.md-sidebar--secondary .md-nav__title {
+  display: block;
+  color: var(--md-default-fg-color--light);
+  font-size: .6rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* Extend the native compact Contents control to tablet drawer widths. */
+@media screen and (min-width: 60em) and (max-width: 76.234375em) {
+  .md-sidebar--secondary:not([hidden]) {
+    position: fixed;
+    top: auto !important;
+    right: .8rem;
+    bottom: 1.6rem;
+    width: auto;
+    height: auto;
+    z-index: 2;
+    padding: 0;
+  }
+  .md-sidebar--secondary .md-sidebar__scrollwrap {
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: visible;
+    height: auto !important;
+  }
+  .md-sidebar--secondary .md-sidebar__inner {
+    position: absolute;
+    right: 0;
+    bottom: 2.7rem;
+    width: 11.7rem;
+    max-height: 50vh;
+    overflow-y: auto;
+    pointer-events: none;
+    opacity: 0;
+    padding-bottom: .4rem;
+    background: var(--md-default-bg-color);
+    border-radius: .4rem;
+    box-shadow: var(--md-shadow-z2);
+  }
+  .md-sidebar--secondary [type=checkbox]:checked ~ .md-sidebar__inner {
+    pointer-events: auto;
+    opacity: 1;
+  }
+  .md-sidebar--secondary .md-nav--secondary { margin-top: 0; }
+  .md-sidebar--secondary .md-sidebar-button {
+    display: inline-flex;
+    padding: .5rem;
+    border-radius: 1.6rem;
+    color: var(--md-default-fg-color--light);
+    background: var(--md-default-bg-color--light);
+    box-shadow: var(--md-shadow-z2);
+    cursor: pointer;
+  }
+  .md-sidebar--secondary .md-sidebar-button::after {
+    content: "";
+    width: .9rem;
+    height: .9rem;
+    background: currentColor;
+    mask: var(--md-toc-icon) center / contain no-repeat;
+  }
+  .md-sidebar--secondary .md-sidebar-button:focus-visible {
+    outline: 2px solid var(--md-accent-fg-color);
+  }
+}
+
+.md-sidebar--secondary:not(:has(.md-nav--secondary > .md-nav__list > li)) { display: none; }
+
+/* Apply the reading-area cap once, rather than shrinking every nested block. */
+.md-content > .md-content__inner {
+  container-type: inline-size;
+  box-sizing: border-box;
+  width: calc(var(--kometa-article-width, 100%) - 1.6rem);
+  max-width: calc(100% - 1.6rem);
+  min-width: 0;
+}
+
+/* Short blocks hug their contents; longer blocks stay inside their parent. */
+.md-typeset :is(.highlight, pre, .admonition, details, .tabbed-set, .md-typeset__scrollwrap, blockquote, figure),
+.md-typeset .grid > .card,
+.md-typeset .grid.cards > :is(ul, ol) > li {
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: 0;
+}
+
+/* Keep native scroll containers without their full-bleed negative margins. */
+.md-typeset :is(.admonition, details) .md-typeset__scrollwrap {
+  margin-inline: 0;
+}
+
+.md-typeset .md-typeset__table,
+.md-typeset :is(.admonition, details) .md-typeset__table {
+  padding-inline: 0;
+}
+
+/* Measure against the article, while keeping nested blocks inside their parent. */
+.md-typeset :is(.highlight, pre, .admonition, details) {
+  min-width: min(70cqi, 100%);
+  max-width: min(90cqi, 100%);
+}
+/* Hidden details content must not change the box width when toggled. */
+.md-typeset :is(.admonition, details) {
+  width: min(90cqi, 100%);
+}
+.md-typeset .md-typeset__scrollwrap {
+  max-width: min(90cqi, 100%);
+}
+/* Highlighted code already has a sized outer wrapper. */
+.md-typeset .highlight > pre {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.md-typeset pre > code,
+.md-typeset .tabbed-content,
+.md-typeset .tabbed-block {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.md-typeset :is(img, video, iframe) {
+  max-width: 100%;
+}
+
+.md-typeset :is(img, video) {
+  height: auto;
+}
+
+/* Code panels retain native highlighting, scrolling, annotations, and copying. */
+.md-typeset .kometa-code-panel {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .45rem;
+  background: var(--md-code-bg-color);
+}
+.md-typeset .kometa-code-panel + .kometa-code-panel {
+  margin-block-start: .75rem;
+}
+.md-typeset .kometa-code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  min-height: 2rem;
+  padding: .35rem .65rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .45rem .45rem 0 0;
+  background: var(--md-default-bg-color);
+}
+.md-typeset .kometa-code-header > .kometa-code-title {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  font: .65rem var(--md-code-font-family);
+  overflow-wrap: anywhere;
+}
+.md-typeset .kometa-code-header > .md-code__nav {
+  position: static;
+  flex-shrink: 0;
+  padding: 0;
+  background: transparent;
+}
+.md-typeset .kometa-code-header .md-code__button {
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .kometa-code-header .md-code__button:hover {
+  color: var(--md-accent-fg-color);
+}
+.md-typeset .kometa-code-panel > pre {
+  margin: 0;
+}
+.md-typeset .kometa-code-panel pre > code {
+  border-radius: 0 0 .45rem .45rem;
+}
+.md-typeset .kometa-code-panel.no-copy .md-code__button[data-md-type="copy"] {
+  display: none;
+}
+
+/* A clipped header copy preserves native horizontal scrolling on wide tables. */
+.kometa-sticky-table-header {
+  position: fixed;
+  z-index: 3;
+  overflow: hidden;
+  margin: 0;
+  background: var(--md-default-bg-color);
+  box-shadow: 0 .05rem 0 var(--md-typeset-table-color);
+}
+
+.kometa-sticky-table-header[hidden] { display: none; }
+
+.md-typeset.kometa-sticky-table-header table:not([class]) {
+  display: table;
+  table-layout: fixed;
+  overflow: visible;
+  max-width: none;
+  margin: 0;
+  border-radius: 0;
+  background: var(--md-default-bg-color);
+}
+
+@media print {
+  .kometa-sticky-table-header { display: none; }
+}
+
+/* Match row dividers between columns, excluding nested reference tables. */
+.md-typeset table:not([class]):not(table table) > :is(thead, tbody, tfoot) > tr > :is(th, td) + :is(th, td) {
+  border-inline-start: .05rem solid var(--md-typeset-table-color);
+}
+
+/* Wrap table text between words; long tokens use the native table scroller. */
+.md-typeset table :is(th, td),
+.md-typeset table :is(th, td) * {
+  word-break: normal;
+  overflow-wrap: normal;
+  hyphens: none;
+}
+
+/* Make content-tab controls visibly separate while keeping native behavior. */
+.md-typeset .tabbed-set {
+  width: 100%;
+}
+
+.md-typeset .tabbed-labels {
+  gap: .35rem;
+  padding: .15rem .1rem .3rem;
+}
+
+.md-typeset .tabbed-labels > label {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .35rem;
+  background: var(--md-code-bg-color);
+  cursor: pointer;
+}
+
+.md-typeset .tabbed-labels > label:hover,
+.md-typeset .tabbed-labels > label:focus-within {
+  border-color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color--transparent);
+}
+
+/* Match the 20 checked-radio positions supported by the native tab styles. */
+.md-typeset .tabbed-set > input:nth-child(1):checked ~ .tabbed-labels > label:nth-child(1),
+.md-typeset .tabbed-set > input:nth-child(2):checked ~ .tabbed-labels > label:nth-child(2),
+.md-typeset .tabbed-set > input:nth-child(3):checked ~ .tabbed-labels > label:nth-child(3),
+.md-typeset .tabbed-set > input:nth-child(4):checked ~ .tabbed-labels > label:nth-child(4),
+.md-typeset .tabbed-set > input:nth-child(5):checked ~ .tabbed-labels > label:nth-child(5),
+.md-typeset .tabbed-set > input:nth-child(6):checked ~ .tabbed-labels > label:nth-child(6),
+.md-typeset .tabbed-set > input:nth-child(7):checked ~ .tabbed-labels > label:nth-child(7),
+.md-typeset .tabbed-set > input:nth-child(8):checked ~ .tabbed-labels > label:nth-child(8),
+.md-typeset .tabbed-set > input:nth-child(9):checked ~ .tabbed-labels > label:nth-child(9),
+.md-typeset .tabbed-set > input:nth-child(10):checked ~ .tabbed-labels > label:nth-child(10),
+.md-typeset .tabbed-set > input:nth-child(11):checked ~ .tabbed-labels > label:nth-child(11),
+.md-typeset .tabbed-set > input:nth-child(12):checked ~ .tabbed-labels > label:nth-child(12),
+.md-typeset .tabbed-set > input:nth-child(13):checked ~ .tabbed-labels > label:nth-child(13),
+.md-typeset .tabbed-set > input:nth-child(14):checked ~ .tabbed-labels > label:nth-child(14),
+.md-typeset .tabbed-set > input:nth-child(15):checked ~ .tabbed-labels > label:nth-child(15),
+.md-typeset .tabbed-set > input:nth-child(16):checked ~ .tabbed-labels > label:nth-child(16),
+.md-typeset .tabbed-set > input:nth-child(17):checked ~ .tabbed-labels > label:nth-child(17),
+.md-typeset .tabbed-set > input:nth-child(18):checked ~ .tabbed-labels > label:nth-child(18),
+.md-typeset .tabbed-set > input:nth-child(19):checked ~ .tabbed-labels > label:nth-child(19),
+.md-typeset .tabbed-set > input:nth-child(20):checked ~ .tabbed-labels > label:nth-child(20)
+{
+  color: var(--md-accent-fg-color);
+  border-color: var(--md-accent-fg-color);
+  background: var(--md-accent-fg-color--transparent);
+  font-weight: 600;
+}
+
+.md-typeset img[alt="Logo"] {
+  height: auto;
+  max-width: 45%;
+}
+
+/* Semantic colors and content-specific layout helpers used by authored pages. */
+.green { color: #00e676; }
+.red { color: #ff001a; }
+.orange { color: #e69800; }
+.grey { color: var(--md-default-fg-color--light); }
+
+table.clearTable { display: inline; }
+table.clearTable td { padding: 3px 15px 3px 3px; }
+table.clearTable td:last-child { padding-right: 3px; }
+table.clearTable,
+table.clearTable :is(tbody, tr, td, th) {
+  background: transparent;
+  border: 0;
+}
+
+table.dualTable :is(td, th),
+#dualTable :is(td, th) {
+  padding-left: 15px;
+}
+
+img[align="right"],
+svg[align="right"] { width: 150px; }
+
+.highlight.no-copy .md-clipboard { display: none; }
+
+/* Invisible anchor markers preceding operation details must remain in the DOM. */
+.md-typeset h6[id]:has(+ details) {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Custom admonition types retain their semantics, using the theme's surfaces. */
+.md-typeset :is(.admonition, details):is(.blank, .separator, .builder, .quicklink) {
+  border-color: var(--md-default-fg-color--lightest);
+  font-size: inherit;
+}
+
+.md-typeset :is(.blank, .separator) > :is(.admonition-title, summary) {
+  padding-left: .6rem;
+}
+
+.md-typeset :is(.blank, .separator) > :is(.admonition-title, summary)::before {
+  display: none;
+}
+
+.md-typeset .separator > :is(.admonition-title, summary) { text-align: center; }
+
+.md-typeset .builder > .admonition-title,
+.md-typeset .builder > summary::before { display: none; }
+
+.md-typeset .quicklink > :is(.admonition-title, summary) { background: transparent; }
+
+/* Announcement contents inherit the default banner colors. */
+.announce-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+}
+
+.announce-bar a { display: inline-flex; align-items: center; }
+.announce-bar svg { height: 20px; width: 20px; fill: currentColor; }
+
+div[id*="tippy"] :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: .3rem;
+  margin-bottom: .3rem;
+}
+
+[data-tooltip][data-tooltip-id*="tippy"] { color: var(--md-typeset-a-color); }
+
+@keyframes heart {
+  0%, 40%, 80%, 100% { transform: scale(1); }
+  20%, 60% { transform: scale(1.15); }
+}
+.heart { animation: heart 1000ms infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .heart { animation: none; }
+}
+
+.release-notes__release {
+  margin: .45rem 0;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .3rem;
+  background: var(--md-code-bg-color);
+}
+
+.release-notes__heading {
+  padding: .45rem .7rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.release-notes__date {
+  margin-left: .8rem;
+  color: var(--md-default-fg-color--light);
+  font-size: .85rem;
+  font-weight: 400;
+}
+
+.release-notes__section {
+  padding: 0 .75rem .2rem;
+}
+
+.release-notes__section h3 {
+  margin: .35rem 0 .1rem;
+  font-size: .9rem;
+}
+
+.release-notes__section ul {
+  margin: .1rem 0 .5rem;
+}
+
+.release-notes__status {
+  padding: 1rem;
+  border-left: .2rem solid var(--md-accent-fg-color);
+  background: var(--md-code-bg-color);
+}
+
+.md-typeset details>.operation-admonition-link,
+.md-typeset details>summary>.operation-admonition-link {
+  color: var(--md-default-fg-color--lighter);
+  float: right;
+  font-weight: 700;
+  margin-left: .6rem;
+  opacity: 0;
+  text-decoration: none;
+  transition: color 125ms, opacity 125ms;
+}
+
+.md-typeset details:focus-within>summary>.operation-admonition-link,
+.md-typeset details:hover>summary>.operation-admonition-link,
+.md-typeset details>summary>.operation-admonition-link:focus {
+  opacity: 1;
+}
+
+.md-typeset details>summary>.operation-admonition-link:hover {
+  color: var(--md-accent-fg-color);
+}
+
+.md-typeset .quicklink>.admonition-title::before,
+.md-typeset .quicklink>.admonition-title,
+.md-typeset .quicklink>summary::before {
+  background-color: var(--md-typeset-a-color);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath d='M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.7 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath d='M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.7 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z'/%3E%3C/svg%3E");
+}
+
+.md-typeset .quicklink>summary::after {
+  right: auto;
+}
+
+.quicklink>ul>li {
+  padding: 0.5em 0 !important;
+}
+
+.quicklink>ul .twemoji {
+  width: .9rem
+}
+
+details[class="quicklink annotate"]>p .md-annotation span span::before {
+  vertical-align: 0;
+}
+
+.quicklink>ul {
+  display: grid !important;
+  grid-template-columns: repeat(1, 1fr);
+  list-style-type: none;
+}
+
+/* Stylize horizontal marquee / scrollers */
+.scroller {
+  max-width: 100%;
+  overflow-x: hidden;
+  /* Add this if you want horizontal scrolling */
+  overflow-y: hidden;
+}
+
+.scroller>.scroller__inner {
+  display: flex;
+  /* All content should display inline */
+}
+
+/* Reduce speed of slow scrollers */
+.very-slow.scroller {
+  --_animation-duration: 100s;
+}
+
+.scroller[data-animated=true]>.scroller__inner {
+  /* The inner scroller should be the size of all inner content */
+  width: max-content;
+  flex-wrap: nowrap;
+  animation: scroll var(--_animation-duration, 55s) linear infinite;
+}
+
+.reversed.scroller[data-animated=true]>.scroller__inner {
+  animation-direction: reverse;
+}
+
+@keyframes scroll {
+  to {
+    transform: translate(-50%);
+  }
+}
+
+/* Add inner-item padding to padded scroller content */
+.padded.scroller[data-animated=true]>.scroller__inner>* {
+  margin-right: 0.5em;
+}
+
+/* Round corners of rounded scrollers */
+.rounded.padded.scroller[data-animated=true]>.scroller__inner img {
+  border-radius: 4px;
+}
+
+/* Stylized scrollers have images which expand when hovered */
+.stylized.scroller>.scroller__inner>* {
+  transition: all 350ms ease-in-out;
+}
+
+.stylized.scroller>.scroller__inner>*:hover {
+  transition: all 350ms ease-in-out;
+}
+
+.stylized.scroller>.scroller__inner>*:hover {
+  scale: 1.15;
+  z-index: 3;
+}
+
+/* Erase the subtitle text when the image is expanded */
+.stylized.scroller>.scroller__inner>*:hover::after {
+  content: "";
+}
+
+/* Reduce image height if scroller is enabled */
+.scroller img {
+
+  max-height: 300px;
+}
+
+.half-height.scroller img {
+
+  max-height: 300px;
+}
+
+.scroller>.scroller__inner>*::after {
+  content: attr(data-label);
+  position: relative;
+  display: block;
+  text-align: center;
+  font-style: italic;
+}
+
+/* Reduce height on mobile */
+@media (max-width: 768px) {
+  .scroller img {
+
+    max-height: 200px;
+  }
+
+  .half-height.scroller img {
+
+    max-height: 200px;
+  }
+}
+
+/* Keep collection section order readable down each block, then across. */
+.md-typeset .collection-order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr));
+  gap: 0 1.25rem;
+  align-items: start;
+  margin-block: 1em;
+}
+
+.md-typeset .collection-order-grid > div {
+  min-width: 0;
+}
+
+.md-typeset .collection-order-grid :is(.md-typeset__scrollwrap, .md-typeset__table) {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.md-typeset .collection-order-grid table:not([class]) {
+  display: table;
+  width: 100%;
+  margin: 0 0 1rem;
+}
+
+.md-typeset .collection-order-grid :is(th, td) {
+  padding: .55em .8em;
+}
+
+.md-typeset .collection-order-grid :is(th, td):first-child {
+  width: 1%;
+  white-space: nowrap;
+}
