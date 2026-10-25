@@ -15,10 +15,12 @@
     </a>
   </div>
   <div class="kometa-sidebar-actions">
-    <a href="{{ homepage | url }}" class="kometa-sidebar-action">
-      <span class="md-icon" aria-hidden="true">{% include ".icons/lucide/house.svg" %}</span>
-      Home
-    </a>
+    <div>
+      <a href="{{ homepage | url }}" class="kometa-sidebar-action" data-kometa-home-link>
+        <span class="md-icon" aria-hidden="true">{% include ".icons/lucide/house.svg" %}</span>
+        Home
+      </a>
+    </div>
     {% if "search" in config.plugins and config.plugins.search.config.enabled %}
       <button type="button" class="kometa-sidebar-action" data-kometa-search aria-label="Search documentation">
         <span class="md-icon" aria-hidden="true">{% include ".icons/lucide/search.svg" %}</span>

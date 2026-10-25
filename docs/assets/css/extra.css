@@ -133,6 +133,37 @@
   background: var(--md-accent-fg-color--transparent);
   font-weight: 600;
 }
+.kometa-navigation .kometa-nav-page { position: relative; }
+.kometa-navigation .kometa-nav-page > a.md-nav__link,
+.kometa-navigation .kometa-nav-page > .kometa-sidebar-action { padding-inline-end: 2rem; }
+.kometa-navigation .kometa-nav-copy {
+  position: absolute;
+  inset-inline-end: .2rem;
+  top: .1rem;
+  padding: .35rem .4rem;
+  border: 0;
+  border-radius: .25rem;
+  background: transparent;
+  color: var(--md-default-fg-color--light);
+  opacity: 0;
+  transition: opacity 125ms;
+  font: inherit;
+  font-size: .7rem;
+  line-height: 1.4;
+  cursor: pointer;
+}
+.kometa-navigation .kometa-nav-page:hover > .kometa-nav-copy,
+.kometa-navigation .kometa-nav-page:focus-within > .kometa-nav-copy {
+  opacity: .65;
+}
+.kometa-navigation .kometa-nav-copy:hover,
+.kometa-navigation .kometa-nav-copy:focus-visible {
+  opacity: .85;
+}
+.kometa-navigation .kometa-nav-copy:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: -2px;
+}
 .kometa-navigation .md-nav__item > .md-nav__link::before,
 .kometa-navigation .md-nav__container > a.md-nav__link::before {
   content: "";

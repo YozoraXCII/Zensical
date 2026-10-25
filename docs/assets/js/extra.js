@@ -106,24 +106,43 @@ document$.subscribe(function() {
   window.addEventListener("hashchange", window.operationAdmonitionHashHandler);
 });
 
-// Copy runtime-option permalinks and open options reached through a direct link.
+// Add copy controls to individual navigation pages, excluding folders.
 document$.subscribe(function() {
-  document.querySelectorAll("[data-copy-permalink]").forEach(function(link) {
+  document.querySelectorAll('.kometa-navigation .md-nav__item:not(.md-nav__item--nested) > a.md-nav__link[href], .kometa-navigation [data-kometa-home-link]').forEach(function(link) {
+    const item = link.parentElement;
+    if (item.querySelector(':scope > .kometa-nav-copy')) return;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'kometa-nav-copy';
+    button.dataset.copyPermalink = 'true';
+    button.dataset.copyUrl = link.href;
+    button.dataset.copyLabel = 'Copy link to ' + link.textContent.trim();
+    button.title = button.dataset.copyLabel;
+    button.textContent = '\u00b6';
+    item.classList.add('kometa-nav-page');
+    item.appendChild(button);
+  });
+});
+
+// Copy heading, page, and runtime-option links; open options reached through a direct link.
+document$.subscribe(function() {
+  document.querySelectorAll("[data-copy-permalink], article :is(h1, h2, h3, h4, h5, h6) a.headerlink").forEach(function(link) {
     if (link.dataset.copyBound) return;
     link.dataset.copyBound = "true";
-    link.setAttribute("aria-label", "Copy direct link");
-    let timer;
+    const label = link.dataset.copyLabel || "Copy direct link";
+    link.setAttribute("aria-label", label);
+    link.title = label;
     link.addEventListener("click", async function(event) {
       if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       event.stopPropagation();
       let copied = false;
       try {
-        await navigator.clipboard.writeText(link.href);
+        await navigator.clipboard.writeText(link.dataset.copyUrl || link.href);
         copied = true;
       } catch (error) {
         const input = document.createElement("textarea");
-        input.value = link.href;
+        input.value = link.dataset.copyUrl || link.href;
         input.style.position = "fixed";
         input.style.opacity = "0";
         document.body.appendChild(input);
@@ -137,13 +156,12 @@ document$.subscribe(function() {
           link.focus({ preventScroll: true });
         }
       }
-      clearTimeout(timer);
-      link.textContent = copied ? "Copied!" : "Copy failed";
-      link.title = copied ? "Link copied" : "Right-click to copy the link address";
-      timer = setTimeout(function() {
-        link.textContent = "\u00b6";
-        link.title = "Copy link";
-      }, 1800);
+      const message = copied ? "Copied to clipboard" : "Could not copy link";
+      if (window.alert$ && typeof window.alert$.next === "function") {
+        window.alert$.next(message);
+      } else {
+        link.title = message;
+      }
     });
   });
 
