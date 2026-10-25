@@ -1,7 +1,7 @@
 {%
     include-markdown "./base/collection/header.md"
     replace='{
-    "COLLECTION": "Separator Separator",
+    "COLLECTION": "SEPARATOR Separator",
     "LIBRARY_TYPE": "Movie, Show",
     "DESCRIPTION": "create a separator collection for SEPARATORs"
 }'
