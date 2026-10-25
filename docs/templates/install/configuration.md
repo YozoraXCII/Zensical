@@ -170,7 +170,7 @@ Use a fresh Job name when repeating this check.
 
 </div>
 
-Look for successful TMDb and Plex connections, your library being processed, and a completed run. Check Plex for the collections created by the `basic` default. If connections fail, check your credentials, the exact library name, and whether Plex is reachable from the selected environment. See [help and logs](../logs.md#find-and-read-your-logs).
+Look for successful TMDb and Plex connections, your library being processed, and a completed run. Check Plex for the collections created by the `basic` default. If connections fail, check your credentials, the exact library name, and whether Plex is reachable from the selected environment. See [help and logs](../help.md#find-and-read-your-logs).
 
 <span id="local-creating-a-few-sample-collections"></span>
 <span id="local-adding-overlays-to-movies"></span>

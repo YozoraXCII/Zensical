@@ -293,7 +293,6 @@ Defaults = [
 ] },
 ] },
     { "Playlist defaults" = "defaults/playlist.md" },
-    { "All defaults AÃ¢â‚¬â€œZ" = "defaults/files.md" },
 ]
 
 [[project.nav]]
@@ -428,7 +427,7 @@ Reference = [
 
 [[project.nav]]
 "Help and Community" = [
-    { "Help & troubleshooting" = "kometa/logs.md" },
+    { "Help" = "kometa/help.md" },
     { "Release notes" = "kometa/release-notes.md" },
     { "Community & credits" = "kometa/acknowledgements.md" },
 ]

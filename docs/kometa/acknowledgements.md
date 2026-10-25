@@ -8,7 +8,7 @@ Find support, share configurations, and help improve Kometa.
 
 | Destination | What to use it for |
 | --- | --- |
-| [Discord](https://discord.com/invite/kometa-822460010649878528) | Ask for help and discuss your setup. Read [support guidance](logs.md#get-further-help) before sharing logs. |
+| [Discord](https://discord.com/invite/kometa-822460010649878528) | Ask for help and discuss your setup. Read [support guidance](help.md#get-further-help) before sharing logs. |
 | [Community configs](https://github.com/Kometa-Team/Community-Configs) | Browse examples contributed by other users. |
 | [Report a bug](https://github.com/Kometa-Team/Kometa/issues) | Report a reproducible problem. |
 | [Request a feature](https://features.kometa.wiki/) | Suggest and discuss improvements. |

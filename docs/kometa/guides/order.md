@@ -176,7 +176,7 @@ Whilst it may not seem logical at a glance, the ASCII sort order allows a lot of
 
 ### Kometa default collection sorting
 
-When utilizing the [Kometa Defaults](../../defaults/files.md), they are all built on the same format for their sort titles:
+When utilizing the [Kometa Defaults](../../defaults/guide.md#list-of-defaults-files), they are all built on the same format for their sort titles:
 
 `<<sort_prefix>><<collection_section>><<pre>><<order_<<key>>>><<title>>`
 

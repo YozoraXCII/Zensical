@@ -47,6 +47,11 @@
   color: var(--md-accent-fg-color);
 }
 
+.md-footer .md-social__link.heart,
+.md-footer .md-social__link.heart:hover {
+  color: #ef4444;
+}
+
 @media screen and (min-width: 76.25em) {
   .md-footer-meta__inner.md-grid {
     max-width: none;
@@ -158,6 +163,7 @@
 }
 .kometa-navigation .kometa-nav-copy:hover,
 .kometa-navigation .kometa-nav-copy:focus-visible {
+  color: var(--md-accent-fg-color);
   opacity: .85;
 }
 .kometa-navigation .kometa-nav-copy:focus-visible {
@@ -656,10 +662,15 @@ svg[align="right"] { width: 150px; }
 
 .md-typeset .quicklink > :is(.admonition-title, summary) { background: transparent; }
 
-/* Announcement contents inherit the default banner colors. */
+/* Discord support banner, matching the original MkDocs appearance. */
+.md-banner {
+  background-color: #5865f2;
+  color: #fff;
+}
+.md-banner a,
+.md-banner a:hover { color: inherit; }
 .announce-bar {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: .4rem;

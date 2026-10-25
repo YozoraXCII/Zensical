@@ -605,7 +605,7 @@ Choose the variables you need from the reference below. Kometa loads the file at
 
 ??? info "Source Integrity &middot; `--source-integrity`/`--no-source-integrity` &middot; `KOMETA_SOURCE_INTEGRITY`<a class='operation-admonition-link' data-copy-permalink='true' href='#source-integrity' title='Copy link'>¶</a>"
 
-    <div id="source-integrity" />Check distributed Kometa files against official source for the exact installed commit. Enabled by default; checking waits up to 30 seconds during startup and never prevents Kometa from running. Results appear with the startup system information, with no integrity messages during library processing. The end-of-run summary repeats the startup result. See [Source integrity](logs.md#source-integrity) for states, caching, and exclusions.
+    <div id="source-integrity" />Check distributed Kometa files against official source for the exact installed commit. Enabled by default; checking waits up to 30 seconds during startup and never prevents Kometa from running. Results appear with the startup system information, with no integrity messages during library processing. The end-of-run summary repeats the startup result. See [Source integrity](help.md#source-integrity) for states, caching, and exclusions.
 
     <hr style="margin: 0px;">
 

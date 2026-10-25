@@ -16,29 +16,29 @@ Kometa can apply a variety of images to a variety of items in Plex from a variet
 
 An "Asset" is one of those sources; it's a set of directories full of images with specific names that can be applied to items by Kometa.  Kometa can apply asset images to:
 
-    | Item Type    | poster | background | logo | square_art |
-    |:-------------|:----------------------------------------|
-    | Collection   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-    | Playlist     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-    | Movie        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-    | Show         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-    | Season       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red }   | :fontawesome-solid-circle-check:{ .red }   |
-    | Episode      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red }   | :fontawesome-solid-circle-check:{ .red }   |
+| Item Type    | poster | background | logo | square_art |
+|:-------------|:-------|:-----------|:-----|:-----------|
+| Collection   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Playlist     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Movie        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Show         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Season       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red }   | :fontawesome-solid-circle-check:{ .red }   |
+| Episode      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .red }   | :fontawesome-solid-circle-check:{ .red }   |
 
 Without additional specific configuration, Kometa will apply assets **only** to collections/playlists which Kometa has created itself ("managed" collections/playlists).  This refers to the **collection itself**, not the items **in** the collection.
 
 Kometa **will not** apply assets to *items within collections*, and that functionality is not available in Kometa since a movie/show/episode has a single poster across the entire library.  Assets can already be applied to individual items, so a duplicate method to apply such assets is not needed.
 
-    | Item Type            | when assets are applied          |
-    |:---------------------|:---------------------------------|
-    | Managed Collection   | happens automatically            |
-    | Managed Playlist     | happens automatically            |
-    | Unmanaged Collection | assets_for_all_collections: true |
-    | Unmanaged Playlist   | NOT SUPPORTED                    |
-    | Movie                | assets_for_all: true             |
-    | Show                 | assets_for_all: true             |
-    | Season               | assets_for_all: true             |
-    | Episode              | assets_for_all: true             |
+| Item Type            | when assets are applied          |
+|:---------------------|:---------------------------------|
+| Managed Collection   | happens automatically            |
+| Managed Playlist     | happens automatically            |
+| Unmanaged Collection | assets_for_all_collections: true |
+| Unmanaged Playlist   | NOT SUPPORTED                    |
+| Movie                | assets_for_all: true             |
+| Show                 | assets_for_all: true             |
+| Season               | assets_for_all: true             |
+| Episode              | assets_for_all: true             |
 
 Relevant operations:
 [`assets_for_all`](../../config/operations.md#assets-for-all)
