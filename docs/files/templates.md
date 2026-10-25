@@ -44,7 +44,7 @@ templates can either be defined in the same file as the other definitions or fro
 ## Template definition
 
 Inside a template definition, you can use all the [Builders](definition-components.md#builders), [Filters](filters.md),
-[Settings](settings.md), [Updates](updates.md), and [Item Updates](item_updates.md) attributes that you can give 
+[Definition options](settings.md) and [metadata updates](updates.md) that you can give
 collections/playlists [except `template`; templates cannot be nested].
 
 In addition, templates also have a few special attributes that they can use:

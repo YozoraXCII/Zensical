@@ -1,52 +1,82 @@
 # Apple Music and iTunes Builders
 
-The Apple Music and iTunes chart builders match ranked chart entries to exact artist and title values in a Plex Music library.
+Build collections from Apple Music or iTunes country charts by matching chart
+artists and titles to your Plex Music library. Both builders support music,
+playlists, and custom sorting.
 
-| Builder | Description | Works with Music | Works with Playlists and Custom Sort |
-|:--|:--|:--:|:--:|
-| [`apple_chart`](#apple-music-and-itunes-charts) | Gets ranked songs or albums from Apple Music country charts | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`itunes_chart`](#apple-music-and-itunes-charts) | Gets ranked songs or albums from iTunes country charts | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-Both builders accept US, UK, JP, DE, FR, IT, and RU. France, Italy, and Russia use EU chart pages. They default to songs and can use `type: album` for album-level collections. Rows without a positive integer rank for the selected country are skipped. Use `collection_order: custom` to keep the country's chart rank order.
+| Builder | Source |
+|:--------|:-------|
+| `apple_chart` | Apple Music country charts |
+| `itunes_chart` | iTunes country charts |
 
-See [Apple Music and iTunes Charts](#apple-music-and-itunes-charts) for configuration examples and source page details.
+## Chart options {#apple-music-and-itunes-charts}
 
-## Apple Music and iTunes charts — `apple_chart` {#apple-music-and-itunes-charts}
+Both builders use the same dictionary options. Songs default to track-level
+collections; `type: album` uses album level.
 
-`apple_chart` and `itunes_chart` build track-level collections from country charts. Use `type: album` to build an album-level collection; the level defaults to tracks for songs and albums for the album chart. Kometa keeps only rows with a positive integer in the selected country's column, sorts those rows by that rank, then matches exact artist and title values in Plex. When multiple track matches exist, the earliest known album release is selected. Unmatched chart items are skipped.
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `country` | Country code below | Country chart to use |
+| `type` | `track`, `song`, `album`; default `track` | Songs or albums |
 
-```yaml title="Apple Music collection"
-collections:
-  UK Apple Songs:
-    apple_chart:
-      country: UK
-    collection_order: custom
+| Code | Country |
+|:-----|:--------|
+| `US` | United States |
+| `UK` | United Kingdom |
+| `JP` | Japan |
+| `DE` | Germany |
+| `FR` | France |
+| `IT` | Italy |
+| `RU` | Russia |
 
-  France Apple Albums:
-    apple_chart:
-      country: FR
-      type: album
-    collection_order: custom
-```
+## Examples
 
-```yaml title="iTunes collection"
-collections:
-  US iTunes Songs:
-    itunes_chart:
-      country: US
-    collection_order: custom
-```
+=== "Country songs"
 
-`country` accepts the following codes. France, Italy, and Russia use EU chart pages.
+    Selects songs ranked in the UK Apple Music chart. `UK` is a country-code
+    string; omitting `type` uses the default track level. Custom ordering keeps
+    the selected country's chart rank.
 
-| Shortcode | Country |
-|:--|:--|
-| US | United States |
-| UK | United Kingdom |
-| JP | Japan |
-| DE | Germany |
-| FR | France |
-| IT | Italy |
-| RU | Russia |
+    ```yaml
+    collections:
+      UK Apple Songs:
+        apple_chart:
+          country: UK
+        collection_order: custom
+    ```
 
-`type` accepts `track`, `song`, or `album` and defaults to `track`. For `apple_chart`, songs use `apple_songs` and albums use `apple_albums`; for `itunes_chart`, songs use `ww`/`eu` and albums use `aww`/`eua`. Set `collection_order: custom` to order Plex matches by the selected country's chart rank.
+=== "Album level"
+
+    Selects albums from the France Apple Music chart. `type: album` changes the
+    collection level as well as the chart; it does not select individual songs.
+
+    ```yaml
+    collections:
+      France Apple Albums:
+        apple_chart:
+          country: FR
+          type: album
+        collection_order: custom
+    ```
+
+=== "iTunes source"
+
+    Selects songs from the US iTunes chart using the same country dictionary
+    format. Replace `apple_chart` with `itunes_chart` to change the source.
+
+    ```yaml
+    collections:
+      US iTunes Songs:
+        itunes_chart:
+          country: US
+        collection_order: custom
+    ```
+
+## Ranking and matching
+
+Only rows with a positive integer rank in the selected country's column are
+included, in rank order. `collection_order: custom` preserves that order in Plex.
+Kometa matches exact artist and title values. If several tracks match, it selects
+the one with the earliest known album release. Unmatched chart items are skipped.

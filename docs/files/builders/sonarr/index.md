@@ -1,63 +1,83 @@
 # Sonarr Builders
 
-You can find items in your Plex using the features of [Sonarr](https://sonarr.tv/).
+Select existing Plex series from [Sonarr](https://sonarr.tv/) records.
+These builders do not support playlists or custom sorting.
 
-???+ warning "Sonarr Configuration"
+!!! warning "Configure Sonarr first"
 
-    [Configuring Sonarr](../../../config/sonarr.md) in the config is required for any of these builders.
+    Both builders require [Sonarr configuration](../../../config/sonarr.md)
+    and a show library for Plex collections. MDBList-only syncing is described below.
 
-| Builder                        | Description                                  |            Works with Movies             |              Works with Shows              |   Works with Playlists and Custom Sort   |
-|:-------------------------------|:---------------------------------------------|:----------------------------------------:|:------------------------------------------:|:----------------------------------------:|
-| [`sonarr_all`](#sonarr-all)         | Gets all Series in Sonarr.                   | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
-| [`sonarr_taglist`](#sonarr-taglist) | Gets Series from Sonarr based on their tags. | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
+## Choose a builder
 
-## Sonarr all — `sonarr_all` {#sonarr-all}
-    
-Gets all Series in Sonarr.
+| Builder | Selects | Value |
+|:--------|:--------|:------|
+| [`sonarr_all`](#sonarr-all) | All series in Sonarr | `true` |
+| [`sonarr_taglist`](#sonarr-taglist) | series selected by Sonarr tags | Tag string, YAML list, or blank |
 
-### Example Sonarr all builder(s) {#example-sonarr-all-builders}
+## All series {#sonarr-all}
+
+<span id="example-sonarr-all-builders"></span>
+
+Selects all series tracked in Sonarr that can be included from your Plex library.
+`true` is an unquoted boolean, rather than a string or a result limit.
 
 ```yaml
 collections:
-  ALL Sonarr Series:
+  All Sonarr Series:
     sonarr_all: true
 ```
 
-## Sonarr taglist — `sonarr_taglist` {#sonarr-taglist}
+## Tags {#sonarr-taglist}
 
-Gets Series from Sonarr based on their tags. 
+Use a tag string or supply multiple tags as a YAML list or comma-separated
+string, such as `"tag1,tag2"`. A blank builder value selects untagged series.
+These are Sonarr tags, rather than Plex labels.
 
-Set the attribute to the tag you want to search for. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated 
-string. 
+<span id="example-sonarr-taglist-builders"></span>
 
-### Example Sonarr taglist builder(s) {#example-sonarr-taglist-builders}
+=== "Tag names"
 
-```yaml
-collections:
-  Sonarr Tag1 and Tag2 Series:
-    sonarr_taglist: tag1, tag2
-```
+    Selects series using the supplied `tag1` and `tag2` tags. Replace those names
+    with your Sonarr tags. The YAML list supplies strings; the equivalent
+    comma-separated form is `sonarr_taglist: "tag1,tag2"`.
 
-If no tag is specified then it gets every Movie without a tag.
+    ```yaml
+    collections:
+      Tagged Sonarr Series:
+        sonarr_taglist:
+          - tag1
+          - tag2
+    ```
 
-```yaml
-collections:
-  Sonarr Series Without Tags:
-    sonarr_taglist: 
-```
+=== "Blank value"
+
+    Selects series with no Sonarr tags. Leaving the value blank has a different
+    meaning from passing a tag name or enabling the all-items builder.
+
+    ```yaml
+    collections:
+      Untagged Sonarr Series:
+        sonarr_taglist:
+    ```
 
 ### Sync to MDBList {#sync-to-mdblist}
 
-When used with [`sync_to_mdb_list`](../../settings.md#mdblist-sync-example),
-`sonarr_taglist` uses the matching series in Sonarr as the source of truth.
-The sync does not depend on the items being present in Plex or on a Plex
-collection being built. Removing a tag in Sonarr also removes
-the series from the MDBList static list. Only series are removed, so this can
-safely share a list with [`radarr_taglist`](../radarr/index.md#radarr-taglist) syncs.
+With [`sync_to_mdb_list`](../../settings.md#mdblist-sync-example), `sonarr_taglist`
+uses matching Sonarr records as the source of truth, even when those items are
+not in Plex or no Plex collection is built. Removing a tag in Sonarr also removes
+the corresponding series from the MDBList static list.
+
+Only series are removed by this sync. It can share a list with
+[`radarr_taglist`](../radarr/index.md#radarr-taglist) syncing from Radarr.
+
+This example syncs series tagged `kometa_test` to the named MDBList static list.
+`build_collection: false` disables the Plex collection; it does not disable the
+MDBList sync. The tag and destination name are strings; `false` is a boolean.
 
 ```yaml
 collections:
-  Sonarr Test:
+  Sonarr Tag Sync:
     sonarr_taglist: kometa_test
     sync_to_mdb_list: My Kometa Test Tags
     build_collection: false

@@ -1,65 +1,125 @@
 # Floppy Builders
 
-You can find movies and shows using lists from your [Floppy](https://github.com/dannyvfilms/Floppy) instance.
+Collect movies, shows, and listed episodes from your
+[Floppy](https://github.com/dannyvfilms/Floppy) instance. All builders below support
+movies, shows, playlists, and custom sorting.
 
-???+ warning "Floppy Configuration"
+!!! warning "Configure Floppy first"
 
-    [Configuring Floppy](../../../config/floppy.md) in the config is required for this builder.
+    Every builder requires the [Floppy connector](../../../config/floppy.md).
+    Public lists work without a token. Private lists and tracking queries require
+    an API token in the connector.
 
-| Builder | Description | Works with Movies | Works with Shows | Works with Playlists and Custom Sort |
-|:--------|:------------|:-----------------:|:----------------:|:------------------------------------:|
-| [`floppy_list`](#floppy-list) | Finds every supported movie/show in a Floppy list. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`floppy_list_details`](#floppy-list) | Finds list items and uses the Floppy description as the Plex collection summary. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`floppy_tracked`](#floppy-tracked) | Finds Floppy items tracked with selected statuses and media types. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## Floppy list — `floppy_list_details`, `floppy_list` {#floppy-list}
+| Builder | Finds | Also copies |
+|:--------|:------|:------------|
+| [`floppy_list`](#floppy-list) | Supported items in specific lists | List tags as item labels, when enabled |
+| [`floppy_list_details`](#floppy-list) | The same list items | List description as the collection summary; optional tags |
+| [`floppy_tracked`](#floppy-tracked) | Tracked items matching statuses and media types | - |
 
-Finds every supported movie, show, or episode in a Floppy list. The expected input is a list URL from the configured Floppy instance. Multiple URLs are supported. Episode entries require `builder_level: episode` and are added as the exact listed episodes.
+For lists, use `collection_order: custom` to preserve source order and
+`sync_mode: sync` to keep collection membership synchronized as the lists change.
 
-Public lists work without a token. Episode collections read exact episode entries from the list RSS feed. Private lists require an API token in the [Floppy connector](../../../config/floppy.md). Use `floppy_list_details` to copy the Floppy list description to the Plex collection summary.
+## Lists {#floppy-list}
 
-Each list also accepts an optional `sync_tags` attribute. When enabled, the Floppy list tags are added as Plex labels to the items in the resulting collection.
+Use a list URL from your configured Floppy instance. Both list builders accept
+list URLs; the dictionary form below adds the optional `sync_tags` setting.
+Multiple URLs are supported, as illustrated by the YAML list of dictionaries.
 
-The `sync_mode: sync` and `collection_order: custom` settings are recommended because Floppy lists can change and their list order is preserved.
+| Option | Value | Purpose |
+|:-------|:------|:--------|
+| `url` | String | Full list URL from your configured instance. |
+| `sync_tags` | Boolean | When `true`, adds the list's tags as Plex labels to items in the resulting collection. |
 
-```yaml
-collections:
-  Floppy List:
-    floppy_list_details:
-      url: https://floppy.example.com/list/1
-      sync_tags: true
-    collection_order: custom
-    sync_mode: sync
-```
+Replace the example URLs with URLs from your own instance.
 
-```yaml
-collections:
-  Floppy Lists:
-    floppy_list:
-      - url: https://floppy.example.com/list/1
-        sync_tags: false
-      - url: https://floppy.example.com/list/2
-        sync_tags: true
-    collection_order: custom
-    sync_mode: sync
-```
+=== "Summary and tags"
 
-## Floppy tracked — `floppy_tracked` {#floppy-tracked}
+    Selects items from list 1, copies its description to the collection summary,
+    and adds the list's tags as item labels. `url` is a string and `true` is an
+    unquoted boolean.
 
-Finds items in the configured Floppy instance by tracking status. A private Floppy API token is required.
+    ```yaml
+    collections:
+      Floppy Picks:
+        floppy_list_details:
+          url: https://floppy.example.com/list/1
+          sync_tags: true
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-`status` accepts `no_status`, `completed`, `in_progress`, `planning`, `paused`, `dropped`, or `all`. The `all` value includes every tracked item regardless of status. `type` accepts `movie`, `show`, `season`, and `anime`; it defaults to `movie` for movie libraries and `show,season` for show libraries.
+=== "Multiple lists"
 
-```yaml
-collections:
-  Tracked In Progress:
-    floppy_tracked:
-      status: in_progress
+    Combines items from two lists using a YAML list of dictionaries. Tags are
+    added from list 2, but not from list 1. These sources are combined, rather
+    than used as AND/OR search filters.
 
-  Tracked Anime:
-    floppy_tracked:
-      status: [completed, in_progress]
-      type: anime
-```
+    ```yaml
+    collections:
+      Combined Floppy Picks:
+        floppy_list:
+          - url: https://floppy.example.com/list/1
+            sync_tags: false
+          - url: https://floppy.example.com/list/2
+            sync_tags: true
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Anime entries are read by MyAnimeList ID and converted through Kometa's existing anime mappings. Only anime that resolves to an item in the current library is included.
+=== "Exact episodes"
+
+    Creates an episode collection from the exact episodes listed in the source,
+    rather than selecting whole shows. Episode entries are read from the list's
+    RSS feed; `builder_level: episode` is required.
+
+    ```yaml
+    collections:
+      Floppy Episode Picks:
+        builder_level: episode
+        floppy_list: https://floppy.example.com/list/1
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+## Tracked items {#floppy-tracked}
+
+Use `floppy_tracked` to select items by tracking status and media type.
+A private Floppy API token is required.
+
+| Option | Allowed values | Purpose |
+|:-------|:---------------|:--------|
+| `status` | `no_status`, `completed`, `in_progress`, `planning`, `paused`, `dropped`, `all` | Select tracking statuses; `all` includes every tracked item regardless of status. |
+| `type` | `movie`, `show`, `season`, `anime` | Select media types; defaults to `movie` in movie libraries and `show,season` in show libraries. |
+
+=== "One status"
+
+    Selects items marked in progress. `in_progress` is a status string; omitting
+    `type` uses the media types appropriate to the current library.
+
+    ```yaml
+    collections:
+      Tracked In Progress:
+        floppy_tracked:
+          status: in_progress
+    ```
+
+=== "Multiple statuses and anime"
+
+    Selects tracked anime marked completed or in progress. `status` is a YAML
+    list here, so either status matches; `type: anime` restricts the media type.
+    There is no need for a pipe separator or `.any` suffix.
+
+    ```yaml
+    collections:
+      Tracked Anime:
+        floppy_tracked:
+          status:
+            - completed
+            - in_progress
+          type: anime
+    ```
+
+Anime entries are read by MyAnimeList ID and converted through Kometa's anime
+mappings. Only anime resolving to an item in the current library is included.

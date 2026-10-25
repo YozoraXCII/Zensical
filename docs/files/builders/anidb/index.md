@@ -1,84 +1,79 @@
 # AniDB Builders
 
-You can find anime using the features of [AniDB.net](https://anidb.net/) (AniDB).
+Collect anime from [AniDB](https://anidb.net/) IDs, relation graphs, and tags.
+All builders support movie and show libraries; playlist and custom-sort support
+varies as shown below.
 
-| Builder                         | Description                                                                                     |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:--------------------------------|:------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`anidb_id`](#anidb-id)             | Finds the anime specified by the AniDB ID.                                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`anidb_relation`](#anidb-relation) | Finds all anime in the relation graph of the specified AniDB ID.                                | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`anidb_tag`](#anidb-tag)           | Finds anime with a specific AniDB tag ID.                                                        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`anidb_tag_name`](#anidb-tag-name) | Finds anime with specific AniDB tag names (supports multiple tags).                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## AniDB ID — `anidb_id` {#anidb-id}
+| Builder | Finds | Playlists / custom sort |
+|:--------|:------|:-----------------------|
+| [`anidb_id`](#anidb-id) | Specific anime | No |
+| [`anidb_relation`](#anidb-relation) | Anime in a relation graph | No |
+| [`anidb_tag`](#anidb-tag) | Anime matching a tag ID | Yes |
+| [`anidb_tag_name`](#anidb-tag-name) | Anime matching all named tags | Yes |
 
-Finds the anime specified by the AniDB ID.
+## IDs and relations
 
-The expected input is an AniDB ID or AniDB Anime URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+Both ID-based builders accept an AniDB ID or anime URL. Supply multiple sources
+as a YAML list or comma-separated string. These combine sources; named tags use
+different matching rules, described below.
 
-### Example AniDB ID builder(s) {#example-anidb-id-builders}
+### Specific anime {#anidb-id}
 
-```yaml
-collections:
-  Sword Art Online Shows:
-    anidb_id: 8692, 8691, 13494
-```
-```yaml
-collections:
-  Sword Art Online Shows:
-    anidb_id: 
-     - 8692
-     - 8691
-     - 13494
-```
-```yaml
-collections:
-  Sword Art Online Shows:
-    anidb_id: https://anidb.net/anime/8692, https://anidb.net/anime/8691, https://anidb.net/anime/13494
-```
+<span id="example-anidb-id-builders"></span>
 
-## AniDB relation — `anidb_relation` {#anidb-relation}
-
-Finds all anime in the relation graph of the specified AniDB ID.
-
-To see the relation graph of an anime use: `https://anidb.net/anime/<ANIDB_ID>/relation/graph` but replace `<ANIDB_ID>` with the AniDB ID you want to see the relations for.
-
-**Value:** The expected input is an AniDB ID, AniDB Anime URL, or AniDB Anime Relation URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-### Example AniDB relation builder(s) {#example-anidb-relation-builders}
+Selects the three specified Sword Art Online entries using a YAML list of IDs.
+A quoted string such as `"8692,8691,13494"` or anime URLs such as
+`https://anidb.net/anime/8692` can also be used.
 
 ```yaml
 collections:
-  All Sword Art Online:
-    anidb_relation: 8692
+  Sword Art Online:
+    anidb_id:
+      - 8692
+      - 8691
+      - 13494
 ```
-```yaml
-collections:
-  All Sword Art Online:
-    anidb_relation: https://anidb.net/anime/8692
-```
+
+### Relation graphs {#anidb-relation}
+
+<span id="example-anidb-relation-builders"></span>
+
+Selects all anime in the relation graph for entry 8692, rather than just that
+entry. The graph URL is also accepted; use this format to inspect relations
+in your browser, replacing the ID as needed.
+
 ```yaml
 collections:
   All Sword Art Online:
     anidb_relation: https://anidb.net/anime/8692/relation/graph
 ```
 
-## AniDB tag — `anidb_tag` {#anidb-tag}
+## Tags
 
-Finds anime with a specific AniDB tag ID.
+Both tag builders support custom ordering. Use `collection_order: custom` to
+preserve returned order and `sync_mode: sync` to keep membership synchronized.
+The `mature` setting in your AniDB configuration controls whether mature/adult
+anime are included.
 
-The expected input is an AniDB tag ID with an optional `limit` parameter.
+### Tag IDs {#anidb-tag}
 
-You can find tag IDs by browsing tags at [https://utilities.kometa.wiki/anidb-service/tags](https://utilities.kometa.wiki/anidb-service/tags).
+Use an integer tag ID directly, or a dictionary with these options. Browse the
+[Kometa AniDB tag reference](https://utilities.kometa.wiki/anidb-service/tags) to find IDs.
 
-### Example AniDB tag builder(s) {#example-anidb-tag-builders}
+<span id="attributes"></span>
 
-```yaml
-collections:
-  Military Anime:
-    anidb_tag: 36
-    collection_order: custom
-    sync_mode: sync
-```
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `tag_id` | Tag ID, required | Tag to match |
+| `limit` | Integer; default `1000` | Maximum anime to return |
+
+<span id="example-anidb-tag-builders"></span>
+
+Selects up to 10 anime with the Military tag. `36` is a tag ID; `10` is a result
+limit. Use `anidb_tag: 36` for the simpler form with the default limit.
+
 ```yaml
 collections:
   Top 10 Military Anime:
@@ -88,119 +83,73 @@ collections:
     collection_order: custom
     sync_mode: sync
 ```
-```yaml
-collections:
-  Future Setting:
-    anidb_tag:
-      tag_id: 2626
-      limit: 50
-    collection_order: custom
-    sync_mode: sync
-```
 
 ### Tag ID examples {#tag-id-examples}
 
-| Tag Name | Tag ID |
-|:---------|-------:|
-| Military | 36     |
-| Future   | 2626   |
-| Comedy   | 2853   |
-| Action   | 2604   |
-| Fantasy  | 2849   |
-| Sci-Fi   | 2846   |
+| Tag | ID |
+|:----|:---|
+| Military | `36` |
+| Future | `2626` |
+| Comedy | `2853` |
+| Action | `2604` |
+| Fantasy | `2849` |
+| Sci-Fi | `2846` |
 
-### Attributes {#attributes}
+### Named tags {#anidb-tag-name}
 
-| Attribute | Description                                          | Required |
-|:----------|:-----------------------------------------------------|:--------:|
-| `tag_id`  | AniDB Tag ID                                         | Yes      |
-| `limit`   | Maximum number of anime to return (default: 1000)    | No       |
+Accepts a tag-name string, a YAML list of names, or a dictionary. Names are
+case-insensitive. **Multiple names must all match (AND)**; a YAML list here does
+not mean OR.
 
-**Note:** The `mature` setting from your AniDB configuration controls whether mature/adult anime are included in the results.
+<span id="anidb-tag-name-attributes"></span>
 
-## AniDB tag name — `anidb_tag_name` {#anidb-tag-name}
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `tags` | String or YAML list, required | All tags to match |
+| `min_weight` | Integer, 0-1000; default `0` | Minimum tag weight |
 
-Finds anime with specific AniDB tag names. This builder supports multiple tags and searches by tag name (e.g., "action", "comedy") rather than tag ID.
+<span id="example-anidb-tag-name-builders"></span>
 
-The expected input is either a single tag name, a list of tag names, or a dictionary with `tags` and optional `min_weight` parameters.
+=== "One tag"
 
-Multiple tags can be specified to find anime that match all of the given tags. Tag names are case-insensitive.
+    Selects anime with the Action tag. The builder value is a string.
 
-### Example AniDB tag name builder(s) {#example-anidb-tag-name-builders}
+    ```yaml
+    collections:
+      Action Anime:
+        anidb_tag_name: action
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  Action Anime:
-    anidb_tag_name: action
-    collection_order: custom
-    sync_mode: sync
-```
-```yaml
-collections:
-  Action Comedy Anime:
-    anidb_tag_name:
-      - action
-      - comedy
-    collection_order: custom
-    sync_mode: sync
-```
-```yaml
-collections:
-  High-Weight Action Anime:
-    anidb_tag_name:
-      tags: action
-      min_weight: 300
-    collection_order: custom
-    sync_mode: sync
-```
-```yaml
-collections:
-  Action Comedy (High Weight):
-    anidb_tag_name:
-      tags:
-        - action
-        - comedy
-      min_weight: 400
-    collection_order: custom
-    sync_mode: sync
-```
+=== "AND and tag weight"
+
+    Requires both Action and Comedy, with the matched tags meeting a minimum
+    weight of 400. The YAML list supplies tag names; `400` is a numeric threshold.
+    Omit `min_weight` to use the default of zero.
+
+    ```yaml
+    collections:
+      Action Comedy With Strong Tags:
+        anidb_tag_name:
+          tags:
+            - action
+            - comedy
+          min_weight: 400
+        collection_order: custom
+        sync_mode: sync
+    ```
 
 ### Tag weight {#tag-weight}
 
-Tag weights in AniDB indicate how strongly a tag applies to an anime:
-
-- **600+**: Core theme/element
-- **400-599**: Significant element
-- **200-399**: Notable element  
-- **0-199**: Minor element
-
-Using `min_weight` filters results to only include anime where the tag(s) meet the minimum weight threshold.
+| Weight | Meaning |
+|:-------|:--------|
+| `600` and above | Core theme or element |
+| `400`-`599` | Significant element |
+| `200`-`399` | Notable element |
+| `0`-`199` | Minor element |
 
 ### Common tag names {#common-tag-names}
 
-| Tag Name      | Description                      |
-|:--------------|:---------------------------------|
-| action        | Action-oriented content          |
-| adventure     | Adventure themes                 |
-| comedy        | Comedic content                  |
-| drama         | Dramatic storytelling            |
-| fantasy       | Fantasy settings/elements        |
-| horror        | Horror themes                    |
-| mecha         | Giant robots/mechanical themes   |
-| military      | Military themes                  |
-| mystery       | Mystery/detective themes         |
-| romance       | Romantic relationships           |
-| sci-fi        | Science fiction themes           |
-| slice of life | Everyday life scenarios          |
-| sports        | Sports-related content           |
-| supernatural  | Supernatural elements            |
-| thriller      | Thriller/suspense themes         |
-
-### Attributes {#anidb-tag-name-attributes}
-
-| Attribute    | Description                                          | Required |
-|:-------------|:-----------------------------------------------------|:--------:|
-| `tags`       | Single tag name or list of tag names                 | Yes      |
-| `min_weight` | Minimum tag weight (0-1000, default: 0)              | No       |
-
-**Note:** The `mature` setting from your AniDB configuration controls whether mature/adult anime are included in the results.
+`action`, `adventure`, `comedy`, `drama`, `fantasy`, `horror`, `mecha`, `military`,
+`mystery`, `romance`, `sci-fi`, `slice of life`, `sports`, `supernatural`, `thriller`.

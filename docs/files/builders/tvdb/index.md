@@ -1,28 +1,42 @@
 # TVDb Builders
 
-You can find items using the features of [TheTVDb.com](https://www.thetvdb.com/) (TVDb).
+Find movies and shows using [TheTVDb](https://www.thetvdb.com/). Select specific
+titles by ID or URL, or collect the items in a TVDb list.
 
-| Builder                  | Description                                                                                                               |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:-------------------------|:--------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`tvdb_list`](#tvdb-list)   | Finds every item in a [TVDb List](https://www.thetvdb.com/lists) or [TVDb UserList](https://www.thetvdb.com/lists/custom) | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tvdb_show`](#tvdb-show)   | Finds the series specified                                                                                                |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  | 
-| [`tvdb_movie`](#tvdb-movie) | Finds the movie specified                                                                                                 | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  |
+## Choose a builder
 
-## TVDb list — `tvdb_list`, `tvdb_list_details` {#tvdb-list}
+| Builder | Finds | Supports | Playlists / custom sort |
+|:--------|:------|:---------|:-----------------------|
+| [`tvdb_list`](#tvdb-list) | Items in a TVDb list or user list | Movies, shows | Yes |
+| [`tvdb_movie`](#tvdb-movie) | Specific movies | Movies | No |
+| [`tvdb_show`](#tvdb-show) | Specific shows | Shows | No |
 
-Finds every item in a [TVDb List](https://www.thetvdb.com/lists) or [TVDb UserList](https://www.thetvdb.com/lists/custom)
+## Using IDs and URLs
 
-The expected input is a TVDb List URL or TVDb UserList URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a 
-comma-separated string.
+| Builder | Accepted value |
+|:--------|:---------------|
+| `tvdb_list` | Full [list](https://www.thetvdb.com/lists) or [user list](https://www.thetvdb.com/lists/custom) URL |
+| `tvdb_movie` | Movie ID or full movie URL |
+| `tvdb_show` | Series ID or full series URL |
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
-and in a specific order.
+These formats also apply to the corresponding [`_details` variants](#copy-metadata-from-tvdb).
+An ID selects a specific title; a list URL selects the titles in that list.
 
-???+ tip "Details Builder"
+All three builders accept multiple values. Use one value per YAML list entry or quote the complete
+comma-separated string, such as `tvdb_movie: "107,157,74"`. Both formats combine
+all the supplied sources; they do not provide AND/OR search logic.
 
-    You can replace `tvdb_list` with `tvdb_list_details` if you would like to fetch and use the description from the list
+## Lists {#tvdb-list}
 
-### Example TVDb list builder(s) {#example-tvdb-list-builders}
+Use `tvdb_list` with a full URL. Both named list URLs, such as
+`https://www.thetvdb.com/lists/arrowverse`, and numbered list URLs, such as
+`https://www.thetvdb.com/lists/6957`, are accepted.
+
+<span id="example-tvdb-list-builders"></span>
+
+This collection follows the Arrowverse list in its source order.
+`collection_order: custom` preserves that order; `sync_mode: sync` keeps
+collection membership synchronized as the list changes.
 
 ```yaml
 collections:
@@ -31,97 +45,96 @@ collections:
     collection_order: custom
     sync_mode: sync
 ```
-```yaml
-collections:
-  Saved by the Bell:
-    tvdb_list: https://www.thetvdb.com/lists/6957
-    collection_order: custom
-    sync_mode: sync
-```
 
-* You can update the collection details with the TVDb list's description and poster by using `tvdb_list_details`.
-* You can specify multiple lists in `tvdb_list_details` but it will only use the first one to update the collection details.
+## Movies {#tvdb-movie}
 
-```yaml
-collections:
-  Arrowverse:
-    tvdb_list_details: https://www.thetvdb.com/lists/arrowverse
-    collection_order: custom
-    sync_mode: sync
-```
+Use `tvdb_movie` to select specific movies. These two examples select the same
+three Lord of the Rings movies using different input formats.
 
-## TVDb movie — `tvdb_movie`, `tvdb_movie_details` {#tvdb-movie}
+<span id="example-tvdb-movie-builders"></span>
 
-Finds the movie specified
+=== "Comma-separated IDs"
 
-The expected input is a TVDb Movie ID or TVDb Movie URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a 
-comma-separated string.
+    Combines the three movie IDs into one collection. The quoted value is a
+    single string containing comma-separated IDs.
 
-???+ tip "Details Builder"
+    ```yaml
+    collections:
+      The Lord of the Rings:
+        tvdb_movie: "107,157,74"
+    ```
 
-    You can replace `tvdb_movie` with `tvdb_movie_details` if you would like to fetch and use the description from the list
+=== "YAML list of URLs"
 
-### Example TVDb movie builder(s) {#example-tvdb-movie-builders}
+    Selects the same movies by their full URLs. Each URL is a string in a YAML
+    list, rather than part of a comma-separated string.
 
-```yaml
-collections:
-  The Lord of the Rings:
-    tvdb_movie: 107, 157, 74
-```
-```yaml
-collections:
-  The Lord of the Rings:
-    tvdb_movie:
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-fellowship-of-the-ring
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-two-towers
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-return-of-the-king
-```
+    ```yaml
+    collections:
+      The Lord of the Rings:
+        tvdb_movie:
+          - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-fellowship-of-the-ring
+          - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-two-towers
+          - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-return-of-the-king
+    ```
 
-* You can update the collection details with the TVDb movie's summary, poster, and background by using `tvdb_movie_details`.
-* You can specify multiple movies in `tvdb_movie_details` but it will only use the first one to update the collection details.
-* Posters and background in the library's asset directory will be used over the collection details unless `tvdb_poster`/`tvdb_background` is also specified.
+## Shows {#tvdb-show}
 
-```yaml
-collections:
-  The Lord of the Rings:
-    tvdb_movie_details:
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-fellowship-of-the-ring
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-two-towers
-      - https://www.thetvdb.com/movies/the-lord-of-the-rings-the-return-of-the-king
-```
+Use `tvdb_show` to select specific series. This collection includes The Clone Wars
+and Rebels, using a YAML list of numeric series IDs. Full series URLs, such as
+`https://www.thetvdb.com/series/star-wars-the-clone-wars`, are also accepted.
 
-## TVDb show — `tvdb_show`, `tvdb_show_details` {#tvdb-show}
+<span id="example-tvdb-show-builders"></span>
 
-Finds the show specified
-
-The expected input is a TVDb Series ID or TVDb Series URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a 
-comma-separated string.
-
-???+ tip "Details Builder"
-
-    You can replace `tvdb_show` with `tvdb_show_details` if you would like to fetch and use the description from the list
-
-### Example TVDb show builder(s) {#example-tvdb-show-builders}
-
-```yaml
-collections:
-  Star Wars (Animated Shows):
-    tvdb_show: 83268, 283468
-```
 ```yaml
 collections:
   Star Wars (Animated Shows):
     tvdb_show:
-      - https://www.thetvdb.com/series/star-wars-the-clone-wars
-      - https://www.thetvdb.com/series/star-wars-rebels
+      - 83268
+      - 283468
 ```
 
-* You can update the collection details with the TVDb show's summary, poster, and background by using `tvdb_show_details`.
-* You can specify multiple shows in `tvdb_show_details` but it will only use the first one to update the collection details.
-* Posters and background in the library's asset directory will be used over the collection details unless `tvdb_poster`/`tvdb_background` is also specified.
+## Copy metadata from TVDb
 
-```yaml
-collections:
-  Star Wars (Animated Shows):
-    tvdb_show_details: 83268, 283468
-```
+Use a `_details` variant to select the same items and copy metadata to your
+Kometa collection. With multiple values, **only the first entry supplies metadata**;
+items from all entries are still included.
+
+| Builder | Metadata variant | Copies |
+|:--------|:-----------------|:-------|
+| `tvdb_list` | `tvdb_list_details` | Description and poster |
+| `tvdb_movie` | `tvdb_movie_details` | Summary, poster, and background |
+| `tvdb_show` | `tvdb_show_details` | Summary, poster, and background |
+
+=== "List metadata"
+
+    Follows the Arrowverse list and copies its description and poster to the
+    collection. The list's order and membership remain synchronized.
+
+    ```yaml
+    collections:
+      Arrowverse:
+        tvdb_list_details: https://www.thetvdb.com/lists/arrowverse
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "First-entry metadata"
+
+    Includes both The Clone Wars and Rebels, but copies the summary, poster, and
+    background from The Clone Wars (`83268`), the first entry. Put the series whose
+    metadata you want first; the same rule applies to movies and lists.
+
+    ```yaml
+    collections:
+      Star Wars (Animated Shows):
+        tvdb_show_details:
+          - 83268
+          - 283468
+    ```
+
+!!! note "Artwork priority"
+
+    For movie and show details, posters and backgrounds in your library's asset
+    directory take priority over copied artwork, unless `tvdb_poster` or
+    `tvdb_background` is also specified.

@@ -1,102 +1,176 @@
 # YouTube Music Builders
 
-Configure the [service connection](../../../config/ytmusic.md) before using these builders.
+Collect tracks and artists from public YouTube Music playlists and charts.
 
-Choose a builder below. Each section includes its supported inputs and a configuration example.
+!!! note "Public access"
 
-| Builder reference |
-| --- |
-| [YouTube Music Dynamic Charts](#youtube-music-dynamic-charts) |
-| [YouTube Music List Builder](#youtube-music-list-builder) |
-| [YouTube Music Top Artists Builder](#youtube-music-top-artists-builder) |
+    No sign-in is needed for the public playlists, dynamic charts, or top-artist
+    charts described here. See [YouTube Music settings](../../../config/ytmusic.md)
+    for service settings.
 
-## YouTube Music dynamic charts — `ytmusic_video_charts`, `ytmusic_genre_charts`, `ytmusic_list` {#youtube-music-dynamic-charts}
+## Choose a source
 
-Use `dynamic_collections` to create track collections from YouTube Music charts. Kometa creates a collection for each chart available in the selected section and country. No sign-in or YouTube Music setup is needed.
+| Source | Creates | Input |
+|:-------|:--------|:------|
+| [`ytmusic_list`](#youtube-music-list-builder) | Track collection from a public playlist | Playlist URL, ID, or dictionary |
+| [`ytmusic_top_artists`](#youtube-music-top-artists-builder) | Artist collection | `true` for global, or country dictionary |
+| [Dynamic charts](#youtube-music-dynamic-charts) | One track collection per available chart | `dynamic_collections` configuration |
 
-```yaml title="Collection file"
-dynamic_collections:
-  YouTube Music Genre Charts:
-    type: ytmusic_genre_charts
-    data:
-      country: US
-      limit: 50
-```
+For regular collections, use `collection_order: custom` to preserve source order
+and `sync_mode: sync` to keep membership synchronized. Tracks appearing more than
+once are kept only at their first position.
 
-Choose `ytmusic_video_charts` or `ytmusic_genre_charts` for video or genre charts. `data.country` is optional and defaults to worldwide charts; enter a two-letter code such as `US` for a specific country. `data.limit` can cap the number of tracks in each collection. You can also use options such as `include`, `exclude`, `title_format`, and `sync`. To build a collection from one playlist, use its link or ID with [`ytmusic_list`](#youtube-music-list-builder).
+## Playlists {#youtube-music-list-builder}
 
-For example, `ytmusic_video_charts` can create collections such as “Top 100 Music Videos United States” and “Top 100 Shorts United States.” `ytmusic_genre_charts` can create collections such as “Top 50 Pop Music Videos United States” and “Top 50 Rock Music Videos United States.” The charts shown in YouTube Music may vary from those available to Kometa, and only available charts become collections.
+`ytmusic_list` accepts a public playlist URL or ID, or a YAML list combining links
+and IDs. Dictionary form uses `playlist` and optional `limit`.
 
-On each run, Kometa logs every genre key as `<playlist ID> | <genre name>`. Use either value in `exclude` to skip a genre:
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `playlist` | URL or playlist ID string | Source playlist |
+| `limit` | Integer | Maximum tracks to include |
 
-```yaml
-dynamic_collections:
-  YouTube Music Genre Charts:
-    type: ytmusic_genre_charts
-    data:
-      country: US
-      limit: 50
-    exclude:
-      - PL4fGSI1pDJn77aK7sAW2AT0oOzo5inWY8 # Pop playlist key
-      - Rock # Or exclude by displayed genre name
-```
+The selected playlist determines the source; this builder has no country option.
 
-Kometa keeps each chart's track order. It can use the chart description and cover when available; details you set for a collection take priority. Available chart sections and names vary by country.
+=== "URL string"
 
-### Supported countries {#supported-countries}
+    Follows the public playlist in source order. Replace the example link with
+    the playlist you want to use.
 
-These country codes are currently available. The list may change, and every chart type may not be available in every country. Use `global` for worldwide charts:
+    ```yaml
+    collections:
+      My YouTube Music Playlist:
+        ytmusic_list: https://music.youtube.com/playlist?list=PLC7LNuBoMA-o
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```text
-AE, AR, AT, AU, BE, BO, BR, CA, CH, CL, CO, CR, CZ, DE, DK, DO, EC, EE, EG, ES, FI, FR, GB
-GT, HK, HN, HU, ID, IE, IL, IN, IS, IT, JP, KE, KR, LU, MX, MY, NG, NI, NL, NO, NZ, PA, PE
-PH, PL, PT, PY, RO, RS, RU, SA, SE, SG, SV, TH, TR, TW, TZ, UA, UG, US, UY, VN, ZA, ZW, ZZ
-```
+=== "ID and integer limit"
 
-## YouTube Music list builder — `ytmusic_list` {#youtube-music-list-builder}
+    Selects at most 50 tracks using the playlist ID instead of its full URL.
+    `playlist` is a string and `limit` is an integer. Replace the example ID.
 
-`ytmusic_list` creates a collection from a public YouTube Music playlist. Paste the playlist link, or use its playlist ID. No sign-in or YouTube Music setup is needed for public playlists.
+    ```yaml
+    collections:
+      My YouTube Music Top 50:
+        ytmusic_list:
+          playlist: PLC7LNuBoMA-o
+          limit: 50
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-This builder uses the playlist you choose, so it has no country setting. For top artists by country, use [`ytmusic_top_artists`](#youtube-music-top-artists-builder). For chart playlists by country, use [dynamic charts](#youtube-music-dynamic-charts).
+Kometa can use the playlist description and cover when available. Collection
+details you set explicitly take priority.
 
-```yaml title="Collection file"
-collections:
-  My YouTube Music Playlist:
-    ytmusic_list: https://music.youtube.com/playlist?list=PLC7LNuBoMA-o
-    collection_order: custom
-    sync_mode: sync
-```
+## Top artists {#youtube-music-top-artists-builder}
 
-You can also provide just the playlist ID, or a list of playlist links and IDs. Set `collection_order: custom` to keep the playlist order. If the same Plex track appears more than once, it is included once at its first position.
+`ytmusic_top_artists` creates an artist-level collection, matching artists by name.
+Use `true` for the global chart or a dictionary with `country`. Country defaults
+to `global`; two-letter country codes are also accepted.
 
-To include at most 50 tracks, use `ytmusic_list: {playlist: PLC7LNuBoMA-o, limit: 50}`. Kometa can also use the playlist description and cover when available. Details you set for the collection take priority.
+=== "Boolean"
 
-Kometa matches playlist tracks to your Plex library using the artist and track name, and checks the duration and album when available. Tracks it cannot match appear in the missing-tracks log and report. Versions with similar names and lengths may occasionally be confused, so review the collection if the exact recording matters.
+    Selects worldwide top artists. `true` is an unquoted boolean, rather than
+    a country name or a result count.
 
-## YouTube Music top artists builder — `ytmusic_top_artists` {#youtube-music-top-artists-builder}
+    ```yaml
+    collections:
+      Global Top Artists:
+        ytmusic_top_artists: true
+        collection_order: custom
+    ```
 
-`ytmusic_top_artists` creates an artist collection from YouTube Music's top artists chart. You can use worldwide or country-specific charts. No sign-in is needed; see [YouTube Music settings](../../../config/ytmusic.md).
+=== "Country dictionary"
 
-```yaml title="Collection file"
-collections:
-  Global Top Artists:
-    ytmusic_top_artists: true
-    collection_order: custom
+    Selects the US top-artists chart. `US` is a two-letter country-code string;
+    it changes the chart location without changing the artist collection level.
 
-  US Top Artists:
-    ytmusic_top_artists:
-      country: US
-    collection_order: custom
-```
+    ```yaml
+    collections:
+      US Top Artists:
+        ytmusic_top_artists:
+          country: US
+        collection_order: custom
+    ```
 
-`country` is optional and defaults to `global`. Use a two-letter country code such as `US`, or enter `global`. Set `collection_order: custom` to keep the chart order. Kometa matches artists by name; artists that are missing from Plex or have an ambiguous match appear in the missing-artists report.
+Missing artists and ambiguous name matches appear in the missing-artists report.
 
-### Supported countries {#youtube-music-top-artists-builder-supported-countries}
+## Dynamic charts {#youtube-music-dynamic-charts}
 
-These country codes are currently available. You can also use `global` for worldwide charts. Availability may change over time:
+Use `dynamic_collections` to create one track collection for each available chart
+in a selected country and section. This differs from `collections`, where each
+entry configures a single collection.
 
-```text
-AE, AR, AT, AU, BE, BO, BR, CA, CH, CL, CO, CR, CZ, DE, DK, DO, EC, EE, EG, ES, FI, FR, GB
-GT, HK, HN, HU, ID, IE, IL, IN, IS, IT, JP, KE, KR, LU, MX, MY, NG, NI, NL, NO, NZ, PA, PE
-PH, PL, PT, PY, RO, RS, RU, SA, SE, SG, SV, TH, TR, TW, TZ, UA, UG, US, UY, VN, ZA, ZW, ZZ
-```
+| Option | Values / purpose |
+|:-------|:-----------------|
+| `type` | `ytmusic_video_charts` for video charts; `ytmusic_genre_charts` for genre charts |
+| `data.country` | Two-letter country code or `global`; defaults to worldwide |
+| `data.limit` | Optional integer cap per collection |
+| `include`, `exclude` | Select or skip available chart keys or names |
+| `title_format` | Format generated collection titles |
+| `sync` | Dynamic collection synchronization option |
+
+Available chart names and sections vary by country and may differ from those
+shown on the YouTube Music website. Only charts available to Kometa produce
+collections. Examples include Top 100 Music Videos and Top 100 Shorts for video
+charts, or Top 50 Pop and Top 50 Rock Music Videos for genre charts.
+
+=== "Country and per-chart limit"
+
+    Creates collections for available US genre charts, with at most 50 tracks
+    in each collection. `US` is a country string; `50` limits each generated
+    collection, rather than the number of collections.
+
+    ```yaml
+    dynamic_collections:
+      YouTube Music Genre Charts:
+        type: ytmusic_genre_charts
+        data:
+          country: US
+          limit: 50
+    ```
+
+=== "Exclude by key or name"
+
+    Creates US genre-chart collections except the Pop playlist key and the Rock
+    genre. On each run, Kometa logs genre keys as `<playlist ID> | <genre name>`;
+    use either value in the YAML exclusion list.
+
+    ```yaml
+    dynamic_collections:
+      YouTube Music Genre Charts:
+        type: ytmusic_genre_charts
+        data:
+          country: US
+          limit: 50
+        exclude:
+          - PL4fGSI1pDJn77aK7sAW2AT0oOzo5inWY8
+          - Rock
+    ```
+
+Each chart retains its track order. Its description and cover can be used when
+available; explicit collection details take priority.
+
+## Country reference {#supported-countries}
+
+<span id="youtube-music-top-artists-builder-supported-countries"></span>
+
+These codes are documented for both dynamic charts and top artists; use `global`
+for worldwide. Availability may change, and not every chart type is available
+in every country.
+
+??? info "Country codes"
+
+    ```text
+    AE, AR, AT, AU, BE, BO, BR, CA, CH, CL, CO, CR, CZ, DE, DK, DO, EC, EE, EG, ES, FI, FR, GB
+    GT, HK, HN, HU, ID, IE, IL, IN, IS, IT, JP, KE, KR, LU, MX, MY, NG, NI, NL, NO, NZ, PA, PE
+    PH, PL, PT, PY, RO, RS, RU, SA, SE, SG, SV, TH, TR, TW, TZ, UA, UG, US, UY, VN, ZA, ZW, ZZ
+    ```
+
+## Track matching
+
+Playlist tracks are matched to Plex by artist and track name, checking duration
+and album when available. Unmatched tracks appear in the missing-tracks log and
+report. Similar names and lengths can cause version mismatches; review results
+when the exact recording matters.

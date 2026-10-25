@@ -1,163 +1,200 @@
 # Tracearr Builders
 
-You can find items in your Plex using the watch history from your configured [Tracearr](https://docs.tracearr.com/) instance.
+Select library items from your [Tracearr](https://docs.tracearr.com/) watch history.
+All builders support custom sorting and playlists; collection support varies below.
 
-???+ warning "Tracearr Configuration"
+!!! warning "Configure Tracearr first"
 
-    [Configuring Tracearr](../../../config/tracearr.md) in the config is required for any of these builders.
+    Every builder requires [Tracearr configuration](../../../config/tracearr.md).
+    Playlists can combine movie and show libraries from one Plex server, but
+    cannot combine Tracearr history from multiple Plex servers.
 
-| Builder                           | Description                                                   |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:----------------------------------|:--------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`tracearr_popular`](#tracearr-history)   | Gets items watched by the most unique Tracearr users.               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_watched`](#tracearr-history)   | Gets items with the most completed Tracearr sessions.               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_watched_media`](#tracearr-watched-media) | Gets the distinct set of watched or partially watched items. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_trending`](#tracearr-history)  | Gets the most active items from recent Tracearr watch history.      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_rewatched`](#tracearr-history) | Gets items repeatedly played by the same Tracearr user.             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_completed`](#tracearr-history) | Gets the most recently completed items from Tracearr history.       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_binged`](#tracearr-history)    | Gets shows ranked by distinct completed episodes watched by one user. | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_transcoded`](#tracearr-history) | Gets items with the most sessions requiring transcoding.            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_watch_time`](#tracearr-history) | Gets items ranked by total time watched.                              | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_in_progress`](#tracearr-history) | Gets a user's unfinished movies and exact episodes.                   | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`tracearr_history`](#tracearr-history)   | Gets every movie/show in the Tracearr watch history feed.           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## Tracearr history — `tracearr_watched_media`, `tracearr_history`, `tracearr_watch_time`, `tracearr_in_progress`, `tracearr_popular` {#tracearr-history}
+| Builder | Selects / ranks by | Collections |
+|:--------|:------------------|:------------|
+| `tracearr_popular` | Most unique users | Movies, shows |
+| `tracearr_watched` | Most completed sessions | Movies, shows |
+| [`tracearr_watched_media`](#tracearr-watched-media) | Distinct completed or partially watched media, recent first | Movies, shows, episodes |
+| `tracearr_trending` | Recent activity | Movies, shows |
+| `tracearr_rewatched` | Repeat plays by the same user | Movies, shows |
+| `tracearr_completed` | Most recent completions | Movies, shows |
+| `tracearr_binged` | Distinct completed episodes watched by one user | Shows only |
+| `tracearr_transcoded` | Sessions requiring audio or video transcoding | Movies, shows |
+| `tracearr_watch_time` | Total watched time | Movies, shows |
+| [`tracearr_in_progress`](#continue-watching) | A user's unfinished movies and exact episodes | Playlist only |
+| `tracearr_history` | Items in the watch-history feed | Movies, shows |
 
-Most Tracearr builders below use the Public API history endpoints and their pagination and filtering support. Kometa prefers `/api/v2/public/history` and automatically falls back to `/api/v1/public/history` when v2 is unavailable. `tracearr_watched_media` instead uses its purpose-built v2 endpoint when Tracearr advertises that capability.
+Use `collection_order: custom` to preserve returned order and `sync_mode: sync`
+to keep membership synchronized on Kometa runs.
 
-| Builder | Description |
-|:--------|:------------|
-| `tracearr_popular`  | Gets items watched by the most unique Tracearr users. |
-| `tracearr_watched`  | Gets items with the most completed Tracearr sessions. |
-| `tracearr_watched_media` | Gets Tracearr's distinct set of watched or partially watched items. Unlike `tracearr_watched`, this is not a chart ranked by completed sessions. |
-| `tracearr_trending` | Gets the most active items from recent Tracearr watch history. |
-| `tracearr_rewatched` | Gets items repeatedly played by the same Tracearr user. |
-| `tracearr_completed` | Gets the most recently completed items from the Tracearr watch history feed. |
-| `tracearr_binged`    | Gets shows ranked by distinct completed episodes watched by a single Tracearr user. |
-| `tracearr_transcoded` | Gets items ranked by Tracearr sessions that required audio or video transcoding. |
-| `tracearr_watch_time` | Gets items ranked by total time watched. |
-| `tracearr_in_progress` | Gets a user's most recently played unfinished movies and exact episodes. This builder is playlist-only and requires Tracearr v2 and `user`. |
-| `tracearr_history`   | Gets every movie/show in the Tracearr watch history feed. |
+## History options {#tracearr-history}
 
-| Attribute | Description | Required | Default |
-|:----------|:------------|:--------:|:-------:|
-| `list_days` | Number of days to look back in the history. | :fontawesome-solid-circle-xmark:{ .red } | `30` |
-| `list_minimum` | Minimum activity required. This is unique users for `popular`; completed plays for `watched`/`completed`; repeat plays for `rewatched`; distinct completed episodes for `binged`; transcode plays for `transcoded`; total watched minutes for `watch_time`; and total plays for the other builders. | :fontawesome-solid-circle-xmark:{ .red } | `0` |
-| `list_size` | Number of Movies/Shows to add to this list. | :fontawesome-solid-circle-xmark:{ .red } | `10` |
-| `user` | Limits history to a Tracearr identity. Accepts the identity UUID, Tracearr username, Plex account ID, media-server user ID, or linked account username. Required by `tracearr_in_progress`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `watched` | Filters plays by Tracearr's completed-watch state. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `minimum_progress` | Minimum play completion percentage from `0` through `100`. | :fontawesome-solid-circle-xmark:{ .red } | `1` for `in_progress` |
-| `maximum_progress` | Maximum play completion percentage from `0` through `100`. | :fontawesome-solid-circle-xmark:{ .red } | `84` for `in_progress` |
-| `transcode` | Filters plays by whether video or audio was transcoded. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `video_decision` | Filters video playback by `directplay`, `copy`, or `transcode`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `audio_decision` | Filters audio playback by `directplay`, `copy`, or `transcode`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `transcode_reason` | Case-insensitive text contained in one of Tracearr's transcode reasons. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `subtitle_decision` | Filters by the subtitle decision, such as `burn`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `platform` | Filters by client platform. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `device` | Filters by playback device. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `resolution` | Filters by Tracearr's displayed source resolution, such as `4K`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `source_video_codec` | Filters by source video codec, such as `hevc`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `source_audio_codec` | Filters by source audio codec, such as `truehd`. | :fontawesome-solid-circle-xmark:{ .red } |  |
-| `genre` | Filters by an exact, case-insensitive Tracearr genre. | :fontawesome-solid-circle-xmark:{ .red } |  |
+These options apply to the history builders; `tracearr_watched_media` has its own
+[options](#tracearr-watched-media). All are optional except `user` for
+`tracearr_in_progress`.
 
-The `sync_mode: sync` and `collection_order: custom` settings are recommended since the list is continuously updated.
+### Activity and user
 
-Tracearr playlist builders can combine movie and show libraries from the same Plex server. A single playlist definition cannot combine Tracearr history from multiple Plex servers.
+| Attribute | Value / purpose | Default |
+|:----------|:----------------|:--------|
+| `list_days` | Number of days to look back | `30` |
+| `list_size` | Maximum items to add | `10` |
+| `list_minimum` | Minimum activity, measured as below | `0` |
+| `user` | Identity UUID, Tracearr username, Plex account ID, media-server user ID, or linked account username | No user filter |
+| `watched` | Completed-watch state filter | No filter |
+| `minimum_progress` | Completion percentage, 0-100 | `1` for in-progress |
+| `maximum_progress` | Completion percentage, 0-100 | `84` for in-progress |
 
-Kometa probes Tracearr's v2 Public API when connecting. When v2 is available, Kometa uses its history identity fields to match each play to its originating Plex library and exact Plex rating key. Movie playlists use the provider IDs supplied by Tracearr directly. Tracearr versions without v2 automatically use the v1 endpoint, and title/year matching is retained for older history records without library identity. Friendly cross-account user matching requires Tracearr v2; the other filters use whichever fields are available from the installed Tracearr version.
+`list_minimum` counts unique users for popular, completed plays for watched and
+completed, repeat plays for rewatched, distinct completed episodes for binged,
+transcode plays for transcoded, and watched **minutes** for watch time. Other
+history builders use total plays.
 
-Identical history requests are reused during the same Kometa run, reducing repeated pagination and pressure on Tracearr's shared v2 API rate limit.
+### Playback filters
 
-### Tracearr watched media {#tracearr-watched-media}
+Omit an attribute to leave it unfiltered.
 
-`tracearr_watched_media` uses `/api/v2/public/watched-media`, when provided by the installed Tracearr version. The endpoint returns compact, distinct media records rather than every playback session, permits up to 1,000 records per page, and supplies provider IDs for direct matching. Kometa checks Tracearr's v2 API specification for this individual capability because early Public API v2 releases do not include it.
+| Attribute | Value / purpose |
+|:----------|:----------------|
+| `transcode` | Whether audio or video was transcoded |
+| `video_decision`, `audio_decision` | `directplay`, `copy`, `transcode` |
+| `transcode_reason` | Case-insensitive text contained in a transcode reason |
+| `subtitle_decision` | Subtitle decision, such as `burn` |
+| `platform` | Client platform, such as `Apple TV` |
+| `device` | Playback device |
+| `resolution` | Displayed source resolution, such as `4K` |
+| `source_video_codec` | Source video codec, such as `hevc` |
+| `source_audio_codec` | Source audio codec, such as `truehd` |
+| `genre` | Exact, case-insensitive Tracearr genre |
 
-This builder is all-time by default. Set `list_days` to retain only records whose `last_watched_day` falls within that many days. Results remain ordered by most recent activity.
+### History examples {#tracearr-history-builders}
 
-| Attribute | Description | Required | Default |
-|:----------|:------------|:--------:|:-------:|
-| `list_size` | Maximum number of Movies, Shows, or Episodes to add. | :fontawesome-solid-circle-xmark:{ .red } | `10` |
-| `list_days` | Optionally limits results to media active within this many days. | :fontawesome-solid-circle-xmark:{ .red } | All time |
-| `user` | Limits watched state to one Tracearr identity. Accepts the same identity values as the history builders. | :fontawesome-solid-circle-xmark:{ .red } | All users |
-| `min_state` | Lowest state to include. `watched` returns completed media; `partial` includes both partially and completely watched media. | :fontawesome-solid-circle-xmark:{ .red } | `watched` |
+`tracearr_binged` requires at least two distinct completed episodes. In playlists,
+it returns shows only.
 
-Movie libraries are matched by TMDb or IMDb ID. Show libraries are matched by TVDb, TMDb, or IMDb ID. With `builder_level: episode`, episodes are matched by the parent show's TVDb ID plus season and episode numbers, with an episode IMDb ID as a fallback. Mixed-library playlists request movies and shows separately and merge them into one recent-first result.
+<span id="example-tracearr-history-builders"></span>
 
-```yaml
-collections:
-  Watched by Anthony:
-    sync_mode: sync
-    collection_order: custom
-    tracearr_watched_media:
-      user: Anthony
-      min_state: watched
-      list_size: 100
-```
+=== "Popular items"
 
-```yaml
-collections:
-  Recently Started:
-    sync_mode: sync
-    collection_order: custom
-    tracearr_watched_media:
-      user: Anthony
-      min_state: partial
-      list_days: 30
-      list_size: 50
-```
+    Selects up to 10 items from the last 30 days, ranked by unique users. These
+    numeric options control the lookback window and result count.
 
-### Tracearr history builders {#tracearr-history-builders}
+    ```yaml
+    collections:
+      Tracearr Popular:
+        tracearr_popular:
+          list_days: 30
+          list_size: 10
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-`tracearr_binged` requires at least two distinct completed episodes and works with Show libraries. In playlists, it returns shows only.
+=== "Watched time and platform"
 
-`tracearr_in_progress` requires Tracearr's v2 Public API. It examines the latest play for each movie or show so an older partial play is not returned after the user subsequently completed that item. Movies are matched by provider ID and shows add the exact unfinished episode using its Plex rating key. The builder is restricted to playlists to keep user-specific viewing activity out of shared Plex collections.
+    Selects up to 20 items with at least 60 watched minutes over the last 30 days
+    on Apple TV. Here `list_minimum` is minutes, not a play count; `platform` is
+    a string filter. Results rank by total watched time.
 
-???+ warning "Tracearr Configuration"
+    ```yaml
+    collections:
+      Most Watched on Apple TV:
+        tracearr_watch_time:
+          list_days: 30
+          list_minimum: 60
+          list_size: 20
+          platform: Apple TV
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-    [Configuring Tracearr](../../../config/tracearr.md) in the config is required for this builder.
+## Distinct watched media {#tracearr-watched-media}
 
-### Example Tracearr history builder(s) {#example-tracearr-history-builders}
+`tracearr_watched_media` selects distinct media records, rather than a chart
+ranked by completed sessions. It requires the watched-media capability available
+in newer Tracearr v2 versions; early v2 versions may not provide it.
 
-```yaml
-collections:
-  Tracearr History:
-    sync_mode: sync
-    collection_order: custom
-    tracearr_history:
-      list_days: 30
-      list_size: 10
-```
+| Attribute | Purpose | Default |
+|:----------|:--------|:--------|
+| `list_size` | Maximum movies, shows, or episodes | `10` |
+| `list_days` | Restrict to media whose last watched day is within this many days | All time |
+| `user` | Same identity forms as history options | All users |
+| `min_state` | `watched` for completed media; `partial` for both partial and complete | `watched` |
 
-```yaml
-collections:
-  Most Watched by Time:
-    sync_mode: sync
-    collection_order: custom
-    tracearr_watch_time:
-      list_days: 30
-      list_minimum: 60
-      list_size: 20
-      platform: Apple TV
-```
+Results remain recent-first. With `builder_level: episode`, episodes can be
+selected directly. Mixed movie/show playlists merge both types into one recent-first list.
+
+=== "Completed media"
+
+    Selects up to 100 distinct items completed by Anthony across all time.
+    Replace the username with the Tracearr identity you want. This is not the
+    most-played ranking returned by `tracearr_watched`.
+
+    ```yaml
+    collections:
+      Watched by Anthony:
+        tracearr_watched_media:
+          user: Anthony
+          min_state: watched
+          list_size: 100
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Partial or complete"
+
+    Selects up to 50 distinct items active in the last 30 days, including both
+    partially and completely watched items. `partial` is a minimum state string,
+    not a request for unfinished items only.
+
+    ```yaml
+    collections:
+      Recently Active Media:
+        tracearr_watched_media:
+          user: Anthony
+          min_state: partial
+          list_days: 30
+          list_size: 50
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+## Continue watching
+
+!!! important "Playlist and user required"
+
+    `tracearr_in_progress` requires Tracearr v2, a `user`, and a playlist definition.
+    It is not supported in shared Plex collections.
+
+The builder examines the latest play for each movie or show, so a later completion
+supersedes an older partial play. Movies match by provider ID; shows add the exact
+unfinished episode by Plex rating key.
+
+This example selects up to 20 unfinished items for Anthony with 10-84 percent
+completion in the last 30 days. The bounds are numeric percentages, not ratings.
+Replace the user and library names with your own.
 
 ```yaml
 playlists:
   Continue Watching with Tracearr:
-    sync_mode: sync
-    collection_order: custom
+    libraries: Movies, TV Shows
     tracearr_in_progress:
       user: Anthony
       list_days: 30
       minimum_progress: 10
       maximum_progress: 84
       list_size: 20
+    collection_order: custom
+    sync_mode: sync
 ```
 
-```yaml
-collections:
-  Tracearr Popular:
-    sync_mode: sync
-    collection_order: custom
-    tracearr_popular:
-      list_days: 30
-      list_size: 10
-```
+## Matching and version support
+
+History uses v2 when available and falls back to v1 otherwise. v2 can identify
+the originating Plex library and exact rating key; older records without library
+identity retain title/year matching. Friendly cross-account user matching requires
+v2. Playback filters depend on fields supplied by your installed Tracearr version.
+
+Watched-media matching uses TMDb or IMDb IDs for movies and TVDb, TMDb, or IMDb
+IDs for shows. Episodes use the parent TVDb ID with season and episode numbers,
+falling back to an episode IMDb ID. This builder requires its dedicated v2 capability.

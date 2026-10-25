@@ -1,76 +1,82 @@
 # WeTrakr Builders
 
-You can find items using lists and personal data from [WeTrakr](https://wetrakr.com/).
+Collect lists, tracking data, favorites, and ratings from [WeTrakr](https://wetrakr.com/).
+All builders support movies, shows, playlists, and custom sorting.
 
-???+ warning "WeTrakr Configuration"
+!!! warning "Configure WeTrakr first"
 
-    [Configuring WeTrakr](../../../config/wetrakr.md) in the config is required for any of these builders.
+    All builders require [WeTrakr configuration](../../../config/wetrakr.md).
+    Personal-data and ratings builders use the account associated with the
+    configured `authorization`.
 
-| Builder                            | Description                                                    | Works with Movies                          | Works with Shows                           | Works with Playlists and Custom Sort       |
-|:------------------------------------|:----------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`wetrakr_list`](#wetrakr-list)          | Finds every item in a WeTrakr list.                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`wetrakr_user_lists`](#wetrakr-list)    | Finds every item across a WeTrakr user's public lists.          | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`wetrakr_tracking`](#wetrakr-personal-data)  | Finds items in the configured WeTrakr account's tracking list, filtered by status. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`wetrakr_favorites`](#wetrakr-personal-data) | Finds every item in the configured WeTrakr account's favorites. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`wetrakr_ratings`](#wetrakr-ratings)    | Finds every item the configured WeTrakr account has rated.      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## WeTrakr list — `wetrakr_list`, `wetrakr_list_details`, `wetrakr_user_lists` {#wetrakr-list}
+| Builder | Finds |
+|:--------|:------|
+| [`wetrakr_list`](#wetrakr_list) | Items in specific lists |
+| [`wetrakr_user_lists`](#wetrakr_user_lists) | Items across a user's public lists |
+| [`wetrakr_tracking`](#wetrakr_tracking) | Tracked items, optionally filtered by status |
+| [`wetrakr_favorites`](#wetrakr_favorites) | Favorites |
+| [`wetrakr_ratings`](#wetrakr-ratings) | Rated items, optionally filtered by score |
 
-Finds every item in a WeTrakr list, or across a WeTrakr user's public lists.
+Use `collection_order: custom` to retain returned order and `sync_mode: sync`
+to keep collection membership synchronized as the source changes.
 
-???+ warning "WeTrakr Configuration"
+## Lists {#wetrakr-list}
 
-    [Configuring WeTrakr](../../../config/wetrakr.md) in the config is required for these builders.
+### Specific lists {#wetrakr_list}
 
-### wetrakr_list {#wetrakr_list}
+`wetrakr_list` accepts a list URL, such as `https://wetrakr.com/lists/13255`, or a
+numeric list ID. For multiple sources, use a YAML list or comma-separated string.
+Private and friends-only lists are readable only when owned by the authenticated
+account; an inaccessible private list produces an error naming the list.
 
-The expected input is a WeTrakr list URL (`https://wetrakr.com/lists/13255`) or its bare numeric id (`13255`).
-Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+Use `wetrakr_list_details` to also copy the description into the collection summary.
+With multiple lists, **only the first supplies the description**.
 
-The `sync_mode: sync` and `collection_order: custom` settings are recommended since WeTrakr lists can be
-updated externally and are returned in list order.
+<span id="example-wetrakr-list-builders"></span>
 
-Private and friends-only lists are only readable when they belong to the authenticated WeTrakr account; a
-private list belonging to someone else returns an error naming the list.
+=== "URL string"
 
-???+ tip "Details Builder"
+    Follows list 13255 in its returned order. The full URL is a string.
 
-    You can replace `wetrakr_list` with `wetrakr_list_details` if you would like to fetch and use the
-    WeTrakr list description as the collection summary. Only the first list's description is used when
-    multiple lists are given.
+    ```yaml
+    collections:
+      WeTrakr Picks:
+        wetrakr_list: https://wetrakr.com/lists/13255
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-### Example WeTrakr list builder(s) {#example-wetrakr-list-builders}
+=== "Multiple IDs and summary"
 
-```yaml
-collections:
-  WeTrakr List:
-    wetrakr_list: https://wetrakr.com/lists/13255
-    collection_order: custom
-    sync_mode: sync
-```
+    Combines items from two numeric list IDs using a YAML list. The collection
+    summary comes from list 13255, the first entry. The sources are combined,
+    rather than used as AND/OR filters.
 
-```yaml
-collections:
-  WeTrakr List:
-    wetrakr_list_details:
-      - 13255
-      - 1033032976
-    collection_order: custom
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      Combined WeTrakr Picks:
+        wetrakr_list_details:
+          - 13255
+          - 1033032976
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-### wetrakr_user_lists {#wetrakr_user_lists}
+### A user's public lists {#wetrakr_user_lists}
 
-Finds the union of every item across a WeTrakr user's public lists.
+`wetrakr_user_lists` accepts a numeric user ID, username, or profile URL such as
+`https://wetrakr.com/user/some_username`. Usernames and URLs are resolved through
+search using an exact, case-insensitive username match.
 
-The input can be a numeric WeTrakr user id, a bare username, or a profile URL
-(`wetrakr.com/user/<username>`) — a username or URL is resolved to its numeric id via WeTrakr's search API,
-matched on an exact (case-insensitive) username.
+Locked or non-public lists are skipped. More public lists require more requests;
+Kometa logs the number found before processing them.
 
-A user with many public lists means more requests; Kometa logs how many lists it found for that user before
-processing them. Locked or non-public lists in that user's list collection are skipped automatically.
+<span id="example-wetrakr-user-lists-builder"></span>
 
-### Example WeTrakr user lists builder {#example-wetrakr-user-lists-builder}
+Combines items across user 275's public lists. Replace `275` with the desired user
+ID, or supply their username or profile URL instead.
 
 ```yaml
 collections:
@@ -80,94 +86,105 @@ collections:
     sync_mode: sync
 ```
 
-## WeTrakr personal data — `wetrakr_tracking`, `wetrakr_favorites` {#wetrakr-personal-data}
+## Personal data {#wetrakr-personal-data}
 
-Finds items from the configured WeTrakr account's own tracking list or favorites.
+### Tracking {#wetrakr_tracking}
 
-???+ warning "WeTrakr Configuration"
+`wetrakr_tracking` accepts a blank value or `true` for every status valid for the
+library type. `false` disables the builder; a dictionary selects specific statuses.
 
-    [Configuring WeTrakr](../../../config/wetrakr.md) in the config is required for these builders. Each of
-    these builders reads the personal data of whichever WeTrakr account the configured `authorization` belongs to.
+| Status | Movies | Shows |
+|:-------|:-------|:------|
+| `planning`, `watched`, `dropped` | Supported | Supported |
+| `watching`, `waiting`, `paused` | Skipped | Supported |
 
-### wetrakr_tracking {#wetrakr_tracking}
+=== "All valid statuses"
 
-WeTrakr's tracking list carries one of six statuses per item: `planning`, `watching`, `waiting`, `watched`,
-`paused`, `dropped`. A blank value or `true` includes every status valid for the library type; `false` disables
-the builder entirely; an object lets you pick specific statuses.
+    Selects all tracked items valid for the library type. `true` is an unquoted
+    boolean; leaving the value blank has the same effect.
 
-```yaml
-collections:
-  WeTrakr Tracking:
-    wetrakr_tracking:
-    collection_order: custom
-    sync_mode: sync
+    ```yaml
+    collections:
+      WeTrakr Tracking:
+        wetrakr_tracking: true
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-  WeTrakr Currently Watching:
-    wetrakr_tracking:
-      watching: true
-    collection_order: custom
-    sync_mode: sync
-```
+=== "One status"
 
-Movie libraries only ever request the `planning`, `watched`, and `dropped` statuses — `watching`, `waiting`, and
-`paused` are show-only concepts and are skipped automatically for movie libraries.
+    In a show library, selects shows marked watching. The nested `true` enables
+    that status; movie libraries skip it because watching is a show-only status.
 
-### wetrakr_favorites {#wetrakr_favorites}
+    ```yaml
+    collections:
+      WeTrakr Currently Watching:
+        wetrakr_tracking:
+          watching: true
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Accepts a blank value or `true`:
+### Favorites {#wetrakr_favorites}
+
+Accepts a blank value or `true`. This example selects all favorites from the
+configured account, rather than a public user's lists.
 
 ```yaml
 collections:
   WeTrakr Favorites:
-    wetrakr_favorites:
+    wetrakr_favorites: true
     collection_order: custom
     sync_mode: sync
 ```
 
-| Builder             | Blank/`true` means                              | Also accepts             | Library restriction |
-|:---------------------|:-------------------------------------------------|:--------------------------|:---------------------|
-| `wetrakr_tracking`   | Every status valid for the library type          | Object of specific statuses, or `false` | Movies and Shows    |
-| `wetrakr_favorites`  | Entire favorites list                            | —                          | Movies and Shows    |
+## Ratings {#wetrakr-ratings}
 
-## WeTrakr ratings — `wetrakr_ratings` {#wetrakr-ratings}
+`wetrakr_ratings` accepts a blank value or `true` for all rated items, a number
+for a minimum score, or a dictionary of rating bounds. Scores use a 0-10 scale
+with one decimal place.
 
-Finds every item the configured WeTrakr account has rated.
+### Rating bounds {#attributes}
 
-???+ warning "WeTrakr Configuration"
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `minimum` | Number, 0-10; optional | Lowest rating to include |
+| `maximum` | Number, 0-10; optional | Highest rating to include |
 
-    [Configuring WeTrakr](../../../config/wetrakr.md) in the config is required for this builder.
+<span id="example-wetrakr-ratings-builders"></span>
 
-`wetrakr_ratings` accepts a blank value or `true` for every rated item, a number as a minimum rating, or an
-object with `minimum`/`maximum` bounds. WeTrakr ratings are on a 0–10 scale with one decimal place.
+=== "All rated items"
 
-### Example WeTrakr ratings builder(s) {#example-wetrakr-ratings-builders}
+    Selects every rated item, regardless of score. A blank value also selects all.
 
-```yaml
-collections:
-  WeTrakr Rated:
-    wetrakr_ratings:
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      WeTrakr Rated:
+        wetrakr_ratings: true
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  WeTrakr Rated 7+:
-    wetrakr_ratings: 7
-    sync_mode: sync
-```
+=== "Decimal threshold"
 
-```yaml
-collections:
-  WeTrakr Rated 7 to 9:
-    wetrakr_ratings:
-      minimum: 7
-      maximum: 9
-    sync_mode: sync
-```
+    Selects items rated at least 7.5. This number is a minimum rating, not an item limit.
 
-### Attributes {#attributes}
+    ```yaml
+    collections:
+      WeTrakr Rated 7.5 and Above:
+        wetrakr_ratings: 7.5
+        sync_mode: sync
+    ```
 
-| Attribute | Description               | Values                 |
-|:----------|:--------------------------|:------------------------|
-| `minimum` | Lowest rating to include  | Number, 0–10, optional |
-| `maximum` | Highest rating to include | Number, 0–10, optional |
+=== "Dictionary range"
+
+    Selects items rated from 7 through 9. Either bound can be omitted for a
+    one-sided filter.
+
+    ```yaml
+    collections:
+      WeTrakr Rated 7 to 9:
+        wetrakr_ratings:
+          minimum: 7
+          maximum: 9
+        sync_mode: sync
+    ```

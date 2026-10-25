@@ -136,7 +136,7 @@ NOTE: these lists are references for collections and playlists, not everything a
 * [Filters](filters.md)
 * [Settings](settings.md)
 * [Radarr/Sonarr Settings](settings.md)
-* [Collection/Playlist Metadata Updates](updates.md)
+* [Metadata updates](updates.md)
 
 ### Special playlist attributes
 

@@ -133,6 +133,7 @@ Home = "index.md"
 [[project.nav]]
 "Get Started" = [
     { "Installation" =  "kometa/install/index.md" },
+    { "Commands and environment variables" = "kometa/environmental.md" },
     { "Understanding your config and files" = "kometa/install/files.md" },
     { "YAML basics" = "kometa/yaml.md" },
     { "Docker images" = "kometa/install/images.md" },
@@ -368,14 +369,12 @@ Reference = [
     { Builders = [
     { "Movie and TV Databases" = [
     { TMDb = [
-    { "TMDb builders" = "files/builders/tmdb/builders.md" },
-    { Charts = "files/builders/tmdb/charts.md" },
-    { People = "files/builders/tmdb/people.md" },
+    { Builders = "files/builders/tmdb/builders.md" },
     { "Discover movies" = "files/builders/tmdb/discover/movie.md" },
     { "Discover shows" = "files/builders/tmdb/discover/show.md" },
 ] },
     { IMDb = [
-    { "IMDb builders" = "files/builders/imdb/builders.md" },
+    { Builders = "files/builders/imdb/builders.md" },
     { "Advanced search" = "files/builders/imdb/search.md" },
 ] },
     { TVDb = "files/builders/tvdb/index.md" },
@@ -386,10 +385,7 @@ Reference = [
     { FlickList = "files/builders/flicklist/index.md" },
     { Floppy = "files/builders/floppy/index.md" },
     { ICheckMovies = "files/builders/icheckmovies/index.md" },
-    { Letterboxd = [
-    { "Letterboxd builders" = "files/builders/letterboxd/builders.md" },
-    { "Discovery and filmographies" = "files/builders/letterboxd/discovery.md" },
-] },
+    { Letterboxd = "files/builders/letterboxd/builders.md" },
     { MDBList = "files/builders/mdblist/index.md" },
     { Serializd = "files/builders/serializd/index.md" },
     { Simkl = "files/builders/simkl/index.md" },
@@ -399,13 +395,10 @@ Reference = [
     { Anime = [
     { AniDB = "files/builders/anidb/index.md" },
     { AniList = [
-    { "AniList builders" = "files/builders/anilist/builders.md" },
+    { Builders = "files/builders/anilist/builders.md" },
     { "Advanced search" = "files/builders/anilist/search.md" },
 ] },
-    { MyAnimeList = [
-    { "MyAnimeList builders" = "files/builders/myanimelist/builders.md" },
-    { "Charts and rankings" = "files/builders/myanimelist/charts.md" },
-] },
+    { MyAnimeList = "files/builders/myanimelist/builders.md" },
 ] },
     { Music = [
     { "Apple Music and iTunes" = "files/builders/apple/index.md" },
@@ -415,26 +408,22 @@ Reference = [
 ] },
     { "Your Library and Activity" = [
     { Plex = [
-    { "Plex builders" = "files/builders/plex/builders.md" },
-    { Search = "files/builders/plex/search.md" },
+    { Builders = "files/builders/plex/builders.md" },
     { "Smart filters" = "files/builders/plex/smart-filter.md" },
+    { Search = "files/builders/plex/search.md" },
 ] },
     { Lidarr = "files/builders/lidarr/index.md" },
     { Radarr = "files/builders/radarr/index.md" },
     { Sonarr = "files/builders/sonarr/index.md" },
     { Tautulli = "files/builders/tautulli/index.md" },
+    { "Text and File lists" = "files/builders/textfile/index.md" },
     { Tracearr = "files/builders/tracearr/index.md" },
 ] },
-    { "Text and file lists" = "files/builders/textfile/index.md" },
 ] },
     { Filters = "files/filters.md" },
-    { "Definition settings" = "files/settings.md" },
-    { "Radarr/Sonarr definition settings" = "files/arr.md" },
-    { "Metadata Updates" = [
-    { "Collection and playlist updates" = "files/updates.md" },
-    { "Item updates" = "files/item_updates.md" },
-] },
-    { "Commands and environment variables" = "kometa/environmental.md" },
+    { "Definition options" = "files/settings.md" },
+    { "Radarr, Sonarr, and Seerr options" = "files/arr.md" },
+    { "Metadata updates" = "files/updates.md" },
 ]
 
 [[project.nav]]

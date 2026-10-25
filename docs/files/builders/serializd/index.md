@@ -5,27 +5,33 @@ search:
 
 # Serializd Builders
 
-Serializd builders use Serializd's JSON API to find shows. They are available only for show libraries and require [Serializd authentication](../../../config/serializd.md) in the Kometa configuration file.
+Collect shows from Serializd lists, watchlists, and homepage charts.
 
-| Builder | Description |
-| ------- | ----------- |
-| [`serializd_list`](#serializd-list) | Finds every show in a public Serializd list. |
-| [`serializd_watchlist`](#serializd-watchlist) | Finds every show in the authenticated user's or another public user's watchlist. |
-| [`serializd_trending`](#serializd-charts) | Finds a limited number of shows from Trending TV Shows. |
-| [`serializd_popular`](#serializd-charts) | Finds a limited number of shows from Popular TV Shows. |
-| [`serializd_featured`](#serializd-charts) | Finds a limited number of shows from Featured Shows. |
+!!! warning "Configure Serializd first"
 
-These builders do not scrape Serializd web pages. Private or otherwise API-inaccessible content produces a builder error.
+    These builders are **show-library only** and require
+    [Serializd authentication](../../../config/serializd.md).
 
-## Serializd charts — `serializd_trending`, `serializd_popular`, `serializd_featured` {#serializd-charts}
+## Choose a builder
 
-The Serializd chart builders retrieve the homepage's ordered show charts through its JSON API. Each builder value is the maximum number of shows to return.
+| Builder | Finds | Value |
+|:--------|:------|:------|
+| [`serializd_list`](#serializd-list) | Shows in public lists | List URL or YAML list of URLs |
+| [`serializd_watchlist`](#serializd-watchlist) | Shows in a watchlist | `me`, username, or full watchlist URL |
+| [`serializd_trending`](#serializd-charts) | Trending TV Shows | Positive integer limit |
+| [`serializd_popular`](#serializd-charts) | Popular TV Shows | Positive integer limit |
+| [`serializd_featured`](#serializd-charts) | Featured Shows | Positive integer limit |
 
-| Builder | Homepage chart |
-| ------- | -------------- |
-| `serializd_trending` | Trending TV Shows |
-| `serializd_popular` | Popular TV Shows |
-| `serializd_featured` | Featured Shows |
+Use `collection_order: custom` to preserve the returned order and `sync_mode: sync`
+to keep membership synchronized as the source changes. These builders use
+Serializd's JSON API; private or otherwise API-inaccessible content produces a
+builder error rather than falling back to web-page scraping.
+
+## Charts {#serializd-charts}
+
+Each chart builder takes an integer greater than zero. This example selects up
+to 10 trending shows in chart order. Replace `serializd_trending` with
+`serializd_popular` or `serializd_featured` to follow another homepage chart.
 
 ```yaml
 collections:
@@ -33,23 +39,13 @@ collections:
     serializd_trending: 10
     collection_order: custom
     sync_mode: sync
-
-  Popular TV Shows:
-    serializd_popular: 10
-    collection_order: custom
-    sync_mode: sync
-
-  Featured Shows:
-    serializd_featured: 10
-    collection_order: custom
-    sync_mode: sync
 ```
 
-The value must be an integer greater than `0`.
+## Lists {#serializd-list}
 
-## Serializd list — `serializd_list` {#serializd-list}
-
-The `serializd_list` builder finds every show in a public Serializd list.
+This example follows the public Live Action Ranked list. The builder value is a
+URL string. To combine lists, supply one URL per entry in a YAML list; returned
+Serializd order is retained.
 
 ```yaml
 collections:
@@ -59,32 +55,31 @@ collections:
     sync_mode: sync
 ```
 
-Multiple list URLs can be supplied as a YAML list. Items retain the order returned by Serializd.
+## Watchlists {#serializd-watchlist}
 
-## Serializd watchlist — `serializd_watchlist` {#serializd-watchlist}
+=== "Authenticated account"
 
-The `serializd_watchlist` builder finds every show in a Serializd watchlist using its JSON API.
+    Selects the watchlist of the account authenticated in your Kometa configuration.
+    `me` is a string identifying that account, not a boolean switch.
 
-Use `me` for the account authenticated in `config.yml`:
+    ```yaml
+    collections:
+      My Serializd Watchlist:
+        serializd_watchlist: me
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  My Serializd Watchlist:
-    serializd_watchlist: me
-    collection_order: custom
-    sync_mode: sync
-```
+=== "Public user"
 
-Use a username or complete watchlist URL for another public user:
+    Selects another user's public watchlist. Replace the placeholder with their
+    username. A full URL such as
+    `https://www.serializd.com/user/somebodys_username/watchlist` is also accepted.
 
-```yaml
-collections:
-  Someone Else's Watchlist:
-    serializd_watchlist: somebodys_username
-```
-
-```yaml
-collections:
-  Noah's Serializd Watchlist:
-    serializd_watchlist: https://www.serializd.com/user/somebodys_username/watchlist
-```
+    ```yaml
+    collections:
+      Community Watchlist:
+        serializd_watchlist: somebodys_username
+        collection_order: custom
+        sync_mode: sync
+    ```

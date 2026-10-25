@@ -1,17 +1,26 @@
 # Lidarr Builders
 
-Lidarr builders create artist collections from artists already tracked in Lidarr. They require a configured Lidarr connection and a Plex music library.
+Create artist collections from artists already tracked in Lidarr and matched
+to your Plex library.
 
-Kometa first matches each Lidarr artist's MusicBrainz artist ID to a Plex `mbid://` GUID. If the ID cannot identify one artist, it accepts an exact, case-insensitive Lidarr artist-name match only when it is unique in Plex. Artists without a unique match are reported as missing and are not added to the collection.
+!!! warning "Configure Lidarr first"
 
-- [All](#lidarr-all) includes every Lidarr artist.
-- [Taglist](#lidarr-taglist) includes artists with specified Lidarr tags.
+    Both builders require a [Lidarr connection](../../../config/lidarr.md)
+    and a Plex Music library. These collections contain artists, rather than
+    individual albums or tracks.
 
-## Lidarr all — `lidarr_all` {#lidarr-all}
+## Choose a builder
 
-`lidarr_all` includes every artist currently tracked in Lidarr.
+| Builder | Selects | Value |
+|:--------|:--------|:------|
+| [`lidarr_all`](#lidarr-all) | Every artist tracked in Lidarr | `true` |
+| [`lidarr_taglist`](#lidarr-taglist) | Artists with all supplied Lidarr tags | Tag names, or blank for untagged artists |
 
-Kometa matches the Lidarr MusicBrainz artist ID to a Plex artist GUID first. If the ID cannot identify one Plex artist, it uses the Lidarr artist name only when that name matches exactly one Plex artist, ignoring case.
+## All artists {#lidarr-all}
+
+Selects all tracked Lidarr artists that match your Plex library. `true` is an
+unquoted boolean. `sync_mode: sync` keeps collection membership synchronized on
+Kometa runs.
 
 ```yaml
 collections:
@@ -20,15 +29,36 @@ collections:
     sync_mode: sync
 ```
 
-## Lidarr taglist — `lidarr_taglist` {#lidarr-taglist}
+## Tags {#lidarr-taglist}
 
-`lidarr_taglist` includes Lidarr artists that have every supplied tag. Leave the value blank to include untagged artists.
+Pass the Lidarr tag names as a comma-separated string. **Every supplied tag must
+match (AND)**. Leave the value blank to select artists without tags.
 
-```yaml
-collections:
-  Kometa Artists:
-    lidarr_taglist: kometa, favorites
+=== "Multiple tags"
 
-  Untagged Lidarr Artists:
-    lidarr_taglist:
-```
+    Selects artists carrying both `kometa` and `favorites` in Lidarr. The quoted
+    value is one comma-separated string, rather than a boolean or a numeric ID.
+
+    ```yaml
+    collections:
+      Favorite Kometa Artists:
+        lidarr_taglist: "kometa,favorites"
+    ```
+
+=== "Blank value"
+
+    Selects Lidarr artists with no tags. The blank value requests untagged
+    artists; it does not select every tracked artist.
+
+    ```yaml
+    collections:
+      Untagged Lidarr Artists:
+        lidarr_taglist:
+    ```
+
+## Artist matching
+
+Kometa first matches each Lidarr MusicBrainz artist ID to a Plex `mbid://` GUID.
+If the ID cannot identify one artist, it accepts an exact, case-insensitive
+artist-name match only when unique in Plex. Missing or ambiguous artists are
+reported as missing and are not added to the collection.

@@ -159,9 +159,8 @@ There are multiple types of attributes that can be utilized within a collection:
 * [Builders](definition-components.md#builders)
 * [Filters](filters.md)
 * [Settings](settings.md)
-* [Radarr/Sonarr Settings](settings.md)
-* [Collection/Playlist Metadata Updates](updates.md)
-* [Item Metadata Updates](item_updates.md)
+* [Radarr, Sonarr, and Seerr options](arr.md)
+* [Metadata updates](updates.md)
 
 ## Example file
 

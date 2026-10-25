@@ -1,140 +1,89 @@
 # Plex Builders
 
-Plex Builders utilize media that already exists within your Plex library to place them into a Collection.
-
-Plex has two categories of Collections - Smart and Manual. The same search criteria can be used to build a Smart or Manual collection in most instances. 
-
-To keep things simple we will use the term Smart Builders and Manual Builders, which refers to the criteria that is used to build the Collection.
-
-Smart Builders use filters (rules) to build collections that match the criteria of the Builder. When new media is added to your library, or if metadata of any item in your library changes to match the Builder's rules, the media is automatically included in the collection without the need to run Kometa again. 
-
-Manual (also known as Dumb or non-Smart) Builders are static in nature and will not dynamically update as new media is added/metadata criteria changes across your library - you will have to run Kometa any time you want the Builder to re-run.
-
-Smart Builders are usually the recommended approach as they are lightweight and faster to process than Dumb Builders
+Build collections from items already in your Plex library. Use a
+[smart filter](smart-filter.md) for rules Plex maintains automatically, or a manual
+builder when Kometa should select the members on each run.
 
 ## Understanding smart vs manual collections
 
-There are some key differences that you should understand before choosing if you want to use a Smart or Manual Builder, this table shows you the key differences between the Collections that are built from each type of Builder.
+| Behaviour | Smart collection | Manual collection |
+|:----------|:-----------------|:------------------|
+| Membership updates | Plex reevaluates rules as library data changes | Kometa updates membership when it runs; items can also be edited manually |
+| Selection | Plex's available filters | Library items selected by builders and filters |
+| Typical use | Live rules, such as highly rated thrillers | Specific IDs, curated lists, or external sources |
+| Editing | Change the filter rules | Change items or the configuration selecting them |
+| Plex icon | Gear icon | Standard collection |
 
-| Feature                                          | **Smart Collection**                                                                       | **Manual (Dumb) Collection**                                              |
-|--------------------------------------------------|--------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| Automation                                       | Automatically includes or removes items as your library changes                            | Requires manual updates—items must be added or removed by hand            |
-| Use Case                                         | Great for auto-generating groups like “Movies Released This Year” or “Top-Rated Thrillers” | Ideal for curated lists like “My Favorites” or “Family Movie Night Picks” |
-| Customization                                    | Built using Plex’s filter system; limited to available filter options                      | Fully customizable—any item from the library can be included              |
-| Accuracy                                         | Always reflects real-time library data based on filter criteria                            | Remains the same unless manually edited                                   |
-| Icon                                             | Identified with a gear icon in the Plex UI (⚙️)                                            | No special icon—just a standard collection                                |
-| Behavior After Library Scan                      | Automatically refreshes based on updated metadata                                          | No change unless edited manually                                          |
-| Editing                                          | Filters can be edited to change which items are included                                   | Items must be individually added/removed                                  |
-| Metadata Changes (via Refresh or Kometa updates) | Filters remain intact; collection contents may shift as metadata changes                   | Content stays fixed unless explicitly modified by scripts or user         |
+Smart collections are usually lighter and faster when all criteria live in Plex.
+[Smart label collections](../../settings.md#smart-label-definitions) are an
+exception to this simple distinction.
 
-There are some exceptions to the above when using a Smart Builder (namely when using a [Smart Label Definition](../../settings.md#smart-label-definitions)), but the above should offer a basic understanding of the key differences.
+## Choose a builder {#plex-builder-types}
+
+| Builder | Selects | Supports | Playlists / custom sort |
+|:--------|:--------|:---------|:-----------------------|
+| [`smart_filter`](smart-filter.md) | A live Plex filter | Movies, shows, music | Custom sort; music smart playlists only |
+| [`plex_search`](search.md) | Search results when Kometa runs | See search attributes for library support | Yes |
+| [`plex_all`](#plex-all) | Every library item | Movies, shows | No |
+| [`plex_id`](#plex-id) | Plex metadata IDs or GUIDs | Movies, shows | No |
+| [`plex_rating_key`](#plex-rating-key) | Server-local rating keys | Movies, shows | No |
+| [`plex_watchlist`](#plex-watchlist) | Watchlist items | Movies, shows | Yes |
+| [`plex_pilots`](#plex-pilots) | First episode of each show | Shows, episode level | Yes |
+| [`plex_collectionless`](#plex-collectionless) | Items outside the considered collections | Movies, shows | No |
 
 ## Builder attributes
 
-The majority of Smart and Manual Builders utilize the same Builder Attributes. Any deviation from this will be highlighted against the specific Builder.
+These query options apply to search and smart filters. Individual builders below
+have their own input forms.
 
-| Attribute  | Description & Values                                                                                                                                                                                                                               |
-|:-----------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `limit`    | **Description:** The max number of item for the filter.<br>**Default:** `all`<br>**Values:** `all` or a number greater than 0                                                                                                                      |
-| `sort_by`  | **Description:** This will control how the filter is sorted in your library. You can do a multi-level sort using a list.<br>**Default:** `random`<br>**Values:** Any sort options for your filter type in the [Sorts Options Table](#plex-sort-options) |
-| `validate` | **Description:** Determines if a collection will fail on a validation error<br>**Default:** `true`<br>**Values**: `true` or `false`                                                                                                                |
-
-## Plex builder types
-
-| Builder                                    | Description                                                                                                                                                  |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`smart_filter`](smart-filter.md)          | use Plex's [Advanced Filters](https://support.plex.tv/articles/201273953-collections/) to create a smart collection based on the filter parameters provided. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`plex_all`](#plex-all)                       | Gets every movie/show in your library. Useful with [Filters](../../filters.md)                                                                               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`plex_id`](#plex-id)                         | Gets items using Plex metadata IDs or full Plex GUIDs                                                                                                         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`plex_rating_key`](#plex-rating-key)         | Gets items using numeric Plex rating keys                                                                                                                     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`plex_search`](search.md)                 | Gets every movie/show based on the search parameters provided                                                                                                | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`plex_watchlist`](#plex-watchlist)           | Gets every movie/show in your Watchlist.                                                                                                                     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`plex_pilots`](#plex-pilots)                 | Gets the first episode of every show in your library                                                                                                         |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`plex_collectionless`](#plex-collectionless) | Gets every movie/show that is not in a collection                                                                                                            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-
+{%
+    include-markdown "./search.md"
+    start="<!--query-options-start-->"
+    end="<!--query-options-end-->"
+%}
 
 {%
     include-markdown "./search-options.md"
-  start="<!--shared-content-start-->"
+    start="<!--shared-content-start-->"
 %}
 
 {%
     include-markdown "./sort-options.md"
-  start="<!--shared-content-start-->"
+    start="<!--shared-content-start-->"
 %}
 
-## Plex all — `plex_all` {#plex-all}
+## All library items {#plex-all}
 
-Finds every item in your library. Useful with [Filters](../../filters.md).
+`plex_all` accepts a boolean. Use `true` to select the library, optionally narrowing
+it with Kometa [filters](../../filters.md).
 
-The expected input is either true or false.
+<span id="example-plex-all-builders"></span>
 
-See the shared [sort options](#plex-sort-options) above.
-
-### Example Plex all builder(s) {#example-plex-all-builders}
+Selects items whose user rating is at least 9. `true` is an unquoted boolean and
+`9` is an inclusive numeric threshold. These are Kometa filters, rather than a
+live Plex smart filter.
 
 ```yaml
 collections:
-  9.0 Movies:
+  My 9.0 Movies:
     plex_all: true
     filters:
       user_rating.gte: 9
 ```
 
-## Plex collectionless — `plex_collectionless` {#plex-collectionless}
+## Specific identifiers
 
-**This is not needed if you're using [Smart Label Collections](../../settings.md#smart-label-definitions).**
+Neither ID builder guarantees a collection ordered like the input list.
 
-Finds every item that is not in a collection unless the collection is in the exclusion list. This is a special 
-collection type to help keep your library looking correct. When items in your library are in multiple collections it 
-can mess up how they're displayed in your library.
+### Metadata IDs {#plex-id}
 
-For Example, if you have a `Marvel Cinematic Universe` Collection set to `Show this collection and its items` and an 
-`Iron Man` Collection set to `Hide items in this collection` what happens is the show overrides the hide, and you end 
-up with both the collections and the 3 Iron Man movies all displaying.
+`plex_id` accepts one value or a YAML list. Values are bare 24-character metadata
+IDs or complete `plex://` GUIDs. Missing library items are skipped with a warning.
+Episode GUIDs, such as `plex://episode/63e3eedd166819851638a317`, are also supported
+for show-part collections.
 
-Alternatively, if you set the `Marvel Cinematic Universe` Collection to `Hide items in this collection` then movies 
-without a collection like `The Incredible Hulk` will be hidden from the library view.
-
-To combat the problem above you set all collections to `Hide items in this collection` then create a collection set to 
-`Hide collection` and put every movie that you still want to display in that collection. 
-
-With the variability of collections generated by the Kometa maintaining a collection like this becomes very difficult, 
-so in order to automate it, you can use `plex_collectionless`. You just have to tell it what collections to exclude or 
-what collection prefixes to exclude.
-
-There are two attributes for `plex_collectionless`:
-
-* `exclude`: Exclude these Collections from being considered for collectionless. 
-* `exclude_prefix` Exclude Collections whose title or sort title starts with a prefix from being considered for 
-collectionless. 
- 
-**At least one exclusion is required.**
-
-### Example Plex collectionless builder(s) {#example-plex-collectionless-builders}
-
-```yaml
-collections:
-  Collectionless:
-    plex_collectionless:
-      exclude_prefix:
-        - "!"
-        - "+"
-        - "~"
-      exclude: 
-        - Marvel Cinematic Universe
-    sort_title: ~_Collectionless
-    collection_order: alpha
-    collection_mode: hide
-```
-
-* Both `exclude` and `exclude_prefix` can take multiple values as a List.
-* This is a known issue with Plex Collection and there is a [Feature Suggestion](https://forums.plex.tv/t/collection-display-issue/305406) detailing the issue more on their 
-forms.
-
-## Plex ID — `plex_id` {#plex-id}
-
-The `plex_id` builder finds items already in Plex using their Plex metadata ID. It accepts a single ID or a list of IDs. Each value can be either a bare 24-character metadata ID or a complete `plex://` GUID.
+Selects two movies using different identifier forms. Replace the example values
+with Plex metadata identifiers for the items you want.
 
 ```yaml
 collections:
@@ -144,17 +93,33 @@ collections:
       - plex://movie/5d776824880197001ec901ab
 ```
 
-For show-part collections, episode GUIDs such as `plex://episode/63e3eedd166819851638a317` are also supported. Values that do not exist in the configured library are skipped with a warning.
+### Rating keys {#plex-rating-key}
 
-This builder does not guarantee that the resulting collection follows the order of the configured IDs.
+`plex_rating_key` accepts one numeric key or a YAML list. Keys are local to your
+Plex server and may change if a library is rebuilt. Prefer `plex_id` when a stable
+metadata identifier is available.
 
-## Plex pilots — `plex_pilots` {#plex-pilots}
+Selects items with local keys 123 and 456. Replace these integers with keys from
+your server; they are not IMDb, TMDb, or Plex metadata IDs.
 
-Gets the first episode of every show in your library. This only works with `builder_level: episode`
+```yaml
+collections:
+  Selected Local Items:
+    plex_rating_key:
+      - 123
+      - 456
+```
 
-See the shared [sort options](#plex-sort-options) above.
+## Pilot episodes {#plex-pilots}
 
-### Example Plex pilots builder(s) {#example-plex-pilots-builders}
+!!! important "Episode level required"
+
+    `plex_pilots` requires `builder_level: episode` and a show library.
+
+<span id="example-plex-pilots-builders"></span>
+
+Selects the first episode of every show. `true` enables the builder; the
+collection contains episodes rather than complete shows.
 
 ```yaml
 collections:
@@ -163,40 +128,19 @@ collections:
     plex_pilots: true
 ```
 
-## Plex rating key — `plex_rating_key` {#plex-rating-key}
+## Watchlist {#plex-watchlist}
 
-The `plex_rating_key` builder finds items already in Plex using their numeric Plex rating key. It accepts a single rating key or a list.
-
-```yaml
-collections:
-  Selected Plex Movies:
-    plex_rating_key:
-      - 123
-      - 456
-```
-
-Rating keys are local to a Plex server and can change if a library is rebuilt. Use [`plex_id`](#plex-id) when a stable Plex metadata identifier is available.
-
-This builder does not guarantee that the resulting collection follows the order of the configured rating keys.
-
-## Plex watchlist — `plex_watchlist` {#plex-watchlist}
-
-Finds every item in your Watchlist.
-
-The expected input is the sort you want returned. It defaults to `added.asc`.
+`plex_watchlist` takes a sort string, defaulting to `added.asc`.
 
 ### Watchlist sort options {#watchlist-sort-options}
 
-| Sort Option                                 | Description                                 |
-|:--------------------------------------------|:--------------------------------------------|
-| `title.asc`<br>`title.desc`                 | Sort by Title                               |
-| `release.asc`<br>`release.desc`             | Sort by Release Date (Originally Available) |
-| `critic_rating.asc`<br>`critic_rating.desc` | Sort by Critic Rating                       |
-| `added.asc`<br>`added.desc`                 | Sort by Date Added to your Watchlist        |
+Append `.asc` or `.desc` to `title`, `release`, `critic_rating`, or `added`.
+These sort by title, original release date, critic rating, or watchlist-added date.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended.
+<span id="example-plex-watchlist-builders"></span>
 
-### Example Plex watchlist builder(s) {#example-plex-watchlist-builders}
+Selects watchlist items highest critic rating first. Custom ordering preserves
+that order; synchronization aligns membership on Kometa runs.
 
 ```yaml
 collections:
@@ -206,7 +150,40 @@ collections:
     sync_mode: sync
 ```
 
-## More Plex references
+## Collectionless items {#plex-collectionless}
 
-- [Search](search.md)
-- [Smart filters](smart-filter.md)
+Selects items not in a collection, ignoring collections named by your exclusions.
+**At least one exclusion is required.** This is not needed with
+[smart label collections](../../settings.md#smart-label-definitions).
+
+| Attribute | Value | Ignores when checking membership |
+|:----------|:------|:--------------------------------|
+| `exclude` | Collection title or YAML list | Named collections |
+| `exclude_prefix` | Prefix or YAML list | Titles or sort titles starting with a prefix |
+
+This can help when overlapping collection display modes expose or hide items
+unexpectedly. A broad Marvel Cinematic Universe collection can conflict with a
+hidden-items Iron Man collection. Set normal collections to hide their items,
+then use a hidden collection to hold items that should remain visible. See the
+[Plex display issue discussion](https://forums.plex.tv/t/collection-display-issue/305406).
+
+<span id="example-plex-collectionless-builders"></span>
+
+Builds a hidden collection of items that are collectionless after ignoring Marvel
+Cinematic Universe and collections starting with `!`, `+`, or `~`. These exclusions
+apply to the membership check, rather than excluding movies from the result.
+
+```yaml
+collections:
+  Collectionless:
+    plex_collectionless:
+      exclude_prefix:
+        - "!"
+        - "+"
+        - "~"
+      exclude:
+        - Marvel Cinematic Universe
+    sort_title: ~_Collectionless
+    collection_order: alpha
+    collection_mode: hide
+```

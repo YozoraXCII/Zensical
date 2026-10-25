@@ -1,102 +1,121 @@
 # YamTrack Builders
 
-You can find items using lists from your [YamTrack](https://github.com/FuzzyGrim/YamTrack) instance.
+Collect movies, shows, and tracked anime from your
+[YamTrack](https://github.com/FuzzyGrim/YamTrack) instance. Both builders support
+movies, shows, playlists, and custom sorting, using TMDb and TVDb IDs to identify items.
 
-???+ warning "YamTrack Configuration"
+!!! warning "Configure YamTrack first"
 
-    [Configuring YamTrack](../../../config/yamtrack.md) in the config is required for any of these builders.
+    All builders require [YamTrack configuration](../../../config/yamtrack.md).
+    List URLs must belong to the configured instance; tracking uses the configured user.
 
-| Builder                         | Description                                      |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:--------------------------------|:-------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`yamtrack_list`](#yamtrack-list)      | Finds every movie/show in the YamTrack List. Extracts both TMDb and TVDB IDs. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`yamtrack_tracked`](#yamtrack-tracked)| Finds tracked movies/shows/anime by YamTrack status. Extracts both TMDb and TVDB IDs. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## YamTrack list — `yamtrack_list`, `yamtrack_list_details` {#yamtrack-list}
+| Builder | Finds |
+|:--------|:------|
+| [`yamtrack_list`](#yamtrack-list) | Items in specific lists |
+| [`yamtrack_tracked`](#yamtrack-tracked) | Tracked items with selected statuses and media types |
 
-Finds every item in the YamTrack List.
+## Lists {#yamtrack-list}
 
-The expected input is a YamTrack List URL from the configured YamTrack instance. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+`yamtrack_list` accepts a full list URL. Multiple sources can be supplied as a
+YAML list or comma-separated string. Use `collection_order: custom` to preserve
+list order and `sync_mode: sync` to keep membership synchronized.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists can be updated in YamTrack and are returned in list order.
+Use `yamtrack_list_details` to also copy the list description into the collection
+summary. With multiple lists, **only the first supplies the description**.
+Replace the example URLs with URLs from your configured instance.
 
-???+ tip "Details Builder"
+<span id="example-yamtrack-list-builders"></span>
 
-    You can replace `yamtrack_list` with `yamtrack_list_details` if you would like to fetch and use the YamTrack list description as the collection summary.
+=== "URL string"
 
-### Example YamTrack list builder(s) {#example-yamtrack-list-builders}
+    Follows list 1 in source order. The builder value is a full URL string.
 
-```yaml
-collections:
-  YamTrack List:
-    yamtrack_list: https://yamtrack.domain.com/list/1
-    collection_order: custom
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      YamTrack Picks:
+        yamtrack_list: https://yamtrack.domain.com/list/1
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  YamTrack List:
-    yamtrack_list_details:
-      - https://yamtrack.domain.com/list/1
-    collection_order: custom
-    sync_mode: sync
-```
+=== "Multiple lists and summary"
 
-* You can update the collection summary with the YamTrack list description by using `yamtrack_list_details`.
-* You can specify multiple lists in `yamtrack_list_details`, but only the first one is used to update the collection summary.
+    Combines items from lists 1 and 2 using a YAML list of URL strings. The
+    collection summary comes from list 1. This combines sources, rather than
+    applying AND/OR search logic.
 
-## YamTrack tracked — `yamtrack_tracked` {#yamtrack-tracked}
+    ```yaml
+    collections:
+      Combined YamTrack Picks:
+        yamtrack_list_details:
+          - https://yamtrack.domain.com/list/1
+          - https://yamtrack.domain.com/list/2
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Finds every tracked item from the configured YamTrack user's movie and TV pages with the selected statuses.
+## Tracked items {#yamtrack-tracked}
 
-???+ warning "YamTrack Configuration"
+`yamtrack_tracked` selects tracked items using nested media and status dictionaries.
 
-    [Configuring YamTrack](../../../config/yamtrack.md) in the config is required for this builder.
+### Media blocks {#attributes}
 
-### Example YamTrack tracked builder {#example-yamtrack-tracked-builder}
+| Attribute | Selects | Required |
+|:----------|:--------|:---------|
+| `movies` | Tracked movies | No |
+| `tv_shows` | Tracked TV shows | No |
+| `anime` | Tracked anime | No |
 
-```yaml
-collections:
-  YamTrack Tracked:
-    yamtrack_tracked:
-      movies:
-        dropped: false
-        planning: true
-        in_progress: true
-        paused: false
-        completed: false
-      tv_shows:
-        dropped: false
-        planning: true
-        in_progress: true
-        paused: false
-        completed: false
-      anime:
-        dropped: false
-        planning: true
-        in_progress: true
-        paused: false
-        completed: false
-```
+Anime may contain both movies and shows. Kometa includes only items matching the
+current library's media type.
 
-In the above example, Kometa adds only items marked `Planning` or `In Progress`.
+Each present block supports `dropped`, `planning`, `in_progress`, `paused`, and
+`completed`. These are **unquoted booleans**: `true` includes a status and `false`
+excludes it. **An omitted status in a present block defaults to `true`.**
+To select only certain statuses, explicitly disable the others.
 
-### Attributes {#attributes}
+<span id="example-yamtrack-tracked-builder"></span>
 
-| Attribute     | Description                            | Values        |
-|:--------------|:---------------------------------------|:--------------|
-| `movies`      | Movie statuses to include. Optional.   | Status block  |
-| `tv_shows`    | TV show statuses to include. Optional. | Status block  |
-| `anime`       | Anime statuses to include. Optional.   | Status block  |
+=== "Select planning and in progress"
 
-Note that `anime` can have both Movies and TV Shows in YamTrack. Kometa will filter only the media type that correlates with the library that is being run.
+    Selects only movies marked Planning or In Progress. Both desired statuses
+    are enabled; the remaining statuses are explicitly disabled. The nested
+    dictionary is under `movies`, rather than directly under the builder.
 
-Status blocks support these boolean attributes. When a status attribute is omitted from a present `movies`, `tv_shows`, or `anime` block, it defaults to `true`.
+    ```yaml
+    collections:
+      YamTrack Movies to Continue:
+        yamtrack_tracked:
+          movies:
+            dropped: false
+            planning: true
+            in_progress: true
+            paused: false
+            completed: false
+    ```
 
-| Attribute     | YamTrack Status | Accepted Values | Default |
-|:--------------|:----------------|:----------------|:--------|
-| `dropped`     | Dropped         | `true`/`false`  | `true`  |
-| `planning`    | Planning        | `true`/`false`  | `true`  |
-| `in_progress` | In Progress     | `true`/`false`  | `true`  |
-| `paused`      | Paused          | `true`/`false`  | `true`  |
-| `completed`   | Completed       | `true`/`false`  | `true`  |
+=== "Shows and anime"
+
+    Selects Planning and In Progress items from both TV shows and anime.
+    Each media block has its own status flags; the filters are not shared
+    automatically between blocks. Anime is filtered to the current library type.
+
+    ```yaml
+    collections:
+      YamTrack Shows and Anime to Continue:
+        yamtrack_tracked:
+          tv_shows:
+            dropped: false
+            planning: true
+            in_progress: true
+            paused: false
+            completed: false
+          anime:
+            dropped: false
+            planning: true
+            in_progress: true
+            paused: false
+            completed: false
+    ```

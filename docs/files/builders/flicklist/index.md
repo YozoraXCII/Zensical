@@ -1,75 +1,83 @@
 # FlickList Builders
 
-You can find items using lists and personal data from [FlickList](https://flicklist.tv/).
+Collect movies and shows from [FlickList](https://flicklist.tv/) lists and account data.
+All builders support playlists and custom sorting; media restrictions are shown below.
 
-???+ warning "FlickList Configuration"
+!!! warning "Configure FlickList first"
 
-    [Configuring FlickList](../../../config/flicklist.md) in the config is required for any of these builders.
+    Every builder requires the [FlickList configuration block](../../../config/flicklist.md).
+    Personal-data and ratings builders use the account belonging to your configured
+    `api_key`, with `read` access. Public user lists need no particular API key scope,
+    but still require the configuration block.
 
-| Builder                              | Description                                                         | Works with Movies                          | Works with Shows                           | Works with Playlists and Custom Sort       |
-|:-------------------------------------|:--------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`flicklist_list`](#flicklist-list)          | Finds every item in a FlickList list.                               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_user_lists`](#flicklist-list)    | Finds every item across a FlickList user's public lists.            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_watchlist`](#flicklist-personal-data) | Finds every item in the configured FlickList user's watchlist.      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_favorites`](#flicklist-personal-data) | Finds every item in the configured FlickList user's favorites.      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_watched`](#flicklist-personal-data)   | Finds every item the configured FlickList user has watched.         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_up_next`](#flicklist-personal-data)   | Finds the configured FlickList user's next-unwatched-episode queue. | :fontawesome-solid-circle-xmark:{ .red }   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_tracked`](#flicklist-personal-data)   | Finds shows the configured FlickList user is tracking.              | :fontawesome-solid-circle-xmark:{ .red }   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`flicklist_ratings`](#flicklist-ratings)    | Finds every item the configured FlickList user has rated.           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## FlickList list — `flicklist_list`, `flicklist_list_details`, `flicklist_user_lists` {#flicklist-list}
+| Builder | Finds | Supports |
+|:--------|:------|:---------|
+| [`flicklist_list`](#flicklist_list) | Items in specific lists | Movies, shows |
+| [`flicklist_user_lists`](#flicklist_user_lists) | Items across a user's public lists | Movies, shows |
+| [`flicklist_watchlist`](#flicklist-personal-data) | Entire watchlist, regardless of status | Movies, shows |
+| [`flicklist_favorites`](#flicklist-personal-data) | Favorites | Movies, shows |
+| [`flicklist_watched`](#flicklist-personal-data) | Actual watched history | Movies, shows |
+| [`flicklist_up_next`](#flicklist-personal-data) | Next-unwatched-episode queue | Shows |
+| [`flicklist_tracked`](#flicklist-personal-data) | Tracked shows | Shows |
+| [`flicklist_ratings`](#flicklist-ratings) | Rated items, optionally filtered by score | Movies, shows |
 
-Finds every item in a FlickList list, or across a FlickList user's public lists.
+Use `collection_order: custom` to preserve the source order and `sync_mode: sync`
+to keep collection membership synchronized as the source changes.
 
-???+ warning "FlickList Configuration"
+## Lists {#flicklist-list}
 
-    [Configuring FlickList](../../../config/flicklist.md) in the config is required for these builders.
+### Specific lists {#flicklist_list}
 
-### flicklist_list {#flicklist_list}
+`flicklist_list` accepts a full URL, such as `https://flicklist.tv/list/4821`,
+or a numeric list ID, such as `4821`. For multiple sources, use a YAML list or
+comma-separated string. The sources are combined, rather than used as AND/OR filters.
 
-The expected input is a FlickList list URL (`https://flicklist.tv/list/4821`) or its bare numeric id (`4821`).
-Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+Use `flicklist_list_details` to also copy the list description to the collection
+summary. With multiple lists, **only the first list supplies the description**.
 
-The `sync_mode: sync` and `collection_order: custom` settings are recommended since FlickList lists can be
-updated externally and are returned in list order.
+<span id="example-flicklist-list-builders"></span>
 
-???+ tip "Details Builder"
+=== "One URL"
 
-    You can replace `flicklist_list` with `flicklist_list_details` if you would like to fetch and use the
-    FlickList list description as the collection summary. Only the first list's description is used when
-    multiple lists are given.
+    Follows list 4821 in its source order. The URL is a string; collection
+    membership stays synchronized as the list changes.
 
-### Example FlickList list builder(s) {#example-flicklist-list-builders}
+    ```yaml
+    collections:
+      FlickList Picks:
+        flicklist_list: https://flicklist.tv/list/4821
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  FlickList List:
-    flicklist_list: https://flicklist.tv/list/4821
-    collection_order: custom
-    sync_mode: sync
-```
+=== "Multiple IDs and metadata"
 
-```yaml
-collections:
-  FlickList List:
-    flicklist_list_details:
-      - 4821
-      - 9310
-    collection_order: custom
-    sync_mode: sync
-```
+    Combines items from lists 4821 and 9310 using a YAML list of numeric IDs.
+    The collection summary comes from list 4821, the first entry.
 
-### flicklist_user_lists {#flicklist_user_lists}
+    ```yaml
+    collections:
+      Combined FlickList Picks:
+        flicklist_list_details:
+          - 4821
+          - 9310
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Finds the union of every item across a named FlickList user's public lists.
+### A user's public lists {#flicklist_user_lists}
 
-The expected input is a FlickList username. This does not require an API key with any particular scope — public
-lists are readable without authentication — but Kometa still requires the `flicklist` config block to be present.
+`flicklist_user_lists` accepts a username and combines every item across that
+user's public lists. More lists require more requests; Kometa logs the number
+of lists found before processing them.
 
-A user with many public lists means more requests; Kometa logs how many lists it found for that user before
-processing them.
+<span id="example-flicklist-user-lists-builder"></span>
 
-### Example FlickList user lists builder {#example-flicklist-user-lists-builder}
+Replace the placeholder username with the FlickList user whose public lists you
+want to follow. This selects their public lists, rather than your API key account's
+personal watchlist or favorites.
 
 ```yaml
 collections:
@@ -79,111 +87,111 @@ collections:
     sync_mode: sync
 ```
 
-## FlickList personal data — `flicklist_watchlist`, `flicklist_favorites`, `flicklist_watched`, `flicklist_tracked`, `flicklist_up_next` {#flicklist-personal-data}
+## Personal data {#flicklist-personal-data}
 
-Finds items from the configured FlickList API key's own watchlist, favorites, watched history, up-next queue,
-or tracked shows.
+The watchlist, favorites, watched, up-next, and tracked builders read from your
+configured API key's account. Each accepts a **blank value or the unquoted boolean
+`true`** to include all items. Only `flicklist_up_next` also accepts an integer limit.
+See [Choose a builder](#choose-a-builder) for the source and media supported by each.
 
-???+ warning "FlickList Configuration"
+=== "Boolean"
 
-    [Configuring FlickList](../../../config/flicklist.md) in the config is required for these builders. Each
-    of these builders reads the `read`-scoped personal data of whichever FlickList account the configured
-    `api_key` belongs to.
+    Includes every favorite from your configured account. Replace
+    `flicklist_favorites` with another personal-data builder to select that source.
+    `true` is a boolean, not a quoted string.
 
-Each of these builders accepts a blank value or `true`:
+    ```yaml
+    collections:
+      FlickList Favorites:
+        flicklist_favorites: true
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  FlickList Watchlist:
-    flicklist_watchlist:
-    collection_order: custom
-    sync_mode: sync
+=== "Blank value"
 
-  FlickList Favorites:
-    flicklist_favorites: true
-    collection_order: custom
-    sync_mode: sync
+    Includes the account's actual watched history. A blank builder value selects
+    the entire source, just as `true` does.
 
-  FlickList Watched:
-    flicklist_watched:
-    sync_mode: sync
+    ```yaml
+    collections:
+      FlickList Watched:
+        flicklist_watched:
+        sync_mode: sync
+    ```
 
-  FlickList Tracked:
-    flicklist_tracked:
-    collection_order: custom
-    sync_mode: sync
-```
+=== "Integer limit"
 
-`flicklist_up_next` and `flicklist_tracked` are show-library only, since a next-unwatched-episode queue and a
-tracked-shows list are both inherently show concepts.
+    Queries up to 20 upcoming episodes from the account's next-unwatched-episode
+    queue. Use this in a show library. The integer limits episodes returned by
+    the source; it is not a rating threshold.
 
-`flicklist_up_next` additionally accepts an integer limit on how many upcoming episodes to return:
+    ```yaml
+    collections:
+      FlickList Up Next:
+        flicklist_up_next: 20
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  FlickList Up Next:
-    flicklist_up_next: 20
-    collection_order: custom
-    sync_mode: sync
-```
+!!! note "Watchlist status and watched history differ"
 
-| Builder               | Blank/`true` means     | Also accepts  | Library restriction |
-|:----------------------|:-----------------------|:--------------|:--------------------|
-| `flicklist_watchlist` | Entire watchlist       | —             | Movies and Shows    |
-| `flicklist_favorites` | Entire favorites list  | —             | Movies and Shows    |
-| `flicklist_watched`   | Entire watched history | —             | Movies and Shows    |
-| `flicklist_up_next`   | All up-next episodes   | Integer limit | Shows only          |
-| `flicklist_tracked`   | Every tracked show     | —             | Shows only          |
+    `flicklist_watchlist` includes all watchlist statuses: `plan_to_watch`, `watching`,
+    `completed`, `on_hold`, and `dropped`. It cannot filter to one status.
+    `flicklist_watched` reflects actual movie or episode play history, rather
+    than a manually assigned `completed` status.
 
-!!! note "`flicklist_watchlist` covers more than "plan to watch""
+## Ratings {#flicklist-ratings}
 
-    FlickList's watchlist stores more than a simple plan-to-watch state: every item carries a
-    `status` of `plan_to_watch`, `watching`, `completed`, `on_hold`, or `dropped`. `flicklist_watchlist`
-    currently returns the entire watchlist regardless of status - there is no way to filter to just
-    one status yet. If you're looking for "shows I've marked completed" specifically, note that this
-    is a different concept from `flicklist_watched`, which reflects actual play history (has the
-    episode/movie been played), not a manually-set watchlist status.
+`flicklist_ratings` selects items rated by your configured API key's account.
+A blank value or `true` selects every rated item; a number sets a minimum score;
+a dictionary supplies rating bounds.
 
-## FlickList ratings — `flicklist_ratings` {#flicklist-ratings}
+### Rating bounds {#attributes}
 
-Finds every item the configured FlickList API key's account has rated.
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `minimum` | Number, 0.5-10; optional | Lowest rating to include. |
+| `maximum` | Number, 0.5-10; optional | Highest rating to include. |
 
-???+ warning "FlickList Configuration"
+FlickList documents ratings in half-point increments, but the API does not
+currently enforce these increments; values such as `5.3` can appear in returned data.
 
-    [Configuring FlickList](../../../config/flicklist.md) in the config is required for this builder.
+<span id="example-flicklist-ratings-builders"></span>
 
-`flicklist_ratings` accepts a blank value or `true` for every rated item, a number as a minimum rating, or an
-object with `minimum`/`maximum` bounds. FlickList ratings are documented as half-point increments (0.5–10) but
-the API does not currently enforce that, so a fractional rating like `5.3` can come back from FlickList itself.
+=== "Every rated item"
 
-### Example FlickList ratings builder(s) {#example-flicklist-ratings-builders}
+    Includes every item the account has rated, regardless of score.
 
-```yaml
-collections:
-  FlickList Rated:
-    flicklist_ratings:
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      FlickList Rated:
+        flicklist_ratings: true
+        sync_mode: sync
+    ```
 
-```yaml
-collections:
-  FlickList Rated 7+:
-    flicklist_ratings: 7
-    sync_mode: sync
-```
+=== "Minimum score"
 
-```yaml
-collections:
-  FlickList Rated 7 to 9:
-    flicklist_ratings:
-      minimum: 7
-      maximum: 9
-    sync_mode: sync
-```
+    Includes items rated at least 7.5. This scalar number is a rating threshold,
+    rather than a result limit.
 
-### Attributes {#attributes}
+    ```yaml
+    collections:
+      FlickList Rated 7.5 and Above:
+        flicklist_ratings: 7.5
+        sync_mode: sync
+    ```
 
-| Attribute | Description               | Values                   |
-|:----------|:--------------------------|:-------------------------|
-| `minimum` | Lowest rating to include  | Number, 0.5–10, optional |
-| `maximum` | Highest rating to include | Number, 0.5–10, optional |
+=== "Rating range"
+
+    Includes items rated from 7 through 9 using a dictionary of lower and upper
+    bounds. Either bound can be omitted for a one-sided filter.
+
+    ```yaml
+    collections:
+      FlickList Rated 7 to 9:
+        flicklist_ratings:
+          minimum: 7
+          maximum: 9
+        sync_mode: sync
+    ```

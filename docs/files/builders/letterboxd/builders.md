@@ -1,276 +1,265 @@
 # Letterboxd Builders
 
-You can find items using the lists on [Letterboxd.com](https://letterboxd.com/) (Letterboxd). 
+Collect movies from [Letterboxd](https://letterboxd.com/) lists, user pages,
+filmographies, and discovery categories. All builders support **movies, playlists,
+and custom sorting**; they do not support shows.
 
-Letterboxd support is powered by `letterboxdpy`. Builder inputs stay the same, but behavior that previously depended on Kometa's custom Letterboxd scraping now follows the fields exposed by `letterboxdpy`.
+## Choose a builder
 
-| Builder                      | Description                              |             Works with Movies              |             Works with Shows             |    Works with Playlists and Custom Sort    |
-|:-----------------------------|:-----------------------------------------|:------------------------------------------:|:----------------------------------------:|:------------------------------------------:|
-| [`letterboxd_list`](#letterboxd-list) | Finds every movie in the Letterboxd List | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_crew`](discovery.md#crew) | Finds movies credited to a person in a selected role | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_studio`](discovery.md#other-discovery-builders) | Finds movies from a studio | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_country`](discovery.md#other-discovery-builders) | Finds movies from a country | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_language`](discovery.md#other-discovery-builders) | Finds movies in a language | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_genre`](discovery.md#other-discovery-builders) | Finds movies in a genre | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_theme`](discovery.md#other-discovery-builders) | Finds movies in a theme | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_similar`](discovery.md#other-discovery-builders) | Finds movies similar to a film | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_collection`](discovery.md#other-discovery-builders) | Finds movies in a film collection | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_user_films`](#letterboxd-user-films) | Finds every movie in a user's watched films | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
-| [`letterboxd_user_reviews`](#letterboxd-user-reviews) | Finds every movie in a user's reviewed films | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
+| Builder | Finds |
+|:--------|:------|
+| [`letterboxd_list`](#letterboxd-list) | Movies in lists or films-search pages |
+| [`letterboxd_user_films`](#letterboxd-user-films) | A user's watched films |
+| [`letterboxd_user_reviews`](#letterboxd-user-reviews) | A user's reviewed films |
+| [`letterboxd_crew`](#crew) | A person's credits in a selected role |
+| [Other discovery builders](#other-discovery-builders) | Studio, country, language, genre, theme, similar films, or film collection |
 
-## Letterboxd list — `letterboxd_list`, `letterboxd_list_details` {#letterboxd-list}
+Use `collection_order: custom` to preserve the returned order and `sync_mode: sync`
+to keep membership synchronized. **Discovery custom ordering requires a single
+builder value per collection.** User pages use their default returned order,
+rather than a requested sort (see [compatibility options](#compatibility-options)).
 
-Finds every movie in a Letterboxd list or [Letterboxd Films Search](https://letterboxd.com/films/).
+## Lists and film searches {#letterboxd-list}
 
-The expected input is a supported Letterboxd URL. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+`letterboxd_list` accepts a supported Letterboxd URL, including standard user lists,
+`/films/...` searches, and private links starting with `https://boxd.it/`.
+Supply multiple URLs as a YAML list or comma-separated string to combine sources.
+For people and discovery categories, use the dedicated [discovery builders](#discovery-and-filmographies).
 
-Private links (which start with the URL `https://boxd.it/`) are also supported.
+Use a URL string directly, or a dictionary with `url` and filters:
 
-Kometa now uses `letterboxdpy` for Letterboxd access. Standard list URLs continue to work, and `/films/...` URLs remain supported.
+| Attribute | Value | Applies to |
+|:----------|:------|:-----------|
+| `url` | Supported URL string | Lists and films searches |
+| `limit` | Integer greater than 1 | Lists and films searches; recommended for large searches |
+| `year` | Year-range string, such as `"1990-1999"` | Lists and films searches |
+| `rating` | Rating-range string, such as `"8-10"` | `/films/...` URLs only; uses the owner's rating on a 10-point scale |
+| `note` | Text string | `/films/...` URLs only; matches the owner's note |
 
-Use the [Letterboxd Discovery Builders](discovery.md) for people, studios, genres, themes, countries, languages, film collections, and similar movies.
+!!! note "URL-specific filters"
 
-You can add different filters directly to this Builder.
+    Standard user lists do not expose per-item owner ratings or notes through
+    `letterboxdpy`, so `rating` and `note` are ignored for those URLs. They are
+    available only on `/films/...` pages that expose the relevant fields.
 
-| Filter Attribute                                                                                  | Description                                                                                                                                                                                                |
-|:--------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `limit`                                                                                           | **Description:** Max number of items per returned.<br>**Values:** number greater than `1`                                                                                                                  |
-| `rating` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" } | **Description:** Search for the specified rating range. The rating is the list owner's rating not site wide rating.<br>**Values:** range of int i.e. `8-10` (convert Letterboxd stars to a 10 point scale) |
-| `year` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" }   | **Description:** Search for the specified year range.<br>**Values:** range of int i.e. `1990-1999`                                                                                                         |
-| `note` :material-numeric-2-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-2" }   | **Description:** Search for the specified value in the note. The note is the list owner's note not site wide note.<br>**Values:** Any String                                                               |
+<span id="example-letterboxd-list-builders"></span>
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
+=== "List URL"
 
-Using the `limit` filter attribute is recommended when using a Letterboxd Film Search as the number of results returned could be very large.
+    Follows Vulture's 101 Best Movie Endings list in source order. The builder
+    value is a full URL string.
 
-???+ warning "Filter Support Depends on URL Type"
+    ```yaml
+    collections:
+      Vulture's 101 Best Movie Endings:
+        letterboxd_list: https://letterboxd.com/brianformo/list/vultures-101-best-movie-endings/
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-    The `year` filter works for both standard list URLs and `/films/...` URLs.
+=== "Year range and summary"
 
-    The `rating` and `note` filters are only available for `/films/...` URLs exposed through `letterboxdpy`. Standard user list URLs do not expose per-item owner ratings or notes, so those filters are ignored for those URLs.
+    Selects only the 1990s movies from that list and copies its description to
+    the collection summary. `year` is a quoted range string, not a single year.
 
-???+ tip "Details Builder"
+    ```yaml
+    collections:
+      Vulture's Best Movie Endings From the 90s:
+        letterboxd_list_details:
+          url: https://letterboxd.com/brianformo/list/vultures-101-best-movie-endings/
+          year: "1990-1999"
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-    You can replace `letterboxd_list` with `letterboxd_list_details` if you would like to fetch and use the description from the list
+`letterboxd_list_details` selects the same items as `letterboxd_list` and copies
+the source description. With multiple lists, **only the first supplies the summary**.
 
+## User films and reviews
 
-### Example Letterboxd list builder(s) {#example-letterboxd-list-builders}
+<span id="letterboxd-user-films"></span>
+<span id="letterboxd-user-reviews"></span>
+
+Use `letterboxd_user_films` for watched films or `letterboxd_user_reviews` for
+reviewed films. Both accept a username string or a dictionary with the options
+below. Multiple users can be supplied as a YAML list or comma-separated string;
+use a YAML list of dictionaries for different per-user filters.
+
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `username` | String, required in dictionary form | User whose films or reviews to collect |
+| `min_rating` | Number, 0-10 | Minimum user rating on a 10-point scale |
+| `limit` | Integer greater than 1 | Cap results; recommended for large user histories |
+| `year` | Year-range string, such as `"1990-1999"` | Filter release years |
+| `note` | Text string | Match review text for reviews; ignored for watched films |
+
+The details variants, `letterboxd_user_films_details` and
+`letterboxd_user_reviews_details`, are accepted for consistency, but user pages
+currently provide no description to copy.
+
+### Compatibility options
+
+Letterboxd access uses `letterboxdpy`. The following options remain accepted for
+older configurations, but do not control fetching as their names might suggest:
+
+| Attribute | Accepted value | Current behaviour |
+|:----------|:---------------|:------------------|
+| `sort_by` | Sort name below; default `release_date_newest` | Uses default page order; a non-default request logs a warning |
+| `incremental` | Boolean; runtime default `false` | Always fetches normally; `true` logs a warning rather than enabling incremental fetching |
+
+??? info "Accepted legacy sort names"
+
+    `release_date_newest`, `release_date_earliest`, `name`, `popularity`,
+    `when_added_newest`, `when_added_earliest`, `when_rated_newest`, `when_rated_earliest`,
+    `average_rating_highest`, `average_rating_lowest`, `user_rating_highest`,
+    `user_rating_lowest`, `length_shortest`, `length_longest`.
+
+<span id="example-letterboxd-user-films-builders"></span>
+<span id="example-letterboxd-user-reviews-builders"></span>
+
+Replace the placeholder usernames in these examples with real Letterboxd usernames.
+
+=== "Username string"
+
+    Selects the user's watched films in the default returned order. The username
+    is a string, rather than an ID or a URL.
+
+    ```yaml
+    collections:
+      User Watched Films:
+        letterboxd_user_films: some_letterboxd_username
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Multiple users and ratings"
+
+    Combines watched films rated at least 8 by the first user with films rated
+    at least 9 by the second. The YAML list combines sources; it does not require
+    both users to have rated the same film. Ratings use a 10-point scale.
+
+    ```yaml
+    collections:
+      Friends' Highly Rated Films:
+        letterboxd_user_films:
+          - username: first_letterboxd_username
+            min_rating: 8
+          - username: second_letterboxd_username
+            min_rating: 9
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Review text and limits"
+
+    Selects up to 50 reviewed films matching the user's review text filter
+    "favorite", rated at least 7.5. `note` is a string, `min_rating` is a decimal
+    number, and `limit` is an integer. This does not request a different sort order.
+
+    ```yaml
+    collections:
+      User Favorite Reviews:
+        letterboxd_user_reviews:
+          username: some_letterboxd_username
+          note: "favorite"
+          min_rating: 7.5
+          limit: 50
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+## Discovery and filmographies
+
+Discovery builders use **slugs**, the identifying part of a Letterboxd URL,
+rather than passing those pages to `letterboxd_list`. For example, `/studio/a24/`
+uses the slug `a24`.
+
+All discovery builders accept `limit` and `year`. All except `letterboxd_similar`
+also accept `sort_by`. Use dictionary form to add these options. Keep one discovery
+builder value per collection when using custom ordering.
+
+| Option | Purpose |
+|:-------|:--------|
+| `limit` | Cap returned movies |
+| `year` | Filter release years |
+| `sort_by` | Request discovery order; unavailable for `letterboxd_similar` |
+
+### Crew {#crew}
+
+`letterboxd_crew` requires both of these string attributes:
+
+| Attribute | Allowed values |
+|:----------|:---------------|
+| `role` | `actor`, `director`, `writer`, `casting`, `editor`, `cinematography`, `composer` |
+| `person` | Person slug, such as `marlon-brando` |
+
+This collection selects Francis Ford Coppola's directing credits. Change `role`
+to select another supported credit type, using the appropriate person slug.
 
 ```yaml
 collections:
-  Vulture’s 101 Best Movie Endings:
-    letterboxd_list: https://letterboxd.com/brianformo/list/vultures-101-best-movie-endings/
+  Francis Ford Coppola:
+    letterboxd_crew:
+      role: director
+      person: francis-ford-coppola
     collection_order: custom
     sync_mode: sync
 ```
 
-* You can update the collection details with the Letterboxd List's description by using `letterboxd_list_details`.
-  * You can specify multiple collections in `letterboxd_list_details` but it will only use the first one to update the collection summary.
+### Other discovery builders {#other-discovery-builders}
 
-```yaml
-collections:
-  Vulture’s 101 Best Movie Endings:
-    letterboxd_list_details: https://letterboxd.com/brianformo/list/vultures-101-best-movie-endings/
-    collection_order: custom
-    sync_mode: sync
-```
+Pass a slug directly as a string, or use the named attribute in dictionary form.
 
-```yaml
-collections:
-  Vulture’s 101 Best Movie Endings From the 90s:
-    letterboxd_list_details: 
-      url: https://letterboxd.com/brianformo/list/vultures-101-best-movie-endings/
-      year: 1990-1999
-    collection_order: custom
-    sync_mode: sync
-```
+| Builder | Dictionary attribute | URL path and slug |
+|:--------|:---------------------|:------------------|
+| `letterboxd_studio` | `studio` | `/studio/a24/`: `a24` |
+| `letterboxd_country` | `country` | `/films/country/usa/`: `usa` |
+| `letterboxd_language` | `language` | `/films/language/english/`: `english` |
+| `letterboxd_genre` | `genre` | `/films/genre/crime/`: `crime` |
+| `letterboxd_theme` | `theme` | `/films/theme/crime-drugs-and-gangsters/`: `crime-drugs-and-gangsters` |
+| `letterboxd_similar` | `film` | `/film/the-godfather/similar/`: `the-godfather` |
+| `letterboxd_collection` | `collection` | `/films/in/beetlejuice-collection-2/`: `beetlejuice-collection-2` |
 
-## Letterboxd user films — `letterboxd_user_films` {#letterboxd-user-films}
+=== "Slug string"
 
-Finds every movie in a Letterboxd user's watched films page.
+    Selects movies similar to The Godfather. The value is the film slug, not
+    its full URL. This builder does not accept `sort_by`.
 
-The expected input is a username or a dictionary with the username and optional parameters. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+    ```yaml
+    collections:
+      Similar to The Godfather:
+        letterboxd_similar: the-godfather
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Kometa now uses `letterboxdpy` for Letterboxd access. The builder contract is unchanged, but watched-film ordering now follows the default order returned by `letterboxdpy`.
+=== "Studio and ordering"
 
-You can add different filters directly to this Builder.
+    Selects A24 movies, requesting newest release dates first. Unlike user-page
+    sorting, discovery `sort_by` is supported for this builder.
 
-| Filter Attribute                                                                                  | Description                                                                                                                                                                                                |
-|:--------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`                                                                                        | **Description:** Letterboxd username<br>**Values:** Username string (required)                                                                                                                          |
-| `sort_by`                                                                                         | **Description:** Accepted for compatibility with older configs.<br>**Default:** `release_date_newest`<br>**Values:** `release_date_newest`, `release_date_earliest`, `name`, `popularity`, `when_added_newest`, `when_added_earliest`, `when_rated_newest`, `when_rated_earliest`, `average_rating_highest`, `average_rating_lowest`, `user_rating_highest`, `user_rating_lowest`, `length_shortest`, `length_longest` |
-| `min_rating` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" } | **Description:** Filter by minimum user rating (on 10-point scale)<br>**Values:** number from `0` to `10`                                                                                                  |
-| `limit`                                                                                           | **Description:** Max number of items per returned.<br>**Values:** number greater than `1`                                                                                                                  |
-| `year` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" }   | **Description:** Search for the specified year range.<br>**Values:** range of int i.e. `1990-1999`                                                                                                         |
-| `note` :material-numeric-2-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-2" }   | **Description:** Accepted for compatibility with older configs, but watched-film notes are not exposed by `letterboxdpy` and this filter is ignored.<br>**Values:** Any String                                                               |
-| `incremental`                                                                                      | **Description:** Accepted for compatibility with older configs.<br>**Default:** `false` at runtime<br>**Values:** `true` or `false` |
+    ```yaml
+    collections:
+      A24 by Release:
+        letterboxd_studio:
+          studio: a24
+          sort_by: release_date_newest
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
+=== "Theme and limit"
 
-???+ warning "Sort, Note, and Incremental Behavior"
+    Selects up to 20 movies in the Crime, Drugs and Gangsters theme, requesting
+    best-match order. The theme slug and sort name are strings; the limit is an integer.
 
-    `sort_by` values are still accepted so existing configs do not break, but `letterboxdpy` does not expose a stable way for Kometa to force those sort orders for watched films. Kometa therefore uses the default page order returned by `letterboxdpy` and logs a warning when a non-default `sort_by` is supplied.
-
-    `note` filtering is currently ignored for watched films because `letterboxdpy` does not expose watched-film notes for Kometa to match against.
-
-    `incremental` parsing is currently disabled for Letterboxd user films because `letterboxdpy` does not expose stable incremental state for Kometa to track. If `incremental: true` is set, Kometa logs a warning and continues with a normal full fetch.
-
-Using the `limit` filter attribute is recommended when using a user with many watched films as the number of results returned could be very large.
-
-???+ tip "Details Builder"
-
-    You can replace `letterboxd_user_films` with `letterboxd_user_films_details` if you would like to use the details variant (currently no description is available for user pages, but this maintains consistency with other builders).
-
-
-### Example Letterboxd user films builder(s) {#example-letterboxd-user-films-builders}
-
-```yaml
-collections:
-  User Watched Films:
-    letterboxd_user_films: {username}
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  User Highly Rated Films:
-    letterboxd_user_films:
-      username: {username}
-      min_rating: 8
-      sort_by: user_rating_highest
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  User 90s Films:
-    letterboxd_user_films:
-      username: {username}
-      year: 1990-1999
-      sort_by: release_date_earliest
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  Multiple Users' Watched Films:
-    letterboxd_user_films:
-      - {username1}
-      - {username2}
-      - {username3}
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  Multiple Users' Highly Rated Films:
-    letterboxd_user_films:
-      - username: {username1}
-        min_rating: 8
-        sort_by: user_rating_highest
-      - username: {username2}
-        min_rating: 9
-        sort_by: user_rating_highest
-    collection_order: custom
-    sync_mode: sync
-```
-
-## Letterboxd user reviews — `letterboxd_user_reviews` {#letterboxd-user-reviews}
-
-Finds every movie in a Letterboxd user's reviewed films page.
-
-The expected input is a username or a dictionary with the username and optional parameters. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-Kometa now uses `letterboxdpy` for Letterboxd access. The builder contract is unchanged, but user review ordering now follows the default order returned by `letterboxdpy`.
-
-You can add different filters directly to this Builder.
-
-| Filter Attribute                                                                                  | Description                                                                                                                                                                                                |
-|:--------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`                                                                                        | **Description:** Letterboxd username<br>**Values:** Username string (required)                                                                                                                          |
-| `sort_by`                                                                                         | **Description:** Accepted for compatibility with older configs.<br>**Default:** `release_date_newest`<br>**Values:** `release_date_newest`, `release_date_earliest`, `name`, `popularity`, `when_added_newest`, `when_added_earliest`, `when_rated_newest`, `when_rated_earliest`, `average_rating_highest`, `average_rating_lowest`, `user_rating_highest`, `user_rating_lowest`, `length_shortest`, `length_longest` |
-| `min_rating` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" } | **Description:** Filter by minimum user rating (on 10-point scale)<br>**Values:** number from `0` to `10`                                                                                                  |
-| `limit`                                                                                           | **Description:** Max number of items per returned.<br>**Values:** number greater than `1`                                                                                                                  |
-| `year` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-1" }   | **Description:** Search for the specified year range.<br>**Values:** range of int i.e. `1990-1999`                                                                                                         |
-| `note` :material-numeric-2-circle:{ data-tooltip data-tooltip-id="tippy-letterboxd-filters-2" }   | **Description:** Search for the specified value in the review text returned by `letterboxdpy`.<br>**Values:** Any String                                                               |
-| `incremental`                                                                                      | **Description:** Accepted for compatibility with older configs.<br>**Default:** `false` at runtime<br>**Values:** `true` or `false` |
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
-
-???+ warning "Sort and Incremental Behavior"
-
-    `sort_by` values are still accepted so existing configs do not break, but `letterboxdpy` does not expose a stable way for Kometa to force those sort orders for reviewed films. Kometa therefore uses the default page order returned by `letterboxdpy` and logs a warning when a non-default `sort_by` is supplied.
-
-    `incremental` parsing is currently disabled for Letterboxd user reviews because `letterboxdpy` does not expose stable incremental state for Kometa to track. If `incremental: true` is set, Kometa logs a warning and continues with a normal full fetch.
-
-Using the `limit` filter attribute is recommended when using a user with many reviewed films as the number of results returned could be very large.
-
-???+ tip "Details Builder"
-
-    You can replace `letterboxd_user_reviews` with `letterboxd_user_reviews_details` if you would like to use the details variant (currently no description is available for user pages, but this maintains consistency with other builders).
-
-
-### Example Letterboxd user reviews builder(s) {#example-letterboxd-user-reviews-builders}
-
-```yaml
-collections:
-  User Reviewed Films:
-    letterboxd_user_reviews: {username}
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  User Top Rated Reviews:
-    letterboxd_user_reviews:
-      username: {username}
-      min_rating: 9
-      sort_by: user_rating_highest
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  User Recent Reviews:
-    letterboxd_user_reviews:
-      username: {username}
-      sort_by: when_rated_newest
-      limit: 50
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  Multiple Users' Reviewed Films:
-    letterboxd_user_reviews:
-      - {username1}
-      - {username2}
-      - {username3}
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  Multiple Users' Top Rated Reviews:
-    letterboxd_user_reviews:
-      - username: {username1}
-        min_rating: 9
-        sort_by: user_rating_highest
-      - username: {username2}
-        min_rating: 8
-        sort_by: user_rating_highest
-    collection_order: custom
-    sync_mode: sync
-```
-
-## More Letterboxd references
-
-- [Discovery and filmographies](discovery.md)
+    ```yaml
+    collections:
+      Crime, Drugs and Gangsters:
+        letterboxd_theme:
+          theme: crime-drugs-and-gangsters
+          sort_by: best_match
+          limit: 20
+        collection_order: custom
+        sync_mode: sync
+    ```

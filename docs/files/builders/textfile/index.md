@@ -1,114 +1,206 @@
 # Text and File Lists
 
-You can find items using IDs written directly in YAML or maintained in a local or remote text file.
+Select movies, shows, seasons, or episodes using IDs written directly in YAML or
+stored in a local or remote file. Both builders support playlists and custom
+sorting. No external service configuration is required.
 
-No external service configuration is required for this Builder.
+## Choose a builder
 
-| Builder                     | Description                                                                                 |             Works with Movies              |             Works with Shows             |    Works with Playlists and Custom Sort    |
-|:----------------------------|:--------------------------------------------------------------------------------------------|:------------------------------------------:|:----------------------------------------:|:------------------------------------------:|
-| [`text`](#text)           | Reads supported IDs and URLs directly from a YAML scalar, multiline string, or list.        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`text_file`](#text-file) | Reads supported IDs and URLs from a local or remote text file while preserving source order. | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Builder | Input | Best for |
+|:--------|:------|:---------|
+| [`text`](#text) | Scalar, literal multiline string, or YAML list | IDs maintained with the collection definition |
+| [`text_file`](#text-file) | File path, URL, or YAML list of paths and URLs | Lists maintained separately or fetched remotely |
 
-## Text file — `text_file` {#text-file}
+Use `collection_order: custom` to preserve source order and `sync_mode: sync` to
+keep membership synchronized. Entries expanding into JSON items retain their
+returned order. Multiple files are concatenated in the listed order and treated
+as one builder input, rather than separate builder groups.
 
-Finds items using a manually created local or remote text file.
+## Identifier reference {#supported-values}
 
-The expected input is a path or URL to a text file, or a list of text file paths and URLs.
+Both builders use the same entry syntax:
 
-Each non-empty line can contain one of the following. Lines beginning with `#` are ignored, and you can also add trailing inline comments using ` # comment` after a value:
+| Value | Selects |
+|:------|:--------|
+| `tt0079945` or an IMDb title URL | IMDb title |
+| Numeric ID, such as `174` | TMDb movie in movie libraries; TVDb show in show libraries |
+| `imdb:tt0079945`, `tmdb:154`, `tvdb:361702` | Explicit identifier type |
+| `plex://movie/<24-char-id>`, `plex://show/<24-char-id>`, `plex://episode/<24-char-id>` | Plex metadata GUID |
+| Bare 24-character Plex metadata ID or `plex:<id>` | Plex metadata item |
+| `tvdb_season:<parts>`, `tvdb_episode:<parts>` | Season or episode; see syntax below |
+| `url:https://example.com/list.json` or a JSON-list URL | Expanded items from a JSON list |
 
-- a TMDb ID
-- a TVDb ID
-- an IMDb ID or IMDb title URL
-- a URL returning a JSON list of supported items, including gzip-compressed JSON responses
-- `plex://movie/<24-char-id>`
-- `plex://show/<24-char-id>`
-- `plex://episode/<24-char-id>`
-- a bare 24-character Plex metadata ID
-- an explicit typed value such as `imdb:`, `tmdb:`, `tvdb:`, `tvdb_season:`, `tvdb_episode:`, `plex:`, or `url:`
+In playlists and mixed/unknown contexts, bare numeric IDs are matched against
+available movie/show libraries. Prefer typed values for clarity. In mixed contexts,
+`tmdb:` considers both movie and show IDs; only the type resolving in the configured
+libraries is added, preserving line order even when types are interleaved.
 
-Numeric lines are interpreted by library type:
+Blank lines and lines beginning with `#` are ignored. A trailing comment starts
+with whitespace followed by `#`. YAML removes comments from scalar and list values
+before Kometa receives them; comments inside literal multiline strings are handled
+as part of the text input. Quote metadata IDs if YAML could treat them as numbers
+or remove leading zeroes.
 
-- Movie libraries: TMDb IDs
-- Show libraries: TVDb IDs
-- Playlists or mixed/unknown contexts: generic numeric IDs matched against available movie/show libraries
+## Inline text {#text}
 
-The `sync_mode: sync` and `collection_order: custom` settings are recommended when you want the collection order to match the source exactly. If a line expands into multiple items from a JSON list URL, those items keep the order returned by that JSON list. If you provide multiple files or URLs, they are concatenated in the order listed and treated as a single `text_file` builder.
+`text` accepts a single string or integer, a literal multiline string, or a YAML
+list of strings and integers. Entries are processed in their declared order.
 
-???+ tip "Playlist ordering with mixed movie/show `tmdb:` entries"
+<span id="single-value"></span>
+<span id="multiline-string"></span>
+<span id="yaml-list"></span>
 
-    When a `tmdb:` entry (e.g. `tmdb:550`) is used in a playlist or mixed library context, Kometa emits
-    **two** internal ID types (`"tmdb"` and `"tmdb_show"`) so both movies and shows are considered.
-    Only the correct type resolves to an item; the other is silently skipped.
-    This means **line order is preserved** even when movies and shows are interleaved.
+=== "Single value"
 
-A URL used directly as the `text_file` value can return either plain text content using the same line syntax as a local file, or a JSON list using the JSON list format shown below.
+    Selects Star Trek: The Motion Picture by IMDb ID. For a movie library,
+    `text: 174` would instead select Star Trek VI using a numeric TMDb ID.
 
-On show libraries, `text_file` can also be used with `builder_level: season` or `builder_level: episode` collections. In those cases, `tvdb_season` and `tvdb_episode` entries can target specific show parts directly.
+    ```yaml
+    collections:
+      Star Trek:
+        text: tt0079945
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-### Episode and season part syntax {#episode-and-season-part-syntax}
+=== "Multiline string"
 
-For show-part collections, the following explicit values are supported:
+    Selects the three movies in the declared order. `|-` keeps one ID per line,
+    and the inline comments explain each entry without becoming part of the ID.
 
-- `tvdb_season:12345_1`
-- `tvdb_season:12345/1`
-- `tvdb_episode:12345_1_2`
-- `tvdb_episode:12345-1-2`
-- `tvdb_episode:12345/1/2`
+    ```yaml
+    collections:
+      Star Trek Movies:
+        text: |-
+          tt0079945 # Star Trek: The Motion Picture
+          174       # Star Trek VI, assumed TMDb in a movie library
+          tmdb:154  # Star Trek II, explicit TMDb
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Behavior depends on the collection level:
+=== "YAML list"
 
-- `builder_level: season` + `tvdb_season` finds the matching season.
-- `builder_level: episode` + `tvdb_season` expands to every episode in that season.
-- `builder_level: episode` + `tvdb_episode` finds one specific episode.
+    Selects the same three movies using a list of string and integer values.
+    This is an ordered source list, rather than an AND/OR search expression.
 
-If multiple lines point at the same episode, Kometa will only keep the episode once in the final collection.
+    ```yaml
+    collections:
+      Star Trek Movies:
+        text:
+          - tt0079945
+          - 174
+          - tmdb:154
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-### JSON list example {#json-list-example}
+!!! important "Keep multiline entries on separate lines"
 
-```json
-[
-  {
-    "imdb_id":"tt26443597"
-  },
-  {
-    "tmdb_id":83533
-  },
-  {
-    "tvdb_season":"12345_1"
-  },
-  {
-    "tvdb_episode":{
-      "tvdb_id":12345,
-      "season":1,
-      "episode":2
-    }
-  },
-  {
-    "type":"tvdb_episode",
-    "id":[12345, 1, 3]
-  },
-  ...
-]
+    Use literal `|` or `|-` blocks. Folded `>` blocks replace line breaks with
+    spaces and destroy the entry structure. `>|` is not valid YAML syntax.
+
+### Mixed playlist {#playlist-example}
+
+Selects movies and shows in the declared order. Replace the library names with
+your configured libraries. Typed IDs clarify each source across mixed libraries.
+
+```yaml
+playlists:
+  Mixed Watchlist:
+    libraries: Movies, TV Shows
+    text: |-
+      tt0079945
+      tmdb:154
+      tvdb:361702
+      plex://show/63e3eedd166819851638a316
+    sync_mode: sync
 ```
 
-### Example text file builder(s) {#example-text-file-builders}
+### JSON URL entries {#url-entries}
+
+An embedded URL must return a [JSON list](#json-list-example), not plain-text
+lines. This example selects one movie, followed by items expanded from the remote
+JSON response. Replace the example URL with your own source.
 
 ```yaml
 collections:
-  My Hand Curated List:
-    text_file: config/lists/hand-curated.txt
+  Combined Picks:
+    text: |-
+      tt0079945
+      url:https://example.com/additional-items.json
     collection_order: custom
     sync_mode: sync
 ```
 
-```yaml
-collections:
-  My Remote Hand Curated List:
-    text_file: https://example.com/hand-curated.txt
-    collection_order: custom
-    sync_mode: sync
+## Files and remote sources {#text-file}
+
+`text_file` accepts a local file path or remote URL, or a YAML list of either.
+Each non-empty, non-comment line uses the shared identifier syntax. A remote
+source can return plain text or a JSON list, including gzip-compressed JSON.
+Use `text_file` rather than `text` when a remote URL returns plain text.
+
+<span id="example-text-file-builders"></span>
+
+=== "Local file"
+
+    Reads IDs from a file maintained separately from this collection definition.
+    The value is a path string; file contents determine the selected items.
+
+    ```yaml
+    collections:
+      Hand-Curated Picks:
+        text_file: config/lists/hand-curated.txt
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Combined local and remote"
+
+    Reads the priority file first, then appends the remote source in its returned
+    order. Replace the paths and URL. Source boundaries do not create separate
+    builder groups; only the combined item order is retained.
+
+    ```yaml
+    collections:
+      Combined Text Files:
+        text_file:
+          - config/lists/priority.txt
+          - https://example.com/overflow.txt
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+### File contents {#example-text-file-contents}
+
+This movie-library file mixes IDs, Plex identifiers, a comment, and a JSON source.
+
+```text
+# Movie library example
+tt0079945 # Star Trek: The Motion Picture
+174       # Star Trek VI, assumed TMDb
+tmdb:154  # Star Trek II, explicit TMDb
+plex://movie/5d7768243c3c2a001fbca85b
+5d776824880197001ec901ab
+plex:5d7768244de0ee001fcc7ff2
+url:https://example.com/list.json
 ```
+
+## Seasons and episodes {#episode-and-season-part-syntax}
+
+Both builders support show-part collections when `builder_level` is set to
+`season` or `episode`.
+
+| Entry | At season level | At episode level |
+|:------|:----------------|:-----------------|
+| `tvdb_season:12345_1` or `tvdb_season:12345/1` | Selects season 1 | Expands season 1 to every episode |
+| `tvdb_episode:12345_1_2`, `tvdb_episode:12345-1-2`, or `tvdb_episode:12345/1/2` | Use episode level | Selects season 1, episode 2 |
+
+`12345` is a show TVDb ID. Repeated references to the same episode are deduplicated.
+
+This episode collection reads exact episodes from a file. For example,
+`tvdb_season:383275/1` expands Tracker season 1; `tvdb_episode:383275_1_2` targets
+its second episode. IMDb episode IDs, such as `tt22408116`, are also supported.
 
 ```yaml
 collections:
@@ -119,167 +211,18 @@ collections:
     sync_mode: sync
 ```
 
-```yaml
-collections:
-  My Combined Text Files:
-    text_file:
-      - config/lists/priority.txt
-      - https://example.com/overflow.txt
-    collection_order: custom
-    sync_mode: sync
+## JSON list format {#json-list-example}
+
+A remote JSON list can mix supported identifiers and show parts. This valid JSON
+example demonstrates direct ID fields, a dictionary for an episode, and a typed
+ID array. Replace the IDs with your own items.
+
+```json
+[
+  {"imdb_id": "tt26443597"},
+  {"tmdb_id": 83533},
+  {"tvdb_season": "12345_1"},
+  {"tvdb_episode": {"tvdb_id": 12345, "season": 1, "episode": 2}},
+  {"type": "tvdb_episode", "id": [12345, 1, 3]}
+]
 ```
-
-When multiple files or URLs are listed, Kometa reads them as one `text_file` builder input in the order shown above. The source boundaries are not kept as separate builder groups; only the combined item order is preserved.
-
-### Example text file contents {#example-text-file-contents}
-
-```text
-# Movie library example
-tt0079945   # Star Trek: The Motion Picture IMDb
-174         # Star Trek VI: The Undiscovered Country assumed TMDb
-tmdb:154    # Star Trek II: The Wrath of Khan unambiguous TMDb
-plex://movie/5d7768243c3c2a001fbca85b # Plex movie GUID
-5d776824880197001ec901ab              # Plex movie GUID
-plex:5d7768244de0ee001fcc7ff2         # typed Plex GUID
-url:https://example.com/list.json     # URL returning a JSON list
-    # [see example JSON list above]
-
-# Show library example
-tt8466564    # Obi-Wan Kenobi IMDB
-tmdb:83867   # Andor unambiguous TMDB
-361702       # The Mandalorian assumed TVDb
-tvdb:393117  # Ahsoka unambiguous TVDb
-plex://show/63e3eedd166819851638a316 # Plex show GUID
-
-# Episode example
-tt22408116  # Tracker S1.E1 Klamath Falls
-tt30221360  # Tracker S1.E3 Springland
-tt31092062  # Tracker S1.E5 St. Louis
-tt31092069  # Tracker S1.E7 Chicago
-tvdb_season:383275/1 # Tracker Season 1 expanded to episodes in episode-level collections
-tvdb_episode:383275_1_2 # Tracker S1.E2 Missoula
-
-
-# Playlist or mixed library example
-tt0079945    # Star Trek: The Motion Picture IMDb
-tmdb:154     # Star Trek II: The Wrath of Khan unambiguous TMDB
-tvdb:361702  # The Mandalorian unambiguous TVDb
-plex://show/63e3eedd166819851638a316 # Plex show GUID
-```
-
-## Text — `text` {#text}
-
-Finds items using IDs written directly in the collection or playlist YAML. It supports the same identifier syntax as the [`text_file`](#text-file) builder without requiring a separate file.
-
-The builder accepts a scalar string or integer, a literal multiline string, or a list of strings and integers. Entries are processed in their declared order.
-
-The `sync_mode: sync` and `collection_order: custom` settings are recommended when you want the collection and its order to exactly match the inline source.
-
-### Supported values {#supported-values}
-
-Each entry can contain one of the following:
-
-- a TMDb ID
-- a TVDb ID
-- an IMDb ID or IMDb title URL
-- a URL returning a JSON list of supported items
-- `plex://movie/<24-char-id>`
-- `plex://show/<24-char-id>`
-- `plex://episode/<24-char-id>`
-- a bare 24-character Plex metadata ID
-- an explicit typed value such as `imdb:`, `tmdb:`, `tvdb:`, `tvdb_season:`, `tvdb_episode:`, `plex:`, or `url:`
-
-Blank lines and lines beginning with `#` are ignored. Literal multiline strings can also contain trailing inline comments introduced by whitespace followed by `#`.
-
-Numeric entries are interpreted by library type:
-
-- Movie libraries: TMDb IDs
-- Show libraries: TVDb IDs
-- Playlists or mixed/unknown contexts: generic numeric IDs matched against the available movie/show libraries
-
-On show libraries, `text` can be used with `builder_level: season` or `builder_level: episode`. The `tvdb_season` and `tvdb_episode` forms described in the [`text_file` documentation](#episode-and-season-part-syntax) target the corresponding show parts.
-
-### Single value {#single-value}
-
-```yaml
-collections:
-  Star Trek:
-    text: tt0079945 # Star Trek: The Motion Picture
-    collection_order: custom
-    sync_mode: sync
-```
-
-YAML removes the trailing comment from a scalar or list value before Kometa receives it.
-
-An unquoted numeric ID is also accepted:
-
-```yaml
-collections:
-  Star Trek VI:
-    text: 174
-```
-
-### Multiline string {#multiline-string}
-
-Use YAML's literal `|` or `|-` block style so each identifier remains on its own line:
-
-```yaml
-collections:
-  Star Trek Movies:
-    text: |-
-      tt0079945   # Star Trek: The Motion Picture IMDb
-      174         # Star Trek VI: The Undiscovered Country assumed TMDb
-      tmdb:154    # Star Trek II: The Wrath of Khan unambiguous TMDb
-      plex://movie/5d7768243c3c2a001fbca85b # Plex movie GUID
-      5d776824880197001ec901ab              # Plex movie GUID
-    collection_order: custom
-    sync_mode: sync
-```
-
-Do not use YAML's folded `>` block style. Folded blocks replace line breaks with spaces, which destroys the one-entry-per-line structure. `>|` is not valid YAML syntax.
-
-### YAML list {#yaml-list}
-
-```yaml
-collections:
-  Star Trek Movies:
-    text:
-      - tt0079945
-      - 174
-      - tmdb:154
-      - plex://movie/5d7768243c3c2a001fbca85b
-      - 5d776824880197001ec901ab
-    collection_order: custom
-    sync_mode: sync
-```
-
-List entries may be strings or integers. Quote Plex metadata IDs if YAML could interpret the value as a number or discard leading zeroes.
-
-### Playlist example {#playlist-example}
-
-```yaml
-playlists:
-  Mixed Watchlist:
-    text: |-
-      tt0079945
-      tmdb:154
-      tvdb:361702
-      plex://show/63e3eedd166819851638a316
-    sync_mode: sync
-```
-
-In a playlist, `tmdb:` entries are considered as both movie and show IDs so mixed item types retain their declared order. Only the type that resolves on the configured Plex libraries is added.
-
-### URL entries {#url-entries}
-
-A URL within `text` must return a JSON list in the format supported by [`text_file`](#json-list-example):
-
-```yaml
-collections:
-  Combined List:
-    text: |-
-      tt0079945
-      url:https://example.com/additional-items.json
-```
-
-Use `text_file` when the remote URL returns plain-text lines rather than a JSON list.

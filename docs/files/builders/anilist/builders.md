@@ -1,57 +1,50 @@
 # AniList Builders
 
-You can find anime using the features of [AniList.co](https://anilist.co/) (AniList).
+Collect anime from [AniList](https://anilist.co/) IDs, studios, relations, charts,
+and user lists. For detailed filters, see [Advanced Search](search.md).
+All builders support movie and show libraries.
 
-| Builder                             | Description                                                                                                              |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:------------------------------------|:-------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`anilist_search`](search.md)       | Finds the anime specified by the AniList search parameters provided                                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`anilist_top_rated`](#anilist-top-rated) | Finds every anime in AniList's [Top Rated Anime](https://anilist.co/search/anime?sort=SCORE_DESC) list                   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`anilist_popular`](#anilist-popular)     | Finds every anime in AniList's [Popular Anime](https://anilist.co/search/anime/popular) list                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`anilist_trending`](#anilist-trending)   | Finds every anime in AniList's [Trending Anime](https://anilist.co/search/anime/trending) list                           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`anilist_relations`](#anilist-relations) | Finds the anime specified by the AniList ID and every relation in its relation tree except Character and Other relations | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`anilist_studio`](#anilist-studio)       | Finds all anime specified by the AniList Studio ID                                                                       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`anilist_id`](#anilist-id)               | Finds the anime specified by the AniList ID                                                                              | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`anilist_userlist`](#anilist-userlist)   | Finds the anime in AniList User's Anime list the options are detailed below                                              | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## AniList ID — `anilist_id` {#anilist-id}
+| Builder | Finds | Playlists / custom sort |
+|:--------|:------|:-----------------------|
+| [`anilist_id`](#anilist-id) | Specific anime | No |
+| [`anilist_relations`](#anilist-relations) | Anime and its related entries | No |
+| [`anilist_studio`](#anilist-studio) | Anime from a studio | No |
+| [`anilist_top_rated`](#anilist-top-rated) | Top-rated anime | Yes |
+| [`anilist_popular`](#anilist-popular) | Popular anime | Yes |
+| [`anilist_trending`](#anilist-trending) | Trending anime | Yes |
+| [`anilist_userlist`](#anilist-userlist) | A user's named list, optionally filtered by score | Yes |
+| [`anilist_search`](search.md) | Anime matching detailed filters | Yes |
 
-Finds the anime specified by the AniList ID.
+For charts, user lists, and searches, use `collection_order: custom` to preserve
+returned order and `sync_mode: sync` to keep membership synchronized.
 
-The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+## IDs, relations, and studios
 
-### Example AniList ID builder(s) {#example-anilist-id-builders}
+These builders accept numeric IDs. Supply multiple values as a YAML list or a
+comma-separated string. An anime ID and a studio ID identify different things,
+even when the numbers happen to match.
+
+### Specific anime {#anilist-id}
+
+<span id="example-anilist-id-builders"></span>
+
+Selects the two Cowboy Bebop entries by anime ID. The quoted value is a
+comma-separated string; a YAML list of integers is also accepted.
 
 ```yaml
 collections:
   Cowboy Bebop:
-    anilist_id: 23, 219
+    anilist_id: "23,219"
 ```
 
-## AniList popular — `anilist_popular` {#anilist-popular}
+### Relations {#anilist-relations}
 
-Finds every anime in AniList's [Popular Anime](https://anilist.co/search/anime/popular) list.
+<span id="example-anilist-relations-builders"></span>
 
-The expected input is a single integer value of how many movies/shows to query. 
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
-
-### Example AniList popular builder(s) {#example-anilist-popular-builders}
-
-```yaml
-collections:
-  Popular Anime:
-    anilist_popular: 10
-    collection_order: custom
-    sync_mode: sync
-```
-
-## AniList relations — `anilist_relations` {#anilist-relations}
-
-Finds the anime specified by the AniList ID and every relation in its relation tree except Character and Other relations.
-
-The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-### Example AniList relations builder(s) {#example-anilist-relations-builders}
+Selects One Piece (ID 21) and its relation tree, excluding Character and Other
+relations. This expands beyond the single specified anime.
 
 ```yaml
 collections:
@@ -59,13 +52,12 @@ collections:
     anilist_relations: 21
 ```
 
-## AniList studio — `anilist_studio` {#anilist-studio}
+### Studios {#anilist-studio}
 
-Finds all anime specified by the AniList Studio ID.
+<span id="example-anilist-studio-builders"></span>
 
-The expected input is an AniList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-### Example AniList studio builder(s) {#example-anilist-studio-builders}
+Selects anime associated with Studio Ghibli. Here `21` is a **studio ID**,
+not the One Piece anime ID used above.
 
 ```yaml
 collections:
@@ -73,15 +65,22 @@ collections:
     anilist_studio: 21
 ```
 
-## AniList top rated — `anilist_top_rated` {#anilist-top-rated}
+## Charts
 
-Finds every anime in AniList's [Top Rated Anime](https://anilist.co/search/anime?sort=SCORE_DESC) list.
+Each builder takes an integer specifying how many anime to query.
 
-The expected input is a single integer value of how many movies/shows to query. 
+| Builder | Chart |
+|:--------|:------|
+| <span id="anilist-top-rated"></span>`anilist_top_rated` | [Top rated](https://anilist.co/search/anime?sort=SCORE_DESC) |
+| <span id="anilist-popular"></span>`anilist_popular` | [Popular](https://anilist.co/search/anime/popular) |
+| <span id="anilist-trending"></span>`anilist_trending` | [Trending](https://anilist.co/search/anime/trending) |
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
+<span id="example-anilist-top-rated-builders"></span>
+<span id="example-anilist-popular-builders"></span>
+<span id="example-anilist-trending-builders"></span>
 
-### Example AniList top rated builder(s) {#example-anilist-top-rated-builders}
+Selects up to 30 top-rated anime in returned order. Replace `anilist_top_rated`
+with another chart builder to select that chart instead; `30` is a result count.
 
 ```yaml
 collections:
@@ -91,55 +90,33 @@ collections:
     sync_mode: sync
 ```
 
-## AniList trending — `anilist_trending` {#anilist-trending}
+## User lists {#anilist-userlist}
 
-Finds every anime in AniList's [Trending Anime](https://anilist.co/search/anime/trending) list.
+Both `username` and `list_name` are required. Score filters use a 0-10 scale.
+`.gt` / `.lt` exclude the boundary; `.gte` / `.lte` include it.
 
-The expected input is a single integer value of how many movies/shows to query. 
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `username` | String, required | AniList username |
+| `list_name` | String, required | Name of the user's list |
+| `score.gt`, `score.gte` | Number, 0.0-10.0 | Minimum score, exclusive / inclusive |
+| `score.lt`, `score.lte` | Number, 0.0-10.0 | Maximum score, exclusive / inclusive |
+| `sort_by` | Sort name; default `score` | `score`, `popularity`, `status`, `progress`, `last_updated`, `last_added`, `start_date`, `completed_date` |
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
+<span id="example-anilist-userlist-builders"></span>
 
-### Example AniList trending builder(s) {#example-anilist-trending-builders}
-
-```yaml
-collections:
-  Trending Anime:
-    anilist_trending: 10
-    collection_order: custom
-    sync_mode: sync
-```
-
-## AniList UserList — `anilist_userlist` {#anilist-userlist}
-
-Gets anime in AniList User's Anime list. The different sub-attributes are detailed below. 
-
-Both `username` and `list_name` are required.
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
-
-| Attribute                                                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|:----------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username`                                                                                    | **Description:** A user's AniList Username                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `list_name`                                                                                   | **Description:** A user's AniList List Name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `score.gt` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-score-filters" }  | **Description:** Only return items that have a score greater than the given number.<br>**Values:** `0.0`-`10.0`                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `score.gte` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-score-filters" } | **Description:** Only return items that have a score greater than or equal to the given number.<br>**Values:** `0.0`-`10.0`                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-| `score.lt` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-score-filters" }  | **Description:** Only return items that have a score less than the given number.<br>**Values:** `0.0`-`10.0`                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-| `score.lte` :material-numeric-1-circle:{ data-tooltip data-tooltip-id="tippy-score-filters" } | **Description:** Only return items that have a score less than or equal to the given number.<br>**Values:** `0.0`-`10.0`                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-| `sort_by`                                                                                     | **Description:** Sort Order to return<br>**Default:** `score`<br>**Values:**<table class="clearTable"><tr><td>`score`</td><td>Sort by User Score</td></tr><tr><td>`popularity`</td><td>Sort by Popularity</td></tr><tr><td>`status`</td><td>Sort by Status</td></tr><tr><td>`progress`</td><td>Sort by Progress</td></tr><tr><td>`last_updated`</td><td>Sort by Last Updated</td></tr><tr><td>`last_added`</td><td>Sort by Last Added</td></tr><tr><td>`start_date`</td><td>Sort by Start Date</td></tr><tr><td>`completed_date`</td><td>Sort by Completed Date</td></tr></table> |
-
-### Example AniList UserList builder(s) {#example-anilist-userlist-builders}
+Selects items in the user's Watching list with a score of at least 7.5, sorted
+by user score. Replace the placeholder username and list name as needed.
+The names are strings and `7.5` is a decimal threshold.
 
 ```yaml
 collections:
-  Currently Watching Anime:
+  Highly Rated Watching Anime:
     anilist_userlist:
-      username: Username
+      username: some_anilist_username
       list_name: Watching
+      score.gte: 7.5
       sort_by: score
     collection_order: custom
     sync_mode: sync
 ```
-
-## More AniList references
-
-- [Advanced search](search.md)

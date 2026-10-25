@@ -1,125 +1,110 @@
 # Simkl Builders
 
-You can find items using the trending and DVD release lists provided by [Simkl](https://simkl.com/) via the [Kometa Simkl Service](https://utilities.kometa.wiki/simkl-service).
+Collect trending movies, shows, anime, and DVD releases from [Simkl](https://simkl.com/)
+through the [Kometa Simkl Service](https://utilities.kometa.wiki/simkl-service).
+No API key or Simkl account is required. Both builders support movies, shows,
+playlists, and custom sorting.
 
-No API key or Simkl account is required.
+## Choose a builder
 
-| Builder                          | Description                                                                                         |             Works with Movies              |             Works with Shows               |    Works with Playlists and Custom Sort    |
-|:---------------------------------|:----------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`simkl_trending`](#simkl-trending)  | Finds movies, TV shows, and anime in Simkl's trending lists.                                        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`simkl_dvd`](#simkl-dvd)            | Finds movies and TV shows in Simkl's DVD release lists.                                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Builder | Finds |
+|:--------|:------|
+| [`simkl_dvd`](#simkl-dvd) | Movies and shows in DVD release lists |
+| [`simkl_trending`](#simkl-trending) | Trending movies, shows, and anime |
 
-## Simkl DVD — `simkl_dvd` {#simkl-dvd}
+Results are filtered to the library type: movies for movie libraries, shows for
+show libraries, and both for playlists. Use `collection_order: custom` to retain
+returned order and `sync_mode: sync` to keep membership synchronized.
 
-Finds movies and TV shows from [Simkl's DVD release lists](https://simkl.com/movies/dvd-releases/).
+## Shared options
 
-The list is filtered automatically to match your library type: movie libraries receive movies, show libraries receive TV shows, and playlists receive both.
+Both builders accept an integer limit directly or a dictionary containing `limit`.
+Trending also accepts `period`.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
+<span id="attribute"></span>
+<span id="simkl-trending-attribute"></span>
 
-???+ tip "Playlist ordering for DVD"
+| Attribute | Applies to | Value | Default |
+|:----------|:-----------|:------|:--------|
+| `limit` | Both | Integer, 1-500 | `20` |
+| `period` | Trending only | `today`, `week`, `month` | `today` |
 
-    The DVD release endpoint returns a single flat list of items.
-    When used in a playlist (mixed library), each item is evaluated individually and
-    **API order is preserved** -- movies and shows appear in the same sequence
-    returned by Simkl.
+Kometa automatically requests the service's top-100 (`small`) list for limits
+up to 100, or top-500 (`large`) list for larger limits.
 
-### Attribute {#attribute}
+## DVD releases {#simkl-dvd}
 
-| Attribute | Description                                                        | Required | Default |
-|:----------|:-------------------------------------------------------------------|:--------:|:-------:|
-| `limit`   | Maximum number of items to return. Must be between `1` and `500`. |    No    |  `20`   |
+Selects items from [Simkl's DVD release lists](https://simkl.com/movies/dvd-releases/).
+In playlists, the endpoint's flat item order is preserved, including any
+interleaving of movies and shows.
 
-!!! note
-    The Simkl service provides lists of the top 100 items (`small`) or top 500 items (`large`). Kometa automatically
-    selects the appropriate list size based on your `limit` value: `small` is used when `limit` is 100 or fewer,
-    `large` when `limit` is greater than 100.
+<span id="example-simkl-dvd-builders"></span>
 
-### Example Simkl DVD builder(s) {#example-simkl-dvd-builders}
+=== "Integer limit"
 
-Simple usage with just a limit:
+    Selects up to 20 DVD releases matching the current library type. The builder
+    value is an integer, not a boolean.
 
-```yaml
-collections:
-  New on DVD:
-    simkl_dvd: 20
-    collection_order: custom
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      New on DVD:
+        simkl_dvd: 20
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Using a dict:
+=== "Dictionary"
 
-```yaml
-collections:
-  New on DVD:
-    simkl_dvd:
-      limit: 50
-    collection_order: custom
-    sync_mode: sync
-```
+    Selects up to 150 DVD releases. The larger limit automatically uses the
+    service's top-500 list; the dictionary form keeps the limit as a named option.
 
-## Simkl trending — `simkl_trending` {#simkl-trending}
+    ```yaml
+    collections:
+      More DVD Releases:
+        simkl_dvd:
+          limit: 150
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-Finds movies, TV shows and anime from Simkl's trending lists.
+## Trending {#simkl-trending}
 
-- [Movies](https://simkl.com/movies/best-movies/most-watched/)
-- [Shows](https://simkl.com/tv/best-shows/most-watched/)
-- [Anime](https://simkl.com/anime/best-anime/most-watched/)
+Uses Simkl's trending lists for [movies](https://simkl.com/movies/best-movies/most-watched/),
+[shows](https://simkl.com/tv/best-shows/most-watched/), and
+[anime](https://simkl.com/anime/best-anime/most-watched/).
 
-The list is filtered automatically to match your library type (movies, shows, or both for playlists).
+!!! note "Trending playlist order"
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order.
+    Trending data arrives in separate sections: movies first, then TV shows,
+    then anime. Each section's order is retained, but media types are not
+    interleaved. Use [text files](../textfile/index.md) when you need explicit
+    per-item ordering across types.
 
-???+ warning "Playlist ordering for trending"
+<span id="example-simkl-trending-builders"></span>
 
-    The Simkl API returns trending data in **separate sections** (movies, TV, anime).
-    When used in a playlist (mixed library), items appear **grouped by type**:
-    all movies first, then all TV shows, then all anime.
-    The internal per-section order is preserved, but movies and shows are not interleaved.
-    If you need strict per-item interleaving, consider using `text_file` instead.
+=== "Default period"
 
-### Attribute {#simkl-trending-attribute}
+    Selects up to 20 trending items using the default `today` period.
 
-| Attribute | Description                                                         | Required | Default  |
-|:----------|:--------------------------------------------------------------------|:--------:|:--------:|
-| `period`  | Time period for the trending list. Options: `today`, `week`, `month` |    No    | `today`  |
-| `limit`   | Maximum number of items to return. Must be between `1` and `500`.  |    No    |   `20`   |
+    ```yaml
+    collections:
+      Simkl Trending Today:
+        simkl_trending: 20
+        collection_order: custom
+        sync_mode: sync
+    ```
 
-!!! note
-    The Simkl service provides lists of the top 100 items (`small`) or top 500 items (`large`). Kometa automatically
-    selects the appropriate list size based on your `limit` value: `small` is used when `limit` is 100 or fewer,
-    `large` when `limit` is greater than 100.
+=== "Named period"
 
-### Example Simkl trending builder(s) {#example-simkl-trending-builders}
+    Selects up to 50 items trending this week. `week` is a string and `50` is an
+    integer. Use `month` for the monthly list or `today` for the daily list.
 
-Simple usage with just a limit:
-
-```yaml
-collections:
-  Simkl Trending Today:
-    simkl_trending: 20
-    collection_order: custom
-    sync_mode: sync
-```
-
-Using a specific period:
-
-```yaml
-collections:
-  Simkl Trending This Week:
-    simkl_trending:
-      period: week
-      limit: 50
-    collection_order: custom
-    sync_mode: sync
-```
-
-```yaml
-collections:
-  Simkl Trending This Month:
-    simkl_trending:
-      period: month
-      limit: 100
-    collection_order: custom
-    sync_mode: sync
-```
+    ```yaml
+    collections:
+      Simkl Trending This Week:
+        simkl_trending:
+          period: week
+          limit: 50
+        collection_order: custom
+        sync_mode: sync
+    ```

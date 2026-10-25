@@ -1,206 +1,255 @@
 # TMDb Builders
 
-You can find items using the features of [TheMovieDb.org](https://www.themoviedb.org/) (TMDb).
+Find movies and shows using [The Movie Database](https://www.themoviedb.org/) (TMDb).
+Select titles by ID or URL, follow a chart, or collect a person's credits. For detailed search filters, use Discover for [movies](discover/movie.md) or [shows](discover/show.md).
 
-## TMDb standard builders
+## Choose a builder
 
-| Builder                                                              | Description                                                                                                                                                                                                                                                                                                                   |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:---------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| `tmdb_discover`([movie](discover/movie.md)/[show](discover/show.md)) | Uses [TMDb's Discover Search](https://developer.themoviedb.org/docs/search-and-query-for-details) to find every movie/show based on the [movie search parameters](https://developers.themoviedb.org/3/discover/movie-discover) or [show search parameters](https://developers.themoviedb.org/3/discover/tv-discover) provided | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_collection`](#tmdb-collection)                          | Finds every item in the TMDb collection                                                                                                                                                                                                                                                                                       | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`tmdb_list`](#tmdb-list)                                      | Finds every item in the TMDb List                                                                                                                                                                                                                                                                                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_movie`](#tmdb-movie)                                    | Finds the movie specified                                                                                                                                                                                                                                                                                                     | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`tmdb_show`](#tmdb-show)                                      | Finds the show specified                                                                                                                                                                                                                                                                                                      |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`tmdb_company`](#tmdb-company)                                | Finds every item from the TMDb company's movie/show list                                                                                                                                                                                                                                                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`tmdb_network`](#tmdb-network)                                | Finds every item from the TMDb network's show list                                                                                                                                                                                                                                                                            |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`tmdb_keyword`](#tmdb-keyword)                                | Finds every item from the TMDb keyword's movie/show list                                                                                                                                                                                                                                                                      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
+- [IDs and URLs](#tmdb-standard-builders): collections, lists, specific titles, companies, networks, and keywords.
+- [Charts](#tmdb-chart-builders): popular, top-rated, trending, and currently airing titles.
+- [People](#tmdb-people-builders): acting, directing, writing, producing, and other crew credits.
 
-## TMDb chart builders
+## By ID or URL {#tmdb-standard-builders}
 
-| Builder                                            | Description                                                                                                                                                     |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:---------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`tmdb_popular`](charts.md#tmdb-popular)                 | Finds the movies/shows in TMDb's [Popular Movies](https://www.themoviedb.org/movie)/[Popular Shows](https://www.themoviedb.org/tv) list                         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_now_playing`](charts.md#tmdb-now-playing)         | Finds the movies in TMDb's [Now Playing](https://www.themoviedb.org/movie/now-playing) list                                                                     | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_top_rated`](charts.md#tmdb-top-rated)             | Finds the movies/shows in TMDb's [Top Rated Movies](https://www.themoviedb.org/movie/top-rated)/[Top Rated Shows](https://www.themoviedb.org/tv/top-rated) list | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_upcoming`](charts.md#tmdb-upcoming)               | Finds the movies in TMDb's [Upcoming Movies](https://www.themoviedb.org/movie/upcoming) list                                                                    | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_airing_today`](charts.md#tmdb-airing-today)       | Finds the shows in TMDb's [Airing Today Shows](https://www.themoviedb.org/tv/airing-today) list                                                                 |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_on_the_air`](charts.md#tmdb-on-the-air)           | Finds the shows in TMDb's [On TV Shows](https://www.themoviedb.org/tv/on-the-air) list                                                                          |  :fontawesome-solid-circle-xmark:{ .red }  | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_trending_daily`](charts.md#tmdb-trending-daily)   | Finds the movies/shows in TMDb's Trending Daily list                                                                                                            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tmdb_trending_weekly`](charts.md#tmdb-trending-weekly) | Finds the movies/shows in TMDb's Trending Weekly list                                                                                                           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+| Builder | Finds | Supports | Playlists / custom sort |
+|:--------|:------|:---------|:-----------------------|
+| [`tmdb_collection`](#tmdb-collection) | Movies in a TMDb collection | Movies | No |
+| [`tmdb_list`](#tmdb-list) | Items in a TMDb list | Movies, shows | Yes |
+| [`tmdb_movie`](#tmdb-movie) | Specific movies | Movies | No |
+| [`tmdb_show`](#tmdb-show) | Specific shows | Shows | No |
+| [`tmdb_company`](#tmdb-company) | Titles associated with a company | Movies, shows | No |
+| [`tmdb_network`](#tmdb-network) | Shows associated with a network | Shows | No |
+| [`tmdb_keyword`](#tmdb-keyword) | Titles tagged with a keyword | Movies, shows | No |
 
+### Using IDs and URLs
 
-## TMDb people builders
+The collection, list, movie, show, company, network, and keyword builders below accept a TMDb ID or full URL.
+For multiple values, use a YAML list or a comma-separated string.
+The same formats apply to their supported [`_details` variants](#copy-metadata-from-tmdb).
 
-    ???+ tip "People Collections"
-    
-        As Plex does not allow People to be part of Collections, Kometa will instead add any media that the person is associated with based om the Builder criteria.
-    
-        You can not have a Collection of "Top 10 Actors" for example, as Plex does not allow this.
+=== "Single ID"
 
-| Builder                               | Description                                            |             Works with Movies              |              Works with Shows              |   Works with Playlists and Custom Sort   |
-|:--------------------------------------|:-------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:----------------------------------------:|
-| [`tmdb_actor`](people.md#tmdb-actor)       | Finds every item in the TMDb Person's Actor Credits    | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
-| [`tmdb_crew`](people.md#tmdb-crew)         | Finds every item in the TMDb Person's Crew Credits     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
-| [`tmdb_director`](people.md#tmdb-director) | Finds every item in the TMDb Person's Director Credits | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
-| [`tmdb_producer`](people.md#tmdb-producer) | Finds every item in the TMDb Person's Producer Credits | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
-| [`tmdb_writer`](people.md#tmdb-writer)     | Finds every item in the TMDb Person's Writer Credits   | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } |
+    ```yaml
+    collections:
+      The Hobbit:
+        tmdb_collection: 121938
+    ```
 
-## TMDb collection — `tmdb_collection`, `tmdb_collection_details` {#tmdb-collection}
+=== "Full URL"
 
-Finds every item in the TMDb collection.
+    ```yaml
+    collections:
+      The Hobbit:
+        tmdb_collection: https://www.themoviedb.org/collection/121938-the-hobbit-collection
+    ```
 
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+=== "Multiple values"
 
-### Example TMDb collection builder(s) {#example-tmdb-collection-builders}
+    ```yaml
+    collections:
+      Middle Earth:
+        tmdb_collection:
+          - 119
+          - 121938
+    ```
 
-```yaml title="Press the + icon to learn more"
+    You can mix IDs and full URLs in a YAML list. A comma-separated value such as
+    `tmdb_collection: 119, 121938` is also accepted.
+
+### Collection {#tmdb-collection}
+
+Find every movie in a TMDb collection.
+
+<span id="example-tmdb-collection-builders"></span>
+
+```yaml
 collections:
-  The Lord of the Rings:
-    tmdb_collection: 
-        - 121938 #(3)!
   The Hobbit:
-    tmdb_collection:  https://www.themoviedb.org/collection/119 
-  Middle Earth:
-    tmdb_collection_details: #(1)!
-      - 119 #(2)!
-      - https://www.themoviedb.org/collection/121938
+    tmdb_collection: 121938
 ```
 
-1. You can replace `tmdb_collection` with `tmdb_collection_details` if you would like to fetch and use the TMDb collection's summary, poster, and background from the list. 
-2. You can specify multiple collections in `tmdb_collection_details` but it will only use the first one to update the collection details.
-3. https://www.themoviedb.org/collection/121938-the-hobbit-collection also accepted
+Find the ID in the collection URL: `themoviedb.org/collection/121938`.
 
-* Posters and background in the library's asset directory will be used over the collection details unless `tmdb_poster`/`tmdb_background` is also specified.
+### List {#tmdb-list}
 
-## TMDb company — `tmdb_company` {#tmdb-company}
+Find every item in a TMDb list.
 
-Finds every movie from the TMDb company's movie list.
+<span id="example-tmdb-list-builders"></span>
 
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+```yaml
+collections:
+  Top 50 Grossing Films of All Time (Worldwide):
+    tmdb_list: 10
+    collection_order: custom
+    sync_mode: sync
+```
 
-### Example TMDb company builder(s) {#example-tmdb-company-builders}
+Find the ID in the list URL: `themoviedb.org/list/10`.
+
+Use `collection_order: custom` to preserve the list's order and `sync_mode: sync`
+to keep collection membership in sync as the list changes.
+
+### Movie {#tmdb-movie}
+
+Find specific movies.
+
+<span id="example-tmdb-movie-builders"></span>
+
+```yaml
+collections:
+  Wizard of Oz & Wicked:
+    tmdb_movie:
+      - 630
+      - 402431
+```
+
+Find the ID in the movie URL: `themoviedb.org/movie/630-the-wizard-of-oz`.
+
+### Show {#tmdb-show}
+
+Find specific shows.
+
+<span id="example-tmdb-show-builders"></span>
+
+```yaml
+collections:
+  Star Wars (Animated Shows):
+    tmdb_show:
+      - 4194
+      - 60554
+```
+
+Find the ID in the show URL: `themoviedb.org/tv/4194-star-wars-the-clone-wars`.
+
+### Company {#tmdb-company}
+
+Find movies or shows associated with a TMDb company.
+
+<span id="example-tmdb-company-builders"></span>
 
 ```yaml
 collections:
   Studio Ghibli:
-    tmdb_company: 10342 #(1)!
+    tmdb_company: 10342
 ```
 
-1. https://www.themoviedb.org/company/10342 also accepted
+Find the ID in the company URL: `themoviedb.org/company/10342`.
 
-## TMDb keyword — `tmdb_keyword` {#tmdb-keyword}
+### Network {#tmdb-network}
 
-Finds every item from the TMDb keyword's movie/show list.
+Find shows associated with a TMDb network.
 
-### Example TMDb keyword builder(s) {#example-tmdb-keyword-builders}
-
-```yaml
-collections:
-  Marvel Cinematic Universe:
-    tmdb_keyword: 180547 #(1)!
-```
-
-1.   https://www.themoviedb.org/keyword/180547 also accepted
-
-## TMDb list — `tmdb_list`, `tmdb_list_details` {#tmdb-list}
-
-Finds every item in the TMDb List.
-
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
-and in a specific order. 
-
-### Example TMDb list builder(s) {#example-tmdb-list-builders}
-
-```yaml title="Press the + icon to learn more"
-collections:
-  Top 50 Grossing Films of All Time (Worldwide):
-    tmdb_list: 10 #(1)!
-    collection_order: custom
-    sync_mode: sync
-  Marvel & DC Universes:
-    tmdb_list_details: #(2)!
-      - 1 #(3)!
-      - 3
-    collection_order: custom
-    sync_mode: sync
-```
-
-1. https://www.themoviedb.org/list/10 also accepted
-2. You can replace `tmdb_list` with `tmdb_list_details` if you would like to fetch and use the TMDb collection's summary, poster, and background from the list
-3. You can specify multiple lists in `tmdb_list_details` but it will only use the first one to update the collection details
-
-## TMDb movie — `tmdb_movie`, `tmdb_movie_details` {#tmdb-movie}
-
-Finds the movie specified.
-
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-### Example TMDb movie builder(s) {#example-tmdb-movie-builders}
-
-```yaml title="Press the + icon to learn more"
-collections:
-  Anaconda:
-    tmdb_movie: #(1)!
-      - 336560
-  Wizard of Oz & Wicked:
-    tmdb_movie_details: #(2)!
-      - 630 #(3)!
-      - 402431
-```
-
-1. You can replace `tmdb_movie` with `tmdb_movie_details` if you would like to fetch and use the TMDb show's summary, poster, and background from the list
-2. You can specify multiple shows in `tmdb_movie_details` but it will only use the first one to update the collection details
-3. https://www.themoviedb.org/movie/630-the-wizard-of-oz also accepted
-
-* Posters and background in the library's asset directory will be used over the collection details unless `tmdb_poster`/`tmdb_background` is also specified.
-
-## TMDb network — `tmdb_network` {#tmdb-network}
-
-Finds every item from the TMDb network's movie/show list.
-
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
-
-### Example TMDb network builder(s) {#example-tmdb-network-builders}
+<span id="example-tmdb-network-builders"></span>
 
 ```yaml
 collections:
   CBS:
-    tmdb_network: 16 #(1)!
+    tmdb_network: 16
 ```
 
-1.  https://www.themoviedb.org/network/16 also accepted
+Find the ID in the network URL: `themoviedb.org/network/16`.
 
-## TMDb show — `tmdb_show` {#tmdb-show}
+### Keyword {#tmdb-keyword}
 
-Finds the show specified.
+Find movies or shows tagged with a TMDb keyword.
 
-This Builder is expected to have the full URL to the item or the TMDb ID of the item. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+<span id="example-tmdb-keyword-builders"></span>
 
-### Example TMDb show builder(s) {#example-tmdb-show-builders}
-
-```yaml title="Press the + icon to learn more"
+```yaml
 collections:
-  Star Wars (Animated Shows):
-    tmdb_show:
-      - 4194 #(1)!
-      - 60554
-    Pokémon Evolutions & Chronicles:
-      tmdb_show_details: #(2)!
-        - 132636 #(3)!
-        - 13230
+  Marvel Cinematic Universe:
+    tmdb_keyword: 180547
 ```
 
-1. https://www.themoviedb.org/tv/4194-star-wars-the-clone-wars also accepted
-2. You can replace `tmdb_show` with `tmdb_show_details` if you would like to fetch and use the TMDb show's summary, poster, and background from the list
-3. You can specify multiple shows in `tmdb_show_details` but it will only use the first one to update the collection details
+Find the ID in the keyword URL: `themoviedb.org/keyword/180547`.
 
-* Posters and background in the library's asset directory will be used over the collection details unless `tmdb_poster`/`tmdb_background` is also specified.
+## Chart builders {#tmdb-chart-builders}
 
-## More TMDb references
+Choose a chart and set its value to the **number of items to query**, such as `30`.
+All chart builders support playlists and custom sorting.
 
-- [Charts](charts.md)
-- [People](people.md)
-- [Discover movies](discover/movie.md)
-- [Discover shows](discover/show.md)
+| Builder | Chart | Supports | Region option |
+|:--------|:------|:---------|:--------------|
+| <span id="tmdb-popular"></span>`tmdb_popular` | [Popular](https://www.themoviedb.org/movie) | Movies, shows | Yes |
+| <span id="tmdb-top-rated"></span>`tmdb_top_rated` | [Top rated](https://www.themoviedb.org/movie/top-rated) | Movies, shows | Yes |
+| <span id="tmdb-now-playing"></span>`tmdb_now_playing` | [Now playing](https://www.themoviedb.org/movie/now-playing) | Movies | Yes |
+| <span id="tmdb-upcoming"></span>`tmdb_upcoming` | [Upcoming](https://www.themoviedb.org/movie/upcoming) | Movies | Yes |
+| <span id="tmdb-airing-today"></span>`tmdb_airing_today` | [Airing today](https://www.themoviedb.org/tv/airing-today) | Shows | No |
+| <span id="tmdb-on-the-air"></span>`tmdb_on_the_air` | [On the air](https://www.themoviedb.org/tv/on-the-air) | Shows | No |
+| <span id="tmdb-trending-daily"></span>`tmdb_trending_daily` | Trending today | Movies, shows | No |
+| <span id="tmdb-trending-weekly"></span>`tmdb_trending_weekly` | Trending this week | Movies, shows | No |
+
+```yaml
+collections:
+  TMDb Popular:
+    tmdb_popular: 30
+    collection_order: custom
+    sync_mode: sync
+```
+
+Replace `tmdb_popular` with any chart builder above. Use `collection_order: custom`
+to preserve chart order and `sync_mode: sync` to keep membership synchronized.
+For builders with a region option, add [`tmdb_region`](../../settings.md) to select a region.
+
+## People builders {#tmdb-people-builders}
+
+Find movies and shows associated with a person, using their TMDb person ID or URL.
+The [ID and URL formats](#using-ids-and-urls) also apply here, including multiple people.
+All people builders support movies and shows; none support playlists or custom sorting.
+
+| Builder | Credits to include |
+|:--------|:-------------------|
+| <span id="tmdb-actor"></span>`tmdb_actor` | Acting |
+| <span id="tmdb-crew"></span>`tmdb_crew` | All crew roles |
+| <span id="tmdb-director"></span>`tmdb_director` | Directing |
+| <span id="tmdb-producer"></span>`tmdb_producer` | Producing |
+| <span id="tmdb-writer"></span>`tmdb_writer` | Writing |
+
+```yaml
+collections:
+  Robin Williams:
+    tmdb_actor: 2157
+```
+
+Find the ID in the person URL: `themoviedb.org/person/2157-robin-williams`.
+Replace `tmdb_actor` with another role to select that person's corresponding credits.
+Each role also has a [`_details` variant](#copy-metadata-from-tmdb) for copying the person's metadata.
+
+!!! note "Collections contain media"
+
+    Plex collections contain movies and shows, rather than people. For example,
+    `tmdb_actor` creates a collection of a person's acting credits, not a collection of actors.
+
+## Copy metadata from TMDb
+
+Use a `_details` variant to find the same items and copy metadata to your Kometa collection.
+
+| Builder | Metadata variant | Copies |
+|:--------|:-----------------|:-------|
+| `tmdb_collection` | `tmdb_collection_details` | Summary, poster, background |
+| `tmdb_list` | `tmdb_list_details` | Summary, poster, background |
+| `tmdb_movie` | `tmdb_movie_details` | Summary, poster, background |
+| `tmdb_show` | `tmdb_show_details` | Summary, poster, background |
+| `tmdb_actor` | `tmdb_actor_details` | Biography, profile |
+| `tmdb_crew` | `tmdb_crew_details` | Biography, profile |
+| `tmdb_director` | `tmdb_director_details` | Biography, profile |
+| `tmdb_producer` | `tmdb_producer_details` | Biography, profile |
+| `tmdb_writer` | `tmdb_writer_details` | Biography, profile |
+
+```yaml
+collections:
+  Middle Earth:
+    tmdb_collection_details:
+      - 119
+      - 121938
+```
+
+This example includes movies from both TMDb collections, but copies metadata
+from **only the first entry** (`119`). The same first-entry rule applies to all
+`_details` variants, including people: the first person supplies the biography and profile.
+
+!!! note "Artwork priority"
+
+    Posters and backgrounds in your library's asset directory take priority over
+    artwork copied by a `_details` builder, unless `tmdb_poster` or
+    `tmdb_background` is also specified.

@@ -106,6 +106,70 @@ document$.subscribe(function() {
   window.addEventListener("hashchange", window.operationAdmonitionHashHandler);
 });
 
+// Copy runtime-option permalinks and open options reached through a direct link.
+document$.subscribe(function() {
+  document.querySelectorAll("[data-copy-permalink]").forEach(function(link) {
+    if (link.dataset.copyBound) return;
+    link.dataset.copyBound = "true";
+    link.setAttribute("aria-label", "Copy direct link");
+    let timer;
+    link.addEventListener("click", async function(event) {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      event.stopPropagation();
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(link.href);
+        copied = true;
+      } catch (error) {
+        const input = document.createElement("textarea");
+        input.value = link.href;
+        input.style.position = "fixed";
+        input.style.opacity = "0";
+        document.body.appendChild(input);
+        input.select();
+        try {
+          copied = document.execCommand("copy");
+        } catch (fallbackError) {
+          copied = false;
+        } finally {
+          input.remove();
+          link.focus({ preventScroll: true });
+        }
+      }
+      clearTimeout(timer);
+      link.textContent = copied ? "Copied!" : "Copy failed";
+      link.title = copied ? "Link copied" : "Right-click to copy the link address";
+      timer = setTimeout(function() {
+        link.textContent = "\u00b6";
+        link.title = "Copy link";
+      }, 1800);
+    });
+  });
+
+  if (window.runtimeOptionHashHandler) {
+    window.removeEventListener("hashchange", window.runtimeOptionHashHandler);
+  }
+  function openRuntimeOption() {
+    let id;
+    try {
+      id = decodeURIComponent(window.location.hash.slice(1));
+    } catch (error) {
+      return;
+    }
+    const target = document.getElementById(id);
+    const details = target && target.closest("details");
+    if (!details || !details.querySelector("[data-copy-permalink]")) return;
+    details.open = true;
+    window.requestAnimationFrame(function() {
+      details.scrollIntoView({ block: "start" });
+    });
+  }
+  window.runtimeOptionHashHandler = openRuntimeOption;
+  window.addEventListener("hashchange", openRuntimeOption);
+  openRuntimeOption();
+});
+
 document$.subscribe(function() {
   const ellipsisText = "Kometa Wiki";
 
@@ -234,6 +298,11 @@ document$.subscribe(function() {
     const top = Math.max(0, header ? header.getBoundingClientRect().bottom : 0);
     entries.forEach(function(entry) {
       const { table, overlay, copy, columns } = entry;
+      // Closed disclosures can retain table geometry even though their contents are hidden.
+      if (table.closest('details:not([open])') || !table.getClientRects().length) {
+        overlay.hidden = true;
+        return;
+      }
       const bounds = table.getBoundingClientRect();
       const head = table.tHead.getBoundingClientRect();
       const scroller = table.closest('.md-typeset__scrollwrap') || table.parentElement;
@@ -260,12 +329,14 @@ document$.subscribe(function() {
   entries.forEach(function(entry) { observer.observe(entry.table); });
   if (header) observer.observe(header);
   document.addEventListener('scroll', schedule, { capture: true, passive: true });
+  document.addEventListener('toggle', schedule, true);
   window.addEventListener('resize', schedule);
   schedule();
   kometaStickyTableCleanup = function() {
     window.cancelAnimationFrame(frame);
     observer.disconnect();
     document.removeEventListener('scroll', schedule, true);
+    document.removeEventListener('toggle', schedule, true);
     window.removeEventListener('resize', schedule);
     entries.forEach(function(entry) {
       entry.table.removeEventListener('afterSort', entry.refresh);

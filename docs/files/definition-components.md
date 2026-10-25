@@ -123,8 +123,8 @@ Collection/Playlist.
 
 ### Item metadata updates
 
-[Item Updates](item_updates.md) are attributes placed at the top level of the definition that tells Kometa Metadata Changes 
-for every item found in the Collection/Playlist. 
+[Item updates](updates.md#item-metadata-updates) change metadata on the media selected for a collection.
+Place them at the top level of the definition; they are not supported for playlists or overlays.
 
 ???+ example "Item Metadata Update Example"
 

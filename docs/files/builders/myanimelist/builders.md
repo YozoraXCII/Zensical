@@ -1,127 +1,210 @@
 # MyAnimeList Builders
 
-You can find anime using the features of [MyAnimeList.net](https://myanimelist.net/) (MyAnimeList).
+Collect anime from [MyAnimeList](https://myanimelist.net/) charts, searches,
+seasons, user lists, and recommendations. All builders support movie and show
+libraries. All except `mal_id` support playlists and custom sorting.
 
-???+ warning "MyAnimeList Configuration"
+!!! warning "Configure MyAnimeList first"
 
-    [Configuring MyAnimeList](../../../config/myanimelist.md) in the config is required for any of these builders to function.
+    Every builder requires [MyAnimeList configuration](../../../config/myanimelist.md).
+    Suggested anime and `"@me"` user lists use the authorized account.
 
-| Builder                         | Description                                                                                                             |             Works with Movies              |              Works with Shows              |    Works with Playlists and Custom Sort    |
-|:--------------------------------|:------------------------------------------------------------------------------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`mal_airing`](charts.md#myanimelist-top-airing)       | Finds every anime in MyAnimeList's [Top Airing Anime](https://myanimelist.net/topanime.php?type=airing) list            | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_all`](charts.md#myanimelist-top-all)             | Finds every anime in MyAnimeList's [Top All Anime](https://myanimelist.net/topanime.php) list                           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | 
-| [`mal_favorite`](charts.md#myanimelist-most-favorited)   | Finds every anime in MyAnimeList's [Most Favorited Anime](https://myanimelist.net/topanime.php?type=favorite) list      | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_id`](#myanimelist-id)               | Finds the anime specified by the MyAnimeList ID                                                                         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |  :fontawesome-solid-circle-xmark:{ .red }  |
-| [`mal_movie`](charts.md#myanimelist-top-movies)         | Finds every anime in MyAnimeList's [Top Anime Movies](https://myanimelist.net/topanime.php?type=movie) list             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_ova`](charts.md#myanimelist-top-ova-series)             | Finds every anime in MyAnimeList's [Top Anime OVA Series](https://myanimelist.net/topanime.php?type=ova) list           | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_popular`](charts.md#myanimelist-most-popular)     | Finds every anime in MyAnimeList's [Most Popular Anime](https://myanimelist.net/topanime.php?type=bypopularity) list    | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_search`](#myanimelist-search)       | Finds every anime in a MyAnimeList Search list                                                                          | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | 
-| [`mal_season`](#myanimelist-seasonal)       | Finds anime in MyAnimeList's [Seasonal Anime](https://myanimelist.net/anime/season) list the options are detailed below | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_special`](charts.md#myanimelist-top-specials)     | Finds every anime in MyAnimeList's [Top Anime Specials](https://myanimelist.net/topanime.php?type=special) list         | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_suggested`](#myanimelist-suggested) | Finds the suggested anime in by MyAnimeList for the authorized user                                                     | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_tv`](charts.md#myanimelist-top-tv-series)               | Finds every anime in MyAnimeList's [Top Anime TV Series](https://myanimelist.net/topanime.php?type=tv) list             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_upcoming`](charts.md#myanimelist-top-upcoming)   | Finds every anime in MyAnimeList's [Top Upcoming Anime](https://myanimelist.net/topanime.php?type=upcoming) list        | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`mal_userlist`](#myanimelist-userlist)   | Finds anime in MyAnimeList User's Anime list the options are detailed below                                             | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## MyAnimeList ID — `mal_id` {#myanimelist-id}
+| Builder | Finds |
+|:--------|:------|
+| [`mal_id`](#myanimelist-id) | Specific anime |
+| [Chart builders](#charts-and-rankings) | Ranked, popular, favorited, airing, or upcoming anime |
+| [`mal_search`](#myanimelist-search) | Anime matching detailed filters |
+| [`mal_season`](#myanimelist-seasonal) | Anime from a selected season |
+| [`mal_suggested`](#myanimelist-suggested) | Recommendations for the authorized user |
+| [`mal_userlist`](#myanimelist-userlist) | A user's list, optionally filtered by status |
 
-Gets the anime specified by the MyAnimeList ID.
+For all except `mal_id`, use `collection_order: custom` to preserve returned
+order and `sync_mode: sync` to keep membership synchronized.
 
-The expected input is a MyAnimeList ID. Multiple values are supported as either a list :material-information-outline:{ data-tooltip data-tooltip-id="tippy-yaml-lists" } or a comma-separated string.
+## Specific IDs {#myanimelist-id}
 
-### Example MyAnimeList ID builder(s) {#example-myanimelist-id-builders}
+Accepts MyAnimeList anime IDs as a YAML list or comma-separated string.
+
+<span id="example-myanimelist-id-builders"></span>
+
+Selects the two Cowboy Bebop entries. These are numeric IDs, rather than result
+limits. A quoted string such as `"23,219"` is also accepted.
 
 ```yaml
 collections:
   Cowboy Bebop:
-    mal_id: 23, 219
+    mal_id:
+      - 23
+      - 219
 ```
 
-## MyAnimeList search — `mal_search` {#myanimelist-search}
+## Charts and rankings
 
-Gets every anime in a MyAnimeList search. The different sub-attributes are detailed below. At least one attribute is required.
+Each builder takes an integer result count, up to **500**.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
+| Builder | Chart |
+|:--------|:------|
+| <span id="myanimelist-top-airing"></span>`mal_airing` | [Top airing](https://myanimelist.net/topanime.php?type=airing) |
+| <span id="myanimelist-top-all"></span>`mal_all` | [Top all anime](https://myanimelist.net/topanime.php) |
+| <span id="myanimelist-most-favorited"></span>`mal_favorite` | [Most favorited](https://myanimelist.net/topanime.php?type=favorite) |
+| <span id="myanimelist-top-movies"></span>`mal_movie` | [Top movies](https://myanimelist.net/topanime.php?type=movie) |
+| <span id="myanimelist-top-ova-series"></span>`mal_ova` | [Top OVA series](https://myanimelist.net/topanime.php?type=ova) |
+| <span id="myanimelist-most-popular"></span>`mal_popular` | [Most popular](https://myanimelist.net/topanime.php?type=bypopularity) |
+| <span id="myanimelist-top-specials"></span>`mal_special` | [Top specials](https://myanimelist.net/topanime.php?type=special) |
+| <span id="myanimelist-top-tv-series"></span>`mal_tv` | [Top TV series](https://myanimelist.net/topanime.php?type=tv) |
+| <span id="myanimelist-top-upcoming"></span>`mal_upcoming` | [Top upcoming](https://myanimelist.net/topanime.php?type=upcoming) |
 
-| Attribute              | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-|:-----------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `sort_by`              | **Description:** Sort Order to return<br>**Values:** `mal_id.desc`, `mal_id.asc`, `title.desc`, `title.asc`, `type.desc`, `type.asc`, `rating.desc`, `rating.asc`, `start_date.desc`, `start_date.asc`, `end_date.desc`, `end_date.asc`, `episodes.desc`, `episodes.asc`, `score.desc`, `score.asc`, `scored_by.desc`, `scored_by.asc`, `rank.desc`, `rank.asc`, `popularity.desc`, `popularity.asc`, `members.desc`, `members.asc`, `favorites.desc`, `favorites.asc` |
-| `limit`                | **Description:** Don't return more than this number<br>**Values:** Number of Anime to query from MyAnimeList                                                                                                                                                                                                                                                                                                                                                           |
-| `query`                | **Description:** Text query to search for                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `prefix`               | **Description:** Results must begin with this prefix                                                                                                                                                                                                                                                                                                                                                                                                                   |
-| `type`                 | **Description:** Type of Anime to search for<br>**Values:** `tv`, `movie`, `ova`, `special`, `ona`, `music`                                                                                                                                                                                                                                                                                                                                                            |
-| `status`               | **Description:** Status to search for<br>**Values:** `airing`, `complete`, `upcoming`                                                                                                                                                                                                                                                                                                                                                                                  |
-| `genre`                | **Description:** Comma-separated String of Genres to include using `,` for `AND` and <code>&#124;</code> for `OR`<br>**Values:** Genre Name or ID                                                                                                                                                                                                                                                                                                                      |
-| `genre.not`            | **Description:** Comma-separated String of Genres to exclude using `,` for `AND` and <code>&#124;</code> for `OR`<br>**Values:** Genre Name or ID                                                                                                                                                                                                                                                                                                                      |
-| `studio`               | **Description:** Comma-separated String of Genres to include using `,` for `AND` and <code>&#124;</code> for `OR`<br>**Values:** Studio Name or ID                                                                                                                                                                                                                                                                                                                     |
-| `content_rating`       | **Description:** Content Rating to search for<br>**Values:** `g`, `pg`, `pg13`, `r17`, `r`, `rx`                                                                                                                                                                                                                                                                                                                                                                       |
-| `score.gt`/`score.gte` | **Description:** Score must be greater than the given number<br>**Values:** Float between `0.00`-`10.00`                                                                                                                                                                                                                                                                                                                                                               |
-| `score.lt`/`score.lte` | **Description:** Score must be less than the given number<br>**Values:** Float between `0.00`-`10.00`                                                                                                                                                                                                                                                                                                                                                                  |
-| `sfw`                  | **Description:** Results must be Safe for Work<br>**Value:** `true`                                                                                                                                                                                                                                                                                                                                                                                                    |
+<span id="example-myanimelist-top-airing-builders"></span>
+<span id="example-myanimelist-top-all-builders"></span>
+<span id="example-myanimelist-most-favorited-builders"></span>
+<span id="example-myanimelist-top-movies-builders"></span>
+<span id="example-myanimelist-top-ova-series-builders"></span>
+<span id="example-myanimelist-most-popular-builders"></span>
+<span id="example-myanimelist-top-specials-builders"></span>
+<span id="example-myanimelist-top-tv-series-builders"></span>
+<span id="example-myanimelist-top-upcoming-builders"></span>
 
-* Studio options can be found on [MyAnimeList's Search](https://myanimelist.net/anime.php) Page.
-* Genre options can be found on [MyAnimeList's Search](https://myanimelist.net/anime.php) Page.
-* To find the ID click on a Studio or Genre in the link above and there should be a number in the URL that's the `id`.
-* For example if the url is `https://myanimelist.net/anime/producer/4/Bones` the `id` would be `4` or if the url is `https://myanimelist.net/anime/genre/1/Action` the `id` would be `1`.
-
-### Example MyAnimeList search builder(s) {#example-myanimelist-search-builders}
+Selects up to 30 entries from the overall top-anime chart in returned order.
+Replace `mal_all` with another chart builder to use that chart instead.
 
 ```yaml
 collections:
-  Top Action Anime:
-    mal_search:
-      limit: 100
-      sort_by: score.desc
-      genre: Action
+  Top 30 Anime:
+    mal_all: 30
     collection_order: custom
     sync_mode: sync
 ```
 
-## MyAnimeList seasonal — `mal_season` {#myanimelist-seasonal}
+## Search {#myanimelist-search}
 
-Gets anime in MyAnimeList's [Seasonal Anime](https://myanimelist.net/anime/season) list the options are detailed below. 
+`mal_search` requires at least one attribute. Options belong beneath the builder.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
+### Results and title filters
 
-| Attribute       | Description & Values                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-|:----------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `season`        | **Description:** Season to search<br>**Default:** `current`<br>**Values:**<table class="clearTable"><tr><td>`winter`</td><td>For winter season January, February, March</td></tr><tr><td>`spring`</td><td>For spring season April, May, June</td></tr><tr><td>`summer`</td><td>For summer season July, August, September</td></tr><tr><td>`fall`</td><td>For fall season October, November, December</td></tr><tr><td>`current`</td><td>For the current Season</td></tr></table> |
-| `year`          | **Description:** Year to search<br>**Default:** Current Year<br>**Values:** Number between `1917` and the current year.                                                                                                                                                                                                                                                                                                                                                          |
-| `sort_by`       | **Description:** Sort Order<br>**Default:** `members`<br>**Values:**<table class="clearTable"><tr><td>`members`</td><td>Sort by Most Members</td></tr><tr><td>`score`</td><td>Sort by Score ([not working properly](https://myanimelist.net/forum/?topicid=2030371))</td></tr></table>                                                                                                                                                                                                                                                                    |
-| `limit`         | **Description:** Don't return more than this number<br>**Default:** `100`<br>**Values:** Number of Anime to query from MyAnimeList (max: 500)                                                                                                                                                                                                                                                                                                                                    |
-| `starting_only` | **Description:** Return only anime that began airing in the selected season<br>**Default:** `False`<br>**Values:** `True` or `False`                                                                                                                                                                                                                                                                                                                                             |
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `limit` | Integer | Maximum anime to query |
+| `sort_by` | Sort option below | Result order |
+| `query` | String | Text query |
+| `prefix` | String | Required beginning of the result title |
+| `type` | `tv`, `movie`, `ova`, `special`, `ona`, `music` | Anime format |
+| `status` | `airing`, `complete`, `upcoming` | Airing status |
+| `content_rating` | `g`, `pg`, `pg13`, `r17`, `r`, `rx` | Content rating |
+| `sfw` | `true` | Require safe-for-work results |
 
-### Example MyAnimeList seasonal builder(s) {#example-myanimelist-seasonal-builders}
+### Genres, studios, and scores
+
+| Attribute | Value | Purpose |
+|:----------|:------|:--------|
+| `genre` | Genre name or ID string | Include genres |
+| `genre.not` | Genre name or ID string | Exclude genres |
+| `studio` | Studio name or ID string | Include studios |
+| `score.gt`, `score.gte` | Number, 0.00-10.00 | Minimum score, exclusive / inclusive |
+| `score.lt`, `score.lte` | Number, 0.00-10.00 | Maximum score, exclusive / inclusive |
+
+For genre and studio strings, commas mean **AND** and pipes mean **OR**. Quote
+multi-value strings: `genre: "Action,Comedy"` requires both; `genre: "Action|Comedy"`
+accepts either. This also applies to `genre.not` exclusions.
+
+Find names and IDs on [MyAnimeList search](https://myanimelist.net/anime.php).
+The number in a producer or genre URL is its ID: `/anime/producer/4/Bones` uses
+studio ID `4`; `/anime/genre/1/Action` uses genre ID `1`.
+
+### Search sorting
+
+Append `.asc` or `.desc` to a field below, such as `score.desc` for highest score first.
+
+`mal_id`, `title`, `type`, `rating`, `start_date`, `end_date`, `episodes`, `score`,
+`scored_by`, `rank`, `popularity`, `members`, `favorites`.
+
+<span id="example-myanimelist-search-builders"></span>
+
+=== "Numbers and boolean"
+
+    Selects up to 100 action anime scoring at least 7.5, highest scores first,
+    requiring safe-for-work results. `7.5` is a decimal score, `100` is an integer
+    limit, and `true` is a boolean.
+
+    ```yaml
+    collections:
+      Highly Rated Action Anime:
+        mal_search:
+          genre: Action
+          score.gte: 7.5
+          sfw: true
+          sort_by: score.desc
+          limit: 100
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "AND / OR"
+
+    The first collection requires both Action and Comedy; the second accepts
+    either. Both strings are quoted. Only the separator changes the matching.
+
+    ```yaml
+    collections:
+      Action Comedies:
+        mal_search:
+          genre: "Action,Comedy"
+          sort_by: score.desc
+          limit: 50
+        collection_order: custom
+        sync_mode: sync
+
+      Action or Comedy:
+        mal_search:
+          genre: "Action|Comedy"
+          sort_by: score.desc
+          limit: 50
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+## Seasonal anime {#myanimelist-seasonal}
+
+Selects anime from [MyAnimeList's seasonal lists](https://myanimelist.net/anime/season).
+
+| Attribute | Value | Default |
+|:----------|:------|:--------|
+| `season` | `winter`, `spring`, `summer`, `fall`, `current` | `current` |
+| `year` | Integer, 1917 through the current year | Current year |
+| `sort_by` | `members`, `score` | `members` |
+| `limit` | Integer, maximum 500 | `100` |
+| `starting_only` | Boolean; only anime beginning in that season | `false` |
+
+Season months are January-March for winter, April-June for spring,
+July-September for summer, and October-December for fall.
+Seasonal score sorting has a [reported issue](https://myanimelist.net/forum/?topicid=2030371).
+
+<span id="example-myanimelist-seasonal-builders"></span>
+
+Selects up to 50 anime that **began** airing in fall 2020, ordered by members.
+`starting_only: true` excludes titles merely continuing through the season.
+Omit season and year to use the current season and year.
 
 ```yaml
 collections:
-  Current Anime Season:
+  New Fall 2020 Anime:
     mal_season:
+      season: fall
+      year: 2020
+      starting_only: true
       sort_by: members
       limit: 50
     collection_order: custom
     sync_mode: sync
 ```
-```yaml
-collections:
-  Fall 2020 Anime:
-    mal_season:
-      season: fall
-      year: 2020
-      limit: 50
-    collection_order: custom
-    sync_mode: sync
-```
 
-## MyAnimeList suggested — `mal_suggested` {#myanimelist-suggested}
-    
-Gets the suggested anime in by MyAnimeList for the authorized user. (Maximum: 100)
+## Suggested anime {#myanimelist-suggested}
 
-The expected input value is a single integer value of how many movies/shows to query.
+<span id="example-myanimelist-suggested-builders"></span>
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
-
-### Example MyAnimeList suggested builder(s) {#example-myanimelist-suggested-builders}
+Selects up to 20 recommendations for the authorized user. `mal_suggested` takes
+an integer result count, with a maximum of **100**.
 
 ```yaml
 collections:
@@ -131,20 +214,21 @@ collections:
     sync_mode: sync
 ```
 
-## MyAnimeList UserList — `mal_userlist` {#myanimelist-userlist}
+## User lists {#myanimelist-userlist}
 
-Gets anime in MyAnimeList User's Anime list. The different sub-attributes are detailed below. The only required attribute is `username`
+Only `username` is required. Quote `"@me"` to select the authorized account.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated and in a specific order. 
+| Attribute | Value | Default |
+|:----------|:------|:--------|
+| `username` | Username string or `"@me"`, required | - |
+| `status` | `all`, `watching`, `completed`, `on_hold`, `dropped`, `plan_to_watch` | `all` |
+| `sort_by` | `score`, `last_updated`, `title`, `start_date` | `score` |
+| `limit` | Integer, maximum 1000 | `100` |
 
-| Attribute  | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|:-----------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `username` | **Description:** A user's MyAnimeList Username or `@me` for the authorized user                                                                                                                                                                                                                                                                                                                                                   |
-| `status`   | **Description:** Status to search for<br>**Default:** `all`<br>**Values:**<table class="clearTable"><tr><td>`all`</td><td>All Anime List</td></tr><tr><td>`watching`</td><td>Currently Watching List</td></tr><tr><td>`completed`</td><td>Completed List</td></tr><tr><td>`on_hold`</td><td>On Hold List</td></tr><tr><td>`dropped`</td><td>Dropped List</td></tr><tr><td>`plan_to_watch`</td><td>Plan to Watch</td></tr></table> |
-| `sort_by`  | **Description:** Sort Order to return<br>**Default:** `score`<br>**Values:**<table class="clearTable"><tr><td>`score`</td><td>Sort by Score</td></tr><tr><td>`last_updated`</td><td>Sort by Last Updated</td></tr><tr><td>`title`</td><td>Sort by Anime Title</td></tr><tr><td>`start_date`</td><td>Sort by Start Date</td></tr></table>                                                                                          |
-| `limit`    | **Description:** Don't return more than this number<br>**Default:** `100`<br>**Values:** Number of Anime to query from MyAnimeList (max: 1000)                                                                                                                                                                                                                                                                                    |
+<span id="example-myanimelist-userlist-builders"></span>
 
-### Example MyAnimeList UserList builder(s) {#example-myanimelist-userlist-builders}
+Selects up to 500 entries from the authorized account's Currently Watching list,
+ordered by score. Use another username string to select that user's list instead.
 
 ```yaml
 collections:
@@ -157,7 +241,3 @@ collections:
     collection_order: custom
     sync_mode: sync
 ```
-
-## More MyAnimeList references
-
-- [Charts and rankings](charts.md)

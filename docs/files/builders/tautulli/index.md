@@ -1,134 +1,144 @@
 # Tautulli Builders
 
-You can find items in your Plex using the features of [Tautulli](https://tautulli.com/).
+Select library items using [Tautulli](https://tautulli.com/) activity rankings.
+Both builders support movies, shows, music, playlists, and custom sorting.
 
-Tautulli builders use its popular and most-played lists. `tautulli_popular` gets popular items and `tautulli_top` gets the most-played items across movies, shows, and music. For music libraries, set `builder_level` to choose artists, albums, or tracks. `tautulli_watched` remains available as an alias for `tautulli_top`.
+!!! warning "Configure Tautulli first"
 
-???+ warning "Tautulli Configuration"
-    
-    [Configuring Tautulli](../../../config/tautulli.md) in the config is required for any of these builders.
+    Every builder requires [Tautulli configuration](../../../config/tautulli.md).
+    In Music libraries, set `builder_level` to choose artists, albums, or tracks.
 
-| Builder                                         | Description                                       |             Works with Movies              |              Works with Shows              |              Works with Music              |    Works with Playlists and Custom Sort    |
-|:------------------------------------------------|:--------------------------------------------------|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|:------------------------------------------:|
-| [`tautulli_popular`](#tautulli-popular)                | Gets the Tautulli Most Popular List               | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
-| [`tautulli_top`](#tautulli-top)                        | Gets the Tautulli Top List                       | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-check:{ .green } |
+## Choose a builder
 
-## Tautulli popular — `tautulli_popular`, `tautulli_top` {#tautulli-popular}
+| Builder | Ranks by | Default Music level |
+|:--------|:---------|:--------------------|
+| [`tautulli_popular`](#tautulli-popular) | Popularity; distinct listeners for Music | Artist |
+| [`tautulli_top`](#tautulli-top) | Most plays | Album |
 
-| Attribute      | Description                                                |                 Required                 | Default |
-|:---------------|:-----------------------------------------------------------|:----------------------------------------:|:-------:|
-| `list_days`    | Number of Days to look back of the list.                   | :fontawesome-solid-circle-xmark:{ .red } |  `30`   |
-| `list_minimum` | Minimum Number of Users Watching/Plays to add to the list. | :fontawesome-solid-circle-xmark:{ .red } |   `0`   |
-| `list_size`    | Number of items to add to this list.                       | :fontawesome-solid-circle-xmark:{ .red } |  `10`   |
-| `list_buffer`  | Additional items to request when filtering movie/show results (older Tautulli versions only). | :fontawesome-solid-circle-xmark:{ .red } | `list_size * 3` |
+`tautulli_watched` remains a backward-compatible alias for `tautulli_top`.
+Use `collection_order: custom` to retain returned rank order and `sync_mode: sync`
+to keep membership synchronized on Kometa runs.
 
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
-and in a specific order. 
+## Shared options
 
-### Example Tautulli popular builder(s) {#example-tautulli-popular-builders}
+Both builders accept the same dictionary options; none is required.
+
+| Attribute | Purpose | Default |
+|:----------|:--------|:--------|
+| `list_days` | Number of days to look back | `30` |
+| `list_minimum` | Minimum users/listeners for popular results, or plays for top results | `0` |
+| `list_size` | Maximum items to add | `10` |
+| `list_buffer` | Extra items requested when filtering results on older Tautulli versions | `list_size * 3` |
+
+## Popular items {#tautulli-popular}
+
+<span id="example-tautulli-popular-builders"></span>
+
+Selects up to 10 movies from the last 30 days' popular list. The values are
+integer counts: `30` is a lookback window and `10` is a result size.
 
 ```yaml
 collections:
-  Most Popular Movies (30 Days):
-    sync_mode: sync
-    collection_order: custom
+  Most Popular Movies in 30 Days:
     tautulli_popular:
       list_days: 30
       list_size: 10
-```
-```yaml
-collections:
-  Plex Popular:
-    tautulli_popular:
-      list_days: 30
-      list_size: 20
-    tautulli_top:
-      list_days: 30
-      list_size: 20
-    sync_mode: sync
-    summary: Movies Popular on Plex
-    collection_order: alpha
-```
-```yaml
-playlists:
-  Plex Popular:
-    libraries: Movies
-    tautulli_popular:
-      list_days: 30
-      list_size: 20
-    sync_mode: sync
-    summary: Movies Popular on Plex
-```
-
-### Music {#music}
-
-On a music library, `tautulli_popular` uses Tautulli's Popular Music list. Set `builder_level` to `artist`, `album`, or `track` to choose the output level. It defaults to `artist`. Artist and album results aggregate Tautulli's music stats; track results count distinct listeners from Tautulli history within `list_days`. `list_minimum` is the minimum listener count for the selected item.
-
-```yaml
-collections:
-  Popular Music Tracks:
-    builder_level: track
-    tautulli_popular:
-      list_days: 30
-      list_size: 20
-      list_minimum: 1
-    sync_mode: sync
     collection_order: custom
-```
-
-## Tautulli top — `tautulli_top`, `tautulli_popular` {#tautulli-top}
-
-???+ tip "Tautulli Watched"
-
-    This builder was previously `tautulli_watched` but has been renamed due to supporting Music libraries
-
-| Attribute      | Description                                                |                 Required                 | Default |
-|:---------------|:-----------------------------------------------------------|:----------------------------------------:|:-------:|
-| `list_days`    | Number of Days to look back of the list.                   | :fontawesome-solid-circle-xmark:{ .red } |  `30`   |
-| `list_minimum` | Minimum Number of Users Watching/Plays to add to the list. | :fontawesome-solid-circle-xmark:{ .red } |   `0`   |
-| `list_size`    | Number of items to add to this list.                       | :fontawesome-solid-circle-xmark:{ .red } |  `10`   |
-| `list_buffer`  | Additional items to request when filtering results (older Tautulli versions only). | :fontawesome-solid-circle-xmark:{ .red } | `list_size * 3` |
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
-and in a specific order. 
-
-`tautulli_watched` is accepted as a backward-compatible alias for `tautulli_top`.
-
-On music libraries, set `builder_level` to `artist`, `album`, or `track` to choose results from Tautulli's Top Music list. The default is `album`. Artist and album results aggregate Tautulli's music stats; track results count plays from Tautulli history within `list_days`. `list_minimum` is the minimum play count for the selected item.
-
-### Example Tautulli top builder(s) {#example-tautulli-top-builders}
-
-```yaml
-collections:
-  Most Watched Movies (30 Days):
     sync_mode: sync
-    collection_order: custom
-    tautulli_top:
-      list_days: 30
-      list_size: 10
-```
-```yaml
-collections:
-  Plex Popular:
-    tautulli_popular:
-      list_days: 30
-      list_size: 20
-    tautulli_top:
-      list_days: 30
-      list_size: 20
-    sync_mode: sync
-    summary: Movies Popular on Plex
-    collection_order: alpha
 ```
 
-```yaml
-collections:
-  Top Music Albums:
-    builder_level: album
-    tautulli_top:
-      list_days: 90
-      list_size: 15
-      list_minimum: 2
-    sync_mode: sync
-    collection_order: custom
-```
+## Most-played items {#tautulli-top}
+
+<span id="example-tautulli-top-builders"></span>
+
+=== "Top movies"
+
+    Selects up to 10 movies from Tautulli's most-played list for the last 30 days.
+    This ranks plays rather than selecting the popular list above.
+
+    ```yaml
+    collections:
+      Most Watched Movies in 30 Days:
+        tautulli_top:
+          list_days: 30
+          list_size: 10
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Combine rankings"
+
+    Combines up to 20 popular and 20 most-played items from the last 30 days.
+    The resulting collection is displayed alphabetically, rather than trying
+    to preserve two different rankings.
+
+    ```yaml
+    collections:
+      Plex Popular and Most Played:
+        tautulli_popular:
+          list_days: 30
+          list_size: 20
+        tautulli_top:
+          list_days: 30
+          list_size: 20
+        collection_order: alpha
+        sync_mode: sync
+    ```
+
+=== "Playlist"
+
+    Creates a playlist from up to 20 popular movies. Replace `Movies` with your
+    configured library name. `libraries` belongs to the playlist definition,
+    outside the Tautulli builder dictionary.
+
+    ```yaml
+    playlists:
+      Plex Popular Movies:
+        libraries: Movies
+        tautulli_popular:
+          list_days: 30
+          list_size: 20
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+## Music {#music}
+
+Use `builder_level: artist`, `album`, or `track`. Popular defaults to artist level;
+top defaults to album level. Artist and album results aggregate Tautulli music
+statistics. Track results use history within `list_days`: popular counts distinct
+listeners, while top counts plays. `list_minimum` uses the corresponding count.
+
+=== "Popular tracks"
+
+    Selects up to 20 tracks listened to by at least one distinct listener in the
+    last 30 days. Track level overrides the popular builder's artist default.
+
+    ```yaml
+    collections:
+      Popular Music Tracks:
+        builder_level: track
+        tautulli_popular:
+          list_days: 30
+          list_size: 20
+          list_minimum: 1
+        collection_order: custom
+        sync_mode: sync
+    ```
+
+=== "Top albums"
+
+    Selects up to 15 albums with at least two plays over the last 90 days.
+    Album level is explicit here, but is already the default for `tautulli_top`.
+
+    ```yaml
+    collections:
+      Top Music Albums:
+        builder_level: album
+        tautulli_top:
+          list_days: 90
+          list_size: 15
+          list_minimum: 2
+        collection_order: custom
+        sync_mode: sync
+    ```

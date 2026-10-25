@@ -1,21 +1,19 @@
 # StevenLu Builders
 
-You can find items using StevenLu's Popular Movies list on [StevenLu.com](https://movies.stevenlu.com/) (StevenLu). 
+Follow [StevenLu's Popular Movies list](https://movies.stevenlu.com/) with
+`stevenlu_popular`. This builder supports **movies, playlists, and custom sorting**;
+it does not support shows.
 
-| Builder                          | Description                                                                          |             Works with Movies              |             Works with Shows             |    Works with Playlists and Custom Sort    |
-|:---------------------------------|:-------------------------------------------------------------------------------------|:------------------------------------------:|:----------------------------------------:|:------------------------------------------:|
-| [`stevenlu_popular`](#stevenlus-popular-movies-list) | Finds every movie on [StevenLu's Popular Movies List](https://movies.stevenlu.com/). | :fontawesome-solid-circle-check:{ .green } | :fontawesome-solid-circle-xmark:{ .red } | :fontawesome-solid-circle-check:{ .green } |
+## Popular movies {#stevenlus-popular-movies-list}
 
-## StevenLu's popular movies list — `stevenlu_popular` {#stevenlus-popular-movies-list}
+Set `stevenlu_popular` to the unquoted boolean `true` to select every movie on the
+list. The builder takes no IDs, URLs, filters, or result limit.
 
-Finds every movie on [StevenLu's Popular Movies List](https://movies.stevenlu.com/).
+## Example {#example-stevenlus-popular-movies-list-builders}
 
-The expected input is `true`.
-
-The `sync_mode: sync` and `collection_order: custom` Setting are recommended since the lists are continuously updated 
-and in a specific order. 
-
-### Example StevenLu's popular movies list builder(s) {#example-stevenlus-popular-movies-list-builders}
+This collection follows StevenLu's popular movies. `collection_order: custom`
+preserves the source list's order; `sync_mode: sync` adds and removes collection
+members to match the changing list.
 
 ```yaml
 collections:
